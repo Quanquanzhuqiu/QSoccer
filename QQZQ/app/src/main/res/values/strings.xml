@@ -5,4 +5,14 @@
     <string name="main_btn_login">登录</string>
     <string name="main_btn_register">注册</string>
     <string name="main_help_text">圈圈足球</string>
+
+    <string name="main_tab_bar_title">主页</string>
+    <string name="main_tab_bar_menu_title">更多功能</string>
+    <string name="main_tab_bar_bottom_menu_1">我的球队</string>
+    <string name="main_tab_bar_bottom_menu_2">聊天</string>
+    <string name="main_tab_bar_bottom_menu_3">发现</string>
+    <string name="main_tab_bar_bottom_menu_4">我</string>
+
+    <string name="my_team_top_menu_1">球队管理</string>
+    <string name="my_team_top_menu_2">球队内部活动</string>
 </resources>
