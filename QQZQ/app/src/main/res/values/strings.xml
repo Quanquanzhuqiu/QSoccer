@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">圈圈足球</string>
+
+    <string name="main_topbar_title">圈圈足球</string>
+    <string name="main_btn_login">登录</string>
+    <string name="main_btn_register">注册</string>
+    <string name="main_help_text">圈圈足球</string>
 </resources>

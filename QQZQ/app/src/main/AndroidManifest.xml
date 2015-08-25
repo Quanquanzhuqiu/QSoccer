@@ -5,7 +5,7 @@
     <application android:name=".BaseApplication" android:allowBackup="true" android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher" android:theme="@android:style/Theme.Black.NoTitleBar">
 
-        <activity android:name="com.qqzq.SplashPage" android:screenOrientation="portrait" android:label="@string/app_name">
+        <activity android:name="com.qqzq.ui.MainTabBar" android:screenOrientation="portrait" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
