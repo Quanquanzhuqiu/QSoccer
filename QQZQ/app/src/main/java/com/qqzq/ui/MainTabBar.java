@@ -14,7 +14,7 @@ import com.qqzq.R;
 /**
  * Created by jie.xiao on 8/25/2015.
  */
-public class MainTabBar  extends BaseActivity implements View.OnClickListener {
+public class MainTabBar extends BaseActivity implements View.OnClickListener {
 
     //Fragment:我的球队
     private MyTeamFragment myTeamFragment;
@@ -35,17 +35,42 @@ public class MainTabBar  extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.tab_bottom_menu_layout_1:
+                selectTab(0);
+                break;
+            case R.id.tab_bottom_menu_layout_2:
+                selectTab(1);
+                break;
+            case R.id.tab_bottom_menu_layout_3:
+                selectTab(2);
+                break;
+            case R.id.tab_bottom_menu_layout_4:
+                selectTab(3);
+                break;
+            default:
+                break;
+        }
     }
 
-    private void selectTab(int tabIndex){
+    private void selectTab(int tabIndex) {
         clearTabSelection();
         //开启Fragment事务
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         //隐藏所有Fragment
         hideAllFragments(fragmentTransaction);
-        switch (tabIndex){
+        switch (tabIndex) {
             case 0:
+
+                if (myTeamFragment == null) {
+                    //如果myTeamFragment为空，则创建一个添加到界面上
+                    myTeamFragment = new MyTeamFragment();
+                    fragmentTransaction.add(R.id.body_content, myTeamFragment);
+                } else {
+                    // 如果myTeamFragment不为空，则直接将它显示出来
+                    fragmentTransaction.show(myTeamFragment);
+                }
+
                 break;
             case 1:
                 break;
@@ -54,9 +79,11 @@ public class MainTabBar  extends BaseActivity implements View.OnClickListener {
             case 3:
                 break;
         }
+
+        fragmentTransaction.commit();
     }
 
-    private void clearTabSelection(){
+    private void clearTabSelection() {
 
     }
 
