@@ -5,7 +5,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.qqzq.util.Constants;
+
+import org.json.JSONObject;
 
 
 /**
@@ -24,9 +32,12 @@ public class BaseApplication extends Application{
 
         applicationContext = this;
         instance = this;
+
+        getJson();
     }
 
     public static BaseApplication getInstance() {
+
         return instance;
     }
 
@@ -92,5 +103,28 @@ public class BaseApplication extends Application{
         setPassword(null);
 //		setContactList(null);
 
+    }
+
+
+    public static void getJson(){
+        RequestQueue requestQueue = Volley.newRequestQueue(BaseApplication.applicationContext);
+        String url = "http://121.43.229.24:8080/qqzq/rest/user/users?offset=0&limit=10";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        System.out.println("response="+response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError arg0) {
+                        System.out.println("sorry,Error");
+                    }
+                });
+        requestQueue.add(jsonObjectRequest);
     }
 }

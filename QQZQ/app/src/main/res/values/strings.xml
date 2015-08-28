@@ -15,4 +15,7 @@
 
     <string name="my_team_top_menu_1">球队管理</string>
     <string name="my_team_top_menu_2">球队内部活动</string>
+
+    <string name="team_management_new_memeber">\t\t\t还没加入球队\n\t\t\t请先创建球队或\n通过查找球队选择加入一个球队</string>
+    <string name="team_activity_new_memeber">\t\t\t还没球队内部活动\n请发起活动</string>
 </resources>
