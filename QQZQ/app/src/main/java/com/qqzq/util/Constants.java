@@ -24,14 +24,14 @@ public class Constants {
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ API list ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	// =============================== ×¢²áÈÏÖ¤²¿·Ö ===============================
-	//ÓÃ»§×¢²á
+	// =============================== æ³¨å†Œè®¤è¯éƒ¨åˆ† ===============================
+	//ç”¨æˆ·æ³¨å†Œ
 	public static final String API_USER_REGISTER_URL = "/authc/register";
-	//ÓÃ»§µÇÂ¼
+	//ç”¨æˆ·ç™»å½•
 	public static final String API_USER_LOGIN_URL = "/authc/login";
-	// ĞŞ¸ÄÃÜÂë
+	// ä¿®æ”¹å¯†ç 
 	public static final String API_USER_EDIT_USER_URL = "/authc/pwd";
-	//ÓÃ»§ÍË³ö
+	//ç”¨æˆ·é€€å‡º
 	public static final String API_USER_LOGOUT_URL = "/authc/logout";
 	
 }

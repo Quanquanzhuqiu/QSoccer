@@ -5,30 +5,32 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.qqzq.entity.EntUserInfo;
+import com.qqzq.network.GsonRequest;
 import com.qqzq.util.Constants;
-
-import org.json.JSONObject;
 
 
 /**
  * Created by jie.xiao on 8/25/2015.
  */
-public class BaseApplication extends Application{
+public class BaseApplication extends Application {
 
     public static Context applicationContext;
     private static BaseApplication instance;
     private String userName = null;
     private String password = null;
+    //请求队列
+    private RequestQueue mRequestQueue;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        mRequestQueue = Volley.newRequestQueue(BaseApplication.applicationContext);
 
         applicationContext = this;
         instance = this;
@@ -70,7 +72,7 @@ public class BaseApplication extends Application{
     /**
      * 设置用户名
      *
-     * @param user
+     * @param username
      */
     public void setUserName(String username) {
         if (username != null) {
@@ -106,25 +108,26 @@ public class BaseApplication extends Application{
     }
 
 
-    public static void getJson(){
-        RequestQueue requestQueue = Volley.newRequestQueue(BaseApplication.applicationContext);
+    public void getJson() {
         String url = "http://121.43.229.24:8080/qqzq/rest/user/users?offset=0&limit=10";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET,
+
+        GsonRequest<EntUserInfo[]> gsonRequest = new GsonRequest<>(
                 url,
-                null,
-                new Response.Listener<JSONObject>() {
+                EntUserInfo[].class,
+                new Response.Listener<EntUserInfo[]>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        System.out.println("response="+response);
+                    public void onResponse(EntUserInfo[] response) {
+                            System.out.println("+++++++++" + response[0].getUsername());
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError arg0) {
+                    public void onErrorResponse(VolleyError error) {
                         System.out.println("sorry,Error");
+                        error.printStackTrace();
                     }
-                });
-        requestQueue.add(jsonObjectRequest);
+                }
+        );
+        mRequestQueue.add(gsonRequest);
     }
 }
