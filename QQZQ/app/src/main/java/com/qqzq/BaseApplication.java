@@ -117,7 +117,7 @@ public class BaseApplication extends Application {
                 new Response.Listener<EntUserInfo[]>() {
                     @Override
                     public void onResponse(EntUserInfo[] response) {
-                            System.out.println("+++++++++" + response[0].getUsername());
+                        System.out.println("+++++++++" + response[0].getUsername());
                     }
                 },
                 new Response.ErrorListener() {

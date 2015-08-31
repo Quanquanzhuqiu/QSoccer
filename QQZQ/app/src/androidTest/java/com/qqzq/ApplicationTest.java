@@ -23,7 +23,7 @@ public class ApplicationTest extends ApplicationTestCase<BaseApplication> {
         baseApplication = getApplication();
     }
 
-    public void testPostJson(){
+    public void testPostJson() {
 
         baseApplication.getJson();
 

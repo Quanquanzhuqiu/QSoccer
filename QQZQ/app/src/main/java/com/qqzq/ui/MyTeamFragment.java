@@ -12,13 +12,13 @@ import com.qqzq.R;
 /**
  * Created by jie.xiao on 8/25/2015.
  */
-public class MyTeamFragment extends Fragment{
+public class MyTeamFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
 
-        View layout = inflater.inflate(R.layout.fragment_my_team,container,false);
+        View layout = inflater.inflate(R.layout.fragment_my_team, container, false);
         return layout;
     }
 }

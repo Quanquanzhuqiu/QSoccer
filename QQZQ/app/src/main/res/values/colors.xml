@@ -5,10 +5,10 @@
     <color name="default_gray">#444444</color>
     <color name="default_light_gray">#b8b8b8</color>
     <color name="font_red">#d51717</color>
-    
+
     <color name="global_bg_color">#F7F7F7</color>
     <color name="main_login_btn_font">#465578</color>
-    
+
     <!-- huanxin -->
     <color name="common_top_bar_blue">#4ebcd3</color>
     <color name="btn_login_normal">#007086</color>
@@ -45,5 +45,5 @@
     <color name="top_bar_text_right">#09BB07</color>
     <color name="top_bar_text_center">#ffffff</color>
     <color name="divider_list_bg">#F0EFED</color>
-    <color name="multiline_tv_border_color"> #C7C8C9</color>
+    <color name="multiline_tv_border_color">#C7C8C9</color>
 </resources>

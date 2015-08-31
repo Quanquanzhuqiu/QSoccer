@@ -19,11 +19,11 @@ public class MainActivity extends BaseActivity {
         init();
     }
 
-    private void init(){
+    private void init() {
         findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
             }
         });
