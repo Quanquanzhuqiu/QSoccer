@@ -39,4 +39,11 @@
     <color name="orange">#FFA500</color>
     <color name="gray_pressed">#b5b5b6</color>
     <color name="gray_normal">#666667</color>
+
+
+    <!-- common -->
+    <color name="top_bar_text_right">#09BB07</color>
+    <color name="top_bar_text_center">#ffffff</color>
+    <color name="divider_list_bg">#F0EFED</color>
+    <color name="multiline_tv_border_color"> #C7C8C9</color>
 </resources>

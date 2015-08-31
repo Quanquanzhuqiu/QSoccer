@@ -5,4 +5,78 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- 共通-->
+    <style name="create_page_divider">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">15dp</item>
+        <item name="android:background">@color/divider_list_bg</item>
+    </style>
+
+    <!-- TOP BAR styles-->
+    <style name="top_bar_return_btn">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:background">@drawable/icon_return</item>
+    </style>
+
+    <style name="top_bar_middle_btn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:text">@string/top_bar_create_team</item>
+        <item name="android:textColor">@color/top_bar_text_center</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="top_bar_right_btn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:text">@string/top_bar_commit</item>
+        <item name="android:textColor">@color/top_bar_text_right</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="linearLayout_create_team_or_activity">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+
+    <!-- 创建球队页面styles -->
+    <style name="create_team_label">
+        <item name="android:textColor">@color/top_bar_text_center</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="create_team_basic_info_image_view">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/icon_star</item>
+    </style>
+
+    <style name="create_team_basic_info_text_view">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textColor">@color/default_black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="create_team_basic_info_edit_text">
+        <item name="android:layout_width">210dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">0dp</item>
+    </style>
 </resources>

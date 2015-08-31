@@ -13,6 +13,33 @@
     <string name="main_tab_bar_bottom_menu_3">发现</string>
     <string name="main_tab_bar_bottom_menu_4">我</string>
 
+    <string name="top_bar_create_team">创建球队</string>
+    <string name="top_bar_commit">提交</string>
+
+    <!-- 创建球队页面-->
+    <string name="create_team_title_1">球队头像</string>
+    <string name="create_team_title_2">球队名称</string>
+    <string name="create_team_hint_2">请输入十五字以内</string>
+
+    <string name="create_team_title_3">球队ID</string>
+    <string name="create_team_hint_3">球队ID作为球队的唯一标示，设置后不可更改，有数字和字母组成</string>
+
+    <string name="create_team_title_4">常活动地点</string>
+    <string name="create_team_hint_4">建议具体到市区级</string>
+
+    <string name="create_team_title_5">常活动类型</string>
+    <string name="create_team_5_5p">5人制</string>
+    <string name="create_team_5_7p">7人制</string>
+    <string name="create_team_5_9p">9人制</string>
+    <string name="create_team_5_11p">11人制</string>
+
+    <string name="create_team_title_6">入队验证</string>
+    <string name="create_team_6_join_team_1">任何人</string>
+    <string name="create_team_6_join_team_2">需审核</string>
+
+    <string name="create_team_title_7">球队介绍</string>
+    <string name="create_team_7_hint">请输入对球队的简介......</string>
+
     <string name="my_team_top_menu_1">球队管理</string>
     <string name="my_team_top_menu_2">球队内部活动</string>
 
