@@ -18,7 +18,7 @@ public class EntTeamInfo {
     private String teamleadernm;
     private String teamleaderusrnm;
     private String teamleaderqqid;
-    private String teamlog;
+    private String teamlogo;
     private String stat;
     private String flag;
     private Date createdate;
@@ -120,12 +120,12 @@ public class EntTeamInfo {
         this.teamleaderqqid = teamleaderqqid;
     }
 
-    public String getTeamlog() {
-        return teamlog;
+    public String getTeamlogo() {
+        return teamlogo;
     }
 
-    public void setTeamlog(String teamlog) {
-        this.teamlog = teamlog;
+    public void setTeamlogo(String teamlogo) {
+        this.teamlogo = teamlogo;
     }
 
     public String getStat() {

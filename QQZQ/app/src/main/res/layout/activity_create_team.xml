@@ -68,6 +68,7 @@
                 android:text="@string/create_team_title_2" />
 
             <EditText
+                android:id="@+id/edit_team_name"
                 style="@style/create_team_basic_info_edit_text"
                 android:hint="@string/create_team_hint_2" />
 
@@ -87,6 +88,7 @@
                 android:text="@string/create_team_title_3" />
 
             <EditText
+                android:id="@+id/edit_team_id"
                 style="@style/create_team_basic_info_edit_text"
                 android:hint="@string/create_team_hint_3" />
 
@@ -106,6 +108,7 @@
                 android:text="@string/create_team_title_4" />
 
             <EditText
+                android:id="@+id/edit_team_location"
                 style="@style/create_team_basic_info_edit_text"
                 android:hint="@string/create_team_hint_4" />
 
@@ -140,24 +143,28 @@
 
 
             <CheckBox
+                android:id="@+id/cbox_5_persons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/create_team_5_5p"
                 android:textColor="@color/default_black" />
 
             <CheckBox
+                android:id="@+id/cbox_7_persons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/create_team_5_7p"
                 android:textColor="@color/default_black" />
 
             <CheckBox
+                android:id="@+id/cbox_9_persons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/create_team_5_9p"
                 android:textColor="@color/default_black" />
 
             <CheckBox
+                android:id="@+id/cbox_11_persons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/create_team_5_11p"
@@ -191,6 +198,7 @@
             android:layout_height="wrap_content">
 
             <RadioGroup
+                android:id="@+id/radio_group_join_config"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -231,7 +239,7 @@
             android:text="@string/create_team_title_7"/>
 
         <EditText
-            android:id="@+id/edt_txt_team_info"
+            android:id="@+id/edit_team_detail"
             android:layout_width="fill_parent"
             android:layout_height="80dp"
             android:ems="10"
