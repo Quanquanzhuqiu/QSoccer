@@ -102,6 +102,7 @@ public class CreateTeamActivity extends BaseActivity {
         return new Response.Listener<EntTeamInfo>() {
             @Override
             public void onResponse(EntTeamInfo response) {
+                System.out.println(response);
 //                mTvResult.setText(new Gson().toJson(response));
             }
         };

@@ -13,6 +13,8 @@ import java.util.Date;
  */
 public class DateSerializer implements JsonSerializer<Date> {
 
+    
+
     @Override
     public JsonElement serialize(Date src, Type typeOfSrc,
                                  JsonSerializationContext context) {
