@@ -25,6 +25,8 @@
     <string name="create_team_hint_3">请输入字母或数字</string>
 
     <string name="create_team_title_4">常活动地点</string>
+    <string name="create_team_title_4_1">省(市）</string>
+    <string name="create_team_title_4_2">市(区)</string>
     <string name="create_team_hint_4">建议具体到市区级</string>
 
     <string name="create_team_title_5">常活动类型</string>

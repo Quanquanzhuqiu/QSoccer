@@ -33,7 +33,8 @@ public class CreateTeamActivity extends BaseActivity {
     private TextView tv_commit;
     private EditText edit_team_name;
     private EditText edit_team_id;
-    private EditText edit_team_location;
+    private EditText edit_team_province;
+    private EditText edit_team_city;
     private EditText edit_team_detail;
     private CheckBox cbox_5_persons;
     private CheckBox cbox_7_persons;
@@ -55,7 +56,8 @@ public class CreateTeamActivity extends BaseActivity {
         tv_commit = (TextView) findViewById(R.id.tv_commit);
         edit_team_id = (EditText) findViewById(R.id.edit_team_id);
         edit_team_name = (EditText) findViewById(R.id.edit_team_name);
-        edit_team_location = (EditText) findViewById(R.id.edit_team_location);
+        edit_team_province = (EditText) findViewById(R.id.edit_team_province);
+        edit_team_city = (EditText) findViewById(R.id.edit_team_city);
         edit_team_detail = (EditText) findViewById(R.id.edit_team_detail);
         radio_group_join_config = (RadioGroup) findViewById(R.id.radio_group_join_config);
         cbox_5_persons = (CheckBox) findViewById(R.id.cbox_5_persons);
@@ -85,7 +87,8 @@ public class CreateTeamActivity extends BaseActivity {
         mParameters = new RequestJsonParameter<EntTeamInfo>();
         String teamId = edit_team_id.getText().toString();
         String teamName = edit_team_name.getText().toString();
-        String teamLocation = edit_team_location.getText().toString();
+        String teamProvince = edit_team_province.getText().toString();
+        String teamCity = edit_team_city.getText().toString();
         String teamDetail = edit_team_detail.getText().toString();
 
         String join_config = null;
@@ -115,6 +118,8 @@ public class CreateTeamActivity extends BaseActivity {
         entTeamInfo.setOftensoccerpernum(soccerPersons);
         entTeamInfo.setSumary(teamDetail);
         entTeamInfo.setEstablishdate(new Date());
+        entTeamInfo.setOftencity(teamProvince);
+        entTeamInfo.setOftendistinct(teamCity);
         mParameters.setParameter(entTeamInfo);
         return mParameters;
     }
