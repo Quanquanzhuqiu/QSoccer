@@ -1,6 +1,8 @@
-package com.qqzq.util;
+package com.qqzq.common;
 
 import android.os.Environment;
+
+import java.text.SimpleDateFormat;
 
 
 public class Constants {
@@ -26,12 +28,15 @@ public class Constants {
 
     // =============================== 注册认证部分 ===============================
     //用户注册
-    public static final String API_USER_REGISTER_URL = "/authc/register";
+    public static final String API_USER_REGISTER_URL = API_SERVER_HOST+"/authc/register";
     //用户登录
-    public static final String API_USER_LOGIN_URL = "/authc/login";
+    public static final String API_USER_LOGIN_URL = API_SERVER_HOST+"/authc/login";
     // 修改密码
-    public static final String API_USER_EDIT_USER_URL = "/authc/pwd";
+    public static final String API_USER_EDIT_USER_URL = API_SERVER_HOST+"/authc/pwd";
     //用户退出
-    public static final String API_USER_LOGOUT_URL = "/authc/logout";
+    public static final String API_USER_LOGOUT_URL = API_SERVER_HOST+"/authc/logout";
 
+    public static final String API_CREATE_TEAM_URL = API_SERVER_HOST+"/team/teams";
+
+    public static SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 }

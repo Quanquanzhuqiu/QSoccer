@@ -22,7 +22,7 @@
     <string name="create_team_hint_2">请输入十五字以内</string>
 
     <string name="create_team_title_3">球队ID</string>
-    <string name="create_team_hint_3">球队ID作为球队的唯一标示，设置后不可更改，有数字和字母组成</string>
+    <string name="create_team_hint_3">请输入字母或数字</string>
 
     <string name="create_team_title_4">常活动地点</string>
     <string name="create_team_hint_4">建议具体到市区级</string>

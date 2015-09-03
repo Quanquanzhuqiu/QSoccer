@@ -35,6 +35,9 @@
             android:name=".ui.MainTabBar"
             android:screenOrientation="portrait"
             android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.CreateTeamActivity"
+            android:screenOrientation="portrait" />
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />

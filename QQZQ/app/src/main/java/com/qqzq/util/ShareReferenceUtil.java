@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.qqzq.common.Constants;
+
 public class ShareReferenceUtil {
     private static final String LOCATION_LATITUDE = "location_latitude";
     private static final String LOCATION_LONTITUDE = "location_lontitude";

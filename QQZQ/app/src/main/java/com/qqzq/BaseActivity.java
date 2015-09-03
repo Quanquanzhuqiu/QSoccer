@@ -2,6 +2,7 @@ package com.qqzq;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,7 +26,12 @@ public class BaseActivity extends Activity {
     @Override
     public void onStop() {
         super.onStop();
-        RequestManager.cancelAll(this);
+        try {
+
+            RequestManager.cancelAll(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     protected void executeRequest(Request<?> request) {
@@ -36,6 +42,7 @@ public class BaseActivity extends Activity {
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                System.out.println(error.getMessage());
                 Toast.makeText(activity, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         };

@@ -9,9 +9,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.qqzq.common.Constants;
 import com.qqzq.entity.EntUserInfo;
 import com.qqzq.network.GsonRequest;
-import com.qqzq.util.Constants;
+import com.qqzq.network.RequestManager;
 
 
 /**
@@ -29,13 +30,13 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        init();
+    }
 
-        mRequestQueue = Volley.newRequestQueue(BaseApplication.applicationContext);
-
+    private void init(){
         applicationContext = this;
         instance = this;
-
-        getJson();
+        RequestManager.init(this);
     }
 
     public static BaseApplication getInstance() {
@@ -108,7 +109,7 @@ public class BaseApplication extends Application {
     }
 
 
-    public void getJson() {
+/*    public void getJson() {
         String url = "http://121.43.229.24:8080/qqzq/rest/user/users?offset=0&limit=10";
 
         GsonRequest<EntUserInfo[]> gsonRequest = new GsonRequest<>(
@@ -129,5 +130,5 @@ public class BaseApplication extends Application {
                 }
         );
         mRequestQueue.add(gsonRequest);
-    }
+    }*/
 }
