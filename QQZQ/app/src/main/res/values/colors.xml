@@ -46,4 +46,5 @@
     <color name="top_bar_text_center">#ffffff</color>
     <color name="divider_list_bg">#F0EFED</color>
     <color name="multiline_tv_border_color">#C7C8C9</color>
+    <color name="logo_dialog_divider_bg">#EAEAEE</color>
 </resources>

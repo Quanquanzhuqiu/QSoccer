@@ -5,6 +5,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -57,15 +58,31 @@ public class GsonRequest<T> extends Request<T> {
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
         try {
+            System.out.println("response header ==>" + networkResponse.headers);
             String json = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
             System.out.println("response json ==>" + json);
             return Response.success(mGson.fromJson(json, mClazz),
                     HttpHeaderParser.parseCacheHeaders(networkResponse));
         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
             return Response.error(new ParseError(e));
         } catch (JsonSyntaxException e) {
+            e.printStackTrace();
             return Response.error(new ParseError(e));
         }
+    }
+
+    @Override
+    protected VolleyError parseNetworkError(VolleyError volleyError) {
+        NetworkResponse networkResponse= volleyError.networkResponse;
+        int statusCode = networkResponse.statusCode;
+        System.out.println(statusCode);
+
+        if(statusCode==400){
+            return new VolleyError(new String(networkResponse.data));
+        }
+
+        return super.parseNetworkError(volleyError);
     }
 
     @Override

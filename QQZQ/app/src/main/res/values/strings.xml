@@ -47,4 +47,8 @@
 
     <string name="team_management_new_memeber">\t\t\t还没加入球队\n\t\t\t请先创建球队或\n通过查找球队选择加入一个球队</string>
     <string name="team_activity_new_memeber">\t\t\t还没球队内部活动\n请发起活动</string>
+
+    <string name="take_photo">拍照</string>
+    <string name="pick_photo">从手机相册选择</string>
+    <string name="cancel_photo">取消</string>
 </resources>

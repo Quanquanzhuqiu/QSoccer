@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/default_white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/ll_create_team">
 
     <!-- TOP BAR-->
     <RelativeLayout
@@ -48,6 +49,7 @@
                 android:text="@string/create_team_title_1" />
 
             <ImageView
+                android:id="@+id/iv_logo"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_alignParentRight="true"

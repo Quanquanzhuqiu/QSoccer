@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -31,6 +32,9 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
     private CheckBox cbox_9_persons;
     private CheckBox cbox_11_persons;
     private RadioGroup radio_group_join_config;
+    private ImageView iv_logo;
+    private TextView tv_camera;
+    private TextView tv_photo;
 
     public CreateTeamActivityTest() {
         super(CreateTeamActivity.class);
@@ -55,6 +59,9 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
         cbox_7_persons = (CheckBox) createTeamActivity.findViewById(R.id.cbox_7_persons);
         cbox_9_persons = (CheckBox) createTeamActivity.findViewById(R.id.cbox_9_persons);
         cbox_11_persons = (CheckBox) createTeamActivity.findViewById(R.id.cbox_11_persons);
+        iv_logo = (ImageView) createTeamActivity.findViewById(R.id.iv_logo);
+        tv_camera = (TextView) createTeamActivity.findViewById(R.id.btn_alter_pic_camera);
+        tv_photo = (TextView) createTeamActivity.findViewById(R.id.btn_alter_pic_photo);
     }
 
     @Override
@@ -64,24 +71,24 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
 
     }
 
-    public void test1_preconditions() throws InterruptedException {
+/*    public void test1_preconditions() throws InterruptedException {
         assertNotNull(tv_commit);
         assertNotNull(edit_team_id);
-        Thread.sleep(10*1000);
     }
 
-/*    public void test2_prepareRequestJson() {
+    public void test2_prepareRequestJson() {
         solo.enterText(edit_team_id, "111111");
         RequestJsonParameter<EntTeamInfo> mParameters = createTeamActivity.prepareRequestJson();
         assertNotNull(mParameters);
         assertNotNull(mParameters.getParameter().getTeamno());
         System.out.println(mParameters.getParameter().getTeamno());
-    }
+    }*/
 
-    public void test3_commit() throws InterruptedException {
+/*    public void test3_commit() throws InterruptedException {
         solo.enterText(edit_team_id, "222222");
         solo.enterText(edit_team_name,"ac milan");
-        solo.enterText(edit_team_location,"四川省成都市");
+        solo.enterText(edit_team_province,"四川");
+        solo.enterText(edit_team_city,"成都");
         solo.enterText(edit_team_detail,"意甲俱乐部");
         solo.clickOnView(radio_group_join_config.getChildAt(0));
         solo.clickOnView(cbox_11_persons);
@@ -89,4 +96,9 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
         solo.clickOnView(tv_commit);
 
     }*/
+
+    public void test4_uploadLogo() throws InterruptedException {
+        solo.clickOnView(iv_logo);
+        solo.clickOnView(tv_camera);
+    }
 }

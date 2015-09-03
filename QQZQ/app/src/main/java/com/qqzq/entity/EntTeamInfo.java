@@ -6,17 +6,17 @@ import java.util.Date;
  * Created by jie.xiao on 15/8/31.
  */
 public class EntTeamInfo {
-    private String id;
+    private int id;
     private String teamname;
     private String teamno;
-    private String oftencity;
-    private String oftendistinct;
+    private int oftencity;
+    private int oftendistinct;
     private String oftensoccerpernum;
-    private String joinconfig;
+    private int joinconfig;
     private String sumary;
     private Date establishdate;
     private String teamleadernm;
-    private String teamleaderusrnm;
+    private String teamleaderusrrnm;
     private String teamleaderqqid;
     private String teamlogo;
     private String stat;
@@ -24,11 +24,11 @@ public class EntTeamInfo {
     private Date createdate;
     private Date updatedate;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -48,19 +48,19 @@ public class EntTeamInfo {
         this.teamno = teamno;
     }
 
-    public String getOftencity() {
+    public int getOftencity() {
         return oftencity;
     }
 
-    public void setOftencity(String oftencity) {
+    public void setOftencity(int oftencity) {
         this.oftencity = oftencity;
     }
 
-    public String getOftendistinct() {
+    public int getOftendistinct() {
         return oftendistinct;
     }
 
-    public void setOftendistinct(String oftendistinct) {
+    public void setOftendistinct(int oftendistinct) {
         this.oftendistinct = oftendistinct;
     }
 
@@ -72,11 +72,11 @@ public class EntTeamInfo {
         this.oftensoccerpernum = oftensoccerpernum;
     }
 
-    public String getJoinconfig() {
+    public int getJoinconfig() {
         return joinconfig;
     }
 
-    public void setJoinconfig(String joinconfig) {
+    public void setJoinconfig(int joinconfig) {
         this.joinconfig = joinconfig;
     }
 
@@ -104,12 +104,12 @@ public class EntTeamInfo {
         this.teamleadernm = teamleadernm;
     }
 
-    public String getTeamleaderusrnm() {
-        return teamleaderusrnm;
+    public String getTeamleaderusrrnm() {
+        return teamleaderusrrnm;
     }
 
-    public void setTeamleaderusrnm(String teamleaderusrnm) {
-        this.teamleaderusrnm = teamleaderusrnm;
+    public void setTeamleaderusrrnm(String teamleaderusrrnm) {
+        this.teamleaderusrrnm = teamleaderusrrnm;
     }
 
     public String getTeamleaderqqid() {

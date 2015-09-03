@@ -21,13 +21,14 @@ public class RequestManager {
     }
 
     public static void init(Context context) {
+        System.out.println(context);
         mRequestQueue = Volley.newRequestQueue(context);
 
-        int memClass = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE))
-                .getMemoryClass();
-        // Use 1/8th of the available memory for this memory cache.
-        int cacheSize = 1024 * 1024 * memClass / 8;
-        mImageLoader = new ImageLoader(mRequestQueue, new BitmapLruCache(cacheSize));
+//        int memClass = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE))
+//                .getMemoryClass();
+//        // Use 1/8th of the available memory for this memory cache.
+//        int cacheSize = 1024 * 1024 * memClass / 8;
+//        mImageLoader = new ImageLoader(mRequestQueue, new BitmapLruCache(cacheSize));
     }
 
     public static RequestQueue getRequestQueue() {
@@ -49,9 +50,8 @@ public class RequestManager {
     }
 
     public static void cancelAll(Object tag) {
-        System.out.println("===========>" + tag);
-        System.out.println("===========>" + mRequestQueue);
         if (mRequestQueue != null) {
+            System.out.println("===========>" + mRequestQueue);
             mRequestQueue.cancelAll(tag);
         }
     }

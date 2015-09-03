@@ -27,7 +27,7 @@ public class BaseActivity extends Activity {
     public void onStop() {
         super.onStop();
         try {
-
+            System.out.println("Cancel all json request!!!");
             RequestManager.cancelAll(this);
         }catch (Exception e){
             e.printStackTrace();
@@ -35,7 +35,12 @@ public class BaseActivity extends Activity {
     }
 
     protected void executeRequest(Request<?> request) {
+
+        if(RequestManager.getRequestQueue()==null){
+                RequestManager.init(activity);
+        }
         RequestManager.addRequest(request, this);
+
     }
 
     protected Response.ErrorListener errorListener() {
