@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_bg"
+    android:orientation="vertical">
+
+    <!-- TOP BAR-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_topbar">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            style="@style/top_bar_return_btn" />
+
+        <TextView
+            android:id="@+id/tv_create_team"
+            style="@style/top_bar_middle_btn"
+            android:text="@string/top_bar_find_team" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="12dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:id="@+id/layout_default_find_team"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/default_white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_default"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_search" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="@string/search_bar_find_team"
+                android:textColor="@color/find_team_bar_text_color"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_team_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:divider="@color/default_white"
+        android:dividerHeight="10dp"
+        android:background="@color/default_white">
+
+    </ListView>
+</LinearLayout>

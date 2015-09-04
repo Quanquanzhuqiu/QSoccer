@@ -44,11 +44,11 @@ public class Constants {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 注册球队部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队
     public static final String API_CREATE_TEAM_URL = API_SERVER_HOST + "/team/teams";
-
+    //根据条件查询球队信息
+    public static final String API_FIND_TEAM_URL = API_SERVER_HOST + "/team/teams";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 上传文件部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //上传文件到分布式文件系统
     public static final String API_FILE_UPLOAD_FASTDFS_URL = API_SERVER_HOST + "/file/fastdfs";
 
-    public static SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 }

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/default_white"
+    android:background="@color/grey_bg"
     android:orientation="vertical"
     android:id="@+id/ll_create_team">
 
@@ -19,14 +19,13 @@
 
         <TextView
             android:id="@+id/tv_create_team"
+            android:text="@string/top_bar_create_team"
             style="@style/top_bar_middle_btn" />
 
         <TextView
             android:id="@+id/tv_commit"
             style="@style/top_bar_right_btn" />
     </RelativeLayout>
-
-    <ImageView style="@style/create_page_divider" />
 
     <!-- 球队头像，球队名称，球队ID，常活动地点-->
     <LinearLayout
@@ -37,7 +36,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginTop="10dp">
 
 
             <TextView
@@ -131,8 +130,6 @@
 
     </LinearLayout>
 
-    <ImageView style="@style/create_page_divider" />
-
     <!-- 常用活动类型-->
     <LinearLayout
         style="@style/linearLayout_create_team_or_activity"
@@ -140,7 +137,8 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <TextView
                 style="@style/create_team_basic_info_label"
@@ -153,6 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="25dp"
             android:orientation="horizontal">
 
@@ -180,8 +179,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView style="@style/create_page_divider" />
-
     <!-- 入队验证-->
     <LinearLayout
         style="@style/linearLayout_create_team_or_activity"
@@ -203,6 +200,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="25dp">
 
             <RadioGroup
@@ -223,8 +221,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView style="@style/create_page_divider" />
-
     <!-- 球队介绍-->
     <LinearLayout
         android:layout_width="fill_parent"
@@ -233,10 +229,12 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/default_white">
 
         <TextView
             style="@style/create_team_basic_info_label"
+            android:layout_marginTop="10dp"
             android:text="@string/create_team_title_7" />
 
         <EditText

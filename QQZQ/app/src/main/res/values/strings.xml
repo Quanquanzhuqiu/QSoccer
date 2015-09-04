@@ -15,6 +15,9 @@
 
     <string name="top_bar_create_team">创建球队</string>
     <string name="top_bar_commit">提交</string>
+    <string name="top_bar_find_team">本地球队</string>
+
+    <string name="search_bar_find_team">查找球队</string>
 
     <!-- 创建球队页面-->
     <string name="create_team_title_1">球队头像</string>
@@ -41,6 +44,11 @@
 
     <string name="create_team_title_7">球队介绍</string>
     <string name="create_team_7_hint">请输入对球队的简介......</string>
+
+    <string name="find_team_team_name">球队名称：</string>
+    <string name="find_team_team_captain">球队队长： </string>
+    <string name="find_team_team_members">球队人数： </string>
+    <string name="find_team_establish_day">成立时间: </string>
 
     <string name="my_team_top_menu_1">球队管理</string>
     <string name="my_team_top_menu_2">球队内部活动</string>

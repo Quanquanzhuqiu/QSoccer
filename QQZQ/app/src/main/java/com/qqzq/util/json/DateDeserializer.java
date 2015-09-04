@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public class DateDeserializer implements JsonDeserializer<Date> {
 
-    @Override
+/*    @Override
     public Date deserialize(JsonElement json, Type typeOfT,
                             JsonDeserializationContext context) throws JsonParseException {
         Date date = null;
@@ -25,6 +25,12 @@ public class DateDeserializer implements JsonDeserializer<Date> {
             e.printStackTrace();
         }
         return json == null ? null : date;
+    }*/
+
+    @Override
+    public Date deserialize(JsonElement json, Type typeOfT,
+                            JsonDeserializationContext context) throws JsonParseException {
+        return json == null ? null : new Date(json.getAsLong());
     }
 
 }
