@@ -1,14 +1,10 @@
 package com.qqzq.ui;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.text.Layout;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -20,17 +16,18 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.qqzq.BaseActivity;
 import com.qqzq.R;
 import com.qqzq.common.Constants;
 import com.qqzq.entity.EntTeamInfo;
+import com.qqzq.entity.EntUplodResponse;
 import com.qqzq.entity.RequestJsonParameter;
 import com.qqzq.network.GsonRequest;
+import com.qqzq.network.MultipartRequest;
+import com.qqzq.network.ResponseListener;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -56,8 +53,9 @@ public class CreateTeamActivity extends BaseActivity {
 
     private RequestJsonParameter<EntTeamInfo> mParameters;
 
-    private static String path="/sdcard/qqzq/logo/";//sd路径
-    private Bitmap head;//头像Bitmap
+    private Bitmap logo;//Logo Bitmap
+
+    private String logoPathInServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,24 +83,14 @@ public class CreateTeamActivity extends BaseActivity {
         tv_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                mParameters = prepareRequestJson();
-
-                if (mParameters == null) {
-                    return;
-                }
-
-                System.out.println("==========>" + mParameters.getParameter().getTeamno());
-
-                executeRequest(new GsonRequest<EntTeamInfo>(Request.Method.POST, Constants.API_CREATE_TEAM_URL, EntTeamInfo.class, null, mParameters,
-                        responseListener(), errorListener()));
+                uploadLogoAndTeamBasicInfo();
             }
         });
 
         iv_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                photoPopupWindow = new PhotoPopupWindow(CreateTeamActivity.this, itemsOnClick);
+                photoPopupWindow = new PhotoPopupWindow(CreateTeamActivity.this, null);
                 photoPopupWindow.showAtLocation(ll_create_team,
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
             }
@@ -110,56 +98,33 @@ public class CreateTeamActivity extends BaseActivity {
 
     }
 
-    //为弹出窗口实现监听类
-    private View.OnClickListener itemsOnClick = new View.OnClickListener() {
-
-        public void onClick(View v) {
-            photoPopupWindow.dismiss();
-            switch (v.getId()) {
-                case R.id.btn_alter_pic_photo:
-                    Intent intent1 = new Intent(Intent.ACTION_PICK, null);
-                    intent1.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                    startActivityForResult(intent1, 1);
-                    break;
-                case R.id.btn_alter_pic_camera:
-                    Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent2.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
-                            "head.jpg")));
-                    startActivityForResult(intent2, 2);//采用ForResult打开
-                    break;
-                default:
-                    break;
-            }
-
-
-        }
-
-    };
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+            //从手机相册选择
             case 1:
                 if (resultCode == RESULT_OK) {
-                    cropPhoto(data.getData());//裁剪图片
+                    photoPopupWindow.cropPhoto(data.getData());//裁剪图片
                 }
                 break;
+            //拍照
             case 2:
                 if (resultCode == RESULT_OK) {
-                    File temp = new File(Environment.getExternalStorageDirectory()
-                            + "/head.jpg");
-                    cropPhoto(Uri.fromFile(temp));//裁剪图片
+                    File temp = new File(Constants.IMAGE_PHOTO_TMP_PATH
+                            + "/logo.jpg");
+                    photoPopupWindow.cropPhoto(Uri.fromFile(temp));//裁剪图片
                 }
                 break;
+            //照片剪裁后
             case 3:
                 if (data != null) {
                     Bundle extras = data.getExtras();
-                    head = extras.getParcelable("data");
-                    if(head!=null){
+                    logo = extras.getParcelable("data");
+                    if (logo != null) {
                         /**
                          * 上传服务器代码
                          */
-                        setPicToView(head);//保存在SD卡中
-                        iv_logo.setImageBitmap(head);//用ImageView显示出来
+                        photoPopupWindow.setPicToView(logo);//保存在SD卡中
+                        iv_logo.setImageBitmap(logo);//用ImageView显示出来
                     }
                 }
                 break;
@@ -167,47 +132,50 @@ public class CreateTeamActivity extends BaseActivity {
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
-    };
-    /**
-     * 调用系统的裁剪
-     * @param uri
-     */
-    public void cropPhoto(Uri uri) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");
-        // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 150);
-        intent.putExtra("outputY", 150);
-        intent.putExtra("return-data", true);
-        startActivityForResult(intent, 3);
     }
-    private void setPicToView(Bitmap mBitmap) {
-        String sdStatus = Environment.getExternalStorageState();
-        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+
+    public void uploadLogoAndTeamBasicInfo() {
+        File logoFile = new File(
+                Constants.IMAGE_PHOTO_TMP_PATH + "logo.jpg");
+        MultipartRequest<EntUplodResponse> request = new MultipartRequest(Constants.API_FILE_UPLOAD_FASTDFS_URL, logoFile, EntUplodResponse.class, null, new ResponseListener<EntUplodResponse>() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                System.out.println(new String(volleyError.networkResponse.data));
+            }
+
+            @Override
+            public void onResponse(EntUplodResponse response) {
+                logoPathInServer = response.getLocation();
+                System.out.println(logoPathInServer);
+                //提交LOGO成功后，再提交整个表单到后台
+                commit();
+            }
+        });
+
+        executeRequest(request);
+    }
+
+    public void commit(){
+        mParameters = prepareRequestJson();
+
+        if (mParameters == null) {
             return;
         }
-        FileOutputStream b = null;
-        File file = new File(path);
-        file.mkdirs();// 创建文件夹
-        String fileName =path + "head.jpg";//图片名字
-        try {
-            b = new FileOutputStream(fileName);
-            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                //关闭流
-                b.flush();
-                b.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+        GsonRequest gsonRequest = new GsonRequest<EntTeamInfo>(Request.Method.POST, Constants.API_CREATE_TEAM_URL, EntTeamInfo.class, null, mParameters,
+                new ResponseListener<EntTeamInfo>() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        System.out.println(new String(volleyError.networkResponse.data));
+                    }
+
+                    @Override
+                    public void onResponse(EntTeamInfo entTeamInfo) {
+                        System.out.println("创建球队成功");
+                    }
+                });
+
+        executeRequest(gsonRequest);
     }
 
     public RequestJsonParameter prepareRequestJson() {
@@ -250,17 +218,11 @@ public class CreateTeamActivity extends BaseActivity {
 //        entTeamInfo.setTeamleadernm("");
         entTeamInfo.setTeamleaderusrrnm("13551063785");
 //        entTeamInfo.setTeamleaderusrrnm("");
+        if(!TextUtils.isEmpty(logoPathInServer)){
+            entTeamInfo.setTeamlogo(logoPathInServer);
+        }
         mParameters.setParameter(entTeamInfo);
         return mParameters;
     }
 
-    private Response.Listener<EntTeamInfo> responseListener() {
-        return new Response.Listener<EntTeamInfo>() {
-            @Override
-            public void onResponse(EntTeamInfo response) {
-                System.out.println(">>>>>>>>>>>" + response);
-//                mTvResult.setText(new Gson().toJson(response));
-            }
-        };
-    }
 }

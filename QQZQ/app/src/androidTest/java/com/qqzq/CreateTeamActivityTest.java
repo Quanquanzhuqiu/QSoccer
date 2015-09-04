@@ -1,5 +1,7 @@
 package com.qqzq;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -84,9 +86,9 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
         System.out.println(mParameters.getParameter().getTeamno());
     }*/
 
-/*    public void test3_commit() throws InterruptedException {
-        solo.enterText(edit_team_id, "222222");
-        solo.enterText(edit_team_name,"ac milan");
+    public void test3_commit() throws InterruptedException {
+        solo.enterText(edit_team_id, "3333333");
+        solo.enterText(edit_team_name,"Juventus");
         solo.enterText(edit_team_province,"四川");
         solo.enterText(edit_team_city,"成都");
         solo.enterText(edit_team_detail,"意甲俱乐部");
@@ -94,11 +96,14 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
         solo.clickOnView(cbox_11_persons);
         assertEquals(View.VISIBLE, tv_commit.getVisibility());
         solo.clickOnView(tv_commit);
+        Thread.sleep(30*1000);
 
-    }*/
+    }
 
-    public void test4_uploadLogo() throws InterruptedException {
+    /*public void test4_uploadLogo() throws InterruptedException {
         solo.clickOnView(iv_logo);
         solo.clickOnView(tv_camera);
-    }
+        createTeamActivity.uploadLogo();
+        Thread.sleep(30*1000);
+    }*/
 }

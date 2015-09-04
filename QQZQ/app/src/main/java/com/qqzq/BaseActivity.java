@@ -37,7 +37,7 @@ public class BaseActivity extends Activity {
     protected void executeRequest(Request<?> request) {
 
         if(RequestManager.getRequestQueue()==null){
-                RequestManager.init(activity);
+            RequestManager.init(activity);
         }
         RequestManager.addRequest(request, this);
 

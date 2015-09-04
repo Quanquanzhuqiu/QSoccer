@@ -33,13 +33,13 @@ public class GsonRequest<T> extends Request<T> {
     private final Map<String, String> mHeaders;
     private final RequestJsonParameter mParameters;
 
-    public GsonRequest(String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
-        this(Method.GET, url, clazz, null, null, listener, errorListener);
+    public GsonRequest(String url, Class<T> clazz, ResponseListener listener) {
+        this(Method.GET, url, clazz, null, null, listener);
     }
 
     public GsonRequest(int method, String url, Class<T> clazz, Map<String, String> headers, RequestJsonParameter parameters,
-                       Response.Listener<T> listener, Response.ErrorListener errorListener) {
-        super(method, url, errorListener);
+                       ResponseListener listener) {
+        super(method, url, listener);
 
         this.mClazz = clazz;
         this.mHeaders = headers;
@@ -58,13 +58,10 @@ public class GsonRequest<T> extends Request<T> {
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
         try {
-            System.out.println("response header ==>" + networkResponse.headers);
             String json = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
-            System.out.println("response json ==>" + json);
             return Response.success(mGson.fromJson(json, mClazz),
                     HttpHeaderParser.parseCacheHeaders(networkResponse));
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
             return Response.error(new ParseError(e));
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
@@ -74,13 +71,13 @@ public class GsonRequest<T> extends Request<T> {
 
     @Override
     protected VolleyError parseNetworkError(VolleyError volleyError) {
-        NetworkResponse networkResponse= volleyError.networkResponse;
-        int statusCode = networkResponse.statusCode;
-        System.out.println(statusCode);
+        NetworkResponse networkResponse = volleyError.networkResponse;
+//        int statusCode = networkResponse.statusCode;
+//        System.out.println(statusCode);
 
-        if(statusCode==400){
-            return new VolleyError(new String(networkResponse.data));
-        }
+//        if (statusCode == 400) {
+//            return new VolleyError(new String(networkResponse.data));
+//        }
 
         return super.parseNetworkError(volleyError);
     }
@@ -107,9 +104,8 @@ public class GsonRequest<T> extends Request<T> {
         try {
             Object object = mParameters.getParameter();
             String json = mGson.toJson(object);
-
+            System.out.println("Request json =>" + json);
             if (json != null) {
-                System.out.println("request json ==>" + json);
                 return json.getBytes(getParamsEncoding());
             }
 

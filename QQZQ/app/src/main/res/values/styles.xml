@@ -85,7 +85,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textColor">@color/default_black</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
     <style name="create_team_basic_info_label" parent="create_team_basic_info_label_font">
@@ -96,7 +96,7 @@
     <style name="create_team_basic_info_edit_font">
         <item name="android:layout_width">70dp</item>
         <item name="android:layout_height">33dp</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="create_team_basic_info_edit" parent="create_team_basic_info_edit_font">
@@ -110,7 +110,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/default_black</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:padding">5dp</item>
         <item name="android:button">@drawable/selector_radio_button</item>
@@ -121,7 +121,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/default_black</item>
         <item name="android:layout_marginLeft">20dp</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:padding">5dp</item>
         <item name="android:button">@drawable/selector_checkbox</item>
     </style>
