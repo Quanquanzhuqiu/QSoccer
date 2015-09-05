@@ -11,6 +11,7 @@ public class Constants {
     public static final String WEIXIN_APP_ID = "XXXXX";
     public static final String WEIBO_APP_ID = "XXXXX";
 
+    public static final String FILE_SERVER_HOST = "http://121.43.229.24/";
     public static final String API_SERVER_HOST = "http://121.43.229.24:8080/qqzq/rest";
     public static final String IMAGE_PHOTO_TMP_PATH = Environment.getExternalStorageDirectory().getPath() + "/qqzq/tmp/";
 

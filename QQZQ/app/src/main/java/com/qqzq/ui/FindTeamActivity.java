@@ -80,8 +80,9 @@ public class FindTeamActivity extends BaseActivity {
         teamList = new ArrayList(entTeamInfos.length);
         for (EntTeamInfo entTeamInfo : entTeamInfos) {
             EntTeamListItem entTeamListItem = new EntTeamListItem();
+            entTeamListItem.setLogoUrl(entTeamInfo.getTeamlogo());
             entTeamListItem.setTeamName(entTeamInfo.getTeamname());
-            entTeamListItem.setTeamCaptain(entTeamInfo.getTeamleadernm());
+            entTeamListItem.setTeamCaptain(entTeamInfo.getTeamleaderusrrnm());
             entTeamListItem.setTeamMembers(entTeamInfo.getOftensoccerpernum());
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(entTeamInfo.getEstablishdate());
@@ -94,4 +95,5 @@ public class FindTeamActivity extends BaseActivity {
     public void initTeamListview(){
         lv_team_list.setAdapter(new TeamListViewAdapter(this,teamList));
     }
+
 }

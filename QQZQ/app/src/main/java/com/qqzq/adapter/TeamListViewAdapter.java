@@ -9,8 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.qqzq.R;
+import com.qqzq.common.Constants;
 import com.qqzq.entity.EntTeamListItem;
+import com.qqzq.network.RequestManager;
 
 import org.w3c.dom.Text;
 
@@ -81,6 +84,7 @@ public class TeamListViewAdapter extends BaseAdapter {
         EntTeamListItem entTeamListItem = mList.get(position);
         if (entTeamListItem != null) {
             Drawable logo = entTeamListItem.getLogo();
+            String logoUrl = entTeamListItem.getLogoUrl();
             String teamName = entTeamListItem.getTeamName();
             String teamCaptain = entTeamListItem.getTeamCaptain();
             String teamMembers = entTeamListItem.getTeamMembers();
@@ -88,6 +92,8 @@ public class TeamListViewAdapter extends BaseAdapter {
 
             if (logo != null) {
                 listItemView.iv_logo.setImageDrawable(logo);
+            }else{
+                displayUrlImg( listItemView.iv_logo,logoUrl);
             }
             listItemView.tv_team_name.setText(activity.getResources().getString(R.string.find_team_team_name) + teamName);
             listItemView.tv_team_captain.setText(activity.getResources().getString(R.string.find_team_team_captain) + teamCaptain);
@@ -96,6 +102,15 @@ public class TeamListViewAdapter extends BaseAdapter {
         }
 
         return convertView;
+    }
+
+    public void displayUrlImg(ImageView imageView,String url){
+
+        String logoUrl = Constants.FILE_SERVER_HOST+url;
+        System.out.println(logoUrl);
+
+        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView,R.drawable.new_team_logo,R.drawable.new_team_logo);
+        RequestManager.getImageLoader().get(logoUrl,listener);
     }
 
     class ListItemView {

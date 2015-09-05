@@ -87,8 +87,8 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
     }*/
 
     public void test3_commit() throws InterruptedException {
-        solo.enterText(edit_team_id, "3333333");
-        solo.enterText(edit_team_name,"Juventus");
+        solo.enterText(edit_team_id, "4");
+        solo.enterText(edit_team_name,"国际米兰");
         solo.enterText(edit_team_province,"四川");
         solo.enterText(edit_team_city,"成都");
         solo.enterText(edit_team_detail,"意甲俱乐部");

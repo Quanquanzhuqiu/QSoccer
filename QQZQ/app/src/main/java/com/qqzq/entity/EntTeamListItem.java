@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
  */
 public class EntTeamListItem {
     private Drawable logo;
+    private String logoUrl;
     private String teamName;
     private String teamCaptain;
     private String teamMembers;
@@ -50,5 +51,13 @@ public class EntTeamListItem {
 
     public void setTeamEstablishDay(String teamEstablishDay) {
         this.teamEstablishDay = teamEstablishDay;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }
