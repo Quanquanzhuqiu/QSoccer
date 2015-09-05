@@ -32,6 +32,6 @@ public class FindTeamActivityTest extends ActivityInstrumentationTestCase2<FindT
     }
 
     public void test1_loadTeamListFromBackend(){
-        activity.loadTeamListFromBackend();
+//        activity.loadTeamListFromBackend();
     }
 }

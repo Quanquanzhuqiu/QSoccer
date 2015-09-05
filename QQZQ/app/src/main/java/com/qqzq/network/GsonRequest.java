@@ -59,13 +59,17 @@ public class GsonRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
         try {
             String json = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
-            System.out.println(json);
+//            System.out.println(json);
+
+            try {
+                mGson.fromJson(json, mClazz);
+            }catch (Exception e){
+
+            }
             return Response.success(mGson.fromJson(json, mClazz),
                     HttpHeaderParser.parseCacheHeaders(networkResponse));
-        } catch (UnsupportedEncodingException e) {
-            return Response.error(new ParseError(e));
-        } catch (JsonSyntaxException e) {
-            e.printStackTrace();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
             return Response.error(new ParseError(e));
         }
     }

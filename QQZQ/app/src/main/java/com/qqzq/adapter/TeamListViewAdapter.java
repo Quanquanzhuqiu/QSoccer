@@ -1,6 +1,6 @@
 package com.qqzq.adapter;
 
-import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,20 +15,18 @@ import com.qqzq.common.Constants;
 import com.qqzq.entity.EntTeamListItem;
 import com.qqzq.network.RequestManager;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**
- * Created by syouketu on 15/9/5.
+ * Created by jie.xiao on 15/9/5.
  */
 public class TeamListViewAdapter extends BaseAdapter {
 
     private List<EntTeamListItem> mList;
-    private Activity activity;
+    private Context context;
 
-    public TeamListViewAdapter(Activity activity, List<EntTeamListItem> mList) {
-        this.activity = activity;
+    public TeamListViewAdapter(Context context, List<EntTeamListItem> mList) {
+        this.context = context;
         this.mList = mList;
     }
 
@@ -66,7 +64,7 @@ public class TeamListViewAdapter extends BaseAdapter {
         // 初始化item view
         if (convertView == null) {
             // 通过LayoutInflater将xml中定义的视图实例化到一个View中
-            convertView = LayoutInflater.from(activity).inflate(R.layout.team_list_item, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.team_list_item, null);
             // 实例化一个封装类ListItemView，并实例化它的所有域
             listItemView = new ListItemView();
             listItemView.iv_logo = (ImageView) convertView.findViewById(R.id.iv_team_list_logo);
@@ -95,13 +93,18 @@ public class TeamListViewAdapter extends BaseAdapter {
             }else{
                 displayUrlImg( listItemView.iv_logo,logoUrl);
             }
-            listItemView.tv_team_name.setText(activity.getResources().getString(R.string.find_team_team_name) + teamName);
-            listItemView.tv_team_captain.setText(activity.getResources().getString(R.string.find_team_team_captain) + teamCaptain);
-            listItemView.tv_team_members.setText(activity.getResources().getString(R.string.find_team_team_members) + teamMembers);
-            listItemView.tv_team_establish_day.setText(activity.getResources().getString(R.string.find_team_establish_day) + teamEstablishDay);
+            listItemView.tv_team_name.setText(context.getResources().getString(R.string.find_team_team_name) + teamName);
+            listItemView.tv_team_captain.setText(context.getResources().getString(R.string.find_team_team_captain) + teamCaptain);
+            listItemView.tv_team_members.setText(context.getResources().getString(R.string.find_team_team_members) + teamMembers);
+            listItemView.tv_team_establish_day.setText(context.getResources().getString(R.string.find_team_establish_day) + teamEstablishDay);
         }
 
         return convertView;
+    }
+
+    public void addItem(EntTeamListItem item){
+        mList.add(item);
+        notifyDataSetChanged();
     }
 
     public void displayUrlImg(ImageView imageView,String url){
