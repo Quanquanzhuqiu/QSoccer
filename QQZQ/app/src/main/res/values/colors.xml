@@ -49,4 +49,12 @@
     <color name="logo_dialog_divider_bg">#EAEAEE</color>
     <color name="grey_bg">#F0EFED</color>
     <color name="find_team_bar_text_color">#A7A7A7</color>
+
+
+    <color name="rgb_153_153_153">#999999</color>
+    <color name="rgb_255_255_255">#FFFFFF</color>
+    <color name="rgb_9_187_7">#09BB07</color>
+    <color name="rgb_240_239_237">#F0EFED</color>
+    <color name="rgb_216_216_213">#D8D8D5</color>
+
 </resources>

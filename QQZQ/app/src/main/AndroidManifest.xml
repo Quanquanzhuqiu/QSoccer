@@ -14,7 +14,7 @@
         android:theme="@android:style/Theme.NoTitleBar">
 
         <activity
-            android:name="com.qqzq.ui.FindTeamActivity"
+            android:name=".ui.LoginActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
             <intent-filter>
@@ -28,9 +28,9 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
-        <activity
+ <!--       <activity
             android:name=".ui.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />-->
         <activity
             android:name=".ui.MainTabBar"
             android:screenOrientation="portrait"
@@ -38,9 +38,9 @@
         <activity
             android:name=".ui.CreateTeamActivity"
             android:screenOrientation="portrait" />
- <!--       <activity
+      <activity
             android:name=".ui.FindTeamActivity"
-            android:screenOrientation="portrait" />-->
+            android:screenOrientation="portrait" />
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />
