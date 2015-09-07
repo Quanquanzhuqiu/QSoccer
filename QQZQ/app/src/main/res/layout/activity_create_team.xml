@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_create_team"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_bg"
-    android:orientation="vertical"
-    android:id="@+id/ll_create_team">
+    android:orientation="vertical">
 
     <!-- TOP BAR-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/bg_topbar">
+    <RelativeLayout style="@style/top_bar_layout">
 
 
         <ImageView
@@ -19,8 +16,8 @@
 
         <TextView
             android:id="@+id/tv_create_team"
-            android:text="@string/top_bar_create_team"
-            style="@style/top_bar_middle_btn" />
+            style="@style/top_bar_middle_btn"
+            android:text="@string/top_bar_create_team" />
 
         <TextView
             android:id="@+id/tv_commit"
@@ -114,7 +111,7 @@
 
             <TextView
                 style="@style/create_team_basic_info_label_font"
-                android:text="@string/create_team_title_4_1"/>
+                android:text="@string/create_team_title_4_1" />
 
 
             <EditText
@@ -150,32 +147,32 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
 
             <CheckBox
                 android:id="@+id/cbox_5_persons"
-                android:text="@string/create_team_5_5p"
+                style="@style/my_checkbox"
                 android:layout_marginLeft="0dp"
-                style="@style/my_checkbox"/>
+                android:text="@string/create_team_5_5p" />
 
             <CheckBox
                 android:id="@+id/cbox_7_persons"
-                android:text="@string/create_team_5_7p"
-                style="@style/my_checkbox"/>
+                style="@style/my_checkbox"
+                android:text="@string/create_team_5_7p" />
 
             <CheckBox
                 android:id="@+id/cbox_9_persons"
-                android:text="@string/create_team_5_9p"
-                style="@style/my_checkbox"/>
+                style="@style/my_checkbox"
+                android:text="@string/create_team_5_9p" />
 
             <CheckBox
                 android:id="@+id/cbox_11_persons"
-                android:text="@string/create_team_5_11p"
-                style="@style/my_checkbox"/>
+                style="@style/my_checkbox"
+                android:text="@string/create_team_5_11p" />
         </LinearLayout>
     </LinearLayout>
 
@@ -184,9 +181,7 @@
         style="@style/linearLayout_create_team_or_activity"
         android:orientation="vertical">
 
-        <LinearLayout
-            style="@style/create_team_basic_layout"
-            >
+        <LinearLayout style="@style/create_team_basic_layout">
 
             <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -199,9 +194,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="25dp">
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp">
 
             <RadioGroup
                 android:id="@+id/radio_group_join_config"
@@ -210,13 +205,13 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:text="@string/create_team_6_join_team_1"
+                    style="@style/my_radio_button"
                     android:layout_marginLeft="0dp"
-                    style="@style/my_radio_button"/>
+                    android:text="@string/create_team_6_join_team_1" />
 
                 <RadioButton
-                    android:text="@string/create_team_6_join_team_2"
-                    style="@style/my_radio_button" />
+                    style="@style/my_radio_button"
+                    android:text="@string/create_team_6_join_team_2" />
             </RadioGroup>
         </LinearLayout>
     </LinearLayout>
@@ -229,8 +224,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:background="@color/default_white">
+        android:background="@color/default_white"
+        android:orientation="vertical">
 
         <TextView
             style="@style/create_team_basic_info_label"
@@ -241,11 +236,11 @@
             android:id="@+id/edit_team_detail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:minLines="6"
-            android:maxLength="1000"
             android:layout_marginTop="10dp"
             android:hint="@string/create_team_7_hint"
             android:inputType="textMultiLine"
+            android:maxLength="1000"
+            android:minLines="6"
             android:textColorHint="@color/default_gray"
             android:textSize="12sp" />
 
