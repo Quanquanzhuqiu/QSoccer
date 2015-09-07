@@ -3,7 +3,7 @@ package com.qqzq.entity;
 /**
  * Created by jie.xiao on 15/9/3.
  */
-public class RequestJsonParameter<T> {
+public class RequestParams<T> {
 
     private T parameter;
 

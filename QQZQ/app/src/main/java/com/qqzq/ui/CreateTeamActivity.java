@@ -13,22 +13,23 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.qqzq.BaseActivity;
 import com.qqzq.R;
 import com.qqzq.common.Constants;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntUplodResponse;
-import com.qqzq.entity.RequestJsonParameter;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.MultipartRequest;
 import com.qqzq.network.ResponseListener;
 
 import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jie.xiao on 8/31/2015.
@@ -50,8 +51,6 @@ public class CreateTeamActivity extends BaseActivity {
     private View ll_create_team;
 
     private PhotoPopupWindow photoPopupWindow;
-
-    private RequestJsonParameter<EntTeamInfo> mParameters;
 
     private Bitmap logo;//Logo Bitmap
 
@@ -140,7 +139,8 @@ public class CreateTeamActivity extends BaseActivity {
         MultipartRequest<EntUplodResponse> request = new MultipartRequest(Constants.API_FILE_UPLOAD_FASTDFS_URL, logoFile, EntUplodResponse.class, null, new ResponseListener<EntUplodResponse>() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                System.out.println(new String(volleyError.networkResponse.data));
+                String result = new String(volleyError.networkResponse.data);
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -155,10 +155,10 @@ public class CreateTeamActivity extends BaseActivity {
         executeRequest(request);
     }
 
-    public void commit(){
-        mParameters = prepareRequestJson();
+    public void commit() {
+        Map<String, Object> mParameters = prepareRequestJson();
 
-        if (mParameters == null) {
+        if (mParameters == null || mParameters.isEmpty()) {
             return;
         }
 
@@ -178,8 +178,8 @@ public class CreateTeamActivity extends BaseActivity {
         executeRequest(gsonRequest);
     }
 
-    public RequestJsonParameter prepareRequestJson() {
-        mParameters = new RequestJsonParameter<EntTeamInfo>();
+    public Map<String, Object> prepareRequestJson() {
+        Map<String, Object> mParameters = new HashMap<>();
         String teamId = edit_team_id.getText().toString();
         String teamName = edit_team_name.getText().toString();
         String teamProvince = edit_team_province.getText().toString();
@@ -218,10 +218,10 @@ public class CreateTeamActivity extends BaseActivity {
 //        entTeamInfo.setTeamleadernm("");
         entTeamInfo.setTeamleaderusrrnm("13551063785");
 //        entTeamInfo.setTeamleaderusrrnm("");
-        if(!TextUtils.isEmpty(logoPathInServer)){
+        if (!TextUtils.isEmpty(logoPathInServer)) {
             entTeamInfo.setTeamlogo(logoPathInServer);
         }
-        mParameters.setParameter(entTeamInfo);
+        mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entTeamInfo);
         return mParameters;
     }
 

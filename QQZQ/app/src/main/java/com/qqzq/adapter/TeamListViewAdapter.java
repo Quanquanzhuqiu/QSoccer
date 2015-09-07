@@ -24,6 +24,7 @@ public class TeamListViewAdapter extends BaseAdapter {
 
     private List<EntTeamListItem> mList;
     private Context context;
+    public int pageIdx = 0;
 
     public TeamListViewAdapter(Context context, List<EntTeamListItem> mList) {
         this.context = context;
@@ -90,8 +91,8 @@ public class TeamListViewAdapter extends BaseAdapter {
 
             if (logo != null) {
                 listItemView.iv_logo.setImageDrawable(logo);
-            }else{
-                displayUrlImg( listItemView.iv_logo,logoUrl);
+            } else {
+                displayUrlImg(listItemView.iv_logo, logoUrl);
             }
             listItemView.tv_team_name.setText(context.getResources().getString(R.string.find_team_team_name) + teamName);
             listItemView.tv_team_captain.setText(context.getResources().getString(R.string.find_team_team_captain) + teamCaptain);
@@ -102,18 +103,18 @@ public class TeamListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void addItem(EntTeamListItem item){
+    public void addItem(EntTeamListItem item) {
         mList.add(item);
         notifyDataSetChanged();
     }
 
-    public void displayUrlImg(ImageView imageView,String url){
+    public void displayUrlImg(ImageView imageView, String url) {
 
-        String logoUrl = Constants.FILE_SERVER_HOST+url;
+        String logoUrl = Constants.FILE_SERVER_HOST + url;
         System.out.println(logoUrl);
 
-        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView,R.drawable.new_team_logo,R.drawable.new_team_logo);
-        RequestManager.getImageLoader().get(logoUrl,listener);
+        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.drawable.new_team_logo, R.drawable.new_team_logo);
+        RequestManager.getImageLoader().get(logoUrl, listener);
     }
 
     class ListItemView {

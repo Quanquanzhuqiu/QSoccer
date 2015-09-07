@@ -9,14 +9,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
-import com.qqzq.entity.RequestJsonParameter;
+import com.qqzq.common.Constants;
 import com.qqzq.util.json.DateDeserializer;
 import com.qqzq.util.json.DateSerializer;
 import com.qqzq.util.json.ObjectDeserializer;
-
-import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -31,13 +27,13 @@ public class GsonRequest<T> extends Request<T> {
     private final Class<T> mClazz;
     private final Response.Listener<T> mListener;
     private final Map<String, String> mHeaders;
-    private final RequestJsonParameter mParameters;
+    private final Map<String, Object> mParameters;
 
     public GsonRequest(String url, Class<T> clazz, ResponseListener listener) {
         this(Method.GET, url, clazz, null, null, listener);
     }
 
-    public GsonRequest(int method, String url, Class<T> clazz, Map<String, String> headers, RequestJsonParameter parameters,
+    public GsonRequest(int method, String url, Class<T> clazz, Map<String, String> headers, Map<String, Object> parameters,
                        ResponseListener listener) {
         super(method, url, listener);
 
@@ -63,12 +59,12 @@ public class GsonRequest<T> extends Request<T> {
 
             try {
                 mGson.fromJson(json, mClazz);
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
             return Response.success(mGson.fromJson(json, mClazz),
                     HttpHeaderParser.parseCacheHeaders(networkResponse));
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return Response.error(new ParseError(e));
         }
@@ -107,11 +103,13 @@ public class GsonRequest<T> extends Request<T> {
 
 
         try {
-            Object object = mParameters.getParameter();
-            String json = mGson.toJson(object);
-            System.out.println("Request json =>" + json);
-            if (json != null) {
-                return json.getBytes(getParamsEncoding());
+            if (mParameters != null) {
+                Object object = mParameters.get(Constants.GSON_REQUST_POST_PARAM_KEY);
+                String json = mGson.toJson(object);
+                System.out.println("Request json =>" + json);
+                if (json != null) {
+                    return json.getBytes(getParamsEncoding());
+                }
             }
 
         } catch (UnsupportedEncodingException e) {
@@ -120,4 +118,6 @@ public class GsonRequest<T> extends Request<T> {
 
         return null;
     }
+
+
 }

@@ -61,38 +61,37 @@
             android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:imeOptions="actionSearch"/>
     </RelativeLayout>
 
-<!--    <ListView
-        android:id="@+id/lv_team_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:divider="@color/default_white"
-        android:dividerHeight="10dp"
+
+    <!-- body -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:background="@color/default_white">
 
-    </ListView>-->
+        <com.qqzq.view.PullToRefreshView
+            android:id="@+id/pull_refresh_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-   <com.qqzq.view.PullToRefreshLayout
-       android:id="@+id/refresh_view"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
-       <include layout="@layout/refresh_head" />
+            <ListView
+                android:id="@+id/lv_team_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/default_white"
+                android:divider="@color/default_white"
+                android:dividerHeight="10dp">
 
-       <!-- 支持所有实现Pullab接口的View-->
-       <com.qqzq.view.PullableListView
-           android:id="@+id/content_view"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:background="@color/default_white"
-           android:divider="@color/default_gray"
-           android:dividerHeight="1dp"
-           >
+            </ListView>
 
-       </com.qqzq.view.PullableListView>
-   </com.qqzq.view.PullToRefreshLayout>
+        </com.qqzq.view.PullToRefreshView>
+
+    </RelativeLayout>
+
 </LinearLayout>
