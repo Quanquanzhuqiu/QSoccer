@@ -22,9 +22,10 @@ import java.util.List;
  */
 public class TeamListViewAdapter extends BaseAdapter {
 
-    private List<EntTeamListItem> mList;
     private Context context;
+    public List<EntTeamListItem> mList;
     public int pageIdx = 0;
+    public boolean hasMore = true;
 
     public TeamListViewAdapter(Context context, List<EntTeamListItem> mList) {
         this.context = context;
@@ -116,6 +117,7 @@ public class TeamListViewAdapter extends BaseAdapter {
         ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.drawable.new_team_logo, R.drawable.new_team_logo);
         RequestManager.getImageLoader().get(logoUrl, listener);
     }
+
 
     class ListItemView {
         ImageView iv_logo;

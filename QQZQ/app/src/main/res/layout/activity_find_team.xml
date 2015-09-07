@@ -72,20 +72,20 @@
         <com.qqzq.view.PullToRefreshView
             android:id="@+id/pull_refresh_listview"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
             <ListView
                 android:id="@+id/lv_team_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
+                android:cacheColorHint="#00000000"
                 android:background="@color/default_white"
-                android:divider="@color/default_white"
-                android:dividerHeight="10dp">
-
-            </ListView>
+                android:divider="#b8b8b8"
+                />
 
         </com.qqzq.view.PullToRefreshView>
 

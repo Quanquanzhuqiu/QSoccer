@@ -17,13 +17,13 @@ public class Utils {
         makedUrl.append("?");
         for (String key : parameters.keySet()) {
             Object value = parameters.get(key);
-            if (makedUrl.indexOf("&") <= 0) {
-                makedUrl.append("&");
-            }
+            makedUrl.append("&");
             makedUrl.append(key);
             makedUrl.append("=");
             makedUrl.append(value);
         }
+
+        makedUrl.deleteCharAt(makedUrl.indexOf("&"));
 
         return makedUrl.toString();
     }

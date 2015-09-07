@@ -39,7 +39,7 @@ public class FindTeamActivity extends BaseActivity {
     private ListView lv_team_list;
     private PullToRefreshView pullToRefreshListView;
     private ImageView iv_team_detail;
-    private List<EntTeamListItem> teamList;
+    private List<EntTeamListItem> teamList = new ArrayList<>();
     private TeamListViewAdapter listViewAdapter;
     private Context context;
 
@@ -58,16 +58,24 @@ public class FindTeamActivity extends BaseActivity {
         et_search = (EditText) findViewById(R.id.et_search);
         iv_team_detail = (ImageView) findViewById(R.id.iv_team_detail);
 
+        listViewAdapter = new TeamListViewAdapter(context, teamList);
+        lv_team_list.setAdapter(listViewAdapter);
+
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
                 if (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                     Toast.makeText(context, "开始查找", Toast.LENGTH_LONG).show();
+
+                    if (listViewAdapter != null) {
+                        listViewAdapter.mList.clear();
+                    }
+
                     Map<String, Object> mParameters = new HashMap<>();
                     mParameters.put("offset", 0);
                     mParameters.put("limit", Constants.PAGE_SIZE);
-                    mParameters.put("teamLeaderUsrNm",v.getText().toString());
+                    mParameters.put("teamLeaderUsrNm", v.getText().toString());
                     loadTeamListFromBackend(mParameters);
                     return true;
                 }
@@ -92,6 +100,11 @@ public class FindTeamActivity extends BaseActivity {
                                                          {
                                                              @Override
                                                              public void onHeaderRefresh(PullToRefreshView view) {
+
+                                                                 if (listViewAdapter != null) {
+                                                                     listViewAdapter.mList.clear();
+                                                                 }
+
                                                                  Map<String, Object> mParameters = new HashMap<>();
                                                                  mParameters.put("offset", 0);
                                                                  mParameters.put("limit", Constants.PAGE_SIZE);
@@ -137,6 +150,7 @@ public class FindTeamActivity extends BaseActivity {
     public void loadTeamListFromBackend(Map<String, Object> mParameters) {
 
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_TEAM_URL, mParameters);
+        System.out.println(queryUrl);
         GsonRequest gsonRequest = new GsonRequest<EntTeamInfo[]>(queryUrl, EntTeamInfo[].class,
                 responseListener);
         executeRequest(gsonRequest);
@@ -146,7 +160,6 @@ public class FindTeamActivity extends BaseActivity {
         if (entTeamInfos == null) {
             return;
         }
-        teamList = new ArrayList(entTeamInfos.length);
         for (EntTeamInfo entTeamInfo : entTeamInfos) {
             EntTeamListItem entTeamListItem = new EntTeamListItem();
             entTeamListItem.setLogoUrl(entTeamInfo.getTeamlogo());
@@ -160,18 +173,25 @@ public class FindTeamActivity extends BaseActivity {
             teamList.add(entTeamListItem);
         }
 
-        listViewAdapter = new TeamListViewAdapter(context, teamList);
-        lv_team_list.setAdapter(listViewAdapter);
+        listViewAdapter.notifyDataSetChanged();
     }
 
     ResponseListener responseListener = new ResponseListener<EntTeamInfo[]>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            if (pullToRefreshListView != null) {
+                pullToRefreshListView.onHeaderRefreshComplete();
+                pullToRefreshListView.onFooterRefreshComplete();
+            }
             System.out.println(new String(volleyError.networkResponse.data));
         }
 
         @Override
         public void onResponse(EntTeamInfo[] entTeamInfos) {
+            if (pullToRefreshListView != null) {
+                pullToRefreshListView.onHeaderRefreshComplete();
+                pullToRefreshListView.onFooterRefreshComplete();
+            }
             refreshTeamListView(entTeamInfos);
             listViewAdapter.pageIdx++;
         }

@@ -18,7 +18,7 @@ public class Constants {
 
     // connection configuration
     public static final int CONNECT_TIME_OUT = 40000;
-    public static final int PAGE_SIZE = 6;
+    public static final int PAGE_SIZE = 4;
 
     public static final String GSON_REQUST_POST_PARAM_KEY = "json";
 

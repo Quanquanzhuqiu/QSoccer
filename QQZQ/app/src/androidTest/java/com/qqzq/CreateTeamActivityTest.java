@@ -1,9 +1,6 @@
 package com.qqzq;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -11,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.qqzq.entity.EntTeamInfo;
-import com.qqzq.entity.RequestJsonParameter;
 import com.qqzq.ui.CreateTeamActivity;
 import com.robotium.solo.Solo;
 

@@ -55,7 +55,7 @@ public class GsonRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
         try {
             String json = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
-//            System.out.println(json);
+            System.out.println(json);
 
             try {
                 mGson.fromJson(json, mClazz);
