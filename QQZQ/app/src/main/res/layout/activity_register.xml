@@ -38,7 +38,9 @@
             android:src="@drawable/ic_phone_number" />
 
         <EditText
+            android:id="@+id/edt_phone_no"
             style="@style/login_edit_text"
+            android:inputType="phone"
             android:hint="@string/hint_phone_number" />
     </LinearLayout>
 
@@ -52,9 +54,11 @@
             style="@style/login_edit_text"
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:inputType="number"
             android:hint="@string/hint_phone_verify_code" />
 
         <Button
+            android:id="@+id/btn_verify_code"
             android:layout_width="90dp"
             android:layout_height="36dp"
             android:layout_gravity="center_vertical"

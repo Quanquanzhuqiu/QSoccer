@@ -10,6 +10,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.qqzq.network.RequestManager;
 
+import cn.smssdk.SMSSDK;
+
 /**
  * Created by jie.xiao on 8/25/2015.
  */
@@ -29,18 +31,16 @@ public class BaseActivity extends Activity {
         try {
             System.out.println("Cancel all json request!!!");
             RequestManager.cancelAll(this);
-        }catch (Exception e){
+
+            //主要所有SMSSDK监听事件
+            SMSSDK.unregisterAllEventHandler();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     protected void executeRequest(Request<?> request) {
-
-        if(RequestManager.getRequestQueue()==null){
-            RequestManager.init(activity);
-        }
         RequestManager.addRequest(request, this);
-
     }
 
     protected Response.ErrorListener errorListener() {

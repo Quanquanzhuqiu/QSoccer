@@ -10,10 +10,14 @@ public class Constants {
     // 3rd part API APP ID
     public static final String WEIXIN_APP_ID = "XXXXX";
     public static final String WEIBO_APP_ID = "XXXXX";
+    public static final String MOD_APP_KEY = "9c3fe724515d";
+    public static final String MOD_APP_SECRECT = "9c3fe724515d";
 
-    public static final String FILE_SERVER_HOST = "http://121.43.229.24/";
-    public static final String API_SERVER_HOST = "http://121.43.229.24:8080/qqzq/rest";
-    public static final String IMAGE_PHOTO_TMP_PATH = Environment.getExternalStorageDirectory().getPath() + "/qqzq/tmp/";
+    /**
+     * 中国手机区号.
+     */
+    public static final String CHINA_MOBLIE_NO = "86";
+
 
 
     // connection configuration
@@ -36,7 +40,11 @@ public class Constants {
 
     public static final String LOGO_CONTENT_TYPE = "image/jpeg";
 
-    //=================================== API list ===================================
+    //=================================== 后台API调用列表 ===================================
+    public static final String FILE_SERVER_HOST = "http://121.43.229.24/";
+    public static final String API_SERVER_HOST = "http://121.43.229.24:8080/qqzq/rest";
+    public static final String IMAGE_PHOTO_TMP_PATH = Environment.getExternalStorageDirectory().getPath() + "/qqzq/tmp/";
+
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 注册认证部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //用户注册

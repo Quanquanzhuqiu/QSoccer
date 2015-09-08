@@ -33,4 +33,5 @@ dependencies {
     compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/httpmime-4.3.5.jar')
     compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/robotium-solo-5.4.1.jar')
     compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/Volley.jar')
+    compile project(':smssdk')
 }
