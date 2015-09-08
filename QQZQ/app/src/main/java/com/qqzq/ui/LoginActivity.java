@@ -29,6 +29,7 @@ public class LoginActivity extends BaseActivity {
     private EditText edt_username;
     private EditText edt_password;
     private Button btn_register;
+    private Button btn_login;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,20 @@ public class LoginActivity extends BaseActivity {
         edt_username = (EditText) findViewById(R.id.edt_username);
         edt_password = (EditText) findViewById(R.id.edt_password);
         btn_register = (Button) findViewById(R.id.btn_register);
+        btn_login = (Button) findViewById(R.id.btn_login);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
             }
         });
     }

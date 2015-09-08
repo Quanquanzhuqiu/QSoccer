@@ -103,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
-            android:text="@string/txt_sign_agreement"
+            android:text="@string/txt_qqzq_agreement"
             android:textColor="@color/rgb_0_0_0"
             android:textSize="15sp"
             />

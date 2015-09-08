@@ -19,9 +19,9 @@ public class Constants {
     // connection configuration
     public static final int CONNECT_TIME_OUT = 40000;
     public static final int PAGE_SIZE = 4;
+    public static final int UNLIMITED_PAGE_SIZE = 1000;
 
     public static final String GSON_REQUST_POST_PARAM_KEY = "json";
-
     public static final String SHARE_REFERENCE_NAME = "qqzq";
 
     //preference configuration
@@ -29,6 +29,10 @@ public class Constants {
     public static final String PREF_USERNAME = "username";
     // login password
     public static final String PREF_PWD = "pwd";
+
+
+    //extra configuration
+    public static final String EXTRA_SELECTED_LOCATION = "location";
 
     public static final String LOGO_CONTENT_TYPE = "image/jpeg";
 
@@ -43,6 +47,10 @@ public class Constants {
     public static final String API_USER_EDIT_USER_URL = API_SERVER_HOST + "/authc/pwd";
     //用户退出
     public static final String API_USER_LOGOUT_URL = API_SERVER_HOST + "/authc/logout";
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~ 地区选择部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
+    public static final String API_FIND_PROVINCE_URL = API_SERVER_HOST + "system/provinces";
+    public static final String API_FIND_CITY_URL = API_SERVER_HOST + "system//citys";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 注册球队部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队

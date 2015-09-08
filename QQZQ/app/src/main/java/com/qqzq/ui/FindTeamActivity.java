@@ -36,30 +36,29 @@ import java.util.Map;
 public class FindTeamActivity extends BaseActivity {
     private EditText et_search;
     private LinearLayout layout_default_find_team;
-    private ListView lv_team_list;
+    private ListView lv_teams;
     private PullToRefreshView pullToRefreshListView;
     private ImageView iv_team_detail;
     private List<EntTeamListItem> teamList = new ArrayList<>();
     private TeamListViewAdapter listViewAdapter;
-    private Context context;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_team);
-        context = getApplicationContext();
         init();
     }
 
     private void init() {
         layout_default_find_team = (LinearLayout) findViewById(R.id.layout_default_find_team);
         pullToRefreshListView = (PullToRefreshView) findViewById(R.id.pull_refresh_listview);
-        lv_team_list = (ListView) findViewById(R.id.lv_team_list);
+        lv_teams = (ListView) findViewById(R.id.lv_teams);
         et_search = (EditText) findViewById(R.id.et_search);
         iv_team_detail = (ImageView) findViewById(R.id.iv_team_detail);
 
         listViewAdapter = new TeamListViewAdapter(context, teamList);
-        lv_team_list.setAdapter(listViewAdapter);
+        lv_teams.setAdapter(listViewAdapter);
 
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -128,7 +127,7 @@ public class FindTeamActivity extends BaseActivity {
 
         );
 
-        lv_team_list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        lv_teams.setOnItemClickListener(new AdapterView.OnItemClickListener()
 
                                             {
                                                 @Override

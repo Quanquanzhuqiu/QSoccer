@@ -17,6 +17,7 @@
     <string name="top_bar_login">登陆</string>
     <string name="top_bar_register">注册</string>
     <string name="top_bar_commit">提交</string>
+    <string name="top_bar_select_location">选择地区</string>
     <string name="top_bar_find_team">本地球队</string>
 
     <string name="search_bar_find_team">查找球队</string>
@@ -34,7 +35,10 @@
     <string name="hint_phone_verify_code">请输入手机验证码</string>
     <string name="hint_password_retype">请再次输入密码</string>
     <string name="txt_get_verify_code">获取验证码</string>
-    <string name="txt_sign_agreement">我已阅读并同意《圈圈足球协议》</string>
+    <string name="txt_qqzq_agreement">我已阅读并同意《圈圈足球协议》</string>
+
+    <!-- 选择地区页面-->
+    <string name="txt_selected_location">已选地区</string>
 
     <!-- 创建球队页面-->
     <string name="create_team_title_1">球队头像</string>
