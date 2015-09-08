@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -14,13 +13,16 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.qqzq.BaseActivity;
 import com.qqzq.R;
+import com.qqzq.adapter.LocationListViewAdapter;
 import com.qqzq.common.Constants;
 import com.qqzq.entity.EntLocationInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.util.Utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +33,7 @@ public class SelectLocationActivity extends BaseActivity {
     private Context context = this;
     private ListView lv_location;
     private TextView tv_selected_location;
-    private ArrayAdapter adapter;
+    private LocationListViewAdapter adapter;
 
     private EntLocationInfo[] locationInfos;
     private boolean isProvincePage = true;
@@ -77,15 +79,7 @@ public class SelectLocationActivity extends BaseActivity {
     }
 
     private void refreshLocationListView(EntLocationInfo[] locationInfos) {
-
-        String[] locations = new String[locationInfos.length];
-        int i = 0;
-        for (EntLocationInfo locationInfo : locationInfos) {
-            locations[i] = locationInfo.getLocation();
-            i++;
-        }
-
-        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, locations);
+        adapter = new LocationListViewAdapter(this,locationInfos);
         lv_location.setAdapter(adapter);
     }
 
@@ -106,7 +100,7 @@ public class SelectLocationActivity extends BaseActivity {
         mParameters.put("offset", 0);
         mParameters.put("limit", Constants.UNLIMITED_PAGE_SIZE);
         mParameters.put("provinceId", provinceId);
-        String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_PROVINCE_URL, mParameters);
+        String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_CITY_URL, mParameters);
         System.out.println(queryUrl);
         GsonRequest gsonRequest = new GsonRequest<EntLocationInfo[]>(queryUrl, EntLocationInfo[].class,
                 findLocationResponseListener);

@@ -56,12 +56,14 @@
 
     <Button
         style="@style/login_buttons"
+        android:id="@+id/btn_login"
         android:background="@drawable/bg_login"
         android:text="@string/txt_login"
         android:textColor="@color/rgb_255_255_255" />
 
     <Button
         style="@style/login_buttons"
+        android:id="@+id/btn_register"
         android:background="@drawable/bg_register"
         android:text="@string/txt_register"
         android:textColor="@color/rgb_9_187_7" />

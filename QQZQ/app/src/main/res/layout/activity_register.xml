@@ -7,7 +7,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_return"
             style="@style/top_bar_return_btn" />
 
         <TextView
@@ -26,6 +26,7 @@
             android:src="@drawable/ic_location" />
 
         <EditText
+            android:id="@+id/edt_select_location"
             style="@style/login_edit_text"
             android:hint="@string/hint_location" />
     </LinearLayout>

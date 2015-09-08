@@ -49,8 +49,8 @@ public class Constants {
     public static final String API_USER_LOGOUT_URL = API_SERVER_HOST + "/authc/logout";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 地区选择部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
-    public static final String API_FIND_PROVINCE_URL = API_SERVER_HOST + "system/provinces";
-    public static final String API_FIND_CITY_URL = API_SERVER_HOST + "system//citys";
+    public static final String API_FIND_PROVINCE_URL = API_SERVER_HOST + "/system/provinces";
+    public static final String API_FIND_CITY_URL = API_SERVER_HOST + "/system/citys";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 注册球队部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队

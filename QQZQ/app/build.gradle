@@ -23,20 +23,14 @@ android {
         exclude 'META-INF/LICENSE'
     }
 }
-/*dependencies {
-   compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.0'
-    compile files('F:/Repository/Git/qqzq/QQZQ/libs/gson-2.2.3.jar')
-    compile files('F:/Repository/Git/qqzq/QQZQ/libs/Volley.jar')
-}*/
 
 dependencies {
     androidTestCompile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.0'
-    compile files('F:/Repository/Git/qqzq/QQZQ/libs/gson-2.2.3.jar')
-    compile files('F:/Repository/Git/qqzq/QQZQ/libs/httpclient-4.3.5.jar')
-    compile files('F:/Repository/Git/qqzq/QQZQ/libs/httpcore-4.3.2.jar')
-    compile files('F:/Repository/Git/qqzq/QQZQ/libs/httpmime-4.3.5.jar')
-    compile files('F:/Repository/Git/qqzq/QQZQ/libs/robotium-solo-5.4.1.jar')
-    compile files('F:/Repository/Git/qqzq/QQZQ/libs/Volley.jar')
+    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/gson-2.2.3.jar')
+    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/httpclient-4.3.5.jar')
+    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/httpcore-4.3.2.jar')
+    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/httpmime-4.3.5.jar')
+    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/robotium-solo-5.4.1.jar')
+    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/Volley.jar')
 }

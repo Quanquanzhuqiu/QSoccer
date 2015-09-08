@@ -27,6 +27,8 @@
             android:id="@+id/tv_selected_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
             android:textColor="@color/rgb_0_0_0"
             android:textSize="16sp" />
 
@@ -44,15 +46,17 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_marginTop="16dp"
+        android:background="@color/rgb_255_255_255">
 
         <ListView
             android:id="@+id/lv_location"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
-            android:background="@color/rgb_255_255_255"
-            android:divider="@color/default_gray"></ListView>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:divider="@null" />
     </LinearLayout>
 
 </LinearLayout>
