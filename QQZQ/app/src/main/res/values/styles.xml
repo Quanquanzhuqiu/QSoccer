@@ -2,16 +2,25 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Light" />
+
     <style name="AnimBottom" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
+
     <style name="PopupAnimation" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
 
     <!-- 共通-->
+    <style name="default_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/rgb_240_239_237</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
     <style name="create_page_divider">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">10dp</item>
@@ -33,7 +42,7 @@
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_marginLeft">20dp</item>
-        <item name="android:background">@drawable/icon_return</item>
+        <item name="android:background">@drawable/ic_return</item>
     </style>
 
     <style name="top_bar_middle_btn">
@@ -85,7 +94,7 @@
         <item name="android:layout_width">10dp</item>
         <item name="android:layout_height">10dp</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:background">@drawable/icon_star</item>
+        <item name="android:background">@drawable/ic_star</item>
     </style>
 
     <style name="create_team_basic_info_label_font">
@@ -112,7 +121,6 @@
     </style>
 
 
-
     <style name="my_radio_button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -130,7 +138,7 @@
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:textSize">12sp</item>
         <item name="android:padding">5dp</item>
-        <item name="android:button">@drawable/selector_checkbox</item>
+        <item name="android:button">@drawable/selector_checkbox_green</item>
     </style>
 
     <!-- 修改头像 -->
@@ -141,5 +149,38 @@
         <item name="android:textColor">@color/default_black</item>
         <item name="android:textSize">17sp</item>
         <item name="android:layout_marginTop">15dp</item>
+    </style>
+
+    <!-- 登陆页面styles -->
+    <style name="login_edit_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">49dp</item>
+        <item name="android:background">@drawable/shape_grey_divider</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="login_buttons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">46dp</item>
+        <item name="android:layout_marginLeft">17dp</item>
+        <item name="android:layout_marginRight">17dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="login_image_view">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">17dp</item>
+    </style>
+
+    <style name="login_edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">17dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColorHint">@color/rgb_153_153_153</item>
+        <item name="android:textSize">15sp</item>
     </style>
 </resources>

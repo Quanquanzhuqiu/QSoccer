@@ -152,7 +152,7 @@ public class FindTeamActivity extends BaseActivity {
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_TEAM_URL, mParameters);
         System.out.println(queryUrl);
         GsonRequest gsonRequest = new GsonRequest<EntTeamInfo[]>(queryUrl, EntTeamInfo[].class,
-                responseListener);
+                findTeamResponseListener);
         executeRequest(gsonRequest);
     }
 
@@ -176,7 +176,7 @@ public class FindTeamActivity extends BaseActivity {
         listViewAdapter.notifyDataSetChanged();
     }
 
-    ResponseListener responseListener = new ResponseListener<EntTeamInfo[]>() {
+    ResponseListener findTeamResponseListener = new ResponseListener<EntTeamInfo[]>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             if (pullToRefreshListView != null) {

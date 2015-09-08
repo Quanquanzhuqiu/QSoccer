@@ -11,7 +11,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.qqzq.entity.EntUplodResponse;
+import com.qqzq.entity.EntClientResponse;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
@@ -108,8 +108,8 @@ public class MultipartRequest<T> extends Request<T> {
         try {
 
             Object mResponse = gson.fromJson(json, mClass);
-            if (mResponse instanceof EntUplodResponse && response.headers.containsKey("Location")) {
-                ((EntUplodResponse) mResponse).setLocation(response.headers.get("Location"));
+            if (mResponse instanceof EntClientResponse && response.headers.containsKey("Location")) {
+                ((EntClientResponse) mResponse).setLocation(response.headers.get("Location"));
             }
 
             return Response.success(mResponse, HttpHeaderParser.parseCacheHeaders(response));

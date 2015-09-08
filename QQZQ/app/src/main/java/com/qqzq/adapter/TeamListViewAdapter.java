@@ -114,7 +114,7 @@ public class TeamListViewAdapter extends BaseAdapter {
         String logoUrl = Constants.FILE_SERVER_HOST + url;
         System.out.println(logoUrl);
 
-        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.drawable.new_team_logo, R.drawable.new_team_logo);
+        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.drawable.ic_default_team_log, R.drawable.ic_default_team_log);
         RequestManager.getImageLoader().get(logoUrl, listener);
     }
 

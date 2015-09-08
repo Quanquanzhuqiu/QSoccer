@@ -3,7 +3,7 @@ package com.qqzq.entity;
 /**
  * Created by jie.xiao on 15/9/4.
  */
-public class EntUplodResponse {
+public class EntClientResponse {
 
     private String code;
     private String innerMessage;

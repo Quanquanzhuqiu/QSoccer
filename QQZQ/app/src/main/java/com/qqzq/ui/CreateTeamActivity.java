@@ -21,7 +21,7 @@ import com.qqzq.BaseActivity;
 import com.qqzq.R;
 import com.qqzq.common.Constants;
 import com.qqzq.entity.EntTeamInfo;
-import com.qqzq.entity.EntUplodResponse;
+import com.qqzq.entity.EntClientResponse;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.MultipartRequest;
 import com.qqzq.network.ResponseListener;
@@ -37,11 +37,11 @@ import java.util.Map;
 public class CreateTeamActivity extends BaseActivity {
 
     private TextView tv_commit;
-    private EditText edit_team_name;
-    private EditText edit_team_id;
-    private EditText edit_team_province;
-    private EditText edit_team_city;
-    private EditText edit_team_detail;
+    private EditText edt_team_name;
+    private EditText edt_team_id;
+    private EditText edt_team_province;
+    private EditText edt_team_city;
+    private EditText edt_team_detail;
     private CheckBox cbox_5_persons;
     private CheckBox cbox_7_persons;
     private CheckBox cbox_9_persons;
@@ -67,11 +67,11 @@ public class CreateTeamActivity extends BaseActivity {
     private void init() {
         ll_create_team = findViewById(R.id.ll_create_team);
         tv_commit = (TextView) findViewById(R.id.tv_commit);
-        edit_team_id = (EditText) findViewById(R.id.edit_team_id);
-        edit_team_name = (EditText) findViewById(R.id.edit_team_name);
-        edit_team_province = (EditText) findViewById(R.id.edit_team_province);
-        edit_team_city = (EditText) findViewById(R.id.edit_team_city);
-        edit_team_detail = (EditText) findViewById(R.id.edit_team_detail);
+        edt_team_id = (EditText) findViewById(R.id.edt_team_id);
+        edt_team_name = (EditText) findViewById(R.id.edt_team_name);
+        edt_team_province = (EditText) findViewById(R.id.edt_team_province);
+        edt_team_city = (EditText) findViewById(R.id.edt_team_city);
+        edt_team_detail = (EditText) findViewById(R.id.edt_team_detail);
         radio_group_join_config = (RadioGroup) findViewById(R.id.radio_group_join_config);
         cbox_5_persons = (CheckBox) findViewById(R.id.cbox_5_persons);
         cbox_7_persons = (CheckBox) findViewById(R.id.cbox_7_persons);
@@ -136,21 +136,8 @@ public class CreateTeamActivity extends BaseActivity {
     public void uploadLogoAndTeamBasicInfo() {
         File logoFile = new File(
                 Constants.IMAGE_PHOTO_TMP_PATH + "logo.jpg");
-        MultipartRequest<EntUplodResponse> request = new MultipartRequest(Constants.API_FILE_UPLOAD_FASTDFS_URL, logoFile, EntUplodResponse.class, null, new ResponseListener<EntUplodResponse>() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                String result = new String(volleyError.networkResponse.data);
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onResponse(EntUplodResponse response) {
-                logoPathInServer = response.getLocation();
-                System.out.println(logoPathInServer);
-                //提交LOGO成功后，再提交整个表单到后台
-                commit();
-            }
-        });
+        MultipartRequest<EntClientResponse> request = new MultipartRequest(Constants.API_FILE_UPLOAD_FASTDFS_URL,
+                logoFile, EntClientResponse.class, null, uploadLogoResponseListner);
 
         executeRequest(request);
     }
@@ -162,29 +149,19 @@ public class CreateTeamActivity extends BaseActivity {
             return;
         }
 
-        GsonRequest gsonRequest = new GsonRequest<EntTeamInfo>(Request.Method.POST, Constants.API_CREATE_TEAM_URL, EntTeamInfo.class, null, mParameters,
-                new ResponseListener<EntTeamInfo>() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        System.out.println(new String(volleyError.networkResponse.data));
-                    }
-
-                    @Override
-                    public void onResponse(EntTeamInfo entTeamInfo) {
-                        System.out.println("创建球队成功");
-                    }
-                });
+        GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_CREATE_TEAM_URL,
+                EntTeamInfo.class, null, mParameters, createTeamResponseListener);
 
         executeRequest(gsonRequest);
     }
 
     public Map<String, Object> prepareRequestJson() {
         Map<String, Object> mParameters = new HashMap<>();
-        String teamId = edit_team_id.getText().toString();
-        String teamName = edit_team_name.getText().toString();
-        String teamProvince = edit_team_province.getText().toString();
-        String teamCity = edit_team_city.getText().toString();
-        String teamDetail = edit_team_detail.getText().toString();
+        String teamId = edt_team_id.getText().toString();
+        String teamName = edt_team_name.getText().toString();
+        String teamProvince = edt_team_province.getText().toString();
+        String teamCity = edt_team_city.getText().toString();
+        String teamDetail = edt_team_detail.getText().toString();
 
         int join_config = -1;
         for (int i = 0; i < radio_group_join_config.getChildCount(); i++) {
@@ -225,4 +202,31 @@ public class CreateTeamActivity extends BaseActivity {
         return mParameters;
     }
 
+    ResponseListener createTeamResponseListener = new ResponseListener<EntTeamInfo>() {
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            System.out.println(new String(volleyError.networkResponse.data));
+        }
+
+        @Override
+        public void onResponse(EntTeamInfo entTeamInfo) {
+            System.out.println("创建球队成功");
+        }
+    };
+
+    ResponseListener uploadLogoResponseListner = new ResponseListener<EntClientResponse>() {
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            String result = new String(volleyError.networkResponse.data);
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onResponse(EntClientResponse response) {
+            logoPathInServer = response.getLocation();
+            System.out.println(logoPathInServer);
+            //提交LOGO成功后，再提交整个表单到后台
+            commit();
+        }
+    };
 }

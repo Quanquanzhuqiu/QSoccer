@@ -20,17 +20,17 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:paddingBottom="5dip"
-    android:paddingTop="5dip" >
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp" >
 
     <ProgressBar
         android:id="@+id/pull_to_refresh_progress"
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dip"
-        android:layout_marginRight="20dip"
-        android:layout_marginTop="10dip"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
         android:indeterminate="true"
         android:visibility="gone" />
 
@@ -39,8 +39,8 @@
         android:layout_width="30dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="30dip"
-        android:layout_marginRight="20dip"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
         android:src="@drawable/ic_pulltorefresh_arrow"
         android:visibility="visible" />
@@ -59,9 +59,9 @@
     <TextView
         android:id="@+id/pull_to_refresh_updated_at"
         android:layout_width="fill_parent"
-        android:layout_height="30dip"
+        android:layout_height="30dp"
         android:layout_below="@+id/pull_to_refresh_text"
-        android:text="更新于：07-28 15:32"
+        android:text="更新于：09-08 15:32"
         android:layout_gravity="center"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceSmall"
