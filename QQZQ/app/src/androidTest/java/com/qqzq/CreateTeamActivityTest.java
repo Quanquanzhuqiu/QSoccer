@@ -46,11 +46,11 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
 
         createTeamActivity = getActivity();
         tv_commit = (TextView) createTeamActivity.findViewById(R.id.tv_commit);
-        edit_team_id = (EditText) createTeamActivity.findViewById(R.id.edit_team_id);
-        edit_team_name = (EditText) createTeamActivity.findViewById(R.id.edit_team_name);
-        edit_team_province = (EditText) createTeamActivity.findViewById(R.id.edit_team_province);
-        edit_team_city = (EditText) createTeamActivity.findViewById(R.id.edit_team_city);
-        edit_team_detail = (EditText) createTeamActivity.findViewById(R.id.edit_team_detail);
+        edit_team_id = (EditText) createTeamActivity.findViewById(R.id.edt_team_id);
+        edit_team_name = (EditText) createTeamActivity.findViewById(R.id.edt_team_name);
+        edit_team_province = (EditText) createTeamActivity.findViewById(R.id.edt_team_province);
+        edit_team_city = (EditText) createTeamActivity.findViewById(R.id.edt_team_city);
+        edit_team_detail = (EditText) createTeamActivity.findViewById(R.id.edt_team_detail);
         radio_group_join_config = (RadioGroup) createTeamActivity.findViewById(R.id.radio_group_join_config);
         cbox_5_persons = (CheckBox) createTeamActivity.findViewById(R.id.cbox_5_persons);
         cbox_7_persons = (CheckBox) createTeamActivity.findViewById(R.id.cbox_7_persons);
@@ -91,14 +91,13 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
         solo.clickOnView(cbox_11_persons);
         assertEquals(View.VISIBLE, tv_commit.getVisibility());
         solo.clickOnView(tv_commit);
-        Thread.sleep(30*1000);
+//        Thread.sleep(30*1000);
 
     }
 
-    /*public void test4_uploadLogo() throws InterruptedException {
+/*    public void test4_uploadLogo() throws InterruptedException {
         solo.clickOnView(iv_logo);
         solo.clickOnView(tv_camera);
-        createTeamActivity.uploadLogo();
         Thread.sleep(30*1000);
     }*/
 }

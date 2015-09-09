@@ -51,6 +51,7 @@
             android:src="@drawable/ic_phone_number" />
 
         <EditText
+            android:id="@+id/edt_verify_code"
             style="@style/login_edit_text"
             android:layout_width="wrap_content"
             android:layout_weight="1"
@@ -76,6 +77,7 @@
             android:src="@drawable/ic_password" />
 
         <EditText
+            android:id="@+id/edt_password"
             style="@style/login_edit_text"
             android:hint="@string/hint_password" />
     </LinearLayout>
@@ -87,6 +89,7 @@
             android:src="@drawable/ic_password_retype" />
 
         <EditText
+            android:id="@+id/edt_password_retype"
             style="@style/login_edit_text"
             android:hint="@string/hint_password_retype" />
     </LinearLayout>
@@ -99,6 +102,7 @@
         android:gravity="center_horizontal">
 
         <CheckBox
+            android:id="@+id/cbox_qqzq_agreement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/selector_checkbox_blue" />
@@ -116,6 +120,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_register"
         style="@style/login_buttons"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_login"

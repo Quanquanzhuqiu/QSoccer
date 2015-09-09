@@ -37,7 +37,8 @@ public class SelectLocationActivity extends BaseActivity {
 
     private EntLocationInfo[] locationInfos;
     private boolean isProvincePage = true;
-    private String selectedProvince = "";
+    private String selectedProvinceCode = "";
+    private String selectedCityCode = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,11 +62,15 @@ public class SelectLocationActivity extends BaseActivity {
                     tv_selected_location.setText(location);
 
                     if (isProvincePage) {
-                        selectedProvince = selectedLocationInfo.getId();
-                        requestCityList(selectedProvince);
+                        selectedProvinceCode = selectedLocationInfo.getId();
+                        requestCityList(selectedProvinceCode);
                     } else {
+                        selectedCityCode = selectedLocationInfo.getId();
+
                         Intent intent = new Intent(context, RegisterActivity.class);
                         intent.putExtra(Constants.EXTRA_SELECTED_LOCATION, location);
+                        intent.putExtra(Constants.EXTRA_SELECTED_PROVINCE_CODE, selectedProvinceCode);
+                        intent.putExtra(Constants.EXTRA_SELECTED_CITY_CODE, selectedCityCode);
                         startActivity(intent);
                     }
                 }

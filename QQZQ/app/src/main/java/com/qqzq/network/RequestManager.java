@@ -51,7 +51,6 @@ public class RequestManager {
 
     public static void cancelAll(Object tag) {
         if (mRequestQueue != null) {
-            System.out.println("===========>" + mRequestQueue);
             mRequestQueue.cancelAll(tag);
         }
     }

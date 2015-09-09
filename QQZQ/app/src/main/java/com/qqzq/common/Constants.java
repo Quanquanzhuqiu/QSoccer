@@ -11,7 +11,7 @@ public class Constants {
     public static final String WEIXIN_APP_ID = "XXXXX";
     public static final String WEIBO_APP_ID = "XXXXX";
     public static final String MOD_APP_KEY = "9c3fe724515d";
-    public static final String MOD_APP_SECRECT = "9c3fe724515d";
+    public static final String MOD_APP_SECRECT = "6040313e1ab9413095fd68bcc48fd8a0";
 
     /**
      * 中国手机区号.
@@ -28,6 +28,7 @@ public class Constants {
     public static final String GSON_REQUST_POST_PARAM_KEY = "json";
     public static final String SHARE_REFERENCE_NAME = "qqzq";
 
+
     //preference configuration
     // login user name
     public static final String PREF_USERNAME = "username";
@@ -37,6 +38,8 @@ public class Constants {
 
     //extra configuration
     public static final String EXTRA_SELECTED_LOCATION = "location";
+    public static final String EXTRA_SELECTED_PROVINCE_CODE = "province_code";
+    public static final String EXTRA_SELECTED_CITY_CODE = "city_code";
 
     public static final String LOGO_CONTENT_TYPE = "image/jpeg";
 

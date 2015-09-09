@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.qqzq.BaseActivity;
 import com.qqzq.R;
 import com.qqzq.common.Constants;
@@ -25,6 +28,9 @@ import com.qqzq.entity.EntClientResponse;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.MultipartRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.util.json.DateDeserializer;
+import com.qqzq.util.json.DateSerializer;
+import com.qqzq.util.json.ObjectDeserializer;
 
 import java.io.File;
 import java.util.Date;
@@ -136,10 +142,12 @@ public class CreateTeamActivity extends BaseActivity {
     public void uploadLogoAndTeamBasicInfo() {
         File logoFile = new File(
                 Constants.IMAGE_PHOTO_TMP_PATH + "logo.jpg");
-        MultipartRequest<EntClientResponse> request = new MultipartRequest(Constants.API_FILE_UPLOAD_FASTDFS_URL,
-                logoFile, EntClientResponse.class, null, uploadLogoResponseListner);
+        if (logoFile.exists()) {
+            MultipartRequest<EntClientResponse> request = new MultipartRequest(Constants.API_FILE_UPLOAD_FASTDFS_URL,
+                    logoFile, EntClientResponse.class, null, uploadLogoResponseListner);
 
-        executeRequest(request);
+            executeRequest(request);
+        }
     }
 
     public void commit() {
@@ -198,6 +206,20 @@ public class CreateTeamActivity extends BaseActivity {
         if (!TextUtils.isEmpty(logoPathInServer)) {
             entTeamInfo.setTeamlogo(logoPathInServer);
         }
+
+        try {
+            Gson gson = new GsonBuilder()
+//                .registerTypeAdapter(Date.class, new DateSerializer())
+//                .registerTypeAdapter(Date.class, new DateDeserializer())
+//                .registerTypeAdapter(Object.class,
+//                        new ObjectDeserializer(EntTeamInfo.class.getName()))
+                    .create();
+
+            String s = new Gson().toJson(entTeamInfo);
+            Log.v("qqzq", s);
+        }catch(Exception e){
+            Log.e("qqzq","转换json出错",e);
+        }
         mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entTeamInfo);
         return mParameters;
     }
@@ -217,8 +239,9 @@ public class CreateTeamActivity extends BaseActivity {
     ResponseListener uploadLogoResponseListner = new ResponseListener<EntClientResponse>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            String result = new String(volleyError.networkResponse.data);
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+            System.out.println(volleyError);
+//            String result = new String(volleyError.networkResponse.data);
+//            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
         }
 
         @Override

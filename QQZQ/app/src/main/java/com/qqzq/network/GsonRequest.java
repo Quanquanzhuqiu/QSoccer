@@ -1,5 +1,7 @@
 package com.qqzq.network;
 
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -29,6 +31,11 @@ public class GsonRequest<T> extends Request<T> {
     private final Map<String, String> mHeaders;
     private final Map<String, Object> mParameters;
 
+    private static final String TAG = "GsonRequest";
+    private static final String PROTOCOL_CHARSET = "utf-8";
+    private static final String PROTOCOL_CONTENT_TYPE = String.format(
+            "application/json; charset=%s", PROTOCOL_CHARSET);
+
     public GsonRequest(String url, Class<T> clazz, ResponseListener listener) {
         this(Method.GET, url, clazz, null, null, listener);
     }
@@ -36,11 +43,12 @@ public class GsonRequest<T> extends Request<T> {
     public GsonRequest(int method, String url, Class<T> clazz, Map<String, String> headers, Map<String, Object> parameters,
                        ResponseListener listener) {
         super(method, url, listener);
-
+        Log.i(TAG, url);
         this.mClazz = clazz;
         this.mHeaders = headers;
         this.mParameters = parameters;
         this.mListener = listener;
+//        setShouldCache(false);
 
         // Gson init
         this.mGson = new GsonBuilder()
@@ -48,12 +56,14 @@ public class GsonRequest<T> extends Request<T> {
                 .registerTypeAdapter(Date.class, new DateDeserializer())
                 .registerTypeAdapter(Object.class,
                         new ObjectDeserializer(mClazz.getName()))
+                .excludeFieldsWithoutExposeAnnotation()
                 .create();
     }
 
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
         try {
+            Log.v(TAG, "XXXXXXXXXXXXXXXXX");
             String json = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
             System.out.println(json);
 
@@ -72,15 +82,11 @@ public class GsonRequest<T> extends Request<T> {
 
     @Override
     protected VolleyError parseNetworkError(VolleyError volleyError) {
-        NetworkResponse networkResponse = volleyError.networkResponse;
-//        int statusCode = networkResponse.statusCode;
-//        System.out.println(statusCode);
-
-//        if (statusCode == 400) {
-//            return new VolleyError(new String(networkResponse.data));
-//        }
-
-        return super.parseNetworkError(volleyError);
+        if (volleyError.networkResponse != null && volleyError.networkResponse.data != null) {
+            VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
+            volleyError = error;
+        }
+        return volleyError;
     }
 
     @Override
@@ -95,29 +101,28 @@ public class GsonRequest<T> extends Request<T> {
 
     @Override
     public String getBodyContentType() {
-        return "application/json";
+        return PROTOCOL_CONTENT_TYPE;
     }
 
     @Override
     public byte[] getBody() throws AuthFailureError {
 
-
         try {
             if (mParameters != null) {
                 Object object = mParameters.get(Constants.GSON_REQUST_POST_PARAM_KEY);
-                String json = mGson.toJson(object);
+                String json = mGson.toJson(object,mClazz);
+                Log.i(TAG, json);
                 System.out.println("Request json =>" + json);
                 if (json != null) {
                     return json.getBytes(getParamsEncoding());
                 }
             }
 
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            Log.e(TAG, e.getMessage());
         }
 
         return null;
     }
-
-
 }

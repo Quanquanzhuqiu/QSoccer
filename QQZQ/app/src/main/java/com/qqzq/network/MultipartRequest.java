@@ -42,6 +42,7 @@ public class MultipartRequest<T> extends Request<T> {
                             Map<String, String> headers,
                             ResponseListener listener) {
         super(Request.Method.POST, url, listener);
+        Log.i("qqzq", url);
         mHeaders = headers;
         mClass = clazz;
         mListener = listener;

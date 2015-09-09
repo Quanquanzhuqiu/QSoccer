@@ -13,16 +13,26 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.qqzq.BaseActivity;
 import com.qqzq.R;
 import com.qqzq.common.Constants;
+import com.qqzq.entity.EntClientResponse;
+import com.qqzq.entity.EntLocationInfo;
+import com.qqzq.entity.EntRegisterInfo;
+import com.qqzq.entity.EntTeamInfo;
+import com.qqzq.network.GsonRequest;
+import com.qqzq.network.ResponseListener;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -34,12 +44,20 @@ import cn.smssdk.gui.RegisterPage;
 public class RegisterActivity extends BaseActivity {
 
     private Context context = this;
-    private TextView tv_qqzq_agreement;
     private ImageView iv_return;
     private EditText edt_select_location;
     private EditText edt_phone_no;
+    private EditText edt_verify_code;
+    private EditText edt_password;
+    private EditText edt_password_retype;
+    private CheckBox cbox_qqzq_agreement;
+    private TextView tv_qqzq_agreement;
     private Button btn_verify_code;
+    private Button btn_register;
+
     private Bundle extras;
+    private String selectedProvinceCode = "";
+    private String selectedCityCode = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,13 +72,25 @@ public class RegisterActivity extends BaseActivity {
         tv_qqzq_agreement = (TextView) findViewById(R.id.tv_qqzq_agreement);
         edt_select_location = (EditText) findViewById(R.id.edt_select_location);
         edt_phone_no = (EditText) findViewById(R.id.edt_phone_no);
+        edt_verify_code = (EditText) findViewById(R.id.edt_verify_code);
+        edt_password = (EditText) findViewById(R.id.edt_password);
+        edt_password_retype = (EditText) findViewById(R.id.edt_password_retype);
+        cbox_qqzq_agreement = (CheckBox) findViewById(R.id.cbox_qqzq_agreement);
         btn_verify_code = (Button) findViewById(R.id.btn_verify_code);
+        btn_register = (Button) findViewById(R.id.btn_register);
 
         //注册短信回调
         SMSSDK.registerEventHandler(eh);
         initSpanableString();
 
-        if (extras != null && extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)) {
+        if (extras != null
+                && extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)
+                && extras.containsKey(Constants.EXTRA_SELECTED_PROVINCE_CODE)
+                && extras.containsKey(Constants.EXTRA_SELECTED_CITY_CODE)) {
+
+            selectedProvinceCode = extras.getString(Constants.EXTRA_SELECTED_PROVINCE_CODE);
+            selectedCityCode = extras.getString(Constants.EXTRA_SELECTED_CITY_CODE);
+
             String selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
             edt_select_location.setText(selectedLocation);
         }
@@ -86,14 +116,17 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View v) {
                 if (edt_phone_no != null && !TextUtils.isEmpty(edt_phone_no.getText())) {
 
-                    new AlertDialog.Builder(context)
-                            .setTitle("提示")
-                            .setMessage("验证码将通过短信发送到你的手机，请注意查收！")
-                            .setPositiveButton("确定", null)
-                            .show();
+                    Toast.makeText(context, "验证码将通过短信发送到你的手机，请注意查收！", Toast.LENGTH_LONG).show();
 
-                    sendSMS(edt_phone_no.getText().toString());
+//                    sendSMS(edt_phone_no.getText().toString());
                 }
+            }
+        });
+
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerUser();
             }
         });
     }
@@ -131,6 +164,68 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
+
+    private void registerUser() {
+        String checkResult = formCheck();
+        if (!TextUtils.isEmpty(checkResult)) {
+            Toast.makeText(context, checkResult, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+        Map<String, Object> mParameters = prepareRequestJson();
+        GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_REGISTER_URL,
+                EntTeamInfo.class, null, mParameters, registerUserResponseListener);
+
+        executeRequest(gsonRequest);
+    }
+
+    private Map<String, Object> prepareRequestJson() {
+
+        Map<String, Object> mParameters = new HashMap<>();
+
+        EntRegisterInfo entRegisterInfo = new EntRegisterInfo();
+        entRegisterInfo.setProvince(Integer.parseInt(selectedProvinceCode));
+        entRegisterInfo.setCity(Integer.parseInt(selectedCityCode));
+        entRegisterInfo.setUsername(edt_phone_no.getText().toString());
+        entRegisterInfo.setPassword(edt_password.getText().toString());
+        entRegisterInfo.setVerifyCode(edt_verify_code.getText().toString());
+
+        mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entRegisterInfo);
+        return mParameters;
+    }
+
+    private String formCheck() {
+
+        if (TextUtils.isEmpty(selectedProvinceCode)
+                || TextUtils.isEmpty(selectedCityCode)
+                || TextUtils.isEmpty(edt_select_location.getText())) {
+            return "请输入你的所在地";
+        }
+
+        if (TextUtils.isEmpty(edt_phone_no.getText())) {
+            return "请输入手机号码";
+        }
+
+        if (TextUtils.isEmpty(edt_verify_code.getText())) {
+            return "请输入验证码";
+        }
+
+        if (TextUtils.isEmpty(edt_password.getText()) || TextUtils.isEmpty(edt_password_retype.getText())) {
+            return "请输入密码";
+        }
+
+        if (edt_password.getText().equals(edt_password_retype.getText())) {
+            return "两次输入的密码不一致";
+        }
+
+        if (!cbox_qqzq_agreement.isChecked()) {
+            return "请同意圈圈足球协议";
+        }
+
+        return "";
+    }
+
     EventHandler eh = new EventHandler() {
 
         @Override
@@ -149,6 +244,21 @@ public class RegisterActivity extends BaseActivity {
             } else {
                 ((Throwable) data).printStackTrace();
             }
+        }
+    };
+
+    ResponseListener registerUserResponseListener = new ResponseListener<EntClientResponse>() {
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            System.out.println(volleyError);
+            System.out.println(new String(volleyError.networkResponse.data));
+        }
+
+        @Override
+        public void onResponse(EntClientResponse entClientResponse) {
+            System.out.println("注册成功");
+//            Intent intent = new Intent(context, LoginActivity.class);
+//            startActivity(intent);
         }
     };
 }
