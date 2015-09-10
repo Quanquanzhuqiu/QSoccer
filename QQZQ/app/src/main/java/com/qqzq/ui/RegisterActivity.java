@@ -118,7 +118,7 @@ public class RegisterActivity extends BaseActivity {
 
                     Toast.makeText(context, "验证码将通过短信发送到你的手机，请注意查收！", Toast.LENGTH_LONG).show();
 
-//                    sendSMS(edt_phone_no.getText().toString());
+                    sendSMS(edt_phone_no.getText().toString());
                 }
             }
         });
@@ -175,7 +175,7 @@ public class RegisterActivity extends BaseActivity {
 
         Map<String, Object> mParameters = prepareRequestJson();
         GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_REGISTER_URL,
-                EntTeamInfo.class, null, mParameters, registerUserResponseListener);
+                EntRegisterInfo.class, null, mParameters, registerUserResponseListener);
 
         executeRequest(gsonRequest);
     }
@@ -251,7 +251,6 @@ public class RegisterActivity extends BaseActivity {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             System.out.println(volleyError);
-            System.out.println(new String(volleyError.networkResponse.data));
         }
 
         @Override

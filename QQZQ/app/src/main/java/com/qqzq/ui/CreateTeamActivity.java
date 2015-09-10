@@ -228,7 +228,7 @@ public class CreateTeamActivity extends BaseActivity {
     ResponseListener createTeamResponseListener = new ResponseListener<EntTeamInfo>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            System.out.println(new String(volleyError.networkResponse.data));
+            System.out.println(volleyError);
         }
 
         @Override
