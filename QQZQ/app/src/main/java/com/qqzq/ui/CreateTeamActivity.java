@@ -143,6 +143,7 @@ public class CreateTeamActivity extends BaseActivity {
         File logoFile = new File(
                 Constants.IMAGE_PHOTO_TMP_PATH + "logo.jpg");
         if (logoFile.exists()) {
+            System.out.println(Constants.API_FILE_UPLOAD_FASTDFS_URL);
             MultipartRequest<EntClientResponse> request = new MultipartRequest(Constants.API_FILE_UPLOAD_FASTDFS_URL,
                     logoFile, EntClientResponse.class, null, uploadLogoResponseListner);
 

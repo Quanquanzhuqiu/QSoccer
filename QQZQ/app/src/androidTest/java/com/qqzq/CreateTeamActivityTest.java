@@ -91,7 +91,7 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
         solo.clickOnView(cbox_11_persons);
         assertEquals(View.VISIBLE, tv_commit.getVisibility());
         solo.clickOnView(tv_commit);
-//        Thread.sleep(30*1000);
+        Thread.sleep(10*1000);
 
     }
 

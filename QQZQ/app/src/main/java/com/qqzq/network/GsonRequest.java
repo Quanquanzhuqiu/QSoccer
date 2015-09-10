@@ -16,7 +16,6 @@ import com.qqzq.util.json.DateDeserializer;
 import com.qqzq.util.json.DateSerializer;
 import com.qqzq.util.json.ObjectDeserializer;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Map;
 
@@ -48,7 +47,7 @@ public class GsonRequest<T> extends Request<T> {
         this.mHeaders = headers;
         this.mParameters = parameters;
         this.mListener = listener;
-//        setShouldCache(false);
+        setShouldCache(false);
 
         // Gson init
         this.mGson = new GsonBuilder()
@@ -56,22 +55,17 @@ public class GsonRequest<T> extends Request<T> {
                 .registerTypeAdapter(Date.class, new DateDeserializer())
                 .registerTypeAdapter(Object.class,
                         new ObjectDeserializer(mClazz.getName()))
-                .excludeFieldsWithoutExposeAnnotation()
                 .create();
     }
 
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
         try {
-            Log.v(TAG, "XXXXXXXXXXXXXXXXX");
+
             String json = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
+            Log.v(TAG, json);
             System.out.println(json);
 
-            try {
-                mGson.fromJson(json, mClazz);
-            } catch (Exception e) {
-
-            }
             return Response.success(mGson.fromJson(json, mClazz),
                     HttpHeaderParser.parseCacheHeaders(networkResponse));
         } catch (Exception e) {

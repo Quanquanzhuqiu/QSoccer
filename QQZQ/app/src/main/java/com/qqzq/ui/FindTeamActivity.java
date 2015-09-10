@@ -149,7 +149,6 @@ public class FindTeamActivity extends BaseActivity {
     public void loadTeamListFromBackend(Map<String, Object> mParameters) {
 
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_TEAM_URL, mParameters);
-        System.out.println(queryUrl);
         GsonRequest gsonRequest = new GsonRequest<EntTeamInfo[]>(queryUrl, EntTeamInfo[].class,
                 findTeamResponseListener);
         executeRequest(gsonRequest);

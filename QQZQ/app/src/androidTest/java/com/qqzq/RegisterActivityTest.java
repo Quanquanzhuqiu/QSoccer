@@ -87,7 +87,7 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Regis
         solo.clickOnView(cbox_qqzq_agreement);
         solo.clickOnView(btn_register);
 
-//        Thread.sleep(20 * 1000);
+        Thread.sleep(20 * 1000);
 //        solo.waitForActivity(LoginActivity.class);
     }
 
