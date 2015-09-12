@@ -1,76 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_bg">
 
     <!-- top bar -->
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/common_top_title_with_add_btn" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/default_white"
-            android:text="@string/main_topbar_title"
-            android:textSize="20sp"
-            android:singleLine="true"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
+    <com.qqzq.view.PagerSlidingTabStrip
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/top_bar"
 
-    <!-- body -->
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        />
 
-        <ImageView
-            android:id="@+id/main_tips_bg"
-            android:layout_width="fill_parent"
-            android:layout_height="355dp"
-            android:scaleType="fitXY" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabs" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+
 
         <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/main_tips_bg"
-            android:layout_alignParentBottom="true">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="fill_parent"
+            <Button
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentBottom="true"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="25dp">
-
-                <Button
-                    android:id="@+id/btn_login"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/main_login_btn_font"
-                    android:textSize="18sp"
-                    android:text="@string/main_btn_login"
-                    android:layout_marginRight="5dp" />
-
-                <Button
-                    android:id="@+id/btn_register"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/default_white"
-                    android:textSize="18sp"
-                    android:text="@string/main_btn_register"
-                    android:layout_marginLeft="5dp" />
-            </LinearLayout>
+                android:background="@drawable/main_bottom_item_bg"
+                android:drawableTop="@drawable/tab_myteam_bg"
+                android:paddingBottom="2dp"
+                android:paddingTop="7dp"
+                android:scaleType="matrix"
+                android:text="@string/my_team"
+                android:textColor="@color/main_bottom_text_color"
+                android:textSize="12sp" />
         </RelativeLayout>
-    </RelativeLayout>
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_bottom_item_bg"
+                android:drawableTop="@drawable/tab_chat_bg"
+                android:paddingBottom="2dp"
+                android:paddingTop="7dp"
+                android:scaleType="matrix"
+                android:text="@string/chat"
+                android:textColor="@color/main_bottom_text_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_bottom_item_bg"
+                android:drawableTop="@drawable/tab_find_bg"
+                android:paddingBottom="2dp"
+                android:paddingTop="7dp"
+                android:scaleType="matrix"
+                android:text="@string/find"
+                android:textColor="@color/main_bottom_text_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_bottom_item_bg"
+                android:drawableTop="@drawable/tab_me_bg"
+                android:paddingBottom="2dp"
+                android:paddingTop="7dp"
+                android:scaleType="matrix"
+                android:text="@string/me"
+                android:textColor="@color/main_bottom_text_color"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

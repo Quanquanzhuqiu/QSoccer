@@ -9,21 +9,43 @@
     <color name="global_bg_color">#F7F7F7</color>
     <color name="main_login_btn_font">#465578</color>
 
-    <!-- huanxin -->
+    <color name="background_tab_pressed">#6633B5E5</color>
+
+
+    <!-- common -->
+    <color name="top_bar_text_right">#09BB07</color>
+    <color name="top_bar_text_center">#ffffff</color>
+    <color name="divider_list_bg">#F0EFED</color>
+    <color name="multiline_tv_border_color">#C7C8C9</color>
+    <color name="logo_dialog_divider_bg">#EAEAEE</color>
+    <color name="grey_bg">#F0EFED</color>
+    <color name="find_team_bar_text_color">#A7A7A7</color>
+
+    <color name="rgb_0_0_0">#000000</color>
+    <color name="rgb_153_153_153">#999999</color>
+    <color name="rgb_255_255_255">#FFFFFF</color>
+    <color name="rgb_9_187_7">#09BB07</color>
+    <color name="rgb_240_239_237">#F0EFED</color>
+    <color name="rgb_216_216_213">#D8D8D5</color>
+    <color name="rgb_178_178_178">#B2B2B2</color>
+
     <color name="common_top_bar_blue">#4ebcd3</color>
-    <color name="btn_login_normal">#007086</color>
+    <color name="btn_login_normal">#F18B05</color>
     <color name="btn_login_pressed">#303744</color>
     <color name="btn_logout_normal">#d33f3f</color>
     <color name="btn_logout_pressed">#DA5A4D</color>
-    <color name="btn_register_normal">#2dafa3</color>
+    <color name="btn_register_normal">#1E3B65</color>
     <color name="btn_register_pressed">#4ebcd3</color>
-    <color name="common_bottom_bar_normal_bg">#2d2f31</color>
-    <color name="common_bottom_bar_selected_bg">#161718</color>
-    <color name="common_botton_bar_blue">#2ea7e0</color>
+    <color name="common_bottom_bar_normal_bg">#ECECEC</color>
+    <color name="common_bottom_bar_selected_bg">#F6F6F6</color>
+    <color name="common_bottom_bar_normal_bg2">#FEFEFE</color>
+    <color name="common_bottom_bar_selected_bg2">#FEFEFE</color>
+    <color name="common_botton_bar_blue">#475872</color>
+    <color name="common_botton_bar_blue2">#D6D6D6</color>
     <color name="common_bg">#fcfcfc</color>
     <color name="btn_pressed_green_solid">#B6DA53</color>
     <color name="divider_list">#cccccc</color>
-    <color name="top_bar_normal_bg">#4ebcd3</color>
+    <color name="top_bar_normal_bg">#1e3b66</color>
     <color name="error_item_color">#F6EBE6</color>
     <color name="bottom_bar_normal_bg">#2D2F31</color>
     <color name="bottom_text_color_normal">#ffffff</color>
@@ -39,23 +61,108 @@
     <color name="orange">#FFA500</color>
     <color name="gray_pressed">#b5b5b6</color>
     <color name="gray_normal">#666667</color>
+    <color name="grid_state_pressed">#1Affffff</color>
+    <color name="grid_state_focused">#80000000</color>
+
+    <color name="voip_interface_text_color">#bababa</color>
+    <color name="black_deep">#FF000000</color>
+    <color name="listview_divider_line">#bebebe</color>
+
+    <!-- qiyou -->
+    <color name="index_top_title_bg">#CCCCCC</color>
+    <color name="white">#ffffff</color>
+    <color name="bg_color">#F0F0F0</color>
+
+    <color name="common_botton_s">#475872</color>
+    <color name="common_botton_s2">#D6D6D6</color>
+    <color name="common_botton_u">#8A8A8A</color>
+    <color name="vertical_line_color">#CBC9CA</color>
+    <color name="index_title_color">#3d3d3d</color>
+    <color name="index_subtitle_color">#A8A8A8</color>
+    <color name="index_cotent_color">#6d6d6d</color>
+    <color name="btn_sign_u">#F18B05</color>
+    <color name="btn_sign_s">#797979</color>
+    <color name="btn_sign2_u">#4dd765</color>
+    <color name="btn_sign2_s">#a2a2a2</color>
+    <color name="news_button_s">#097dcf</color>
+    <color name="news_button_u">#3d3d3d</color>
+
+    <!-- me -->
+    <color name="bg_login">#FCFCFE</color>
+    <color name="bg_login_hint">#C5C5C7</color>
+    <color name="base_info_line">#bebebe</color>
+    <color name="text_right_color">#8f8f8f</color>
+    <color name="index_divider_line">#A2A2A2</color>
+
+    <!-- cityList -->
+    <color name="listview_item_normal">#ffffff</color>
+    <color name="listview_item_pressed">#d4d4d4</color>
+
+    <!-- 朋友圈 -->
+    <color name="friends_head">#f0f0f0</color>
+    <color name="friends_head_tv">#888888</color>
+    <color name="friends_head_line">#d0d0d1</color>
+    <color name="friends_name">#1e3b66</color>
+    <color name="friends_time">#666666</color>
+    <color name="friends_content">#050505</color>
+    <color name="btn_bg_hv">#F1F1F1</color>
+    <color name="btn_bg">#1e3b66</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="gold">#b89766</color>
+    <color name="base_line">#f3f3f3</color>
+
+    <!-- 活动列表 -->
+    <color name="btn_pressed_s">#7d7f87</color>
+    <color name="btn_pressed_u">#f18b05</color>
+    <color name="divider_line_color">#cbcaca</color>
+    <color name="publish_event_text">#4dd765</color>
+    <color name="publish_event_title_text">#7c7c7c</color>
+
+    <!-- 反馈 -->
+    <color name="suggestion_reply">#569e8f</color>
+    <color name="suggestion_time">#8e8e8d</color>
+    <color name="suggestion">#3d3d3d</color>
+
+    <!-- 微信颜色 -->
+    <color name="weixing_title">#323232</color>
+    <color name="weixing_content">#aaaaaa</color>
+    <color name="weixing_bg">#ebebeb</color>
+
+    <!-- new ride -->
+    <color name="hint_text_color">#8e8e8d</color>
+    <color name="ride_divider_color">#555555</color>
+    <color name="ride_popwindow_bg">#2b2b2b</color>
+    <color name="ride_popwindow_text">#d3d2d2</color>
+    <color name="ride_finish_text_u">#3d3d3d</color>
+    <color name="ride_finish_text_s">#f39a26</color>
+    <color name="ride_finish_button_bg">#fefefe</color>
+    <color name="ride_finish_button_line">#454541</color>
+    <color name="ride_set_kcal_color">#f9f9f9</color>
+    <color name="confrim_btn_s">#1e3b66</color>
+    <color name="confrim_btn_u">#f18b06</color>
+    <color name="give_up_btn_s">#1e3b66</color>
+    <color name="give_up_btn_u">#5f9fd5</color>
+    <color name="popup_btn_u">#3e3e3e</color>
+    <color name="popup_btn_s">#f18b06</color>
+
+    <!-- 新朋友圈 -->
+    <!-- use at personal_center_layout, horizontal_layout and option_item -->
+    <color name="personal_center_gray">#F5F5F5</color>
+    <!-- 天蓝色 -->
+    <color name="gray">#808080</color>
+    <color name="EFEFEF">#EFEFEF</color>
+    <color name="font_gray">#cccccc</color>
+    <color name="font_black">#000000</color>
+    <color name="blue">#3A5FCD</color>
+    <color name="replay_name">#697fb1</color>
+
+    <!-- 新闻列表 -->
+    <color name="news_btn_menu_color">#0879c8</color>
 
 
-    <!-- common -->
-    <color name="top_bar_text_right">#09BB07</color>
-    <color name="top_bar_text_center">#ffffff</color>
-    <color name="divider_list_bg">#F0EFED</color>
-    <color name="multiline_tv_border_color">#C7C8C9</color>
-    <color name="logo_dialog_divider_bg">#EAEAEE</color>
-    <color name="grey_bg">#F0EFED</color>
-    <color name="find_team_bar_text_color">#A7A7A7</color>
+    <!-- 定位组 -->
+    <color name="signup_text_name">#353535</color>
 
-
-    <color name="rgb_0_0_0">#000000</color>
-    <color name="rgb_153_153_153">#999999</color>
-    <color name="rgb_255_255_255">#FFFFFF</color>
-    <color name="rgb_9_187_7">#09BB07</color>
-    <color name="rgb_240_239_237">#F0EFED</color>
-    <color name="rgb_216_216_213">#D8D8D5</color>
-    <color name="rgb_178_178_178">#B2B2B2</color>
+    <color name="signup_text_post">#6b6b6b</color>
 </resources>

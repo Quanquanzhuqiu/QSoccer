@@ -10,8 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qqzq.common.Constants;
-import com.qqzq.ui.LoginActivity;
-import com.qqzq.ui.RegisterActivity;
+import com.qqzq.activity.RegisterActivity;
 import com.robotium.solo.Solo;
 
 /**

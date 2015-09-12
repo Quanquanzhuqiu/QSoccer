@@ -8,10 +8,10 @@
 
     <string name="main_tab_bar_title">主页</string>
     <string name="main_tab_bar_menu_title">更多功能</string>
-    <string name="main_tab_bar_bottom_menu_1">我的球队</string>
-    <string name="main_tab_bar_bottom_menu_2">聊天</string>
-    <string name="main_tab_bar_bottom_menu_3">发现</string>
-    <string name="main_tab_bar_bottom_menu_4">我</string>
+    <string name="my_team">我的球队</string>
+    <string name="chat">聊天</string>
+    <string name="find">发现</string>
+    <string name="me">我</string>
 
     <string name="top_bar_create_team">创建球队</string>
     <string name="top_bar_login">登陆</string>
@@ -89,4 +89,18 @@
     <string name="pull_to_refresh_footer_pull_label">上拉刷新</string>
     <string name="pull_to_refresh_footer_refreshing_label">载入中\u2026</string>
     <string name="pull_to_refresh_no_data_label">加载完成</string>
+
+
+    <string name="action_search">搜索</string>
+    <string name="action_plus">功能</string>
+    <string name="action_album">我的相册</string>
+    <string name="action_collection">我的收藏</string>
+    <string name="action_card">我的银行卡</string>
+    <string name="action_settings">设置</string>
+    <string name="action_feed">意见反馈</string>
+    <string name="plus_group_chat">发起群聊</string>
+    <string name="plus_add_friend">添加朋友</string>
+    <string name="plus_video_chat">视频聊天</string>
+    <string name="plus_scan">扫一扫</string>
+    <string name="plus_take_photo">拍照分享</string>
 </resources>

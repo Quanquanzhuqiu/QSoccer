@@ -2,6 +2,8 @@ package com.qqzq;
 
 import android.test.ApplicationTestCase;
 
+import com.qqzq.activity.BaseApplication;
+
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */

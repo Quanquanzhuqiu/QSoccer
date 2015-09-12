@@ -3,19 +3,7 @@
     style="@style/default_layout">
 
     <!-- TOP BAR-->
-    <RelativeLayout style="@style/top_bar_layout">
-
-
-        <ImageView
-            android:id="@+id/imageView"
-            style="@style/top_bar_return_btn" />
-
-        <TextView
-            android:id="@+id/tv_create_team"
-            style="@style/top_bar_middle_btn"
-            android:text="@string/top_bar_login" />
-
-    </RelativeLayout>
+    <include layout="@layout/common_top_title"/>
 
     <LinearLayout
         style="@style/login_edit_layout"
