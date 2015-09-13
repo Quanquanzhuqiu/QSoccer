@@ -27,7 +27,13 @@
     <color name="rgb_9_187_7">#09BB07</color>
     <color name="rgb_240_239_237">#F0EFED</color>
     <color name="rgb_216_216_213">#D8D8D5</color>
-    <color name="rgb_178_178_178">#B2B2B2</color>
+
+
+    <color name="text_color_1">#808080</color>
+    <color name="common_text_color_grey">#999999</color>
+    <color name="common_text_color_green">#09BB07</color>
+
+    <color name="verify_code_btn_bg_color">#B2B2B2</color>
 
     <color name="common_top_bar_blue">#4ebcd3</color>
     <color name="btn_login_normal">#F18B05</color>

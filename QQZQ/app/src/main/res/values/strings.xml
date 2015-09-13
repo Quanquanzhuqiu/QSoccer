@@ -13,14 +13,41 @@
     <string name="find">发现</string>
     <string name="me">我</string>
 
-    <string name="top_bar_create_team">创建球队</string>
-    <string name="top_bar_login">登陆</string>
-    <string name="top_bar_register">注册</string>
-    <string name="top_bar_commit">提交</string>
-    <string name="top_bar_select_location">选择地区</string>
-    <string name="top_bar_find_team">本地球队</string>
+    <string name="create_team">创建球队</string>
+    <string name="find_team">查找球队</string>
+    <string name="login">登陆</string>
+    <string name="register">注册</string>
+    <string name="commit">提交</string>
+    <string name="select_location">选择地区</string>
+    <string name="local_team">本地球队</string>
+    <string name="create_game">发起活动</string>
 
-    <string name="search_bar_find_team">查找球队</string>
+    <string name="no_team_1">还没有加入球队？</string>
+    <string name="no_team_2">请先</string>
+    <string name="no_team_3">或</string>
+    <string name="no_team_4">通过</string>
+    <string name="no_team_5">选择加入</string>
+    <string name="no_team_6">一个球队</string>
+
+    <string name="no_game_1">还没有球队内部活动？</string>
+    <string name="no_game_2">请</string>
+
+    <string name="latest_team_news">球队最新动态</string>
+    <string name="team_name">球队名称：</string>
+    <string name="team_captain">球队队长： </string>
+    <string name="team_members">球队人数： </string>
+    <string name="team_establish_day">成立时间: </string>
+    <string name="financial_statistics">财务统计: </string>
+    <string name="duty_statistics">出勤概况: </string>
+    <string name="duty_detail">实际出勤13人，王哥放鸽子1次。</string>
+    <string name="team_default_establish_day">2015年9月22日</string>
+
+    <string name="game_publisher">【球队召集】</string>
+    <string name="game_address">地址：</string>
+    <string name="game_time">时间：</string>
+    <string name="game_type">类型：</string>
+    <string name="game_registering">报名中</string>
+    <string name="game_registered">报名结束</string>
 
     <!-- 登陆页面-->
     <string name="hint_username">请输入用户名/手机号</string>
@@ -76,6 +103,8 @@
 
     <string name="team_management_new_memeber">\t\t\t还没加入球队\n\t\t\t请先创建球队或\n通过查找球队选择加入一个球队</string>
     <string name="team_activity_new_memeber">\t\t\t还没球队内部活动\n请发起活动</string>
+
+
 
     <string name="take_photo">拍照</string>
     <string name="pick_photo">从手机相册选择</string>

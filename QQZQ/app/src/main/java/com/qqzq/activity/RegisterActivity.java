@@ -39,7 +39,8 @@ import cn.smssdk.SMSSDK;
 public class RegisterActivity extends BaseActivity {
 
     private Context context = this;
-    private ImageView iv_return;
+    private TextView tv_title;
+    private ImageView iv_back;
     private EditText edt_select_location;
     private EditText edt_phone_no;
     private EditText edt_verify_code;
@@ -62,8 +63,9 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void init() {
-        extras = this.getIntent().getExtras();
-        iv_return = (ImageView) findViewById(R.id.iv_return);
+        tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText("注册");
+        iv_back = (ImageView) findViewById(R.id.iv_back);
         tv_qqzq_agreement = (TextView) findViewById(R.id.tv_qqzq_agreement);
         edt_select_location = (EditText) findViewById(R.id.edt_select_location);
         edt_phone_no = (EditText) findViewById(R.id.edt_phone_no);
@@ -90,11 +92,10 @@ public class RegisterActivity extends BaseActivity {
             edt_select_location.setText(selectedLocation);
         }
 
-        iv_return.setOnClickListener(new View.OnClickListener() {
+        iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
+                RegisterActivity.this.finish();
             }
         });
 
@@ -161,18 +162,20 @@ public class RegisterActivity extends BaseActivity {
 
 
     private void registerUser() {
-        String checkResult = formCheck();
-        if (!TextUtils.isEmpty(checkResult)) {
-            Toast.makeText(context, checkResult, Toast.LENGTH_LONG).show();
-            return;
-        }
+//        String checkResult = formCheck();
+//        if (!TextUtils.isEmpty(checkResult)) {
+//            Toast.makeText(context, checkResult, Toast.LENGTH_LONG).show();
+//            return;
+//        }
 
 
-        Map<String, Object> mParameters = prepareRequestJson();
-        GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_REGISTER_URL,
-                EntRegisterInfo.class, null, mParameters, registerUserResponseListener);
+//        Map<String, Object> mParameters = prepareRequestJson();
+//        GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_REGISTER_URL,
+//                EntRegisterInfo.class, null, mParameters, registerUserResponseListener);
+//
+//        executeRequest(gsonRequest);
 
-        executeRequest(gsonRequest);
+        jumpPage();
     }
 
     private Map<String, Object> prepareRequestJson() {
@@ -242,6 +245,11 @@ public class RegisterActivity extends BaseActivity {
         }
     };
 
+    private void jumpPage() {
+        Intent intent = new Intent(context, LoginActivity.class);
+        startActivity(intent);
+    }
+
     ResponseListener registerUserResponseListener = new ResponseListener<EntClientResponse>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
@@ -251,8 +259,7 @@ public class RegisterActivity extends BaseActivity {
         @Override
         public void onResponse(EntClientResponse entClientResponse) {
             System.out.println("注册成功");
-//            Intent intent = new Intent(context, LoginActivity.class);
-//            startActivity(intent);
+            jumpPage();
         }
     };
 }

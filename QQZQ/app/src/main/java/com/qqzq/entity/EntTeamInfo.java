@@ -159,4 +159,9 @@ public class EntTeamInfo {
     public void setUpdatedate(Date updatedate) {
         this.updatedate = updatedate;
     }
+
+    @Override
+    public String toString() {
+        return teamname;
+    }
 }

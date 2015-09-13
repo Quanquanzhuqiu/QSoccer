@@ -8,22 +8,19 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.Menu;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.Window;
+import android.widget.ImageView;
 
 import com.qqzq.R;
 import com.qqzq.chat.ChatFragment;
+import com.qqzq.common.Constants;
 import com.qqzq.subitem.find.FindFragment;
 import com.qqzq.subitem.game.GameManagementFragment;
 import com.qqzq.subitem.me.MeFragment;
 import com.qqzq.subitem.team.MyTeamFragment;
 import com.qqzq.subitem.team.TeamMangmentFragment;
 import com.qqzq.view.PagerSlidingTabStrip;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 /**
  * Created by jie.xiao on 8/25/2015.
@@ -62,6 +59,8 @@ public class MainActivity extends BaseFragmentActivity {
      */
     private DisplayMetrics dm;
 
+    private ImageView iv_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +73,18 @@ public class MainActivity extends BaseFragmentActivity {
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         tabs.setViewPager(pager);
         setTabsValue();
+
+        init();
+    }
+
+    private void init(){
+        iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.finish();
+            }
+        });
     }
 
     /**
@@ -125,11 +136,19 @@ public class MainActivity extends BaseFragmentActivity {
                 case 0:
                     if (teamMangmentFragment == null) {
                         teamMangmentFragment = new TeamMangmentFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constants.EXTRA_PAGE_TYEP, Constants.PAGE_TYPE_NO_TEAM);
+//                        bundle.putString(Constants.EXTRA_PAGE_TYEP, Constants.PAGE_TYPE_HAVE_TEAM);
+                        teamMangmentFragment.setArguments(bundle);
                     }
                     return teamMangmentFragment;
                 case 1:
                     if (gameManagementFragment == null) {
                         gameManagementFragment = new GameManagementFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constants.EXTRA_PAGE_TYEP, Constants.PAGE_TYPE_NO_GAME);
+//                        bundle.putString(Constants.EXTRA_PAGE_TYEP, Constants.PAGE_TYPE_HAVE_GAME);
+                        gameManagementFragment.setArguments(bundle);
                     }
                     return gameManagementFragment;
                 default:

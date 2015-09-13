@@ -147,6 +147,7 @@ public class PhotoPopupWindow extends PopupWindow {
         File file = new File(Constants.IMAGE_PHOTO_TMP_PATH);
         file.mkdirs();// 创建文件夹
         String fileName = Constants.IMAGE_PHOTO_TMP_PATH + "logo.jpg";//图片名字
+        System.out.println(file);
         try {
             b = new FileOutputStream(fileName);
             mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件

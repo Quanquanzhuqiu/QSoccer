@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.R;
-import com.qqzq.adapter.TeamListViewAdapter;
+import com.qqzq.subitem.team.adapter.TeamListViewAdapter;
 import com.qqzq.common.Constants;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntTeamListItem;
@@ -43,6 +43,9 @@ public class FindTeamActivity extends BaseActivity {
     private TeamListViewAdapter listViewAdapter;
     private Context context = this;
 
+    private ImageView iv_back;
+    private TextView tv_title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,10 @@ public class FindTeamActivity extends BaseActivity {
     }
 
     private void init() {
+
+        tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText("查找球队");
+        iv_back = (ImageView) findViewById(R.id.iv_back);
         layout_default_find_team = (LinearLayout) findViewById(R.id.layout_default_find_team);
         pullToRefreshListView = (PullToRefreshView) findViewById(R.id.pull_refresh_listview);
         lv_teams = (ListView) findViewById(R.id.lv_teams);
@@ -59,6 +66,13 @@ public class FindTeamActivity extends BaseActivity {
 
         listViewAdapter = new TeamListViewAdapter(context, teamList);
         lv_teams.setAdapter(listViewAdapter);
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FindTeamActivity.this.finish();
+            }
+        });
 
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -129,12 +143,12 @@ public class FindTeamActivity extends BaseActivity {
 
         lv_teams.setOnItemClickListener(new AdapterView.OnItemClickListener()
 
-                                            {
-                                                @Override
-                                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                    Toast.makeText(context, "选中第" + position + "个球队", Toast.LENGTH_LONG).show();
-                                                }
+                                        {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                Toast.makeText(context, "选中第" + position + "个球队", Toast.LENGTH_LONG).show();
                                             }
+                                        }
 
         );
 

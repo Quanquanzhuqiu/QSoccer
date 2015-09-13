@@ -28,6 +28,7 @@ import com.qqzq.network.GsonRequest;
 import com.qqzq.network.MultipartRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.activity.PhotoPopupWindow;
+import com.qqzq.util.ImageUtil;
 
 import java.io.File;
 import java.util.Date;
@@ -39,6 +40,8 @@ import java.util.Map;
  */
 public class CreateTeamActivity extends BaseActivity {
 
+    private TextView tv_title;
+    private ImageView iv_back;
     private TextView tv_commit;
     private EditText edt_team_name;
     private EditText edt_team_id;
@@ -68,6 +71,10 @@ public class CreateTeamActivity extends BaseActivity {
     }
 
     private void init() {
+
+        tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText("创建球队");
+        iv_back = (ImageView) findViewById(R.id.iv_back);
         ll_create_team = findViewById(R.id.ll_create_team);
         tv_commit = (TextView) findViewById(R.id.tv_commit);
         edt_team_id = (EditText) findViewById(R.id.edt_team_id);
@@ -81,6 +88,16 @@ public class CreateTeamActivity extends BaseActivity {
         cbox_9_persons = (CheckBox) findViewById(R.id.cbox_9_persons);
         cbox_11_persons = (CheckBox) findViewById(R.id.cbox_11_persons);
         iv_logo = (ImageView) findViewById(R.id.iv_logo);
+        photoPopupWindow = new PhotoPopupWindow(CreateTeamActivity.this, null);
+        photoPopupWindow.dismiss();
+
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateTeamActivity.this.finish();
+            }
+        });
 
         tv_commit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +109,6 @@ public class CreateTeamActivity extends BaseActivity {
         iv_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                photoPopupWindow = new PhotoPopupWindow(CreateTeamActivity.this, null);
                 photoPopupWindow.showAtLocation(ll_create_team,
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
             }
@@ -105,14 +121,17 @@ public class CreateTeamActivity extends BaseActivity {
             //从手机相册选择
             case 1:
                 if (resultCode == RESULT_OK) {
-                    photoPopupWindow.cropPhoto(data.getData());//裁剪图片
+                    Uri uri = data.getData();
+                    Log.e("uri", uri.toString());
+                    System.out.println("------->" + photoPopupWindow);
+                    photoPopupWindow.cropPhoto(uri);//裁剪图片
                 }
                 break;
             //拍照
             case 2:
                 if (resultCode == RESULT_OK) {
                     File temp = new File(Constants.IMAGE_PHOTO_TMP_PATH
-                            + "/logo.jpg");
+                            + "/logo.png");
                     photoPopupWindow.cropPhoto(Uri.fromFile(temp));//裁剪图片
                 }
                 break;
@@ -215,8 +234,8 @@ public class CreateTeamActivity extends BaseActivity {
 
             String s = new Gson().toJson(entTeamInfo);
             Log.v("qqzq", s);
-        }catch(Exception e){
-            Log.e("qqzq","转换json出错",e);
+        } catch (Exception e) {
+            Log.e("qqzq", "转换json出错", e);
         }
         mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entTeamInfo);
         return mParameters;

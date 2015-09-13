@@ -1,4 +1,4 @@
-package com.qqzq.adapter;
+package com.qqzq.subitem.team.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -61,24 +61,24 @@ public class TeamListViewAdapter extends BaseAdapter {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ListItemView listItemView;
+        ViewHolder viewHolder;
 
         // 初始化item view
         if (convertView == null) {
             // 通过LayoutInflater将xml中定义的视图实例化到一个View中
             convertView = LayoutInflater.from(context).inflate(R.layout.team_list_item, null);
             // 实例化一个封装类ListItemView，并实例化它的所有域
-            listItemView = new ListItemView();
-            listItemView.iv_logo = (ImageView) convertView.findViewById(R.id.iv_team_list_logo);
-            listItemView.tv_team_name = (TextView) convertView.findViewById(R.id.tv_team_name);
-            listItemView.tv_team_captain = (TextView) convertView.findViewById(R.id.tv_team_captain);
-            listItemView.tv_team_members = (TextView) convertView.findViewById(R.id.tv_team_members);
-            listItemView.tv_team_establish_day = (TextView) convertView.findViewById(R.id.tv_team_establish_day);
+            viewHolder = new ViewHolder();
+            viewHolder.iv_logo = (ImageView) convertView.findViewById(R.id.iv_team_list_logo);
+            viewHolder.tv_team_name = (TextView) convertView.findViewById(R.id.tv_team_name);
+            viewHolder.tv_team_captain = (TextView) convertView.findViewById(R.id.tv_team_captain);
+            viewHolder.tv_team_members = (TextView) convertView.findViewById(R.id.tv_team_members);
+            viewHolder.tv_team_establish_day = (TextView) convertView.findViewById(R.id.tv_team_establish_day);
             // 将ListItemView对象传递给convertView
-            convertView.setTag(listItemView);
+            convertView.setTag(viewHolder);
         } else {
             // 从converView中获取ListItemView对象
-            listItemView = (ListItemView) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         EntTeamListItem entTeamListItem = mList.get(position);
@@ -91,14 +91,14 @@ public class TeamListViewAdapter extends BaseAdapter {
             String teamEstablishDay = entTeamListItem.getTeamEstablishDay();
 
             if (logo != null) {
-                listItemView.iv_logo.setImageDrawable(logo);
+                viewHolder.iv_logo.setImageDrawable(logo);
             } else {
-                displayUrlImg(listItemView.iv_logo, logoUrl);
+                displayUrlImg(viewHolder.iv_logo, logoUrl);
             }
-            listItemView.tv_team_name.setText(context.getResources().getString(R.string.find_team_team_name) + teamName);
-            listItemView.tv_team_captain.setText(context.getResources().getString(R.string.find_team_team_captain) + teamCaptain);
-            listItemView.tv_team_members.setText(context.getResources().getString(R.string.find_team_team_members) + teamMembers);
-            listItemView.tv_team_establish_day.setText(context.getResources().getString(R.string.find_team_establish_day) + teamEstablishDay);
+            viewHolder.tv_team_name.setText(context.getResources().getString(R.string.find_team_team_name) + teamName);
+            viewHolder.tv_team_captain.setText(context.getResources().getString(R.string.find_team_team_captain) + teamCaptain);
+            viewHolder.tv_team_members.setText(context.getResources().getString(R.string.find_team_team_members) + teamMembers);
+            viewHolder.tv_team_establish_day.setText(context.getResources().getString(R.string.find_team_establish_day) + teamEstablishDay);
         }
 
         return convertView;
@@ -119,7 +119,7 @@ public class TeamListViewAdapter extends BaseAdapter {
     }
 
 
-    class ListItemView {
+    class ViewHolder {
         ImageView iv_logo;
         TextView tv_team_name;
         TextView tv_team_captain;

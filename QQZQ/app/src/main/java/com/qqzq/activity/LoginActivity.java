@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -31,6 +32,7 @@ public class LoginActivity extends BaseActivity {
     private Button btn_register;
     private Button btn_login;
     private TextView tv_title;
+    private ImageView iv_back;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class LoginActivity extends BaseActivity {
     private void init() {
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("登陆");
+        iv_back = (ImageView) findViewById(R.id.iv_back);
         edt_username = (EditText) findViewById(R.id.edt_username);
         edt_password = (EditText) findViewById(R.id.edt_password);
         btn_register = (Button) findViewById(R.id.btn_register);
@@ -69,9 +72,10 @@ public class LoginActivity extends BaseActivity {
         if (mParameters == null || mParameters.isEmpty()) {
             return;
         }
-        GsonRequest loginRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_LOGIN_URL,
-                EntClientResponse.class, null, mParameters, loginResponseListener);
-        executeRequest(loginRequest);
+//        GsonRequest loginRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_LOGIN_URL,
+//                EntClientResponse.class, null, mParameters, loginResponseListener);
+//        executeRequest(loginRequest);
+        jumpPage();
     }
 
     private Map<String, Object> prepareRequestJson() {
@@ -88,7 +92,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void jumpPage() {
-        Intent intent = new Intent(context, RegisterActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         startActivity(intent);
     }
 

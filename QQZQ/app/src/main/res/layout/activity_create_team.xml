@@ -7,22 +7,9 @@
     android:orientation="vertical">
 
     <!-- TOP BAR-->
-    <RelativeLayout style="@style/top_bar_layout">
-
-
-        <ImageView
-            android:id="@+id/imageView"
-            style="@style/top_bar_return_btn" />
-
-        <TextView
-            android:id="@+id/tv_create_team"
-            style="@style/top_bar_middle_btn"
-            android:text="@string/top_bar_create_team" />
-
-        <TextView
-            android:id="@+id/tv_commit"
-            style="@style/top_bar_right_btn" />
-    </RelativeLayout>
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/common_top_title_with_commit_btn" />
 
     <!-- 球队头像，球队名称，球队ID，常活动地点-->
     <LinearLayout

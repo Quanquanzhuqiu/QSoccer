@@ -13,7 +13,7 @@
         <TextView
             android:id="@+id/tv_create_team"
             style="@style/top_bar_middle_btn"
-            android:text="@string/top_bar_select_location" />
+            android:text="@string/select_location" />
 
     </RelativeLayout>
 

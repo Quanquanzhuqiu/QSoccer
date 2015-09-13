@@ -3,19 +3,7 @@
     style="@style/default_layout">
 
     <!-- TOP BAR-->
-    <RelativeLayout style="@style/top_bar_layout">
-
-
-        <ImageView
-            android:id="@+id/iv_return"
-            style="@style/top_bar_return_btn" />
-
-        <TextView
-            android:id="@+id/tv_create_team"
-            style="@style/top_bar_middle_btn"
-            android:text="@string/top_bar_register" />
-
-    </RelativeLayout>
+    <include layout="@layout/common_top_title" />
 
     <LinearLayout
         style="@style/login_edit_layout"
@@ -40,8 +28,8 @@
         <EditText
             android:id="@+id/edt_phone_no"
             style="@style/login_edit_text"
-            android:inputType="phone"
-            android:hint="@string/hint_phone_number" />
+            android:hint="@string/hint_phone_number"
+            android:inputType="phone" />
     </LinearLayout>
 
     <LinearLayout style="@style/login_edit_layout">
@@ -55,8 +43,8 @@
             style="@style/login_edit_text"
             android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:inputType="number"
-            android:hint="@string/hint_phone_verify_code" />
+            android:hint="@string/hint_phone_verify_code"
+            android:inputType="number" />
 
         <Button
             android:id="@+id/btn_verify_code"
@@ -66,7 +54,7 @@
             android:layout_marginRight="15dp"
             android:background="@color/rgb_240_239_237"
             android:text="@string/txt_get_verify_code"
-            android:textColor="@color/rgb_178_178_178"
+            android:textColor="@color/verify_code_btn_bg_color"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -114,8 +102,7 @@
             android:layout_marginLeft="7dp"
             android:text="@string/txt_qqzq_agreement"
             android:textColor="@color/rgb_0_0_0"
-            android:textSize="15sp"
-            />
+            android:textSize="15sp" />
 
     </LinearLayout>
 

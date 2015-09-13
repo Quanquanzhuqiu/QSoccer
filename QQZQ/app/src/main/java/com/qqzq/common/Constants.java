@@ -19,7 +19,6 @@ public class Constants {
     public static final String CHINA_MOBLIE_NO = "86";
 
 
-
     // connection configuration
     public static final int CONNECT_TIME_OUT = 40000;
     public static final int PAGE_SIZE = 4;
@@ -40,13 +39,19 @@ public class Constants {
     public static final String EXTRA_SELECTED_LOCATION = "location";
     public static final String EXTRA_SELECTED_PROVINCE_CODE = "province_code";
     public static final String EXTRA_SELECTED_CITY_CODE = "city_code";
+    public static final String EXTRA_PAGE_TYEP = "page_type";
 
-    public static final String LOGO_CONTENT_TYPE = "image/jpeg";
+
+    public static final String PAGE_TYPE_NO_TEAM = "no_team";
+    public static final String PAGE_TYPE_HAVE_TEAM = "have_team";
+    public static final String PAGE_TYPE_NO_GAME = "no_game";
+    public static final String PAGE_TYPE_HAVE_GAME = "have_game";
 
     //=================================== 后台API调用列表 ===================================
     public static final String FILE_SERVER_HOST = "http://121.43.229.24/";
     public static final String API_SERVER_HOST = "http://121.43.229.24:8080/qqzq/rest";
     public static final String IMAGE_PHOTO_TMP_PATH = Environment.getExternalStorageDirectory().getPath() + "/qqzq/tmp/";
+    public static final String PNG_PHOTO_TMP_PATH = "/qqzq/tmp/";
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 注册认证部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
