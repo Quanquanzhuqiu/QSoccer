@@ -12,8 +12,9 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.qqzq.R;
+import com.qqzq.activity.BaseApplication;
 import com.qqzq.activity.BaseFragment;
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
@@ -38,7 +39,7 @@ public class TeamMangmentFragment extends BaseFragment {
     private Context context;
     private GridView gv_team;
     private TeamGridViewAdapter teamGridViewAdapter;
-    private List<EntTeamInfo> list = new ArrayList<EntTeamInfo>();
+    public static List<EntTeamInfo> list = new ArrayList<EntTeamInfo>();
 
     private TextView tv_create_team;
     private TextView tv_find_team;
@@ -89,36 +90,10 @@ public class TeamMangmentFragment extends BaseFragment {
 
     private void initHaveTeamPage(View view) {
         gv_team = (GridView) view.findViewById(R.id.gv_team);
-        loadTeamListFromBackend();
+//        loadTeamListFromBackend();
+
+        teamGridViewAdapter = new TeamGridViewAdapter(getActivity(), list);
+        gv_team.setAdapter(teamGridViewAdapter);
     }
 
-
-    public void loadTeamListFromBackend() {
-        Map<String, Object> mParameters = new HashMap<>();
-        mParameters.put("offset", 0);
-        mParameters.put("limit", Constants.PAGE_SIZE);
-        mParameters.put("teamLeaderUsrNm", "13551063785");
-        String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_TEAM_URL, mParameters);
-        GsonRequest gsonRequest = new GsonRequest<EntTeamInfo[]>(queryUrl, EntTeamInfo[].class,
-                findTeamResponseListener);
-        executeRequest(gsonRequest);
-    }
-
-    ResponseListener findTeamResponseListener = new ResponseListener<EntTeamInfo[]>() {
-        @Override
-        public void onErrorResponse(VolleyError volleyError) {
-            System.out.println(volleyError);
-        }
-
-        @Override
-        public void onResponse(EntTeamInfo[] entTeamInfos) {
-            list = Arrays.asList(entTeamInfos);
-            for (EntTeamInfo entTeamInfo : list) {
-                System.out.println(entTeamInfo);
-            }
-
-            teamGridViewAdapter = new TeamGridViewAdapter(getActivity(), list);
-            gv_team.setAdapter(teamGridViewAdapter);
-        }
-    };
 }

@@ -1,8 +1,6 @@
-package com.qqzq.common;
+package com.qqzq.config;
 
 import android.os.Environment;
-
-import java.text.SimpleDateFormat;
 
 
 public class Constants {
@@ -11,7 +9,7 @@ public class Constants {
     public static final String WEIXIN_APP_ID = "XXXXX";
     public static final String WEIBO_APP_ID = "XXXXX";
     public static final String MOD_APP_KEY = "9c3fe724515d";
-    public static final String MOD_APP_SECRECT = "6040313e1ab9413095fd68bcc48fd8a0";
+    public static final String MOD_APP_SECRETE = "6040313e1ab9413095fd68bcc48fd8a0";
 
     /**
      * 中国手机区号.
@@ -29,6 +27,7 @@ public class Constants {
 
 
     //preference configuration
+    public static final String PREF_APP = "PREF_QQZQ";
     // login user name
     public static final String PREF_USERNAME = "username";
     // login password
@@ -40,6 +39,9 @@ public class Constants {
     public static final String EXTRA_SELECTED_PROVINCE_CODE = "province_code";
     public static final String EXTRA_SELECTED_CITY_CODE = "city_code";
     public static final String EXTRA_PAGE_TYEP = "page_type";
+    public static final String EXTRA_MAIN_TAB_DATA = "main_tab_data";
+
+    public static final String HTTP_HEADER_TOKER = "Token";
 
 
     public static final String PAGE_TYPE_NO_TEAM = "no_team";

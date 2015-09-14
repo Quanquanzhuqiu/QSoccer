@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.qqzq.R;
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.RequestManager;
 

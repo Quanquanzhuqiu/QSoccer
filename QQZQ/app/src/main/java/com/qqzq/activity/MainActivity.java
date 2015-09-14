@@ -10,17 +10,27 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
 
+import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.chat.ChatFragment;
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
+import com.qqzq.entity.EntTeamInfo;
+import com.qqzq.network.GsonRequest;
+import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.find.FindFragment;
 import com.qqzq.subitem.game.GameManagementFragment;
 import com.qqzq.subitem.me.MeFragment;
 import com.qqzq.subitem.team.MyTeamFragment;
 import com.qqzq.subitem.team.TeamMangmentFragment;
+import com.qqzq.util.Utils;
 import com.qqzq.view.PagerSlidingTabStrip;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jie.xiao on 8/25/2015.
@@ -42,6 +52,8 @@ public class MainActivity extends BaseFragmentActivity {
     //我的球队页面布局
     private View myTeamLayout;
 
+    private ViewPager pager;
+
     //球队管理页面的Fragment
     private TeamMangmentFragment teamMangmentFragment;
 
@@ -59,32 +71,27 @@ public class MainActivity extends BaseFragmentActivity {
      */
     private DisplayMetrics dm;
 
-    private ImageView iv_back;
+    private List<EntTeamInfo> teamList = new ArrayList<EntTeamInfo>();
+    private String teamPageType = Constants.PAGE_TYPE_NO_TEAM;
+    private String gamePageType = Constants.PAGE_TYPE_NO_GAME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-//        setOverflowShowingAlways();
-        dm = getResources().getDisplayMetrics();
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-        tabs.setViewPager(pager);
-        setTabsValue();
-
         init();
     }
 
-    private void init(){
-        iv_back = (ImageView) findViewById(R.id.iv_back);
-        iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.this.finish();
-            }
-        });
+    private void init() {
+        loadTeamListFromBackend();
+
+        dm = getResources().getDisplayMetrics();
+        pager = (ViewPager) findViewById(R.id.pager);
+        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+//        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+//        tabs.setViewPager(pager);
+//        setTabsValue();
     }
 
     /**
@@ -137,8 +144,7 @@ public class MainActivity extends BaseFragmentActivity {
                     if (teamMangmentFragment == null) {
                         teamMangmentFragment = new TeamMangmentFragment();
                         Bundle bundle = new Bundle();
-                        bundle.putString(Constants.EXTRA_PAGE_TYEP, Constants.PAGE_TYPE_NO_TEAM);
-//                        bundle.putString(Constants.EXTRA_PAGE_TYEP, Constants.PAGE_TYPE_HAVE_TEAM);
+                        bundle.putString(Constants.EXTRA_PAGE_TYEP, teamPageType);
                         teamMangmentFragment.setArguments(bundle);
                     }
                     return teamMangmentFragment;
@@ -146,8 +152,7 @@ public class MainActivity extends BaseFragmentActivity {
                     if (gameManagementFragment == null) {
                         gameManagementFragment = new GameManagementFragment();
                         Bundle bundle = new Bundle();
-                        bundle.putString(Constants.EXTRA_PAGE_TYEP, Constants.PAGE_TYPE_NO_GAME);
-//                        bundle.putString(Constants.EXTRA_PAGE_TYEP, Constants.PAGE_TYPE_HAVE_GAME);
+                        bundle.putString(Constants.EXTRA_PAGE_TYEP, gamePageType);
                         gameManagementFragment.setArguments(bundle);
                     }
                     return gameManagementFragment;
@@ -158,4 +163,36 @@ public class MainActivity extends BaseFragmentActivity {
 
     }
 
+    public void loadTeamListFromBackend() {
+        Map<String, Object> mParameters = new HashMap<>();
+        mParameters.put("offset", 0);
+        mParameters.put("limit", 6);
+        mParameters.put("teamLeaderUsrNm", BaseApplication.QQZQ_USER);
+        String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_TEAM_URL, mParameters);
+        GsonRequest gsonRequest = new GsonRequest<EntTeamInfo[]>(queryUrl, EntTeamInfo[].class,
+                findTeamResponseListener);
+        executeRequest(gsonRequest);
+    }
+
+    ResponseListener findTeamResponseListener = new ResponseListener<EntTeamInfo[]>() {
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            System.out.println(volleyError);
+        }
+
+        @Override
+        public void onResponse(EntTeamInfo[] entTeamInfos) {
+            if (entTeamInfos.length > 0) {
+                teamList = Arrays.asList(entTeamInfos);
+//                teamMangmentFragment.list = Arrays.asList(entTeamInfos);
+                TeamMangmentFragment.list = Arrays.asList(entTeamInfos);
+                teamPageType = Constants.PAGE_TYPE_HAVE_TEAM;
+            } else {
+                teamPageType = Constants.PAGE_TYPE_NO_TEAM;
+            }
+            pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+            tabs.setViewPager(pager);
+            setTabsValue();
+        }
+    };
 }

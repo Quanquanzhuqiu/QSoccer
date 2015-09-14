@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.qqzq.R;
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntRegisterInfo;
 import com.qqzq.network.GsonRequest;
@@ -80,6 +80,7 @@ public class RegisterActivity extends BaseActivity {
         SMSSDK.registerEventHandler(eh);
         initSpanableString();
 
+        extras = this.getIntent().getExtras();
         if (extras != null
                 && extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)
                 && extras.containsKey(Constants.EXTRA_SELECTED_PROVINCE_CODE)
@@ -162,20 +163,17 @@ public class RegisterActivity extends BaseActivity {
 
 
     private void registerUser() {
-//        String checkResult = formCheck();
-//        if (!TextUtils.isEmpty(checkResult)) {
-//            Toast.makeText(context, checkResult, Toast.LENGTH_LONG).show();
-//            return;
-//        }
+        String checkResult = formCheck();
+        if (!TextUtils.isEmpty(checkResult)) {
+            Toast.makeText(context, checkResult, Toast.LENGTH_LONG).show();
+            return;
+        }
 
+        Map<String, Object> mParameters = prepareRequestJson();
+        GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_REGISTER_URL,
+                EntRegisterInfo.class, null, mParameters, registerUserResponseListener);
 
-//        Map<String, Object> mParameters = prepareRequestJson();
-//        GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_REGISTER_URL,
-//                EntRegisterInfo.class, null, mParameters, registerUserResponseListener);
-//
-//        executeRequest(gsonRequest);
-
-        jumpPage();
+        executeRequest(gsonRequest);
     }
 
     private Map<String, Object> prepareRequestJson() {

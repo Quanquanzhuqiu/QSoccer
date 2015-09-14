@@ -2,19 +2,13 @@ package com.qqzq.subitem.game;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.FrameLayout.LayoutParams;
-import android.widget.TextView;
 
 import com.qqzq.R;
 import com.qqzq.activity.BaseFragment;
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
 
 /**
  * Created by jie.xiao on 15/9/12.

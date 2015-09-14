@@ -4,10 +4,8 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import com.qqzq.common.Constants;
 
 import java.lang.reflect.Type;
-import java.text.ParseException;
 import java.util.Date;
 
 /**

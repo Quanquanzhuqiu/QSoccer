@@ -8,12 +8,12 @@
     <!-- top bar -->
     <include
         android:id="@+id/top_bar"
-        layout="@layout/common_top_title_with_add_btn" />
+        layout="@layout/common_top_title_with_more" />
 
     <com.qqzq.view.PagerSlidingTabStrip
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/top_bar"
 
         />

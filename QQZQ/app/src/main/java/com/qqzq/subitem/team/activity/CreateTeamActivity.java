@@ -21,14 +21,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.R;
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.MultipartRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.activity.PhotoPopupWindow;
-import com.qqzq.util.ImageUtil;
 
 import java.io.File;
 import java.util.Date;

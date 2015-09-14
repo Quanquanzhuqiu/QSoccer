@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
 import com.qqzq.activity.RegisterActivity;
 import com.robotium.solo.Solo;
 

@@ -16,7 +16,7 @@ import com.android.volley.VolleyError;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.R;
 import com.qqzq.subitem.team.adapter.TeamListViewAdapter;
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntTeamListItem;
 import com.qqzq.network.GsonRequest;

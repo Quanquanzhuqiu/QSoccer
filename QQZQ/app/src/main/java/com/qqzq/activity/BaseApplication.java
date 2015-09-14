@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
 import com.qqzq.network.RequestManager;
 
 import cn.smssdk.SMSSDK;
@@ -20,6 +20,12 @@ public class BaseApplication extends Application {
     private static BaseApplication instance;
     private String userName = null;
     private String password = null;
+
+
+    public static String QQZQ_USER = "";
+    public static String QQZQ_PASSWORD = "";
+    public static String QQZQ_TOKENT = "";
+    public static SharedPreferences spQQZQ;
 
     public static BaseApplication getInstance() {
 
@@ -37,6 +43,8 @@ public class BaseApplication extends Application {
         instance = this;
         startVolleyRequestManager();
         startSmsSDK();
+
+        spQQZQ = getSharedPreferences(Constants.PREF_APP, Context.MODE_PRIVATE);
     }
 
     private void startVolleyRequestManager() {
@@ -44,7 +52,7 @@ public class BaseApplication extends Application {
     }
 
     private void startSmsSDK() {
-        SMSSDK.initSDK(this, Constants.MOD_APP_KEY, Constants.MOD_APP_SECRECT);
+        SMSSDK.initSDK(this, Constants.MOD_APP_KEY, Constants.MOD_APP_SECRETE);
     }
 
     /**

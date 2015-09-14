@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.adapter.LocationListViewAdapter;
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
 import com.qqzq.entity.EntLocationInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
@@ -27,6 +28,8 @@ import java.util.Map;
 public class SelectLocationActivity extends BaseActivity {
 
     private Context context = this;
+    private TextView tv_title;
+    private ImageView iv_back;
     private ListView lv_location;
     private TextView tv_selected_location;
     private LocationListViewAdapter adapter;
@@ -44,6 +47,9 @@ public class SelectLocationActivity extends BaseActivity {
     }
 
     private void init() {
+        tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText("选择地区");
+        iv_back = (ImageView) findViewById(R.id.iv_back);
         tv_selected_location = (TextView) findViewById(R.id.tv_selected_location);
         lv_location = (ListView) findViewById(R.id.lv_location);
         lv_location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,6 +78,13 @@ public class SelectLocationActivity extends BaseActivity {
                 }
 
 
+            }
+        });
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectLocationActivity.this.finish();
             }
         });
 

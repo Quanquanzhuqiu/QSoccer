@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -17,7 +16,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.qqzq.R;
-import com.qqzq.common.Constants;
+import com.qqzq.config.Constants;
 
 import java.io.File;
 import java.io.FileNotFoundException;

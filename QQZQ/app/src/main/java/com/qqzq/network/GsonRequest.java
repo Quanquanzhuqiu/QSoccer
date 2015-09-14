@@ -11,11 +11,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.qqzq.common.Constants;
+import com.qqzq.activity.BaseApplication;
+import com.qqzq.config.Constants;
 import com.qqzq.util.json.DateDeserializer;
 import com.qqzq.util.json.DateSerializer;
 import com.qqzq.util.json.ObjectDeserializer;
 
+import java.util.BitSet;
 import java.util.Date;
 import java.util.Map;
 
@@ -62,6 +64,14 @@ public class GsonRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
         try {
 
+            System.out.println(networkResponse.headers);
+            if (networkResponse.headers.containsKey(Constants.HTTP_HEADER_TOKER)) {
+                String token = networkResponse.headers.get(Constants.HTTP_HEADER_TOKER);
+                Log.v(TAG, "TOKEN = " + token);
+                BaseApplication.QQZQ_TOKENT = token;
+            }
+
+
             String json = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
             Log.v(TAG, json);
             System.out.println(json);
@@ -105,7 +115,7 @@ public class GsonRequest<T> extends Request<T> {
         try {
             if (mParameters != null) {
                 Object object = mParameters.get(Constants.GSON_REQUST_POST_PARAM_KEY);
-                String json = mGson.toJson(object,mClazz);
+                String json = mGson.toJson(object);
                 Log.i(TAG, json);
                 System.out.println("Request json =>" + json);
                 if (json != null) {
