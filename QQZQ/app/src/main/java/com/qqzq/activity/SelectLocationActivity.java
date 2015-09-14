@@ -17,6 +17,7 @@ import com.qqzq.config.Constants;
 import com.qqzq.entity.EntLocationInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.subitem.team.activity.CreateTeamActivity;
 import com.qqzq.util.Utils;
 
 import java.util.HashMap;
@@ -36,8 +37,9 @@ public class SelectLocationActivity extends BaseActivity {
 
     private EntLocationInfo[] locationInfos;
     private boolean isProvincePage = true;
-    private String selectedProvinceCode = "";
-    private String selectedCityCode = "";
+    private int selectedProvinceCode = 0;
+    private int selectedCityCode = 0;
+    private String prevPageName = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,13 @@ public class SelectLocationActivity extends BaseActivity {
         iv_back = (ImageView) findViewById(R.id.iv_back);
         tv_selected_location = (TextView) findViewById(R.id.tv_selected_location);
         lv_location = (ListView) findViewById(R.id.lv_location);
+
+        Bundle extras = this.getIntent().getExtras();
+        if (extras.containsKey(Constants.EXTRA_PREV_PAGE_NAME)) {
+            prevPageName = extras.getString(Constants.EXTRA_PREV_PAGE_NAME);
+            System.out.println(prevPageName);
+        }
+
         lv_location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,16 +73,29 @@ public class SelectLocationActivity extends BaseActivity {
                     tv_selected_location.setText(location);
 
                     if (isProvincePage) {
-                        selectedProvinceCode = selectedLocationInfo.getId();
+                        selectedProvinceCode = Integer.parseInt(selectedLocationInfo.getId());
                         requestCityList(selectedProvinceCode);
                     } else {
-                        selectedCityCode = selectedLocationInfo.getId();
+                        selectedCityCode = Integer.parseInt(selectedLocationInfo.getId());
 
-                        Intent intent = new Intent(context, RegisterActivity.class);
-                        intent.putExtra(Constants.EXTRA_SELECTED_LOCATION, location);
-                        intent.putExtra(Constants.EXTRA_SELECTED_PROVINCE_CODE, selectedProvinceCode);
-                        intent.putExtra(Constants.EXTRA_SELECTED_CITY_CODE, selectedCityCode);
-                        startActivity(intent);
+                        if (TextUtils.isEmpty(prevPageName)) {
+                            return;
+                        }
+
+                        Intent intent = null;
+                        System.out.println(RegisterActivity.class.getName());
+                        if ("CreateTeamActivity".equals(prevPageName)) {
+                            intent = new Intent(context, CreateTeamActivity.class);
+                        } else if ("RegisterActivity".equals(prevPageName)) {
+                            intent = new Intent(context, RegisterActivity.class);
+                        }
+
+                        if (intent != null) {
+                            intent.putExtra(Constants.EXTRA_SELECTED_LOCATION, location);
+                            intent.putExtra(Constants.EXTRA_SELECTED_PROVINCE_CODE, selectedProvinceCode);
+                            intent.putExtra(Constants.EXTRA_SELECTED_CITY_CODE, selectedCityCode);
+                            startActivity(intent);
+                        }
                     }
                 }
 
@@ -93,7 +115,7 @@ public class SelectLocationActivity extends BaseActivity {
     }
 
     private void refreshLocationListView(EntLocationInfo[] locationInfos) {
-        adapter = new LocationListViewAdapter(this,locationInfos);
+        adapter = new LocationListViewAdapter(this, locationInfos);
         lv_location.setAdapter(adapter);
     }
 
@@ -109,7 +131,7 @@ public class SelectLocationActivity extends BaseActivity {
         executeRequest(gsonRequest);
     }
 
-    private void requestCityList(String provinceId) {
+    private void requestCityList(int provinceId) {
         Map<String, Object> mParameters = new HashMap<>();
         mParameters.put("offset", 0);
         mParameters.put("limit", Constants.UNLIMITED_PAGE_SIZE);

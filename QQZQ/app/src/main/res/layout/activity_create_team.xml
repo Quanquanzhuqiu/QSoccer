@@ -59,28 +59,16 @@
                 style="@style/create_team_basic_info_label"
                 android:text="@string/create_team_title_2" />
 
+        </LinearLayout>
+
+        <LinearLayout style="@style/create_team_basic_layout">
+
             <EditText
                 android:id="@+id/edt_team_name"
                 style="@style/create_team_basic_info_edit"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:hint="@string/create_team_hint_2" />
-
-        </LinearLayout>
-
-        <!-- 球队ID-->
-        <LinearLayout style="@style/create_team_basic_layout">
-
-            <ImageView style="@style/create_team_basic_info_image_view" />
-
-            <TextView
-                android:id="@+id/tv_create_team_title3"
-                style="@style/create_team_basic_info_label"
-                android:text="@string/create_team_title_3" />
-
-            <EditText
-                android:id="@+id/edt_team_id"
-                style="@style/create_team_basic_info_edit"
-                android:hint="@string/create_team_hint_3" />
-
         </LinearLayout>
 
         <!-- 常活动地点-->
@@ -92,27 +80,21 @@
                 style="@style/create_team_basic_info_label"
                 android:text="@string/create_team_title_4" />
 
-            <EditText
-                android:id="@+id/edt_team_province"
-                style="@style/create_team_basic_info_edit_font" />
+        </LinearLayout>
 
-            <TextView
-                style="@style/create_team_basic_info_label_font"
-                android:text="@string/create_team_title_4_1" />
-
+        <LinearLayout style="@style/create_team_basic_layout">
 
             <EditText
-                android:id="@+id/edt_team_city"
-                style="@style/create_team_basic_info_edit_font" />
-
-            <TextView
-                style="@style/create_team_basic_info_label_font"
-                android:text="@string/create_team_title_4_2" />
-
+                android:id="@+id/edt_team_location"
+                style="@style/create_team_basic_info_edit"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:hint="@string/create_team_hint_4" />
 
         </LinearLayout>
 
     </LinearLayout>
+
 
     <!-- 常用活动类型-->
     <LinearLayout

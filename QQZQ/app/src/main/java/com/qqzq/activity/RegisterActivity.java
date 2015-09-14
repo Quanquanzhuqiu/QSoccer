@@ -52,8 +52,8 @@ public class RegisterActivity extends BaseActivity {
     private Button btn_register;
 
     private Bundle extras;
-    private String selectedProvinceCode = "";
-    private String selectedCityCode = "";
+    private int selectedProvinceCode = 0;
+    private int selectedCityCode = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,8 +86,8 @@ public class RegisterActivity extends BaseActivity {
                 && extras.containsKey(Constants.EXTRA_SELECTED_PROVINCE_CODE)
                 && extras.containsKey(Constants.EXTRA_SELECTED_CITY_CODE)) {
 
-            selectedProvinceCode = extras.getString(Constants.EXTRA_SELECTED_PROVINCE_CODE);
-            selectedCityCode = extras.getString(Constants.EXTRA_SELECTED_CITY_CODE);
+            selectedProvinceCode = extras.getInt(Constants.EXTRA_SELECTED_PROVINCE_CODE);
+            selectedCityCode = extras.getInt(Constants.EXTRA_SELECTED_CITY_CODE);
 
             String selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
             edt_select_location.setText(selectedLocation);
@@ -104,6 +104,7 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, SelectLocationActivity.class);
+                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "RegisterActivity");
                 startActivity(intent);
             }
         });
@@ -181,8 +182,8 @@ public class RegisterActivity extends BaseActivity {
         Map<String, Object> mParameters = new HashMap<>();
 
         EntRegisterInfo entRegisterInfo = new EntRegisterInfo();
-        entRegisterInfo.setProvince(Integer.parseInt(selectedProvinceCode));
-        entRegisterInfo.setCity(Integer.parseInt(selectedCityCode));
+        entRegisterInfo.setProvince(selectedProvinceCode);
+        entRegisterInfo.setCity(selectedCityCode);
         entRegisterInfo.setUsername(edt_phone_no.getText().toString());
         entRegisterInfo.setPassword(edt_password.getText().toString());
         entRegisterInfo.setVerifyCode(edt_verify_code.getText().toString());
@@ -193,8 +194,8 @@ public class RegisterActivity extends BaseActivity {
 
     private String formCheck() {
 
-        if (TextUtils.isEmpty(selectedProvinceCode)
-                || TextUtils.isEmpty(selectedCityCode)
+        if (selectedProvinceCode == 0
+                || selectedCityCode == 0
                 || TextUtils.isEmpty(edt_select_location.getText())) {
             return "请输入你的所在地";
         }

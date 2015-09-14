@@ -39,7 +39,7 @@ public class Constants {
     public static final String EXTRA_SELECTED_PROVINCE_CODE = "province_code";
     public static final String EXTRA_SELECTED_CITY_CODE = "city_code";
     public static final String EXTRA_PAGE_TYEP = "page_type";
-    public static final String EXTRA_MAIN_TAB_DATA = "main_tab_data";
+    public static final String EXTRA_PREV_PAGE_NAME = "EXTRA_PREV_PAGE_NAME";
 
     public static final String HTTP_HEADER_TOKER = "Token";
 

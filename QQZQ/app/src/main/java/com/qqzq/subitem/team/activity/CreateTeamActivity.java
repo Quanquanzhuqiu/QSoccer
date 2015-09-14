@@ -1,5 +1,6 @@
 package com.qqzq.subitem.team.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -21,6 +22,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.R;
+import com.qqzq.activity.BaseApplication;
+import com.qqzq.activity.MainActivity;
+import com.qqzq.activity.SelectLocationActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntClientResponse;
@@ -39,13 +43,12 @@ import java.util.Map;
  */
 public class CreateTeamActivity extends BaseActivity {
 
+    private Context context = this;
     private TextView tv_title;
     private ImageView iv_back;
     private TextView tv_commit;
     private EditText edt_team_name;
-    private EditText edt_team_id;
-    private EditText edt_team_province;
-    private EditText edt_team_city;
+    private EditText edt_team_location;
     private EditText edt_team_detail;
     private CheckBox cbox_5_persons;
     private CheckBox cbox_7_persons;
@@ -60,6 +63,10 @@ public class CreateTeamActivity extends BaseActivity {
     private Bitmap logo;//Logo Bitmap
 
     private String logoPathInServer;
+
+    private Bundle extras;
+    private int selectedProvinceCode = 0;
+    private int selectedCityCode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +83,8 @@ public class CreateTeamActivity extends BaseActivity {
         iv_back = (ImageView) findViewById(R.id.iv_back);
         ll_create_team = findViewById(R.id.ll_create_team);
         tv_commit = (TextView) findViewById(R.id.tv_commit);
-        edt_team_id = (EditText) findViewById(R.id.edt_team_id);
         edt_team_name = (EditText) findViewById(R.id.edt_team_name);
-        edt_team_province = (EditText) findViewById(R.id.edt_team_province);
-        edt_team_city = (EditText) findViewById(R.id.edt_team_city);
+        edt_team_location = (EditText) findViewById(R.id.edt_team_location);
         edt_team_detail = (EditText) findViewById(R.id.edt_team_detail);
         radio_group_join_config = (RadioGroup) findViewById(R.id.radio_group_join_config);
         cbox_5_persons = (CheckBox) findViewById(R.id.cbox_5_persons);
@@ -89,6 +94,19 @@ public class CreateTeamActivity extends BaseActivity {
         iv_logo = (ImageView) findViewById(R.id.iv_logo);
         photoPopupWindow = new PhotoPopupWindow(CreateTeamActivity.this, null);
         photoPopupWindow.dismiss();
+
+        extras = this.getIntent().getExtras();
+        if (extras != null
+                && extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)
+                && extras.containsKey(Constants.EXTRA_SELECTED_PROVINCE_CODE)
+                && extras.containsKey(Constants.EXTRA_SELECTED_CITY_CODE)) {
+
+            selectedProvinceCode = extras.getInt(Constants.EXTRA_SELECTED_PROVINCE_CODE);
+            selectedCityCode = extras.getInt(Constants.EXTRA_SELECTED_CITY_CODE);
+
+            String selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
+            edt_team_location.setText(selectedLocation);
+        }
 
 
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +131,14 @@ public class CreateTeamActivity extends BaseActivity {
             }
         });
 
+        edt_team_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SelectLocationActivity.class);
+                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "CreateTeamActivity");
+                startActivity(intent);
+            }
+        });
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -181,10 +207,8 @@ public class CreateTeamActivity extends BaseActivity {
 
     public Map<String, Object> prepareRequestJson() {
         Map<String, Object> mParameters = new HashMap<>();
-        String teamId = edt_team_id.getText().toString();
         String teamName = edt_team_name.getText().toString();
-        String teamProvince = edt_team_province.getText().toString();
-        String teamCity = edt_team_city.getText().toString();
+        String teamLocation = edt_team_location.getText().toString();
         String teamDetail = edt_team_detail.getText().toString();
 
         int join_config = -1;
@@ -208,34 +232,21 @@ public class CreateTeamActivity extends BaseActivity {
         }
 
         EntTeamInfo entTeamInfo = new EntTeamInfo();
-        entTeamInfo.setTeamno(teamId);
         entTeamInfo.setTeamname(teamName);
+        entTeamInfo.setTeamno("0");
+        entTeamInfo.setOftencity(selectedProvinceCode);
+        entTeamInfo.setOftendistinct(selectedCityCode);
         entTeamInfo.setJoinconfig(join_config);
         entTeamInfo.setOftensoccerpernum(soccerPersons);
         entTeamInfo.setSumary(teamDetail);
         entTeamInfo.setEstablishdate(new Date());
         entTeamInfo.setOftencity(0);
         entTeamInfo.setOftendistinct(0);
-//        entTeamInfo.setTeamleadernm("");
-        entTeamInfo.setTeamleaderusrrnm("13551063785");
-//        entTeamInfo.setTeamleaderusrrnm("");
+        entTeamInfo.setTeamleaderusrrnm(BaseApplication.QQZQ_USER);
         if (!TextUtils.isEmpty(logoPathInServer)) {
             entTeamInfo.setTeamlogo(logoPathInServer);
         }
 
-        try {
-            Gson gson = new GsonBuilder()
-//                .registerTypeAdapter(Date.class, new DateSerializer())
-//                .registerTypeAdapter(Date.class, new DateDeserializer())
-//                .registerTypeAdapter(Object.class,
-//                        new ObjectDeserializer(EntTeamInfo.class.getName()))
-                    .create();
-
-            String s = new Gson().toJson(entTeamInfo);
-            Log.v("qqzq", s);
-        } catch (Exception e) {
-            Log.e("qqzq", "转换json出错", e);
-        }
         mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entTeamInfo);
         return mParameters;
     }
@@ -249,6 +260,8 @@ public class CreateTeamActivity extends BaseActivity {
         @Override
         public void onResponse(EntTeamInfo entTeamInfo) {
             System.out.println("创建球队成功");
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
         }
     };
 
