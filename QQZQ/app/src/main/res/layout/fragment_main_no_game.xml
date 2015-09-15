@@ -37,6 +37,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/tv_game_publish"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"

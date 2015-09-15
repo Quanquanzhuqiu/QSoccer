@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_create_team"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_bg"
+    android:orientation="vertical">
+
+    <!-- TOP BAR-->
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/common_top_title_with_commit_btn" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <LinearLayout
+                style="@style/linearLayout_create_team_or_activity"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- 活动标题-->
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <ImageView style="@style/create_team_basic_info_image_view" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:text="@string/game_title" />
+
+                    <EditText
+                        android:id="@+id/edt_team_name"
+                        style="@style/create_team_basic_info_edit"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:hint="@string/game_title_hint" />
+
+                </LinearLayout>
+
+
+                <!-- 活动地点-->
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <ImageView style="@style/create_team_basic_info_image_view" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:text="@string/game_location" />
+
+                    <EditText
+                        style="@style/create_team_basic_info_edit"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp" />
+
+                </LinearLayout>
+
+                <!-- 活动日期-->
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <ImageView style="@style/create_team_basic_info_image_view" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:text="@string/game_date" />
+
+                    <EditText
+                        style="@style/create_team_basic_info_edit"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp" />
+
+                </LinearLayout>
+
+                <!-- 活动时间-->
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <ImageView style="@style/create_team_basic_info_image_view" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:text="@string/game_time" />
+
+                    <EditText
+                        style="@style/create_team_basic_info_edit"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 活动类型-->
+            <LinearLayout
+                style="@style/linearLayout_create_team_or_activity"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <ImageView style="@style/create_team_basic_info_image_view" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:text="@string/game_type" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            style="@style/my_radio_button"
+                            android:layout_marginLeft="0dp"
+                            android:text="@string/game_type_public" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/bg_login"
+                            android:gravity="center"
+                            android:text="@string/select_team"
+                            android:textColor="@color/rgb_255_255_255" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="成都老曼联"
+                            android:textColor="@color/default_black" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+
+                    <RadioButton
+                        style="@style/my_radio_button"
+                        android:layout_marginLeft="0dp"
+                        android:text="@string/game_type_public" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 场地类型-->
+            <LinearLayout
+                style="@style/linearLayout_create_team_or_activity"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <ImageView style="@style/create_team_basic_info_image_view" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:text="@string/game_court_type" />
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/create_team_basic_layout">
+
+
+                    <RadioButton
+                        style="@style/my_radio_button"
+                        android:text="@string/game_court_type_5" />
+
+                    <RadioButton
+                        style="@style/my_radio_button"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/game_court_type_7" />
+
+                    <RadioButton
+                        style="@style/my_radio_button"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/game_court_type_9" />
+
+                    <RadioButton
+                        style="@style/my_radio_button"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/game_court_type_11" />
+                </LinearLayout>
+                Ï
+
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <CheckBox
+                        style="@style/my_checkbox"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/eat_and_play" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 活动费用-->
+            <LinearLayout
+                style="@style/linearLayout_create_team_or_activity"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <ImageView style="@style/create_team_basic_info_image_view" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:text="@string/game_cost" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        style="@style/my_radio_button"
+                        android:layout_marginLeft="25dp"
+                        android:text="@string/game_cost_average" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/game_cost_average_hint"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        style="@style/my_radio_button"
+                        android:layout_marginLeft="25dp"
+                        android:text="@string/game_cost_fixed" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/game_cost_fixed_hint"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        style="@style/my_radio_button"
+                        android:layout_marginLeft="25dp"
+                        android:text="@string/game_cost_member_charge" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/game_cost_member_charge_hint"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        style="@style/my_radio_button"
+                        android:text="@string/game_cost_member_no_registrator" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/game_cost_member_no_registrator_hint"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        style="@style/my_radio_button"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/game_cost_member_link_registrator" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/linearLayout_create_team_or_activity"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- 人数上限-->
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <ImageView style="@style/create_team_basic_info_image_view" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:text="@string/game_registrator_upper_limit" />
+
+                    <EditText
+                        style="@style/create_team_basic_info_edit"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:hint="@string/game_registrator_upper_limit_hint" />
+
+                </LinearLayout>
+
+                <!-- 人数下限-->
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <ImageView style="@style/create_team_basic_info_image_view" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:text="@string/game_registrator_lower_limit" />
+
+                    <EditText
+                        style="@style/create_team_basic_info_edit"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:hint="@string/game_registrator_lower_limit_hint" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearLayout_create_team_or_activity"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- 活动介绍-->
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <ImageView style="@style/create_team_basic_info_image_view" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:text="@string/game_description" />
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/create_team_basic_layout">
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/game_description_hint"
+                        android:inputType="textMultiLine"
+                        android:maxLength="1000"
+                        android:minLines="6"
+                        android:textColorHint="@color/default_gray"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

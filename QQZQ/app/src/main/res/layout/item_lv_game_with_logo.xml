@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/game_publisher" />
+                android:text="@string/main_game_publisher" />
 
             <TextView
                 android:id="@+id/tv_game_publisher"
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/game_address" />
+                android:text="@string/main_game_address" />
 
             <TextView
                 android:id="@+id/tv_game_address"
@@ -67,7 +67,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/game_time" />
+                android:text="@string/main_game_datetime" />
 
             <TextView
                 android:id="@+id/tv_game_time"
@@ -84,7 +84,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/game_type" />
+                android:text="@string/main_game_type" />
 
             <TextView
                 android:id="@+id/tv_game_type"

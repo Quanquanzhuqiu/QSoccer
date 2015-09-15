@@ -252,7 +252,7 @@ public class RegisterActivity extends BaseActivity {
     ResponseListener registerUserResponseListener = new ResponseListener<EntClientResponse>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            System.out.println(volleyError);
+            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 
         @Override

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -269,8 +270,7 @@ public class CreateTeamActivity extends BaseActivity {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             System.out.println(volleyError);
-//            String result = new String(volleyError.networkResponse.data);
-//            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 
         @Override

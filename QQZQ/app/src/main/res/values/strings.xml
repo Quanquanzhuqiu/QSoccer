@@ -13,8 +13,10 @@
     <string name="find">发现</string>
     <string name="me">我</string>
 
+    <!-- 我的球队首页-->
     <string name="create_team">创建球队</string>
     <string name="find_team">查找球队</string>
+    <string name="select_team">选择球队</string>
     <string name="login">登陆</string>
     <string name="register">注册</string>
     <string name="commit">提交</string>
@@ -42,12 +44,12 @@
     <string name="duty_detail">实际出勤13人，王哥放鸽子1次。</string>
     <string name="team_default_establish_day">2015年9月22日</string>
 
-    <string name="game_publisher">【球队召集】</string>
-    <string name="game_address">地址：</string>
-    <string name="game_time">时间：</string>
-    <string name="game_type">类型：</string>
-    <string name="game_registering">报名中</string>
-    <string name="game_registered">报名结束</string>
+    <string name="main_game_publisher">【球队召集】</string>
+    <string name="main_game_address">地址：</string>
+    <string name="main_game_datetime">时间：</string>
+    <string name="main_game_type">类型：</string>
+    <string name="main_game_registering">报名中</string>
+    <string name="main_game_registered">报名结束</string>
 
     <!-- 登陆页面-->
     <string name="hint_username">请输入用户名/手机号</string>
@@ -101,14 +103,41 @@
     <string name="my_team_top_menu_1">球队管理</string>
     <string name="my_team_top_menu_2">球队内部活动</string>
 
-    <string name="team_management_new_memeber">\t\t\t还没加入球队\n\t\t\t请先创建球队或\n通过查找球队选择加入一个球队</string>
-    <string name="team_activity_new_memeber">\t\t\t还没球队内部活动\n请发起活动</string>
-
-
-
     <string name="take_photo">拍照</string>
     <string name="pick_photo">从手机相册选择</string>
     <string name="cancel_photo">取消</string>
+
+    <!-- 发起活动页面-->
+    <string name="game_title">活动标题</string>
+    <string name="game_title_hint">请输入十五字以内...</string>
+    <string name="game_location">活动地点</string>
+    <string name="game_date">活动日期</string>
+    <string name="game_time">活动时间</string>
+    <string name="game_type">活动类型</string>
+    <string name="game_type_private">球队内部互动</string>
+    <string name="game_type_public">公开活动</string>
+    <string name="game_court_type">场地类型</string>
+    <string name="game_court_type_5">5人制</string>
+    <string name="game_court_type_7">7人制</string>
+    <string name="game_court_type_9">9人制</string>
+    <string name="game_court_type_11">11人制</string>
+    <string name="eat_and_play">吃喝玩乐</string>
+    <string name="game_cost">活动费用</string>
+    <string name="game_cost_average">总价分摊</string>
+    <string name="game_cost_average_hint">总价/场</string>
+    <string name="game_cost_fixed">固定单价</string>
+    <string name="game_cost_fixed_hint">单价/人</string>
+    <string name="game_cost_member_charge">会员费用记账支付</string>
+    <string name="game_cost_member_charge_hint">总价/场</string>
+    <string name="game_cost_member_no_registrator">不关联报名名单</string>
+    <string name="game_cost_member_no_registrator_hint">（总费用平摊到所有成员扣除）</string>
+    <string name="game_cost_member_link_registrator">关联报名名单</string>
+    <string name="game_registrator_upper_limit">人数上限</string>
+    <string name="game_registrator_upper_limit_hint">请填写最低报名人数</string>
+    <string name="game_registrator_lower_limit">人数下限</string>
+    <string name="game_registrator_lower_limit_hint">默认为报名人数下限+5</string>
+    <string name="game_description">活动介绍</string>
+    <string name="game_description_hint">请输入本次活动的简介</string>
 
     <!-- pull to refresh txt -->
     <string name="pull_to_refresh_pull_label">下拉刷新</string>
