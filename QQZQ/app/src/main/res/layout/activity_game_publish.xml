@@ -38,7 +38,7 @@
                         android:text="@string/game_title" />
 
                     <EditText
-                        android:id="@+id/edt_team_name"
+                        android:id="@+id/edt_game_name"
                         style="@style/create_team_basic_info_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
@@ -57,6 +57,7 @@
                         android:text="@string/game_location" />
 
                     <EditText
+                        android:id="@+id/edt_game_location"
                         style="@style/create_team_basic_info_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp" />
@@ -73,6 +74,7 @@
                         android:text="@string/game_date" />
 
                     <EditText
+                        android:id="@+id/edt_game_date"
                         style="@style/create_team_basic_info_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp" />
@@ -89,6 +91,7 @@
                         android:text="@string/game_time" />
 
                     <EditText
+                        android:id="@+id/edt_game_time"
                         style="@style/create_team_basic_info_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp" />
@@ -128,6 +131,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/rbtn_game_type_public"
                             style="@style/my_radio_button"
                             android:layout_marginLeft="0dp"
                             android:text="@string/game_type_public" />
@@ -172,9 +176,10 @@
 
 
                     <RadioButton
+                        android:id="@+id/rbtn_game_type_private"
                         style="@style/my_radio_button"
                         android:layout_marginLeft="0dp"
-                        android:text="@string/game_type_public" />
+                        android:text="@string/game_type_private" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -198,20 +203,24 @@
 
 
                     <RadioButton
+                        android:id="@+id/rbtn_game_court_type_5"
                         style="@style/my_radio_button"
                         android:text="@string/game_court_type_5" />
 
                     <RadioButton
+                        android:id="@+id/rbtn_game_court_type_7"
                         style="@style/my_radio_button"
                         android:layout_marginLeft="10dp"
                         android:text="@string/game_court_type_7" />
 
                     <RadioButton
+                        android:id="@+id/rbtn_game_court_type_9"
                         style="@style/my_radio_button"
                         android:layout_marginLeft="10dp"
                         android:text="@string/game_court_type_9" />
 
                     <RadioButton
+                        android:id="@+id/rbtn_game_court_type_11"
                         style="@style/my_radio_button"
                         android:layout_marginLeft="10dp"
                         android:text="@string/game_court_type_11" />
@@ -221,6 +230,7 @@
                 <LinearLayout style="@style/create_team_basic_layout">
 
                     <CheckBox
+                        android:id="@+id/cbox_eat_and_play"
                         style="@style/my_checkbox"
                         android:layout_marginLeft="20dp"
                         android:text="@string/eat_and_play" />
@@ -249,6 +259,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/rbtn_game_cost_average"
                         style="@style/my_radio_button"
                         android:layout_marginLeft="25dp"
                         android:text="@string/game_cost_average" />
@@ -267,6 +278,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/rbtn_game_cost_fixed"
                         style="@style/my_radio_button"
                         android:layout_marginLeft="25dp"
                         android:text="@string/game_cost_fixed" />
@@ -285,6 +297,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/rbtn_game_cost_member_charge"
                         style="@style/my_radio_button"
                         android:layout_marginLeft="25dp"
                         android:text="@string/game_cost_member_charge" />
@@ -305,6 +318,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/rbtn_game_cost_member_no_registrator"
                         style="@style/my_radio_button"
                         android:text="@string/game_cost_member_no_registrator" />
 
@@ -324,6 +338,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/rbtn_game_cost_member_link_registrator"
                         style="@style/my_radio_button"
                         android:layout_marginTop="5dp"
                         android:text="@string/game_cost_member_link_registrator" />
@@ -348,6 +363,7 @@
                         android:text="@string/game_registrator_upper_limit" />
 
                     <EditText
+                        android:id="@+id/edt_game_registrator_upper_limit"
                         style="@style/create_team_basic_info_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
@@ -365,6 +381,7 @@
                         android:text="@string/game_registrator_lower_limit" />
 
                     <EditText
+                        android:id="@+id/edt_game_registrator_lower_limit"
                         style="@style/create_team_basic_info_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
@@ -392,6 +409,7 @@
                 <LinearLayout style="@style/create_team_basic_layout">
 
                     <EditText
+                        android:id="@+id/edt_game_description"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"

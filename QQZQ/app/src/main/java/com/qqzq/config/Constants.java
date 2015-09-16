@@ -76,6 +76,12 @@ public class Constants {
     //根据条件查询球队信息
     public static final String API_FIND_TEAM_URL = API_SERVER_HOST + "/team/teams";
 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~ 活动发起部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
+    //创建球队
+    public static final String API_GAME_PUBLISH_URL = API_SERVER_HOST + "/activity/activities";
+    //根据条件查询球队信息
+    public static final String API_FIND_GAME_URL = API_SERVER_HOST + "/activity/activities";
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 上传文件部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //上传文件到分布式文件系统
     public static final String API_FILE_UPLOAD_FASTDFS_URL = API_SERVER_HOST + "/file/fastdfs";
