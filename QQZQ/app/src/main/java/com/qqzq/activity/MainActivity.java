@@ -1,5 +1,6 @@
 package com.qqzq.activity;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.android.volley.VolleyError;
 import com.qqzq.R;
@@ -24,6 +27,7 @@ import com.qqzq.subitem.me.MeFragment;
 import com.qqzq.subitem.team.MyTeamFragment;
 import com.qqzq.subitem.team.TeamMangmentFragment;
 import com.qqzq.util.Utils;
+import com.qqzq.view.CustomPopupView;
 import com.qqzq.view.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
@@ -35,7 +39,9 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 8/25/2015.
  */
-public class MainActivity extends BaseFragmentActivity {
+public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
+
+    private Activity context = this;
 
     //我的球队页面的Fragment
     private MyTeamFragment myTeamFragment;
@@ -74,6 +80,7 @@ public class MainActivity extends BaseFragmentActivity {
     private List<EntTeamInfo> teamList = new ArrayList<EntTeamInfo>();
     private String teamPageType = Constants.PAGE_TYPE_NO_TEAM;
     private String gamePageType = Constants.PAGE_TYPE_NO_GAME;
+    private ImageView iv_more_menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +93,7 @@ public class MainActivity extends BaseFragmentActivity {
     private void init() {
         loadTeamListFromBackend();
 
+        iv_more_menu = (ImageView) findViewById(R.id.iv_more_menu);
         dm = getResources().getDisplayMetrics();
         pager = (ViewPager) findViewById(R.id.pager);
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
@@ -118,6 +126,7 @@ public class MainActivity extends BaseFragmentActivity {
         // 取消点击Tab时的背景色
         tabs.setTabBackground(0);
     }
+
 
     public class MyPagerAdapter extends FragmentPagerAdapter {
 
@@ -163,8 +172,31 @@ public class MainActivity extends BaseFragmentActivity {
 
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_more_menu:
+                View popupView = View.inflate(context, R.layout.popup_menu_main, null);
+                CustomPopupView myPopupview = new CustomPopupView(context, iv_more_menu, popupView);
+                initPopupView(popupView);
+                break;
+            default:
+                break;
+        }
+    }
+
+    //初始化弹出框
+    private void initPopupView(View view) {
+        LinearLayout ll_game_publish = (LinearLayout) view.findViewById(R.id.ll_game_publish);
+        LinearLayout ll_create_team = (LinearLayout) view.findViewById(R.id.ll_create_team);
+        LinearLayout ll_find_team = (LinearLayout) view.findViewById(R.id.ll_find_team);
+        ll_game_publish.setOnClickListener(this);
+        ll_create_team.setOnClickListener(this);
+        ll_find_team.setOnClickListener(this);
+    }
+
     public void loadTeamListFromBackend() {
-        Map<String, Object> mParameters = new HashMap<>();
+        Map<String, Object> mParameters = new HashMap<String, Object>();
         mParameters.put("offset", 0);
         mParameters.put("limit", 6);
         mParameters.put("teamLeaderUsrNm", BaseApplication.QQZQ_USER);

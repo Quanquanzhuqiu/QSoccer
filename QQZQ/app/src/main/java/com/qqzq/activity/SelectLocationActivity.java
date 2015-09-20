@@ -121,7 +121,7 @@ public class SelectLocationActivity extends BaseActivity {
 
 
     private void requestProvinceList() {
-        Map<String, Object> mParameters = new HashMap<>();
+        Map<String, Object> mParameters = new HashMap<String, Object>();
         mParameters.put("offset", 0);
         mParameters.put("limit", Constants.UNLIMITED_PAGE_SIZE);
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_PROVINCE_URL, mParameters);
@@ -132,7 +132,7 @@ public class SelectLocationActivity extends BaseActivity {
     }
 
     private void requestCityList(int provinceId) {
-        Map<String, Object> mParameters = new HashMap<>();
+        Map<String, Object> mParameters = new HashMap<String, Object>();
         mParameters.put("offset", 0);
         mParameters.put("limit", Constants.UNLIMITED_PAGE_SIZE);
         mParameters.put("provinceId", provinceId);

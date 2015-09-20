@@ -42,6 +42,12 @@
         <activity
             android:name=".subitem.game.activity.GamePublishActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".subitem.team.activity.SelectTeamActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".subitem.team.activity.TeamRuleActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />

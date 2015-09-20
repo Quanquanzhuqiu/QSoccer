@@ -1,7 +1,6 @@
 package com.qqzq.subitem.me;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -19,7 +18,6 @@ import com.qqzq.activity.BaseFragment;
  */
 public class MeFragment extends BaseFragment {
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

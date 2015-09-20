@@ -39,7 +39,7 @@ public class FindTeamActivity extends BaseActivity {
     private ListView lv_teams;
     private PullToRefreshView pullToRefreshListView;
     private ImageView iv_team_detail;
-    private List<EntTeamListItem> teamList = new ArrayList<>();
+    private List<EntTeamListItem> teamList = new ArrayList<EntTeamListItem>();
     private TeamListViewAdapter listViewAdapter;
     private Context context = this;
 
@@ -85,7 +85,7 @@ public class FindTeamActivity extends BaseActivity {
                         listViewAdapter.mList.clear();
                     }
 
-                    Map<String, Object> mParameters = new HashMap<>();
+                    Map<String, Object> mParameters = new HashMap<String, Object>();
                     mParameters.put("offset", 0);
                     mParameters.put("limit", Constants.PAGE_SIZE);
                     mParameters.put("teamLeaderUsrNm", v.getText().toString());
@@ -118,7 +118,7 @@ public class FindTeamActivity extends BaseActivity {
                                                                      listViewAdapter.mList.clear();
                                                                  }
 
-                                                                 Map<String, Object> mParameters = new HashMap<>();
+                                                                 Map<String, Object> mParameters = new HashMap<String, Object>();
                                                                  mParameters.put("offset", 0);
                                                                  mParameters.put("limit", Constants.PAGE_SIZE);
                                                                  loadTeamListFromBackend(mParameters);
@@ -132,7 +132,7 @@ public class FindTeamActivity extends BaseActivity {
                                                          {
                                                              @Override
                                                              public void onFooterRefresh(PullToRefreshView view) {
-                                                                 Map<String, Object> mParameters = new HashMap<>();
+                                                                 Map<String, Object> mParameters = new HashMap<String, Object>();
                                                                  mParameters.put("offset", listViewAdapter.pageIdx);
                                                                  mParameters.put("limit", Constants.PAGE_SIZE);
                                                                  loadTeamListFromBackend(mParameters);
@@ -152,7 +152,7 @@ public class FindTeamActivity extends BaseActivity {
 
         );
 
-        Map<String, Object> mParameters = new HashMap<>();
+        Map<String, Object> mParameters = new HashMap<String, Object>();
         mParameters.put("offset", 0);
         mParameters.put("limit", Constants.PAGE_SIZE);
 
@@ -191,11 +191,7 @@ public class FindTeamActivity extends BaseActivity {
     ResponseListener findTeamResponseListener = new ResponseListener<EntTeamInfo[]>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            if (pullToRefreshListView != null) {
-                pullToRefreshListView.onHeaderRefreshComplete();
-                pullToRefreshListView.onFooterRefreshComplete();
-            }
-            System.out.println(new String(volleyError.networkResponse.data));
+            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 
         @Override

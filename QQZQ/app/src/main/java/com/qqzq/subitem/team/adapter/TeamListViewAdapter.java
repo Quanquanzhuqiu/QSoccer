@@ -25,7 +25,7 @@ public class TeamListViewAdapter extends BaseAdapter {
     private Context context;
     public List<EntTeamListItem> mList;
     public int pageIdx = 0;
-    public boolean hasMore = true;
+    public boolean hasDetail = true;
 
     public TeamListViewAdapter(Context context, List<EntTeamListItem> mList) {
         this.context = context;
@@ -66,7 +66,7 @@ public class TeamListViewAdapter extends BaseAdapter {
         // 初始化item view
         if (convertView == null) {
             // 通过LayoutInflater将xml中定义的视图实例化到一个View中
-            convertView = LayoutInflater.from(context).inflate(R.layout.team_list_item, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.row_select_team_list, null);
             // 实例化一个封装类ListItemView，并实例化它的所有域
             viewHolder = new ViewHolder();
             viewHolder.iv_logo = (ImageView) convertView.findViewById(R.id.iv_team_list_logo);
@@ -74,6 +74,7 @@ public class TeamListViewAdapter extends BaseAdapter {
             viewHolder.tv_team_captain = (TextView) convertView.findViewById(R.id.tv_team_captain);
             viewHolder.tv_team_members = (TextView) convertView.findViewById(R.id.tv_team_members);
             viewHolder.tv_team_establish_day = (TextView) convertView.findViewById(R.id.tv_team_establish_day);
+            viewHolder.iv_team_detail = (ImageView) convertView.findViewById(R.id.iv_team_detail);
             // 将ListItemView对象传递给convertView
             convertView.setTag(viewHolder);
         } else {
@@ -99,6 +100,7 @@ public class TeamListViewAdapter extends BaseAdapter {
             viewHolder.tv_team_captain.setText(context.getResources().getString(R.string.find_team_team_captain) + teamCaptain);
             viewHolder.tv_team_members.setText(context.getResources().getString(R.string.find_team_team_members) + teamMembers);
             viewHolder.tv_team_establish_day.setText(context.getResources().getString(R.string.find_team_establish_day) + teamEstablishDay);
+            viewHolder.iv_team_detail.setVisibility(hasDetail ? View.VISIBLE : View.GONE);
         }
 
         return convertView;
@@ -107,6 +109,10 @@ public class TeamListViewAdapter extends BaseAdapter {
     public void addItem(EntTeamListItem item) {
         mList.add(item);
         notifyDataSetChanged();
+    }
+
+    public void setHasDetail(boolean hasDetail) {
+        this.hasDetail = hasDetail;
     }
 
     public void displayUrlImg(ImageView imageView, String url) {
@@ -125,5 +131,6 @@ public class TeamListViewAdapter extends BaseAdapter {
         TextView tv_team_captain;
         TextView tv_team_members;
         TextView tv_team_establish_day;
+        ImageView iv_team_detail;
     }
 }

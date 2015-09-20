@@ -207,7 +207,7 @@ public class CreateTeamActivity extends BaseActivity {
     }
 
     public Map<String, Object> prepareRequestJson() {
-        Map<String, Object> mParameters = new HashMap<>();
+        Map<String, Object> mParameters = new HashMap<String, Object>();
         String teamName = edt_team_name.getText().toString();
         String teamLocation = edt_team_location.getText().toString();
         String teamDetail = edt_team_detail.getText().toString();

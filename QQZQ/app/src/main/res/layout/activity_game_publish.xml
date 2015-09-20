@@ -77,7 +77,8 @@
                         android:id="@+id/edt_game_date"
                         style="@style/create_team_basic_info_edit"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp" />
+                        android:layout_marginRight="15dp"
+                        android:editable="false" />
 
                 </LinearLayout>
 
@@ -94,7 +95,8 @@
                         android:id="@+id/edt_game_time"
                         style="@style/create_team_basic_info_edit"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp" />
+                        android:layout_marginRight="15dp"
+                        android:editable="false" />
 
                 </LinearLayout>
 
@@ -142,6 +144,7 @@
                             android:layout_weight="1" />
 
                         <TextView
+                            android:id="@+id/tv_select_team"
                             android:layout_width="70dp"
                             android:layout_height="30dp"
                             android:layout_marginRight="10dp"
@@ -158,9 +161,9 @@
                         android:layout_marginTop="15dp">
 
                         <TextView
+                            android:id="@+id/tv_selected_team"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="成都老曼联"
                             android:textColor="@color/default_black" />
                     </LinearLayout>
 

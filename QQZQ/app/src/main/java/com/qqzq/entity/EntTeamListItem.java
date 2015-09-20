@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 public class EntTeamListItem {
     private Drawable logo;
     private String logoUrl;
+    private String teamId;
     private String teamName;
     private String teamCaptain;
     private String teamMembers;
@@ -59,5 +60,13 @@ public class EntTeamListItem {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+    public String getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
     }
 }

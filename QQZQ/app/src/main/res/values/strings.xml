@@ -22,7 +22,7 @@
     <string name="commit">提交</string>
     <string name="select_location">选择地区</string>
     <string name="local_team">本地球队</string>
-    <string name="create_game">发起活动</string>
+    <string name="publish_game">发起活动</string>
 
     <string name="no_team_1">还没有加入球队？</string>
     <string name="no_team_2">请先</string>

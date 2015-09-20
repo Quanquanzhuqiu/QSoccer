@@ -38,6 +38,8 @@ public class Constants {
     public static final String EXTRA_SELECTED_LOCATION = "location";
     public static final String EXTRA_SELECTED_PROVINCE_CODE = "province_code";
     public static final String EXTRA_SELECTED_CITY_CODE = "city_code";
+    public static final String EXTRA_SELECTED_TEAM = "EXTRA_SELECTED_TEAM";
+    public static final String EXTRA_SELECTED_TEAM_ID = "EXTRA_SELECTED_TEAM_ID";
     public static final String EXTRA_PAGE_TYEP = "page_type";
     public static final String EXTRA_PREV_PAGE_NAME = "EXTRA_PREV_PAGE_NAME";
 

@@ -1,7 +1,6 @@
 package com.qqzq.subitem.find;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -17,7 +16,7 @@ import com.qqzq.activity.BaseFragment;
  * Created by jie.xiao on 15/9/12.
  */
 public class FindFragment extends BaseFragment {
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

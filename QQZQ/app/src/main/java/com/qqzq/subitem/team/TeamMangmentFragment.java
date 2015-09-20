@@ -3,31 +3,22 @@ package com.qqzq.subitem.team;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.qqzq.R;
-import com.qqzq.activity.BaseApplication;
 import com.qqzq.activity.BaseFragment;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamInfo;
-import com.qqzq.network.GsonRequest;
-import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.find.activity.FindTeamActivity;
 import com.qqzq.subitem.team.activity.CreateTeamActivity;
 import com.qqzq.subitem.team.adapter.TeamGridViewAdapter;
-import com.qqzq.util.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by jie.xiao on 8/25/2015.
@@ -44,7 +35,6 @@ public class TeamMangmentFragment extends BaseFragment {
     private TextView tv_create_team;
     private TextView tv_find_team;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;

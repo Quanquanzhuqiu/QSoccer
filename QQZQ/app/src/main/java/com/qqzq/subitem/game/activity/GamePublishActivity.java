@@ -1,6 +1,9 @@
 package com.qqzq.subitem.game.activity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,13 +20,19 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.activity.BaseApplication;
 import com.qqzq.activity.MainActivity;
+import com.qqzq.activity.SelectLocationActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntGameInfo;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.subitem.find.activity.FindTeamActivity;
+import com.qqzq.subitem.team.activity.SelectTeamActivity;
+import com.qqzq.widget.time.ScreenInfo;
+import com.qqzq.widget.time.WheelMain;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +42,7 @@ import java.util.Map;
  */
 public class GamePublishActivity extends BaseActivity {
 
-    private Context context = this;
+    private Activity context = this;
     private TextView tv_titile;
     private TextView tv_commit;
     private EditText edt_game_name;
@@ -54,6 +63,15 @@ public class GamePublishActivity extends BaseActivity {
     private EditText edt_game_registrator_upper_limit;
     private EditText edt_game_registrator_lower_limit;
     private EditText edt_game_description;
+    private TextView tv_select_team;
+    private TextView tv_selected_team;
+
+    private int year, month, day, hour, min;
+    private String selectedTeamName;
+    private String selectedTeamId;
+    private String selectedLocation;
+    private int selectedProvinceCode = 0;
+    private int selectedCityCode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +103,32 @@ public class GamePublishActivity extends BaseActivity {
         edt_game_registrator_upper_limit = (EditText) findViewById(R.id.edt_game_registrator_upper_limit);
         edt_game_registrator_lower_limit = (EditText) findViewById(R.id.edt_game_registrator_lower_limit);
         edt_game_description = (EditText) findViewById(R.id.edt_game_description);
+        tv_select_team = (TextView) findViewById(R.id.tv_select_team);
+        tv_selected_team = (TextView) findViewById(R.id.tv_selected_team);
+
+
+        Bundle extras = context.getIntent().getExtras();
+        if (extras != null) {
+            if (extras.containsKey(Constants.EXTRA_SELECTED_TEAM)
+                    && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_ID)) {
+                selectedTeamName = extras.getString(Constants.EXTRA_SELECTED_TEAM);
+                selectedTeamId = extras.getString(Constants.EXTRA_SELECTED_TEAM_ID);
+                tv_selected_team.setText(selectedTeamName);
+                System.out.println("选中的球队是:" + selectedTeamName + " " + selectedTeamId);
+            }
+
+            if (extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)
+                    && extras.containsKey(Constants.EXTRA_SELECTED_PROVINCE_CODE)
+                    && extras.containsKey(Constants.EXTRA_SELECTED_CITY_CODE)) {
+                selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
+                selectedProvinceCode = extras.getInt(Constants.EXTRA_SELECTED_PROVINCE_CODE);
+                selectedCityCode = extras.getInt(Constants.EXTRA_SELECTED_CITY_CODE);
+                edt_game_location.setText(selectedLocation);
+                System.out.println("选中的地点是:" + selectedProvinceCode + " " + selectedCityCode);
+            }
+
+        }
+
 
         tv_commit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +136,31 @@ public class GamePublishActivity extends BaseActivity {
                 if (formCheck()) {
                     commitToBackend();
                 }
+            }
+        });
+
+        tv_select_team.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SelectTeamActivity.class);
+                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());
+                startActivity(intent);
+            }
+        });
+
+        edt_game_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimeDialog(edt_game_date);
+            }
+        });
+
+        edt_game_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SelectLocationActivity.class);
+                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());
+                startActivity(intent);
             }
         });
     }
@@ -114,7 +183,7 @@ public class GamePublishActivity extends BaseActivity {
     }
 
     public Map<String, Object> prepareRequestJson() {
-        Map<String, Object> mParameters = new HashMap<>();
+        Map<String, Object> mParameters = new HashMap<String, Object>();
 
         String gameName = edt_game_name.getText().toString();
         String gameLocation = edt_game_location.getText().toString();
@@ -191,7 +260,6 @@ public class GamePublishActivity extends BaseActivity {
     ResponseListener publishGameResponseListener = new ResponseListener<EntClientResponse>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            System.out.println(volleyError);
             Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 
@@ -202,4 +270,34 @@ public class GamePublishActivity extends BaseActivity {
             startActivity(intent);
         }
     };
+
+    public void showTimeDialog(final EditText edt_time) {
+
+        final View timepickerview = View.inflate(context, R.layout.widget_time_picker,
+                null);
+        ScreenInfo screenInfo = new ScreenInfo(context);
+
+        Calendar calendar = Calendar.getInstance();
+
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        hour = calendar.get(Calendar.HOUR_OF_DAY);
+        min = calendar.get(Calendar.MINUTE);
+        final WheelMain wheelMain = new WheelMain(timepickerview, 0);
+        wheelMain.screenheight = screenInfo.getHeight();
+        wheelMain.initDateTimePicker(year, month, day, hour, min);
+
+        new AlertDialog.Builder(context).setTitle("选择时间")
+                .setView(timepickerview)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                edt_time.setText(wheelMain.getTime());
+                            }
+                        }
+
+                ).setNegativeButton("取消", null).show();
+
+    }
 }

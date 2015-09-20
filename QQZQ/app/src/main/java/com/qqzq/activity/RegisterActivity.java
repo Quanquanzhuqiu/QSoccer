@@ -179,7 +179,7 @@ public class RegisterActivity extends BaseActivity {
 
     private Map<String, Object> prepareRequestJson() {
 
-        Map<String, Object> mParameters = new HashMap<>();
+        Map<String, Object> mParameters = new HashMap<String, Object>();
 
         EntRegisterInfo entRegisterInfo = new EntRegisterInfo();
         entRegisterInfo.setProvince(selectedProvinceCode);

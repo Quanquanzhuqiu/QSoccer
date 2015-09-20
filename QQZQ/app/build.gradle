@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 19
     buildToolsVersion "23.0.0"
 
     defaultConfig {
         applicationId "com.qqzq"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
     }
@@ -26,6 +26,7 @@ android {
 
 dependencies {
     androidTestCompile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-v4:19.0.0'
     compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/gson-2.2.3.jar')
     compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/httpclient-4.3.5.jar')
     compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/httpcore-4.3.2.jar')

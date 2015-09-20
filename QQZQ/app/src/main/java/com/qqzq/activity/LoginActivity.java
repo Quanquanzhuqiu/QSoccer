@@ -93,7 +93,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private Map<String, Object> prepareRequestJson() {
-        Map<String, Object> mParameters = new HashMap<>();
+        Map<String, Object> mParameters = new HashMap<String,Object>();
         username = edt_username.getText().toString();
         password = edt_password.getText().toString();
 
