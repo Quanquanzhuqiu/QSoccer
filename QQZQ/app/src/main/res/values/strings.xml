@@ -13,6 +13,10 @@
     <string name="find">发现</string>
     <string name="me">我</string>
 
+    <string name="cancel">取消</string>
+    <string name="select_time">日期选择</string>
+    <string name="save">保存</string>
+
     <!-- 我的球队首页-->
     <string name="create_team">创建球队</string>
     <string name="find_team">查找球队</string>
@@ -114,7 +118,7 @@
     <string name="game_date">活动日期</string>
     <string name="game_time">活动时间</string>
     <string name="game_type">活动类型</string>
-    <string name="game_type_private">球队内部互动</string>
+    <string name="game_type_private">球队内部活动</string>
     <string name="game_type_public">公开活动</string>
     <string name="game_court_type">场地类型</string>
     <string name="game_court_type_5">5人制</string>

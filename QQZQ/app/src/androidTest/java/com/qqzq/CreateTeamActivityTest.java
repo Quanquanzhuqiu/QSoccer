@@ -46,10 +46,7 @@ public class CreateTeamActivityTest extends ActivityInstrumentationTestCase2<Cre
 
         createTeamActivity = getActivity();
         tv_commit = (TextView) createTeamActivity.findViewById(R.id.tv_commit);
-        edit_team_id = (EditText) createTeamActivity.findViewById(R.id.edt_team_id);
         edit_team_name = (EditText) createTeamActivity.findViewById(R.id.edt_team_name);
-        edit_team_province = (EditText) createTeamActivity.findViewById(R.id.edt_team_province);
-        edit_team_city = (EditText) createTeamActivity.findViewById(R.id.edt_team_city);
         edit_team_detail = (EditText) createTeamActivity.findViewById(R.id.edt_team_detail);
         radio_group_join_config = (RadioGroup) createTeamActivity.findViewById(R.id.radio_group_join_config);
         cbox_5_persons = (CheckBox) createTeamActivity.findViewById(R.id.cbox_5_persons);

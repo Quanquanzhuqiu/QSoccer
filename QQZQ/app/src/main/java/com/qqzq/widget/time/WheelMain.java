@@ -20,7 +20,7 @@ public class WheelMain {
 
     private int iTime;
 
-    private static int START_YEAR = 1990, END_YEAR = 2100;
+    private static int START_YEAR = 2015, END_YEAR = 2200;
 
     public View getView() {
         return view;

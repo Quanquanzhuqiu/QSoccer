@@ -1,6 +1,7 @@
 package com.qqzq.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.qqzq.R;
@@ -22,10 +24,13 @@ import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.find.FindFragment;
+import com.qqzq.subitem.find.activity.FindTeamActivity;
 import com.qqzq.subitem.game.GameManagementFragment;
+import com.qqzq.subitem.game.activity.GamePublishActivity;
 import com.qqzq.subitem.me.MeFragment;
 import com.qqzq.subitem.team.MyTeamFragment;
 import com.qqzq.subitem.team.TeamMangmentFragment;
+import com.qqzq.subitem.team.activity.CreateTeamActivity;
 import com.qqzq.util.Utils;
 import com.qqzq.view.CustomPopupView;
 import com.qqzq.view.PagerSlidingTabStrip;
@@ -97,9 +102,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         dm = getResources().getDisplayMetrics();
         pager = (ViewPager) findViewById(R.id.pager);
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-//        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-//        tabs.setViewPager(pager);
-//        setTabsValue();
+
+        iv_more_menu.setOnClickListener(this);
     }
 
     /**
@@ -176,9 +180,22 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_more_menu:
+//                Toast.makeText(context, "已点中弹出菜单", Toast.LENGTH_LONG).show();
                 View popupView = View.inflate(context, R.layout.popup_menu_main, null);
                 CustomPopupView myPopupview = new CustomPopupView(context, iv_more_menu, popupView);
                 initPopupView(popupView);
+                break;
+            case R.id.ll_create_team:
+                Intent createTeamIntent = new Intent(context, CreateTeamActivity.class);
+                startActivity(createTeamIntent);
+                break;
+            case R.id.ll_find_team:
+                Intent findTeamIntent = new Intent(context, FindTeamActivity.class);
+                startActivity(findTeamIntent);
+                break;
+            case R.id.ll_game_publish:
+                Intent publishGameIntent = new Intent(context, GamePublishActivity.class);
+                startActivity(publishGameIntent);
                 break;
             default:
                 break;
@@ -209,7 +226,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     ResponseListener findTeamResponseListener = new ResponseListener<EntTeamInfo[]>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            System.out.println(volleyError);
+            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 
         @Override

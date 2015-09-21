@@ -1,93 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_popup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ll_popup"
-    android:background="#3e3e3e"
-    android:orientation="vertical" >
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_game_publish"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="8dip"
-        android:paddingBottom="8dip"
-        android:layout_gravity="center"
+        android:layout_height="200dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_popup_menu"
         android:gravity="center"
-        android:background="@drawable/selector_btn_popup">
+        android:orientation="vertical"
+        android:weightSum="3">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/dot_white"/>
 
-        <TextView
-            android:gravity="left"
-            android:id="@+id/btn_individual"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_game_publish"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:text="@string/publish_game"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:minWidth="120dp" />
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="20dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/icon_popup_publish_game" />
+
+            <TextView
+                android:id="@+id/btn_individual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@null"
+                android:gravity="left"
+                android:text="@string/publish_game"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_create_team"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/icon_popup_create_team" />
+
+            <TextView
+                android:id="@+id/btn_club"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@null"
+                android:gravity="left"
+                android:text="@string/create_team"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_find_team"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/icon_popup_find_team" />
+
+            <TextView
+                android:id="@+id/btn_organ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@null"
+                android:gravity="left"
+                android:text="@string/find_team"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_create_team"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="8dip"
-        android:paddingBottom="8dip"
-        android:gravity="center"
-        android:background="@drawable/selector_btn_popup">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/dot_white"/>
-
-        <TextView
-            android:gravity="left"
-            android:id="@+id/btn_club"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:text="@string/create_team"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:minWidth="120dp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_find_team"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="8dip"
-        android:paddingBottom="8dip"
-        android:gravity="center"
-        android:background="@drawable/selector_btn_popup">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/dot_white"/>
-
-        <TextView
-            android:gravity="left"
-            android:id="@+id/btn_organ"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:text="@string/find_team"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:minWidth="120dp"
-            />
-    </LinearLayout>
-
 </LinearLayout>

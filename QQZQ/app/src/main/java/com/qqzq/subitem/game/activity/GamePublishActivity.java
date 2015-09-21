@@ -10,7 +10,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,18 +31,22 @@ import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.find.activity.FindTeamActivity;
 import com.qqzq.subitem.team.activity.SelectTeamActivity;
+import com.qqzq.widget.time.MyWheelView;
+import com.qqzq.widget.time.Pickers;
 import com.qqzq.widget.time.ScreenInfo;
 import com.qqzq.widget.time.WheelMain;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by jie.xiao on 15/9/15.
  */
-public class GamePublishActivity extends BaseActivity {
+public class GamePublishActivity extends BaseActivity implements View.OnClickListener {
 
     private Activity context = this;
     private TextView tv_titile;
@@ -48,7 +54,6 @@ public class GamePublishActivity extends BaseActivity {
     private EditText edt_game_name;
     private EditText edt_game_location;
     private EditText edt_game_date;
-    private EditText edt_game_time;
     private RadioButton rbtn_game_type_public;
     private RadioButton rbtn_game_type_private;
     private RadioButton rbtn_game_court_type_5;
@@ -57,6 +62,7 @@ public class GamePublishActivity extends BaseActivity {
     private RadioButton rbtn_game_court_type_11;
     private CheckBox cbox_eat_and_play;
     private RadioButton rbtn_game_cost_average;
+    private RadioButton rbtn_game_cost_fixed;
     private RadioButton rbtn_game_cost_member_charge;
     private RadioButton rbtn_game_cost_member_no_registrator;
     private RadioButton rbtn_game_cost_member_link_registrator;
@@ -65,6 +71,11 @@ public class GamePublishActivity extends BaseActivity {
     private EditText edt_game_description;
     private TextView tv_select_team;
     private TextView tv_selected_team;
+    private LinearLayout ll_select_team;
+    private LinearLayout ll_game_cost_member_no_registrator;
+    private LinearLayout ll_game_cost_member_link_registrator;
+    private MyWheelView pickerscrlllview; // 滚动选择器
+    private RelativeLayout rl_time_pick; // 选择器布局
 
     private int year, month, day, hour, min;
     private String selectedTeamName;
@@ -77,10 +88,12 @@ public class GamePublishActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_publish);
-        init();
+        initView();
+        initLinstener();
+        initData();
     }
 
-    private void init() {
+    private void initView() {
         tv_titile = (TextView) findViewById(R.id.tv_title);
         tv_commit = (TextView) findViewById(R.id.tv_commit);
         tv_titile.setText("发起活动");
@@ -88,7 +101,6 @@ public class GamePublishActivity extends BaseActivity {
         edt_game_name = (EditText) findViewById(R.id.edt_game_name);
         edt_game_location = (EditText) findViewById(R.id.edt_game_location);
         edt_game_date = (EditText) findViewById(R.id.edt_game_date);
-        edt_game_time = (EditText) findViewById(R.id.edt_game_time);
         rbtn_game_type_public = (RadioButton) findViewById(R.id.rbtn_game_type_public);
         rbtn_game_type_private = (RadioButton) findViewById(R.id.rbtn_game_type_private);
         rbtn_game_court_type_5 = (RadioButton) findViewById(R.id.rbtn_game_court_type_5);
@@ -96,6 +108,7 @@ public class GamePublishActivity extends BaseActivity {
         rbtn_game_court_type_9 = (RadioButton) findViewById(R.id.rbtn_game_court_type_9);
         rbtn_game_court_type_11 = (RadioButton) findViewById(R.id.rbtn_game_court_type_11);
         cbox_eat_and_play = (CheckBox) findViewById(R.id.cbox_eat_and_play);
+        rbtn_game_cost_fixed = (RadioButton) findViewById(R.id.rbtn_game_cost_fixed);
         rbtn_game_cost_average = (RadioButton) findViewById(R.id.rbtn_game_cost_average);
         rbtn_game_cost_member_charge = (RadioButton) findViewById(R.id.rbtn_game_cost_member_charge);
         rbtn_game_cost_member_no_registrator = (RadioButton) findViewById(R.id.rbtn_game_cost_member_no_registrator);
@@ -105,7 +118,33 @@ public class GamePublishActivity extends BaseActivity {
         edt_game_description = (EditText) findViewById(R.id.edt_game_description);
         tv_select_team = (TextView) findViewById(R.id.tv_select_team);
         tv_selected_team = (TextView) findViewById(R.id.tv_selected_team);
+        ll_select_team = (LinearLayout) findViewById(R.id.ll_select_team);
+        ll_game_cost_member_no_registrator = (LinearLayout) findViewById(R.id.ll_game_cost_member_no_registrator);
+        ll_game_cost_member_link_registrator = (LinearLayout) findViewById(R.id.ll_game_cost_member_link_registrator);
+        pickerscrlllview = (MyWheelView) findViewById(R.id.pickerscrlllview);
+        rl_time_pick = (RelativeLayout) findViewById(R.id.rl_time_pick);
 
+        showTimePickView(edt_game_date);
+    }
+
+    private void initLinstener() {
+
+        // 初始化控件监听器
+        tv_commit.setOnClickListener(this);
+        tv_select_team.setOnClickListener(this);
+        edt_game_date.setOnClickListener(this);
+        edt_game_location.setOnClickListener(this);
+        rbtn_game_type_private.setOnClickListener(this);
+        rbtn_game_type_public.setOnClickListener(this);
+        rbtn_game_cost_member_charge.setOnClickListener(this);
+        rbtn_game_cost_average.setOnClickListener(this);
+        rbtn_game_cost_fixed.setOnClickListener(this);
+    }
+
+    /**
+     * 初始化数据
+     */
+    private void initData() {
 
         Bundle extras = context.getIntent().getExtras();
         if (extras != null) {
@@ -115,6 +154,7 @@ public class GamePublishActivity extends BaseActivity {
                 selectedTeamId = extras.getString(Constants.EXTRA_SELECTED_TEAM_ID);
                 tv_selected_team.setText(selectedTeamName);
                 System.out.println("选中的球队是:" + selectedTeamName + " " + selectedTeamId);
+                ll_select_team.setVisibility(View.VISIBLE);
             }
 
             if (extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)
@@ -128,41 +168,59 @@ public class GamePublishActivity extends BaseActivity {
             }
 
         }
+    }
 
-
-        tv_commit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_commit:
                 if (formCheck()) {
                     commitToBackend();
                 }
-            }
-        });
-
-        tv_select_team.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, SelectTeamActivity.class);
-                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());
-                startActivity(intent);
-            }
-        });
-
-        edt_game_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showTimeDialog(edt_game_date);
-            }
-        });
-
-        edt_game_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, SelectLocationActivity.class);
-                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());
-                startActivity(intent);
-            }
-        });
+                break;
+            case R.id.tv_select_team:
+                Intent selectTeamIntent = new Intent(context, SelectTeamActivity.class);
+                selectTeamIntent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());
+                startActivity(selectTeamIntent);
+                break;
+            case R.id.edt_game_date:
+//                showTimeDialog(edt_game_date);
+                break;
+            case R.id.edt_game_location:
+//                Intent selectLocationIntent = new Intent(context, SelectLocationActivity.class);
+//                selectLocationIntent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());
+//                startActivity(selectLocationIntent);
+                break;
+            case R.id.rbtn_game_type_public:
+                rbtn_game_type_private.setChecked(false);
+                break;
+            case R.id.rbtn_game_type_private:
+                selectedTeamId = "";
+                selectedTeamName = "";
+                rbtn_game_type_public.setChecked(false);
+                ll_select_team.setVisibility(View.GONE);
+                break;
+            case R.id.rbtn_game_cost_member_charge:
+                rbtn_game_cost_average.setChecked(false);
+                rbtn_game_cost_fixed.setChecked(false);
+                ll_game_cost_member_no_registrator.setVisibility(View.VISIBLE);
+                ll_game_cost_member_link_registrator.setVisibility(View.VISIBLE);
+                break;
+            case R.id.rbtn_game_cost_average:
+                rbtn_game_cost_member_charge.setChecked(false);
+                rbtn_game_cost_fixed.setChecked(false);
+                ll_game_cost_member_no_registrator.setVisibility(View.GONE);
+                ll_game_cost_member_link_registrator.setVisibility(View.GONE);
+                break;
+            case R.id.rbtn_game_cost_fixed:
+                rbtn_game_cost_member_charge.setChecked(false);
+                rbtn_game_cost_average.setChecked(false);
+                ll_game_cost_member_no_registrator.setVisibility(View.GONE);
+                ll_game_cost_member_link_registrator.setVisibility(View.GONE);
+                break;
+            default:
+                break;
+        }
     }
 
     private boolean formCheck() {
@@ -188,7 +246,6 @@ public class GamePublishActivity extends BaseActivity {
         String gameName = edt_game_name.getText().toString();
         String gameLocation = edt_game_location.getText().toString();
         String gameDateStr = edt_game_date.getText().toString();
-        String gameTimeStr = edt_game_time.getText().toString();
         int gameType = -1;
         if (rbtn_game_type_private.isChecked()) {
             gameType = 0;
@@ -271,10 +328,17 @@ public class GamePublishActivity extends BaseActivity {
         }
     };
 
-    public void showTimeDialog(final EditText edt_time) {
+    // 滚动选择器选中事件
+    MyWheelView.onSelectListener pickerListener = new MyWheelView.onSelectListener() {
 
-        final View timepickerview = View.inflate(context, R.layout.widget_time_picker,
-                null);
+        @Override
+        public void onSelect(Pickers pickers) {
+            System.out.println("选择：" + pickers.getShowId() + "--银行："
+                    + pickers.getShowConetnt());
+        }
+    };
+
+    public void showTimePickView(final EditText edt_time) {
         ScreenInfo screenInfo = new ScreenInfo(context);
 
         Calendar calendar = Calendar.getInstance();
@@ -284,20 +348,10 @@ public class GamePublishActivity extends BaseActivity {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         hour = calendar.get(Calendar.HOUR_OF_DAY);
         min = calendar.get(Calendar.MINUTE);
-        final WheelMain wheelMain = new WheelMain(timepickerview, 0);
+        final WheelMain wheelMain = new WheelMain(rl_time_pick, 0);
         wheelMain.screenheight = screenInfo.getHeight();
         wheelMain.initDateTimePicker(year, month, day, hour, min);
 
-        new AlertDialog.Builder(context).setTitle("选择时间")
-                .setView(timepickerview)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                edt_time.setText(wheelMain.getTime());
-                            }
-                        }
-
-                ).setNegativeButton("取消", null).show();
-
     }
+
 }
