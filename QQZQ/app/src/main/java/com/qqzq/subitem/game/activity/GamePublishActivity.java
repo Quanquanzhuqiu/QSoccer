@@ -1,9 +1,6 @@
 package com.qqzq.subitem.game.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,25 +19,19 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.activity.BaseApplication;
 import com.qqzq.activity.MainActivity;
-import com.qqzq.activity.SelectLocationActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntGameInfo;
-import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
-import com.qqzq.subitem.find.activity.FindTeamActivity;
 import com.qqzq.subitem.team.activity.SelectTeamActivity;
-import com.qqzq.widget.time.MyWheelView;
-import com.qqzq.widget.time.Pickers;
+import com.qqzq.widget.WheelView;
 import com.qqzq.widget.time.ScreenInfo;
 import com.qqzq.widget.time.WheelMain;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -74,8 +65,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private LinearLayout ll_select_team;
     private LinearLayout ll_game_cost_member_no_registrator;
     private LinearLayout ll_game_cost_member_link_registrator;
-    private MyWheelView pickerscrlllview; // 滚动选择器
-    private RelativeLayout rl_time_pick; // 选择器布局
+    private LinearLayout ll_time_picker; // 选择器布局
 
     private int year, month, day, hour, min;
     private String selectedTeamName;
@@ -121,10 +111,9 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         ll_select_team = (LinearLayout) findViewById(R.id.ll_select_team);
         ll_game_cost_member_no_registrator = (LinearLayout) findViewById(R.id.ll_game_cost_member_no_registrator);
         ll_game_cost_member_link_registrator = (LinearLayout) findViewById(R.id.ll_game_cost_member_link_registrator);
-        pickerscrlllview = (MyWheelView) findViewById(R.id.pickerscrlllview);
-        rl_time_pick = (RelativeLayout) findViewById(R.id.rl_time_pick);
-
-        showTimePickView(edt_game_date);
+        ll_time_picker = (LinearLayout) findViewById(R.id.ll_time_picker);
+        ll_time_picker.setVisibility(View.VISIBLE);
+//        showTimePickView(edt_game_date);
     }
 
     private void initLinstener() {
@@ -329,14 +318,14 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     };
 
     // 滚动选择器选中事件
-    MyWheelView.onSelectListener pickerListener = new MyWheelView.onSelectListener() {
+/*    WheelView.onSelectListener pickerListener = new WheelView.onSelectListener() {
 
         @Override
         public void onSelect(Pickers pickers) {
             System.out.println("选择：" + pickers.getShowId() + "--银行："
                     + pickers.getShowConetnt());
         }
-    };
+    };*/
 
     public void showTimePickView(final EditText edt_time) {
         ScreenInfo screenInfo = new ScreenInfo(context);
@@ -348,9 +337,9 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         day = calendar.get(Calendar.DAY_OF_MONTH);
         hour = calendar.get(Calendar.HOUR_OF_DAY);
         min = calendar.get(Calendar.MINUTE);
-        final WheelMain wheelMain = new WheelMain(rl_time_pick, 0);
-        wheelMain.screenheight = screenInfo.getHeight();
-        wheelMain.initDateTimePicker(year, month, day, hour, min);
+//        final WheelMain wheelMain = new WheelMain(rl_time_pick, 0);
+//        wheelMain.screenheight = screenInfo.getHeight();
+//        wheelMain.initDateTimePicker(year, month, day, hour, min);
 
     }
 

@@ -52,7 +52,7 @@ public class BaseApplication extends Application {
     }
 
     private void startSmsSDK() {
-        SMSSDK.initSDK(this, Constants.MOD_APP_KEY, Constants.MOD_APP_SECRETE);
+        SMSSDK.initSDK(this, Constants.MOD_APP_KEY, Constants.MOD_APP_SECRET);
     }
 
     /**

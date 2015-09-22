@@ -8,8 +8,8 @@ public class Constants {
     // 3rd part API APP ID
     public static final String WEIXIN_APP_ID = "XXXXX";
     public static final String WEIBO_APP_ID = "XXXXX";
-    public static final String MOD_APP_KEY = "9c3fe724515d";
-    public static final String MOD_APP_SECRETE = "6040313e1ab9413095fd68bcc48fd8a0";
+    public static final String MOD_APP_KEY = "aa0a1eb04fd2";
+    public static final String MOD_APP_SECRET = "3b4e06fefdf9eb390dcbd20135421851";
 
     /**
      * 中国手机区号.

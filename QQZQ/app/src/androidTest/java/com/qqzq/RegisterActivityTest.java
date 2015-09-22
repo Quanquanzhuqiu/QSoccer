@@ -53,7 +53,7 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Regis
     private void initUI() {
         solo = new Solo(getInstrumentation(), getActivity());
         activity = getActivity();
-        iv_return = (ImageView) activity.findViewById(R.id.iv_return);
+//        iv_return = (ImageView) activity.findViewById(R.id.iv_return);
         tv_qqzq_agreement = (TextView) activity.findViewById(R.id.tv_qqzq_agreement);
         edt_select_location = (EditText) activity.findViewById(R.id.edt_select_location);
         edt_phone_no = (EditText) activity.findViewById(R.id.edt_phone_no);

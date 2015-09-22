@@ -1,33 +1,44 @@
-package com.qqzq.widget.time;
+package com.qqzq.widget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.FontMetricsInt;
 import android.graphics.Paint.Style;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by jie.xiao on 15/9/20.
+ * 自定义滚动选择器
+ *
+ * @author zengtao 2015年5月20日 下午7:36:03
+ * @author jie.xiao 2015年9月22日
  */
-public class MyWheelView extends View {
+@SuppressLint({"HandlerLeak", "ClickableViewAccessibility"})
+public class WheelView extends View {
 
-    public static final String TAG = "MyWheelView";
+    public static final String TAG = "PickerView";
     /**
      * text之间间距和minTextSize之比
      */
-    public static final float MARGIN_ALPHA = 2.8f;
+    public static final float MARGIN_ALPHA = 3f;
     /**
      * 自动回滚到中间的速度
      */
     public static final float SPEED = 2;
 
+    private List<PickerItem> mDataList = new ArrayList<PickerItem>();
     /**
      * 选中的位置，这个位置是mDataList的中心位置，一直不变
      */
@@ -46,55 +57,42 @@ public class MyWheelView extends View {
     private int mViewWidth;
 
     private float mLastDownY;
-
-    private List<Pickers> mDataList;
-
     /**
      * 滑动的距离
      */
     private float mMoveLen = 0;
     private boolean isInit = false;
-
     private onSelectListener mSelectListener;
+    private Timer timer;
+    private MyTimerTask mTask;
 
+    Handler updateHandler = new Handler() {
 
-    public MyWheelView(Context context) {
+        @Override
+        public void handleMessage(Message msg) {
+            if (Math.abs(mMoveLen) < SPEED) {
+                mMoveLen = 0;
+                if (mTask != null) {
+                    mTask.cancel();
+                    mTask = null;
+                    performSelect();
+                }
+            } else
+                // 这里mMoveLen / Math.abs(mMoveLen)是为了保有mMoveLen的正负号，以实现上滚或下滚
+                mMoveLen = mMoveLen - mMoveLen / Math.abs(mMoveLen) * SPEED;
+            invalidate();
+        }
+
+    };
+
+    public WheelView(Context context) {
         super(context);
         init();
     }
 
-    public MyWheelView(Context context, AttributeSet attrs) {
+    public WheelView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
-    }
-
-    private void init() {
-        mDataList = new ArrayList<Pickers>();
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setStyle(Style.FILL);
-        mPaint.setTextAlign(Align.CENTER);
-        mPaint.setColor(mColorText);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        mViewHeight = getMeasuredHeight();
-        mViewWidth = getMeasuredWidth();
-        // 按照View的高度计算字体大小
-        mMaxTextSize = mViewHeight / 8.0f;
-        mMinTextSize = mMaxTextSize / 2f;
-        isInit = true;
-        invalidate();
-    }
-
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        // 根据index绘制view
-        if (isInit)
-            drawData(canvas);
     }
 
     public void setOnSelectListener(onSelectListener listener) {
@@ -106,12 +104,11 @@ public class MyWheelView extends View {
             mSelectListener.onSelect(mDataList.get(mCurrentSelected));
     }
 
-    public void setData(List<Pickers> datas) {
+    public void setData(List<PickerItem> datas) {
         mDataList = datas;
         mCurrentSelected = datas.size() / 2;
         invalidate();
     }
-
 
     /**
      * 选择选中的item的index
@@ -148,15 +145,44 @@ public class MyWheelView extends View {
     }
 
     private void moveHeadToTail() {
-        Pickers head = mDataList.get(0);
+        PickerItem head = mDataList.get(0);
         mDataList.remove(0);
         mDataList.add(head);
     }
 
     private void moveTailToHead() {
-        Pickers tail = mDataList.get(mDataList.size() - 1);
+        PickerItem tail = mDataList.get(mDataList.size() - 1);
         mDataList.remove(mDataList.size() - 1);
         mDataList.add(0, tail);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mViewHeight = getMeasuredHeight();
+        mViewWidth = getMeasuredWidth();
+        // 按照View的高度计算字体大小
+        mMaxTextSize = mViewHeight / 13.0f;
+        mMinTextSize = mMaxTextSize / 1.6f;
+        isInit = true;
+        invalidate();
+    }
+
+    private void init() {
+        timer = new Timer();
+        mDataList = new ArrayList<PickerItem>();
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setStyle(Style.FILL);
+        mPaint.setTextAlign(Align.CENTER);
+        mPaint.setColor(mColorText);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        // 根据index绘制view
+        if (isInit)
+            drawData(canvas);
     }
 
     private void drawData(Canvas canvas) {
@@ -172,7 +198,8 @@ public class MyWheelView extends View {
         float baseline = (float) (y - (fmi.bottom / 2.0 + fmi.top / 2.0));
 
         int indexs = mCurrentSelected;
-        String textData = mDataList.get(indexs).getShowConetnt();
+
+        String textData = mDataList.get(indexs).getValue();
         canvas.drawText(textData, x, baseline, mPaint);
 
         // 绘制上方data
@@ -202,7 +229,7 @@ public class MyWheelView extends View {
         float baseline = (float) (y - (fmi.bottom / 2.0 + fmi.top / 2.0));
 
         int indexs = mCurrentSelected + type * position;
-        String textData = mDataList.get(indexs).getShowConetnt();
+        String textData = mDataList.get(indexs).getValue();
         canvas.drawText(textData, (float) (mViewWidth / 2.0), baseline, mPaint);
     }
 
@@ -235,6 +262,10 @@ public class MyWheelView extends View {
     }
 
     private void doDown(MotionEvent event) {
+        if (mTask != null) {
+            mTask.cancel();
+            mTask = null;
+        }
         mLastDownY = event.getY();
     }
 
@@ -262,12 +293,30 @@ public class MyWheelView extends View {
             mMoveLen = 0;
             return;
         }
+        if (mTask != null) {
+            mTask.cancel();
+            mTask = null;
+        }
+        mTask = new MyTimerTask(updateHandler);
+        timer.schedule(mTask, 0, 10);
     }
 
+    class MyTimerTask extends TimerTask {
+        Handler handler;
+
+        public MyTimerTask(Handler handler) {
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            handler.sendMessage(handler.obtainMessage());
+        }
+
+    }
 
     public interface onSelectListener {
-        void onSelect(Pickers pickers);
+        void onSelect(PickerItem pickerItem);
     }
-
-
 }
+

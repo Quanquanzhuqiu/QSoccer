@@ -13,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:background="#ffffff" >
 
-        <com.qqzq.widget.time.MyWheelView
+        <com.qqzq.widget.WheelView
             android:id="@+id/pickerscrlllview"
             android:layout_width="match_parent"
             android:layout_height="160dp"
