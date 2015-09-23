@@ -1,9 +1,10 @@
-package com.qqzq.activity;
+package com.qqzq.widget.photo;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
@@ -42,10 +43,10 @@ public class PhotoPopupWindow extends PopupWindow {
             myOnClick = itemsOnClick;
         }
         this.myOnClick = myOnClick;
-        Init();
+        init();
     }
 
-    private void Init() {
+    private void init() {
         // TODO Auto-generated method stub
         // PopupWindow 导入
         LayoutInflater inflater = (LayoutInflater) context
@@ -70,7 +71,9 @@ public class PhotoPopupWindow extends PopupWindow {
         this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         // 设置可触
         this.setFocusable(true);
-        ColorDrawable dw = new ColorDrawable(0xb0000000);
+//        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        //设置透明背景
+        ColorDrawable dw = new ColorDrawable(Color.argb(0, 0, 0, 0));
         this.setBackgroundDrawable(dw);
         // 单击弹出窗以外处 关闭弹出窗
         mMenuView.setOnTouchListener(new View.OnTouchListener() {

@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +25,9 @@ import com.qqzq.entity.EntGameInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.team.activity.SelectTeamActivity;
-import com.qqzq.widget.WheelView;
-import com.qqzq.widget.time.ScreenInfo;
-import com.qqzq.widget.time.WheelMain;
+import com.qqzq.widget.time.TimePicker;
+import com.qqzq.widget.time.TimePickerWindow;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,17 +60,15 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private EditText edt_game_description;
     private TextView tv_select_team;
     private TextView tv_selected_team;
+    private LinearLayout ll_game_publish;
     private LinearLayout ll_select_team;
     private LinearLayout ll_game_cost_member_no_registrator;
     private LinearLayout ll_game_cost_member_link_registrator;
-    private LinearLayout ll_time_picker; // 选择器布局
 
-    private int year, month, day, hour, min;
+    private TimePickerWindow timePickerWindow; // 时间选择器窗口
+
     private String selectedTeamName;
     private String selectedTeamId;
-    private String selectedLocation;
-    private int selectedProvinceCode = 0;
-    private int selectedCityCode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,12 +104,13 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         edt_game_description = (EditText) findViewById(R.id.edt_game_description);
         tv_select_team = (TextView) findViewById(R.id.tv_select_team);
         tv_selected_team = (TextView) findViewById(R.id.tv_selected_team);
+        ll_game_publish = (LinearLayout) findViewById(R.id.ll_game_publish);
         ll_select_team = (LinearLayout) findViewById(R.id.ll_select_team);
         ll_game_cost_member_no_registrator = (LinearLayout) findViewById(R.id.ll_game_cost_member_no_registrator);
         ll_game_cost_member_link_registrator = (LinearLayout) findViewById(R.id.ll_game_cost_member_link_registrator);
-        ll_time_picker = (LinearLayout) findViewById(R.id.ll_time_picker);
-        ll_time_picker.setVisibility(View.VISIBLE);
-//        showTimePickView(edt_game_date);
+
+        timePickerWindow = new TimePickerWindow(GamePublishActivity.this, null);
+        timePickerWindow.dismiss();
     }
 
     private void initLinstener() {
@@ -145,17 +142,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
                 System.out.println("选中的球队是:" + selectedTeamName + " " + selectedTeamId);
                 ll_select_team.setVisibility(View.VISIBLE);
             }
-
-            if (extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)
-                    && extras.containsKey(Constants.EXTRA_SELECTED_PROVINCE_CODE)
-                    && extras.containsKey(Constants.EXTRA_SELECTED_CITY_CODE)) {
-                selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
-                selectedProvinceCode = extras.getInt(Constants.EXTRA_SELECTED_PROVINCE_CODE);
-                selectedCityCode = extras.getInt(Constants.EXTRA_SELECTED_CITY_CODE);
-                edt_game_location.setText(selectedLocation);
-                System.out.println("选中的地点是:" + selectedProvinceCode + " " + selectedCityCode);
-            }
-
         }
     }
 
@@ -172,13 +158,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
                 selectTeamIntent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());
                 startActivity(selectTeamIntent);
                 break;
-            case R.id.edt_game_date:
-//                showTimeDialog(edt_game_date);
-                break;
             case R.id.edt_game_location:
-//                Intent selectLocationIntent = new Intent(context, SelectLocationActivity.class);
-//                selectLocationIntent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());
-//                startActivity(selectLocationIntent);
                 break;
             case R.id.rbtn_game_type_public:
                 rbtn_game_type_private.setChecked(false);
@@ -207,6 +187,11 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
                 ll_game_cost_member_no_registrator.setVisibility(View.GONE);
                 ll_game_cost_member_link_registrator.setVisibility(View.GONE);
                 break;
+            case R.id.edt_game_date:
+                timePickerWindow.showAtLocation(ll_game_publish,
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                timePickerWindow.setEditText(edt_game_date);
+                break;
             default:
                 break;
         }
@@ -234,7 +219,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
 
         String gameName = edt_game_name.getText().toString();
         String gameLocation = edt_game_location.getText().toString();
-        String gameDateStr = edt_game_date.getText().toString();
+        Date gameDate = timePickerWindow.getSelectedTime();
         int gameType = -1;
         if (rbtn_game_type_private.isChecked()) {
             gameType = 0;
@@ -284,9 +269,9 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         EntGameInfo entGameInfo = new EntGameInfo();
         entGameInfo.setActtitle(gameName);
         entGameInfo.setActaddress(gameLocation);
-        entGameInfo.setActdatetime(new Date());
-        entGameInfo.setActdate(new Date());
-        entGameInfo.setActtime(new Date());
+        entGameInfo.setActdatetime(gameDate);
+        entGameInfo.setActdate(gameDate);
+        entGameInfo.setActtime(gameDate);
         entGameInfo.setPersonmaxlimit(personMaxLimit);
         entGameInfo.setPersonminlimit(personMinLimit);
         entGameInfo.setActtype(gameType);
@@ -316,31 +301,5 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
             startActivity(intent);
         }
     };
-
-    // 滚动选择器选中事件
-/*    WheelView.onSelectListener pickerListener = new WheelView.onSelectListener() {
-
-        @Override
-        public void onSelect(Pickers pickers) {
-            System.out.println("选择：" + pickers.getShowId() + "--银行："
-                    + pickers.getShowConetnt());
-        }
-    };*/
-
-    public void showTimePickView(final EditText edt_time) {
-        ScreenInfo screenInfo = new ScreenInfo(context);
-
-        Calendar calendar = Calendar.getInstance();
-
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        hour = calendar.get(Calendar.HOUR_OF_DAY);
-        min = calendar.get(Calendar.MINUTE);
-//        final WheelMain wheelMain = new WheelMain(rl_time_pick, 0);
-//        wheelMain.screenheight = screenInfo.getHeight();
-//        wheelMain.initDateTimePicker(year, month, day, hour, min);
-
-    }
 
 }

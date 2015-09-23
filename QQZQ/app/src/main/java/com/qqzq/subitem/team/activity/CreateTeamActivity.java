@@ -19,20 +19,18 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.qqzq.activity.BaseActivity;
 import com.qqzq.R;
+import com.qqzq.activity.BaseActivity;
 import com.qqzq.activity.BaseApplication;
 import com.qqzq.activity.MainActivity;
 import com.qqzq.activity.SelectLocationActivity;
 import com.qqzq.config.Constants;
-import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntClientResponse;
+import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.MultipartRequest;
 import com.qqzq.network.ResponseListener;
-import com.qqzq.activity.PhotoPopupWindow;
+import com.qqzq.widget.photo.PhotoPopupWindow;
 
 import java.io.File;
 import java.util.Date;
@@ -42,7 +40,7 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 8/31/2015.
  */
-public class CreateTeamActivity extends BaseActivity {
+public class CreateTeamActivity extends BaseActivity implements View.OnClickListener {
 
     private Context context = this;
     private TextView tv_title;
@@ -74,10 +72,12 @@ public class CreateTeamActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_team);
 
-        init();
+        initView();
+        initListener();
+        initData();
     }
 
-    private void init() {
+    private void initView() {
 
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("创建球队");
@@ -96,6 +96,16 @@ public class CreateTeamActivity extends BaseActivity {
         photoPopupWindow = new PhotoPopupWindow(CreateTeamActivity.this, null);
         photoPopupWindow.dismiss();
 
+    }
+
+    private void initListener() {
+        iv_back.setOnClickListener(this);
+        iv_logo.setOnClickListener(this);
+        tv_commit.setOnClickListener(this);
+        edt_team_location.setOnClickListener(this);
+    }
+
+    private void initData() {
         extras = this.getIntent().getExtras();
         if (extras != null
                 && extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)
@@ -108,38 +118,6 @@ public class CreateTeamActivity extends BaseActivity {
             String selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
             edt_team_location.setText(selectedLocation);
         }
-
-
-        iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CreateTeamActivity.this.finish();
-            }
-        });
-
-        tv_commit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadLogoAndTeamBasicInfo();
-            }
-        });
-
-        iv_logo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                photoPopupWindow.showAtLocation(ll_create_team,
-                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-            }
-        });
-
-        edt_team_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, SelectLocationActivity.class);
-                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "CreateTeamActivity");
-                startActivity(intent);
-            }
-        });
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -281,4 +259,26 @@ public class CreateTeamActivity extends BaseActivity {
             commit();
         }
     };
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.iv_back:
+                CreateTeamActivity.this.finish();
+                break;
+            case R.id.tv_commit:
+                uploadLogoAndTeamBasicInfo();
+                break;
+            case R.id.iv_logo:
+                photoPopupWindow.showAtLocation(ll_create_team,
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                break;
+            case R.id.edt_team_location:
+                Intent intent = new Intent(context, SelectLocationActivity.class);
+                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "CreateTeamActivity");
+                startActivity(intent);
+                break;
+        }
+    }
 }

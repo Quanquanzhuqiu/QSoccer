@@ -1,810 +1,215 @@
-/*
- *  Android Wheel Control.
- *  https://code.google.com/p/android-wheel/
- *  
- *  Copyright 2010 Yuri Kanivets
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
 package com.qqzq.widget.time;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.GradientDrawable.Orientation;
+import android.graphics.Paint.Align;
+import android.graphics.Paint.FontMetricsInt;
+import android.graphics.Paint.Style;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Layout;
-import android.text.StaticLayout;
-import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.FloatMath;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Interpolator;
-import android.widget.Scroller;
 
-
-import com.qqzq.R;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
- * Numeric wheel view.
+ * 自定义滚动选择器
  *
- * @author Yuri Kanivets
+ * @author zengtao 2015年5月20日 下午7:36:03
+ * @author jie.xiao 2015年9月22日
  */
+@SuppressLint({"HandlerLeak", "ClickableViewAccessibility"})
 public class WheelView extends View {
+
+    public static final String TAG = "WheelView";
     /**
-     * Scrolling duration
+     * text之间间距和minTextSize之比
      */
-    private static final int SCROLLING_DURATION = 400;
-
+    public static final float MARGIN_ALPHA = 3f;
     /**
-     * Minimum delta for scrolling
+     * 自动回滚到中间的速度
      */
-    private static final int MIN_DELTA_FOR_SCROLLING = 1;
+    public static final float SPEED = 2;
 
+    private List<PickerItem> mDataList = new ArrayList<PickerItem>();
     /**
-     * Current value & label text color
+     * 选中的位置，这个位置是mDataList的中心位置，一直不变
      */
-    private static final int VALUE_TEXT_COLOR = 0xF0000000;
+    private int mCurrentSelected;
+    private Paint mPaint;
 
+    private float mMaxTextSize = 20;
+    private float mMinTextSize = 10;
+
+    private float mMaxTextAlpha = 255;
+    private float mMinTextAlpha = 120;
+
+    private int mColorText = 0x333333;
+
+    private int mViewHeight;
+    private int mViewWidth;
+
+    private float mLastDownY;
     /**
-     * Items text color
+     * 滑动的距离
      */
-    private static final int ITEMS_TEXT_COLOR = 0xFF000000;
+    private float mMoveLen = 0;
+    private boolean isInit = false;
+    private onSelectListener mSelectListener;
+    private Timer timer;
+    private MyTimerTask mTask;
 
-    /**
-     * Top and bottom shadows colors
-     */
-    private static final int[] SHADOWS_COLORS = new int[]{0xFF111111,
-            0x00AAAAAA, 0x00AAAAAA};
+    Handler updateHandler = new Handler() {
 
-    /**
-     * Additional items height (is added to standard text item height)
-     */
-    private static final int ADDITIONAL_ITEM_HEIGHT = 15;
-
-    // Text size
-    public int TEXT_SIZE;
-    private float MAX_TEXT_SIZE = 20;
-    private float MIN_TEXT_SIZE = 10;
-
-    // Text alpha
-    private float MAX_TEXT_ALPHA = 255;
-    private float MIN_TEXT_ALPHA = 120;
-
-    private int VIEW_HEIGHT;
-    private int VIEW_WEIGHT;
-
-
-    /**
-     * Top and bottom items offset (to hide that)
-     */
-    private final int ITEM_OFFSET = TEXT_SIZE / 5;
-
-    /**
-     * Additional width for items layout
-     */
-    private static final int ADDITIONAL_ITEMS_SPACE = 10;
-
-    /**
-     * Label offset
-     */
-    private static final int LABEL_OFFSET = 8;
-
-    /**
-     * Left and right padding value
-     */
-    private static final int PADDING = 10;
-
-    /**
-     * Default count of visible items
-     */
-    private static final int DEF_VISIBLE_ITEMS = 9;
-
-    // Wheel Values
-    private WheelAdapter adapter = null;
-    private int currentItem = 0;
-
-    // Widths
-    private int itemsWidth = 0;
-    private int labelWidth = 0;
-
-    // Count of visible items
-    private int visibleItems = DEF_VISIBLE_ITEMS;
-
-    // Item height
-    private int itemHeight = 0;
-
-    // Text paints
-    private TextPaint itemsPaint;
-    private TextPaint valuePaint;
-
-    // Layouts
-    private StaticLayout itemsLayout;
-    private StaticLayout labelLayout;
-    private StaticLayout valueLayout;
-
-    // Label & background
-    private String label;
-    private Drawable centerDrawable;
-
-    // Shadows drawables
-    private GradientDrawable topShadow;
-    private GradientDrawable bottomShadow;
-
-    // Scrolling
-    private boolean isScrollingPerformed;
-    private int scrollingOffset;
-
-    // Scrolling animation
-    private GestureDetector gestureDetector;
-    private Scroller scroller;
-    private int lastScrollY;
-
-    // Cyclic
-    boolean isCyclic = false;
-
-    // Listeners
-    private List<OnWheelChangedListener> changingListeners = new LinkedList<OnWheelChangedListener>();
-    private List<OnWheelScrollListener> scrollingListeners = new LinkedList<OnWheelScrollListener>();
-
-    /**
-     * Constructor
-     */
-    public WheelView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        initData(context);
-    }
-
-    /**
-     * Constructor
-     */
-    public WheelView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initData(context);
-    }
-
-    /**
-     * Constructor
-     */
-    public WheelView(Context context) {
-        super(context);
-        initData(context);
-    }
-
-    /**
-     * Initializes class data
-     *
-     * @param context the context
-     */
-    private void initData(Context context) {
-        gestureDetector = new GestureDetector(context, gestureListener);
-        gestureDetector.setIsLongpressEnabled(false);
-
-        scroller = new Scroller(context);
-    }
-
-    /**
-     * Gets wheel adapter
-     *
-     * @return the adapter
-     */
-    public WheelAdapter getAdapter() {
-        return adapter;
-    }
-
-    /**
-     * Sets wheel adapter
-     *
-     * @param adapter the new wheel adapter
-     */
-    public void setAdapter(WheelAdapter adapter) {
-        this.adapter = adapter;
-        invalidateLayouts();
-        invalidate();
-    }
-
-    /**
-     * Set the the specified scrolling interpolator
-     *
-     * @param interpolator the interpolator
-     */
-    public void setInterpolator(Interpolator interpolator) {
-        scroller.forceFinished(true);
-        scroller = new Scroller(getContext(), interpolator);
-    }
-
-    /**
-     * Gets count of visible items
-     *
-     * @return the count of visible items
-     */
-    public int getVisibleItems() {
-        return visibleItems;
-    }
-
-    /**
-     * Sets count of visible items
-     *
-     * @param count the new count
-     */
-    public void setVisibleItems(int count) {
-        visibleItems = count;
-        invalidate();
-    }
-
-    /**
-     * Gets label
-     *
-     * @return the label
-     */
-    public String getLabel() {
-        return label;
-    }
-
-    /**
-     * Sets label
-     *
-     * @param newLabel the label to set
-     */
-    public void setLabel(String newLabel) {
-        if (label == null || !label.equals(newLabel)) {
-            label = newLabel;
-            labelLayout = null;
+        @Override
+        public void handleMessage(Message msg) {
+            if (Math.abs(mMoveLen) < SPEED) {
+                mMoveLen = 0;
+                if (mTask != null) {
+                    mTask.cancel();
+                    mTask = null;
+                    performSelect();
+                }
+            } else
+                // 这里mMoveLen / Math.abs(mMoveLen)是为了保有mMoveLen的正负号，以实现上滚或下滚
+                mMoveLen = mMoveLen - mMoveLen / Math.abs(mMoveLen) * SPEED;
             invalidate();
         }
+
+    };
+
+    public WheelView(Context context) {
+        super(context);
+        init();
     }
 
-    /**
-     * Adds wheel changing listener
-     *
-     * @param listener the listener
-     */
-    public void addChangingListener(OnWheelChangedListener listener) {
-        changingListeners.add(listener);
+    public WheelView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
     }
 
-    /**
-     * Removes wheel changing listener
-     *
-     * @param listener the listener
-     */
-    public void removeChangingListener(OnWheelChangedListener listener) {
-        changingListeners.remove(listener);
+    public void setOnSelectListener(onSelectListener listener) {
+        mSelectListener = listener;
     }
 
-    /**
-     * Notifies changing listeners
-     *
-     * @param oldValue the old wheel value
-     * @param newValue the new wheel value
-     */
-    protected void notifyChangingListeners(int oldValue, int newValue) {
-        for (OnWheelChangedListener listener : changingListeners) {
-            listener.onChanged(this, oldValue, newValue);
-        }
+    private void performSelect() {
+        if (mSelectListener != null)
+            mSelectListener.onSelect(mDataList.get(mCurrentSelected));
     }
 
-    /**
-     * Adds wheel scrolling listener
-     *
-     * @param listener the listener
-     */
-    public void addScrollingListener(OnWheelScrollListener listener) {
-        scrollingListeners.add(listener);
-    }
-
-    /**
-     * Removes wheel scrolling listener
-     *
-     * @param listener the listener
-     */
-    public void removeScrollingListener(OnWheelScrollListener listener) {
-        scrollingListeners.remove(listener);
-    }
-
-    /**
-     * Notifies listeners about starting scrolling
-     */
-    protected void notifyScrollingListenersAboutStart() {
-        for (OnWheelScrollListener listener : scrollingListeners) {
-            listener.onScrollingStarted(this);
-        }
-    }
-
-    /**
-     * Notifies listeners about ending scrolling
-     */
-    protected void notifyScrollingListenersAboutEnd() {
-        for (OnWheelScrollListener listener : scrollingListeners) {
-            listener.onScrollingFinished(this);
-        }
-    }
-
-    /**
-     * Gets current value
-     *
-     * @return the current value
-     */
-    public int getCurrentItem() {
-        return currentItem;
-    }
-
-    /**
-     * Sets the current item. Does nothing when index is wrong.
-     *
-     * @param index    the item index
-     * @param animated the animation flag
-     */
-    public void setCurrentItem(int index, boolean animated) {
-        if (adapter == null || adapter.getItemsCount() == 0) {
-            return; // throw?
-        }
-        if (index < 0 || index >= adapter.getItemsCount()) {
-            if (isCyclic) {
-                while (index < 0) {
-                    index += adapter.getItemsCount();
-                }
-                index %= adapter.getItemsCount();
-            } else {
-                return; // throw?
-            }
-        }
-        if (index != currentItem) {
-            if (animated) {
-                scroll(index - currentItem, SCROLLING_DURATION);
-            } else {
-                invalidateLayouts();
-
-                int old = currentItem;
-                currentItem = index;
-
-                notifyChangingListeners(old, currentItem);
-
-                invalidate();
-            }
-        }
-    }
-
-    /**
-     * Sets the current item w/o animation. Does nothing when index is wrong.
-     *
-     * @param index the item index
-     */
-    public void setCurrentItem(int index) {
-        setCurrentItem(index, false);
-    }
-
-    /**
-     * Tests if wheel is cyclic. That means before the 1st item there is shown
-     * the last one
-     *
-     * @return true if wheel is cyclic
-     */
-    public boolean isCyclic() {
-        return isCyclic;
-    }
-
-    /**
-     * Set wheel cyclic flag
-     *
-     * @param isCyclic the flag to set
-     */
-    public void setCyclic(boolean isCyclic) {
-        this.isCyclic = isCyclic;
-
+    public void setData(List<PickerItem> datas) {
+        mDataList = datas;
+        mCurrentSelected = datas.size() / 2;
         invalidate();
-        invalidateLayouts();
     }
 
     /**
-     * Invalidates layouts
-     */
-    private void invalidateLayouts() {
-        itemsLayout = null;
-        valueLayout = null;
-        scrollingOffset = 0;
-    }
-
-    /**
-     * Initializes resources
-     */
-    private void initResourcesIfNecessary() {
-        if (itemsPaint == null) {
-            itemsPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG
-                    | Paint.FAKE_BOLD_TEXT_FLAG);
-            // itemsPaint.density = getResources().getDisplayMetrics().density;
-            itemsPaint.setTextSize(TEXT_SIZE);
-        }
-
-        if (valuePaint == null) {
-            valuePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG
-                    | Paint.FAKE_BOLD_TEXT_FLAG | Paint.DITHER_FLAG);
-            // valuePaint.density = getResources().getDisplayMetrics().density;
-            valuePaint.setTextSize(TEXT_SIZE);
-            valuePaint.setShadowLayer(0.1f, 0, 0.1f, 0xFFC0C0C0);
-        }
-
-        if (centerDrawable == null) {
-            centerDrawable = getContext().getResources().getDrawable(
-                    R.drawable.wheel_val);
-        }
-
-        if (topShadow == null) {
-            topShadow = new GradientDrawable(Orientation.TOP_BOTTOM,
-                    SHADOWS_COLORS);
-        }
-
-        if (bottomShadow == null) {
-            bottomShadow = new GradientDrawable(Orientation.BOTTOM_TOP,
-                    SHADOWS_COLORS);
-        }
-
-//        setBackgroundResource(R.drawable.wheel_bg);
-    }
-
-    /**
-     * Calculates desired height for layout
+     * 选择选中的item的index
      *
-     * @param layout the source layout
-     * @return the desired layout height
+     * @param selected
      */
-    private int getDesiredHeight(Layout layout) {
-        if (layout == null) {
-            return 0;
-        }
-
-        int desired = getItemHeight() * visibleItems - ITEM_OFFSET * 2
-                - ADDITIONAL_ITEM_HEIGHT;
-
-        // Check against our minimum height
-        desired = Math.max(desired, getSuggestedMinimumHeight());
-
-        return desired;
+    public void setSelected(int selected) {
+        mCurrentSelected = selected;
+        int distance = mDataList.size() / 2 - mCurrentSelected;
+        if (distance < 0)
+            for (int i = 0; i < -distance; i++) {
+                moveHeadToTail();
+                mCurrentSelected--;
+            }
+        else if (distance > 0)
+            for (int i = 0; i < distance; i++) {
+                moveTailToHead();
+                mCurrentSelected++;
+            }
+        invalidate();
     }
 
     /**
-     * Returns text item by index
+     * 选择选中的内容
      *
-     * @param index the item index
-     * @return the item or null
+     * @param mSelectItem
      */
-    private String getTextItem(int index) {
-        if (adapter == null || adapter.getItemsCount() == 0) {
-            return null;
-        }
-        int count = adapter.getItemsCount();
-        if ((index < 0 || index >= count) && !isCyclic) {
-            return null;
-        } else {
-            while (index < 0) {
-                index = count + index;
+    public void setSelected(String mSelectItem) {
+        for (int i = 0; i < mDataList.size(); i++)
+            if (mDataList.get(i).getId() == Integer.parseInt(mSelectItem)) {
+                setSelected(i);
+                break;
             }
-        }
-
-        index %= count;
-        return adapter.getItem(index);
     }
 
-    /**
-     * Builds text depending on current value
-     *
-     * @param useCurrentValue
-     * @return the text
-     */
-    private String buildText(boolean useCurrentValue) {
-        StringBuilder itemsText = new StringBuilder();
-        int addItems = visibleItems / 2 + 1;
-
-        for (int i = currentItem - addItems; i <= currentItem + addItems; i++) {
-            if (useCurrentValue || i != currentItem) {
-                String text = getTextItem(i);
-                if (text != null) {
-                    itemsText.append(text);
-                }
-            }
-            if (i < currentItem + addItems) {
-                itemsText.append("\n");
-            }
-        }
-
-        return itemsText.toString();
+    private void moveHeadToTail() {
+        PickerItem head = mDataList.get(0);
+        mDataList.remove(0);
+        mDataList.add(head);
     }
 
-    /**
-     * Returns the max item length that can be present
-     *
-     * @return the max length
-     */
-    private int getMaxTextLength() {
-        WheelAdapter adapter = getAdapter();
-        if (adapter == null) {
-            return 0;
-        }
-
-        int adapterLength = adapter.getMaximumLength();
-        if (adapterLength > 0) {
-            return adapterLength;
-        }
-
-        String maxText = null;
-        int addItems = visibleItems / 2;
-        for (int i = Math.max(currentItem - addItems, 0); i < Math.min(
-                currentItem + visibleItems, adapter.getItemsCount()); i++) {
-            String text = adapter.getItem(i);
-            if (text != null
-                    && (maxText == null || maxText.length() < text.length())) {
-                maxText = text;
-            }
-        }
-
-        return maxText != null ? maxText.length() : 0;
-    }
-
-    /**
-     * Returns height of wheel item
-     *
-     * @return the item height
-     */
-    private int getItemHeight() {
-        if (itemHeight != 0) {
-            return itemHeight;
-        } else if (itemsLayout != null && itemsLayout.getLineCount() > 2) {
-            itemHeight = itemsLayout.getLineTop(2) - itemsLayout.getLineTop(1);
-            return itemHeight;
-        }
-
-        return getHeight() / visibleItems;
-    }
-
-    /**
-     * Calculates control width and creates text layouts
-     *
-     * @param widthSize the input layout width
-     * @param mode      the layout mode
-     * @return the calculated control width
-     */
-    private int calculateLayoutWidth(int widthSize, int mode) {
-        initResourcesIfNecessary();
-
-        int width = widthSize;
-
-        int maxLength = getMaxTextLength();
-        if (maxLength > 0) {
-            float textWidth = FloatMath.ceil(Layout.getDesiredWidth("0",
-                    itemsPaint));
-            itemsWidth = (int) (maxLength * textWidth);
-        } else {
-            itemsWidth = 0;
-        }
-        itemsWidth += ADDITIONAL_ITEMS_SPACE; // make it some more
-
-        labelWidth = 0;
-        if (label != null && label.length() > 0) {
-            labelWidth = (int) FloatMath.ceil(Layout.getDesiredWidth(label,
-                    valuePaint));
-        }
-
-        boolean recalculate = false;
-        if (mode == MeasureSpec.EXACTLY) {
-            width = widthSize;
-            recalculate = true;
-        } else {
-            width = itemsWidth + labelWidth + 2 * PADDING;
-            if (labelWidth > 0) {
-                width += LABEL_OFFSET;
-            }
-
-            // Check against our minimum width
-            width = Math.max(width, getSuggestedMinimumWidth());
-
-            if (mode == MeasureSpec.AT_MOST && widthSize < width) {
-                width = widthSize;
-                recalculate = true;
-            }
-        }
-
-        if (recalculate) {
-            // recalculate width
-            int pureWidth = width - LABEL_OFFSET - 2 * PADDING;
-            if (pureWidth <= 0) {
-                itemsWidth = labelWidth = 0;
-            }
-            if (labelWidth > 0) {
-                double newWidthItems = (double) itemsWidth * pureWidth
-                        / (itemsWidth + labelWidth);
-                itemsWidth = (int) newWidthItems;
-                labelWidth = pureWidth - itemsWidth;
-            } else {
-                itemsWidth = pureWidth + LABEL_OFFSET; // no label
-            }
-        }
-
-        if (itemsWidth > 0) {
-            createLayouts(itemsWidth, labelWidth);
-        }
-
-        return width;
-    }
-
-    /**
-     * Creates layouts
-     *
-     * @param widthItems width of items layout
-     * @param widthLabel width of label layout
-     */
-    private void createLayouts(int widthItems, int widthLabel) {
-        if (itemsLayout == null || itemsLayout.getWidth() > widthItems) {
-            itemsLayout = new StaticLayout(buildText(isScrollingPerformed),
-                    itemsPaint, widthItems,
-                    widthLabel > 0 ? Layout.Alignment.ALIGN_OPPOSITE
-                            : Layout.Alignment.ALIGN_CENTER, 1,
-                    ADDITIONAL_ITEM_HEIGHT, false);
-        } else {
-            itemsLayout.increaseWidthTo(widthItems);
-        }
-
-        if (!isScrollingPerformed
-                && (valueLayout == null || valueLayout.getWidth() > widthItems)) {
-            String text = getAdapter() != null ? getAdapter().getItem(
-                    currentItem) : null;
-            valueLayout = new StaticLayout(text != null ? text : "",
-                    valuePaint, widthItems,
-                    widthLabel > 0 ? Layout.Alignment.ALIGN_OPPOSITE
-                            : Layout.Alignment.ALIGN_CENTER, 1,
-                    ADDITIONAL_ITEM_HEIGHT, false);
-        } else if (isScrollingPerformed) {
-            valueLayout = null;
-        } else {
-            valueLayout.increaseWidthTo(widthItems);
-        }
-
-        if (widthLabel > 0) {
-            if (labelLayout == null || labelLayout.getWidth() > widthLabel) {
-                labelLayout = new StaticLayout(label, valuePaint, widthLabel,
-                        Layout.Alignment.ALIGN_NORMAL, 1,
-                        ADDITIONAL_ITEM_HEIGHT, false);
-            } else {
-                labelLayout.increaseWidthTo(widthLabel);
-            }
-        }
+    private void moveTailToHead() {
+        PickerItem tail = mDataList.get(mDataList.size() - 1);
+        mDataList.remove(mDataList.size() - 1);
+        mDataList.add(0, tail);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mViewHeight = getMeasuredHeight();
+        mViewWidth = getMeasuredWidth();
+        // 按照View的高度计算字体大小
+        mMaxTextSize = mViewHeight / 13.0f;
+        mMinTextSize = mMaxTextSize / 1.6f;
+        isInit = true;
+        invalidate();
+    }
 
-        int width = calculateLayoutWidth(widthSize, widthMode);
-
-        int height;
-        if (heightMode == MeasureSpec.EXACTLY) {
-            height = heightSize;
-        } else {
-            height = getDesiredHeight(itemsLayout);
-
-            if (heightMode == MeasureSpec.AT_MOST) {
-                height = Math.min(height, heightSize);
-            }
-        }
-        MAX_TEXT_SIZE = height / 8.0f;
-        MIN_TEXT_SIZE = MAX_TEXT_SIZE / 2f;
-        VIEW_HEIGHT = height;
-        VIEW_WEIGHT = width;
-
-        setMeasuredDimension(width, height);
+    private void init() {
+        timer = new Timer();
+        mDataList = new ArrayList<PickerItem>();
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setStyle(Style.FILL);
+        mPaint.setTextAlign(Align.CENTER);
+        mPaint.setColor(mColorText);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        if (itemsLayout == null) {
-            if (itemsWidth == 0) {
-                calculateLayoutWidth(getWidth(), MeasureSpec.EXACTLY);
-            } else {
-                createLayouts(itemsWidth, labelWidth);
-            }
-        }
-
-        if (itemsWidth > 0) {
-            canvas.save();
-            // Skip padding space and hide a part of top and bottom items
-            canvas.translate(PADDING, -ITEM_OFFSET);
-            drawItems(canvas);
-            drawValue(canvas);
-            canvas.restore();
-        }
-
-//        drawCenterRect(canvas);
-//        drawShadows(canvas);
+        // 根据index绘制view
+        if (isInit)
+            drawData(canvas);
     }
 
-    /**
-     * Draws shadows on top and bottom of control
-     *
-     * @param canvas the canvas for drawing
-     */
-    private void drawShadows(Canvas canvas) {
-        topShadow.setBounds(0, 0, getWidth(), getHeight() / visibleItems);
-        topShadow.draw(canvas);
+    private void drawData(Canvas canvas) {
+        // 先绘制选中的text再往上往下绘制其余的text
+        float scale = parabola(mViewHeight / 4.0f, mMoveLen);
+        float size = (mMaxTextSize - mMinTextSize) * scale + mMinTextSize;
+        mPaint.setTextSize(size);
+        mPaint.setAlpha((int) ((mMaxTextAlpha - mMinTextAlpha) * scale + mMinTextAlpha));
+        // text居中绘制，注意baseline的计算才能达到居中，y值是text中心坐标
+        float x = (float) (mViewWidth / 2.0);
+        float y = (float) (mViewHeight / 2.0 + mMoveLen);
+        FontMetricsInt fmi = mPaint.getFontMetricsInt();
+        float baseline = (float) (y - (fmi.bottom / 2.0 + fmi.top / 2.0));
 
-        bottomShadow.setBounds(0, getHeight() - getHeight() / visibleItems,
-                getWidth(), getHeight());
-        bottomShadow.draw(canvas);
-    }
+        int indexs = mCurrentSelected;
 
-    /**
-     * Draws value and label layout
-     *
-     * @param canvas the canvas for drawing
-     */
-    private void drawValue(Canvas canvas) {
-        valuePaint.setColor(VALUE_TEXT_COLOR);
-        valuePaint.drawableState = getDrawableState();
+        String textData = mDataList.get(indexs).getValue();
+        canvas.drawText(textData, x, baseline, mPaint);
 
-        Rect bounds = new Rect();
-        itemsLayout.getLineBounds(visibleItems / 2, bounds);
-
-        // draw label
-        if (labelLayout != null) {
-            canvas.save();
-            canvas.translate(itemsLayout.getWidth() + LABEL_OFFSET, bounds.top);
-            labelLayout.draw(canvas);
-            canvas.restore();
+        // 绘制上方data
+        for (int i = 1; (mCurrentSelected - i) >= 0; i++) {
+            drawOtherText(canvas, i, -1);
         }
-
-        // draw current value
-        if (valueLayout != null) {
-            canvas.save();
-            canvas.translate(0, bounds.top + scrollingOffset);
-            valueLayout.draw(canvas);
-            canvas.restore();
+        // 绘制下方data
+        for (int i = 1; (mCurrentSelected + i) < mDataList.size(); i++) {
+            drawOtherText(canvas, i, 1);
         }
-    }
-
-    /**
-     * Draws items
-     *
-     * @param canvas the canvas for drawing
-     */
-    private void drawItems(Canvas canvas) {
-        canvas.save();
-
-        int top = itemsLayout.getLineTop(1);
-        canvas.translate(0, -top + scrollingOffset);
-
-        itemsPaint.setColor(ITEMS_TEXT_COLOR);
-        itemsPaint.drawableState = getDrawableState();
-
-        float scale = parabola(VIEW_HEIGHT / 4.0f, scrollingOffset);
-        itemsPaint.setAlpha((int) ((MAX_TEXT_ALPHA - MIN_TEXT_ALPHA) * scale + MIN_TEXT_ALPHA));
-
-        itemsLayout.draw(canvas);
-
-        canvas.restore();
     }
 
     /**
@@ -812,20 +217,20 @@ public class WheelView extends View {
      * @param position 距离mCurrentSelected的差值
      * @param type     1表示向下绘制，-1表示向上绘制
      */
-    private void drawOtherItem(Canvas canvas, int position, int type) {
-//        float d = (float) (MARGIN_ALPHA * mMinTextSize * position + type
-//                * mMoveLen);
-//        float scale = parabola(mViewHeight / 4.0f, d);
-//        float size = (mMaxTextSize - mMinTextSize) * scale + mMinTextSize;
-//        itemsPaint.setTextSize(size);
-//        itemsPaint.setAlpha((int) ((mMaxTextAlpha - mMinTextAlpha) * scale + mMinTextAlpha));
-//        float y = (float) (mViewHeight / 2.0 + type * d);
-//        Paint.FontMetricsInt fmi = mPaint.getFontMetricsInt();
-//        float baseline = (float) (y - (fmi.bottom / 2.0 + fmi.top / 2.0));
-//
-//        int indexs = mCurrentSelected + type * position;
-//        String textData = mDataList.get(indexs).getShowConetnt();
-//        canvas.drawText(textData, (float) (mViewWidth / 2.0), baseline, mPaint);
+    private void drawOtherText(Canvas canvas, int position, int type) {
+        float d = (float) (MARGIN_ALPHA * mMinTextSize * position + type
+                * mMoveLen);
+        float scale = parabola(mViewHeight / 4.0f, d);
+        float size = (mMaxTextSize - mMinTextSize) * scale + mMinTextSize;
+        mPaint.setTextSize(size);
+        mPaint.setAlpha((int) ((mMaxTextAlpha - mMinTextAlpha) * scale + mMinTextAlpha));
+        float y = (float) (mViewHeight / 2.0 + type * d);
+        FontMetricsInt fmi = mPaint.getFontMetricsInt();
+        float baseline = (float) (y - (fmi.bottom / 2.0 + fmi.top / 2.0));
+
+        int indexs = mCurrentSelected + type * position;
+        String textData = mDataList.get(indexs).getValue();
+        canvas.drawText(textData, (float) (mViewWidth / 2.0), baseline, mPaint);
     }
 
     /**
@@ -840,223 +245,78 @@ public class WheelView extends View {
         return f < 0 ? 0 : f;
     }
 
-    /**
-     * Draws rect for current value
-     *
-     * @param canvas the canvas for drawing
-     */
-    private void drawCenterRect(Canvas canvas) {
-        int center = getHeight() / 2;
-        int offset = getItemHeight() / 2;
-        centerDrawable.setBounds(0, center - offset, getWidth(), center
-                + offset);
-        centerDrawable.draw(canvas);
-    }
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        WheelAdapter adapter = getAdapter();
-        if (adapter == null) {
-            return true;
-        }
-
-        if (!gestureDetector.onTouchEvent(event)
-                && event.getAction() == MotionEvent.ACTION_UP) {
-            justify();
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                doDown(event);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                doMove(event);
+                break;
+            case MotionEvent.ACTION_UP:
+                doUp(event);
+                break;
         }
         return true;
     }
 
-    /**
-     * Scrolls the wheel
-     *
-     * @param delta the scrolling value
-     */
-    private void doScroll(int delta) {
-        scrollingOffset += delta;
-
-        int count = scrollingOffset / getItemHeight();
-        int pos = currentItem - count;
-        if (isCyclic && adapter.getItemsCount() > 0) {
-            // fix position by rotating
-            while (pos < 0) {
-                pos += adapter.getItemsCount();
-            }
-            pos %= adapter.getItemsCount();
-        } else if (isScrollingPerformed) {
-            //
-            if (pos < 0) {
-                count = currentItem;
-                pos = 0;
-            } else if (pos >= adapter.getItemsCount()) {
-                count = currentItem - adapter.getItemsCount() + 1;
-                pos = adapter.getItemsCount() - 1;
-            }
-        } else {
-            // fix position
-            pos = Math.max(pos, 0);
-            pos = Math.min(pos, adapter.getItemsCount() - 1);
+    private void doDown(MotionEvent event) {
+        if (mTask != null) {
+            mTask.cancel();
+            mTask = null;
         }
-
-        int offset = scrollingOffset;
-        if (pos != currentItem) {
-            setCurrentItem(pos, false);
-        } else {
-            invalidate();
-        }
-
-        // update offset
-        scrollingOffset = offset - count * getItemHeight();
-        if (scrollingOffset > getHeight()) {
-            scrollingOffset = scrollingOffset % getHeight() + getHeight();
-        }
+        mLastDownY = event.getY();
     }
 
-    // gesture listener
-    private SimpleOnGestureListener gestureListener = new SimpleOnGestureListener() {
-        public boolean onDown(MotionEvent e) {
-            if (isScrollingPerformed) {
-                scroller.forceFinished(true);
-                clearMessages();
-                return true;
-            }
-            return false;
+    private void doMove(MotionEvent event) {
+
+        mMoveLen += (event.getY() - mLastDownY);
+
+        if (mMoveLen > MARGIN_ALPHA * mMinTextSize / 2) {
+            // 往下滑超过离开距离
+            moveTailToHead();
+            mMoveLen = mMoveLen - MARGIN_ALPHA * mMinTextSize;
+        } else if (mMoveLen < -MARGIN_ALPHA * mMinTextSize / 2) {
+            // 往上滑超过离开距离
+            moveHeadToTail();
+            mMoveLen = mMoveLen + MARGIN_ALPHA * mMinTextSize;
         }
 
-        public boolean onScroll(MotionEvent e1, MotionEvent e2,
-                                float distanceX, float distanceY) {
-            startScrolling();
-            doScroll((int) -distanceY);
-            return true;
-        }
-
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-                               float velocityY) {
-            lastScrollY = currentItem * getItemHeight() + scrollingOffset;
-            int maxY = isCyclic ? 0x7FFFFFFF : adapter.getItemsCount()
-                    * getItemHeight();
-            int minY = isCyclic ? -maxY : 0;
-            scroller.fling(0, lastScrollY, 0, (int) -velocityY / 2, 0, 0, minY,
-                    maxY);
-            setNextMessage(MESSAGE_SCROLL);
-            return true;
-        }
-    };
-
-    // Messages
-    private final int MESSAGE_SCROLL = 0;
-    private final int MESSAGE_JUSTIFY = 1;
-
-    /**
-     * Set next message to queue. Clears queue before.
-     *
-     * @param message the message to set
-     */
-    private void setNextMessage(int message) {
-        clearMessages();
-        animationHandler.sendEmptyMessage(message);
-    }
-
-    /**
-     * Clears messages from queue
-     */
-    private void clearMessages() {
-        animationHandler.removeMessages(MESSAGE_SCROLL);
-        animationHandler.removeMessages(MESSAGE_JUSTIFY);
-    }
-
-    // animation handler
-    private Handler animationHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            scroller.computeScrollOffset();
-            int currY = scroller.getCurrY();
-            int delta = lastScrollY - currY;
-            lastScrollY = currY;
-            if (delta != 0) {
-                doScroll(delta);
-            }
-
-            // scrolling is not finished when it comes to final Y
-            // so, finish it manually
-            if (Math.abs(currY - scroller.getFinalY()) < MIN_DELTA_FOR_SCROLLING) {
-                currY = scroller.getFinalY();
-                scroller.forceFinished(true);
-            }
-            if (!scroller.isFinished()) {
-                animationHandler.sendEmptyMessage(msg.what);
-            } else if (msg.what == MESSAGE_SCROLL) {
-                justify();
-            } else {
-                finishScrolling();
-            }
-        }
-    };
-
-    /**
-     * Justifies wheel
-     */
-    private void justify() {
-        if (adapter == null) {
-            return;
-        }
-
-        lastScrollY = 0;
-        int offset = scrollingOffset;
-        int itemHeight = getItemHeight();
-        boolean needToIncrease = offset > 0 ? currentItem < adapter
-                .getItemsCount() : currentItem > 0;
-        if ((isCyclic || needToIncrease)
-                && Math.abs((float) offset) > (float) itemHeight / 2) {
-            if (offset < 0)
-                offset += itemHeight + MIN_DELTA_FOR_SCROLLING;
-            else
-                offset -= itemHeight + MIN_DELTA_FOR_SCROLLING;
-        }
-        if (Math.abs(offset) > MIN_DELTA_FOR_SCROLLING) {
-            scroller.startScroll(0, 0, 0, offset, SCROLLING_DURATION);
-            setNextMessage(MESSAGE_JUSTIFY);
-        } else {
-            finishScrolling();
-        }
-    }
-
-    /**
-     * Starts scrolling
-     */
-    private void startScrolling() {
-        if (!isScrollingPerformed) {
-            isScrollingPerformed = true;
-            notifyScrollingListenersAboutStart();
-        }
-    }
-
-    /**
-     * Finishes scrolling
-     */
-    void finishScrolling() {
-        if (isScrollingPerformed) {
-            notifyScrollingListenersAboutEnd();
-            isScrollingPerformed = false;
-        }
-        invalidateLayouts();
+        mLastDownY = event.getY();
         invalidate();
     }
 
-    /**
-     * Scroll the wheel
-     *
-     * @param time scrolling duration
-     */
-    public void scroll(int itemsToScroll, int time) {
-        scroller.forceFinished(true);
-
-        lastScrollY = scrollingOffset;
-        int offset = itemsToScroll * getItemHeight();
-
-        scroller.startScroll(0, lastScrollY, 0, offset - lastScrollY, time);
-        setNextMessage(MESSAGE_SCROLL);
-
-        startScrolling();
+    private void doUp(MotionEvent event) {
+        // 抬起手后mCurrentSelected的位置由当前位置move到中间选中位置
+        if (Math.abs(mMoveLen) < 0.0001) {
+            mMoveLen = 0;
+            return;
+        }
+        if (mTask != null) {
+            mTask.cancel();
+            mTask = null;
+        }
+        mTask = new MyTimerTask(updateHandler);
+        timer.schedule(mTask, 0, 10);
     }
 
+    class MyTimerTask extends TimerTask {
+        Handler handler;
+
+        public MyTimerTask(Handler handler) {
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            handler.sendMessage(handler.obtainMessage());
+        }
+
+    }
+
+    public interface onSelectListener {
+        void onSelect(PickerItem pickerItem);
+    }
 }
+
