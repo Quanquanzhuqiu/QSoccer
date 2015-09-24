@@ -36,7 +36,7 @@ import cn.smssdk.SMSSDK;
 /**
  * Created by jie.xiao on 9/8/2015.
  */
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     private Context context = this;
     private TextView tv_title;
@@ -59,10 +59,12 @@ public class RegisterActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        init();
+        initView();
+        initListener();
+        initData();
     }
 
-    private void init() {
+    private void initView() {
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("注册");
         iv_back = (ImageView) findViewById(R.id.iv_back);
@@ -76,10 +78,19 @@ public class RegisterActivity extends BaseActivity {
         btn_verify_code = (Button) findViewById(R.id.btn_verify_code);
         btn_register = (Button) findViewById(R.id.btn_register);
 
+    }
+
+    private void initListener() {
+        iv_back.setOnClickListener(this);
+        edt_select_location.setOnClickListener(this);
+        btn_verify_code.setOnClickListener(this);
+        btn_register.setOnClickListener(this);
         //注册短信回调
         SMSSDK.registerEventHandler(eh);
-        initSpanableString();
+    }
 
+    private void initData() {
+        initSpanableString();
         extras = this.getIntent().getExtras();
         if (extras != null
                 && extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)
@@ -92,41 +103,28 @@ public class RegisterActivity extends BaseActivity {
             String selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
             edt_select_location.setText(selectedLocation);
         }
+    }
 
-        iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
                 RegisterActivity.this.finish();
-            }
-        });
-
-        edt_select_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.edt_select_location:
                 Intent intent = new Intent(context, SelectLocationActivity.class);
                 intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "RegisterActivity");
                 startActivity(intent);
-            }
-        });
-
-        btn_verify_code.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.btn_verify_code:
                 if (edt_phone_no != null && !TextUtils.isEmpty(edt_phone_no.getText())) {
-
                     Toast.makeText(context, "验证码将通过短信发送到你的手机，请注意查收！", Toast.LENGTH_LONG).show();
-
                     sendSMS(edt_phone_no.getText().toString());
                 }
-            }
-        });
-
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.btn_register:
                 registerUser();
-            }
-        });
+                break;
+        }
     }
 
     private void sendSMS(String phoneNo) {

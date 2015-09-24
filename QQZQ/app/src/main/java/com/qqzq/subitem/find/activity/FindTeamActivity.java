@@ -22,7 +22,7 @@ import com.qqzq.entity.EntTeamListItem;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.util.Utils;
-import com.qqzq.view.PullToRefreshView;
+import com.qqzq.widget.tab.PullToRefreshView;
 
 import java.util.ArrayList;
 import java.util.Calendar;

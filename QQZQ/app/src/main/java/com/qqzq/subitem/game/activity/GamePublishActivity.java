@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private Activity context = this;
     private TextView tv_titile;
     private TextView tv_commit;
+    private ImageView iv_back;
     private EditText edt_game_name;
     private EditText edt_game_location;
     private EditText edt_game_date;
@@ -77,13 +79,24 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         initView();
         initLinstener();
         initData();
+
+        initTestData();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timePickerWindow != null && timePickerWindow.isShowing()) {
+            timePickerWindow.dismiss();
+        }
     }
 
     private void initView() {
         tv_titile = (TextView) findViewById(R.id.tv_title);
-        tv_commit = (TextView) findViewById(R.id.tv_commit);
         tv_titile.setText("发起活动");
+        tv_commit = (TextView) findViewById(R.id.tv_commit);
         tv_commit.setText("发布");
+        iv_back = (ImageView) findViewById(R.id.iv_back);
         edt_game_name = (EditText) findViewById(R.id.edt_game_name);
         edt_game_location = (EditText) findViewById(R.id.edt_game_location);
         edt_game_date = (EditText) findViewById(R.id.edt_game_date);
@@ -117,6 +130,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
 
         // 初始化控件监听器
         tv_commit.setOnClickListener(this);
+        iv_back.setOnClickListener(this);
         tv_select_team.setOnClickListener(this);
         edt_game_date.setOnClickListener(this);
         edt_game_location.setOnClickListener(this);
@@ -148,6 +162,9 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.iv_back:
+                GamePublishActivity.this.finish();
+                break;
             case R.id.tv_commit:
                 if (formCheck()) {
                     commitToBackend();
@@ -243,8 +260,10 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         int gameCostType = -1;
         if (rbtn_game_cost_average.isChecked()) {
             gameCostType = 1;
-        } else if (rbtn_game_cost_member_charge.isChecked()) {
+        } else if (rbtn_game_cost_fixed.isChecked()) {
             gameCostType = 2;
+        } else if (rbtn_game_cost_member_charge.isChecked()) {
+            gameCostType = 3;
         }
 
         boolean relatelist = true;
@@ -255,12 +274,12 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         }
 
         int personMaxLimit = -1;
-        if (TextUtils.isEmpty(edt_game_registrator_upper_limit.getText())) {
+        if (!TextUtils.isEmpty(edt_game_registrator_upper_limit.getText())) {
             personMaxLimit = Integer.parseInt(edt_game_registrator_upper_limit.getText().toString());
         }
 
         int personMinLimit = -1;
-        if (TextUtils.isEmpty(edt_game_registrator_lower_limit.getText())) {
+        if (!TextUtils.isEmpty(edt_game_registrator_lower_limit.getText())) {
             personMinLimit = Integer.parseInt(edt_game_registrator_lower_limit.getText().toString());
         }
 
@@ -283,6 +302,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         entGameInfo.setPublishdate(new Date());
         entGameInfo.setCreatedate(new Date());
         entGameInfo.setUpdatedate(new Date());
+        entGameInfo.setStat(gameDescription);
 
         mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entGameInfo);
         return mParameters;
@@ -302,4 +322,13 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         }
     };
 
+    private void initTestData() {
+        edt_game_name.setText("周末约球");
+        edt_game_location.setText("天府四街");
+        rbtn_game_type_private.setChecked(true);
+        rbtn_game_court_type_7.setChecked(true);
+        rbtn_game_cost_fixed.setChecked(true);
+        edt_game_registrator_lower_limit.setText("5");
+        edt_game_description.setText("周末约球活动简介，与老曼联比赛。");
+    }
 }

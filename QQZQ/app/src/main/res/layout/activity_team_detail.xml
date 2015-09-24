@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/rgb_240_239_237"
+    android:orientation="vertical">
+
+    <!-- TOP BAR-->
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/common_top_title_with_back_share" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <LinearLayout
+                style="@style/ll_detail_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- 球队名称-->
+                <LinearLayout
+                    style="@style/ll_detail_item"
+                    android:layout_marginTop="14dp">
+
+
+                    <TextView
+                        style="@style/tv_detail_item_label1"
+                        android:layout_width="wrap_content"
+                        android:text="@string/team_detail_name"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:layout_width="wrap_content"
+                        android:text="成都老曼联"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+                <!-- 队长-->
+                <LinearLayout style="@style/ll_detail_item">
+
+
+                    <TextView
+                        style="@style/tv_detail_item_label1"
+                        android:layout_width="wrap_content"
+                        android:text="@string/team_detail_captain"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:layout_width="wrap_content"
+                        android:text="王老吉"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+                <!-- 球队活动次数-->
+                <LinearLayout style="@style/ll_detail_item">
+
+
+                    <TextView
+                        style="@style/tv_detail_item_label2"
+                        android:text="@string/team_detail_game_times" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:layout_width="wrap_content"
+                        android:text="165"
+                        android:textColor="@color/rgb_163_163_163"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <!-- 球队积分-->
+                <LinearLayout style="@style/ll_detail_item">
+
+
+                    <TextView
+                        style="@style/tv_detail_item_label2"
+                        android:layout_width="wrap_content"
+                        android:text="@string/team_detail_points"
+                        android:textColor="@color/rgb_163_163_163"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:layout_width="wrap_content"
+                        android:text="1080"
+                        android:textColor="@color/rgb_163_163_163"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <!-- 常活动地点-->
+                <LinearLayout style="@style/ll_detail_item">
+
+
+                    <TextView
+                        style="@style/tv_detail_item_label2"
+                        android:layout_width="wrap_content"
+                        android:text="@string/team_detail_location"
+                        android:textColor="@color/rgb_163_163_163"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:layout_width="wrap_content"
+                        android:text="成都武侯区"
+                        android:textColor="@color/rgb_163_163_163"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <!-- 成立时间-->
+                <LinearLayout
+                    style="@style/ll_detail_item"
+                    android:layout_marginBottom="14dp">
+
+
+                    <TextView
+                        style="@style/tv_detail_item_label2"
+                        android:layout_width="wrap_content"
+                        android:text="@string/team_detail_establish_date"
+                        android:textColor="@color/rgb_163_163_163"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        style="@style/create_team_basic_info_label"
+                        android:layout_width="wrap_content"
+                        android:text="2015年04月25日"
+                        android:textColor="@color/rgb_163_163_163"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/ll_detail_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ic_team_member" />
+
+                    <TextView
+                        style="@style/tv_detail_item_label3"
+                        android:text="@string/team_detail_member" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ic_team_gallery" />
+
+                    <TextView
+                        style="@style/tv_detail_item_label3"
+                        android:text="@string/team_detail_gallery" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!-- 球队管理章程-->
+            <LinearLayout
+                style="@style/ll_detail_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_detail_item_label1"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/team_detail_rule" />
+
+                <ImageView
+                    android:id="@+id/iv_team_rule"
+                    android:layout_width="17dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/ic_browse_img" />
+            </LinearLayout>
+
+            <!-- 球队相册-->
+            <LinearLayout
+                style="@style/ll_detail_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    style="@style/ll_detail_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/tv_detail_item_label1"
+                        android:layout_weight="1"
+                        android:text="@string/team_detail_gallery" />
+
+                    <ImageView
+                        android:id="@+id/iv_team_gallery"
+                        android:layout_width="17dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/ic_browse_img" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/ic_default_team_log" />
+
+                    <ImageView
+                        android:layout_width="72dp"
+                        android:layout_height="70dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/ic_default_team_log" />
+
+                    <ImageView
+                        android:layout_width="73dp"
+                        android:layout_height="70dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/ic_default_team_log" />
+
+                    <ImageView
+                        android:layout_width="75dp"
+                        android:layout_height="70dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/ic_default_team_log" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- 球队简介-->
+            <LinearLayout
+                style="@style/ll_detail_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/ll_detail_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/tv_detail_item_label1"
+                        android:layout_weight="1"
+                        android:text="@string/team_detail_description" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_grey_divider" />
+
+                <LinearLayout
+                    style="@style/ll_detail_content"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/tv_detail_item_label1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <Button
+                style="@style/login_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/bg_login"
+                android:text="@string/join_team"
+                android:textColor="@color/rgb_255_255_255" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>

@@ -1,7 +1,6 @@
 package com.qqzq.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,16 +23,13 @@ import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.find.FindFragment;
-import com.qqzq.subitem.find.activity.FindTeamActivity;
 import com.qqzq.subitem.game.GameManagementFragment;
-import com.qqzq.subitem.game.activity.GamePublishActivity;
 import com.qqzq.subitem.me.MeFragment;
 import com.qqzq.subitem.team.MyTeamFragment;
 import com.qqzq.subitem.team.TeamMangmentFragment;
-import com.qqzq.subitem.team.activity.CreateTeamActivity;
 import com.qqzq.util.Utils;
-import com.qqzq.view.CustomPopupView;
-import com.qqzq.view.PagerSlidingTabStrip;
+import com.qqzq.widget.menu.PopupMenuWindow;
+import com.qqzq.widget.tab.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,6 +82,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     private String teamPageType = Constants.PAGE_TYPE_NO_TEAM;
     private String gamePageType = Constants.PAGE_TYPE_NO_GAME;
     private ImageView iv_more_menu;
+    private PopupMenuWindow popupMenuWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +92,14 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         init();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (popupMenuWindow != null && popupMenuWindow.isShowing()) {
+            popupMenuWindow.dismiss();
+        }
+    }
+
     private void init() {
         loadTeamListFromBackend();
 
@@ -102,6 +107,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         dm = getResources().getDisplayMetrics();
         pager = (ViewPager) findViewById(R.id.pager);
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+
+        popupMenuWindow = new PopupMenuWindow(context, null);
+        popupMenuWindow.dismiss();
 
         iv_more_menu.setOnClickListener(this);
     }
@@ -181,36 +189,13 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.iv_more_menu:
 //                Toast.makeText(context, "已点中弹出菜单", Toast.LENGTH_LONG).show();
-                View popupView = View.inflate(context, R.layout.popup_menu_main, null);
-                CustomPopupView myPopupview = new CustomPopupView(context, iv_more_menu, popupView);
-                initPopupView(popupView);
-                break;
-            case R.id.ll_create_team:
-                Intent createTeamIntent = new Intent(context, CreateTeamActivity.class);
-                startActivity(createTeamIntent);
-                break;
-            case R.id.ll_find_team:
-                Intent findTeamIntent = new Intent(context, FindTeamActivity.class);
-                startActivity(findTeamIntent);
-                break;
-            case R.id.ll_game_publish:
-                Intent publishGameIntent = new Intent(context, GamePublishActivity.class);
-                startActivity(publishGameIntent);
+                popupMenuWindow.showAsDropDown(iv_more_menu);
                 break;
             default:
                 break;
         }
     }
 
-    //初始化弹出框
-    private void initPopupView(View view) {
-        LinearLayout ll_game_publish = (LinearLayout) view.findViewById(R.id.ll_game_publish);
-        LinearLayout ll_create_team = (LinearLayout) view.findViewById(R.id.ll_create_team);
-        LinearLayout ll_find_team = (LinearLayout) view.findViewById(R.id.ll_find_team);
-        ll_game_publish.setOnClickListener(this);
-        ll_create_team.setOnClickListener(this);
-        ll_find_team.setOnClickListener(this);
-    }
 
     public void loadTeamListFromBackend() {
         Map<String, Object> mParameters = new HashMap<String, Object>();

@@ -70,8 +70,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
         <item name="android:background">@color/default_white</item>
     </style>
 
@@ -87,7 +87,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
     </style>
 
     <style name="create_team_basic_info_image_view">
@@ -182,5 +182,48 @@
         <item name="android:background">@null</item>
         <item name="android:textColorHint">@color/rgb_153_153_153</item>
         <item name="android:textSize">15sp</item>
+    </style>
+
+
+    <style name="ll_detail_content">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:background">@color/default_white</item>
+    </style>
+
+    <style name="ll_detail_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <style name="tv_detail_item_label1">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/rgb_0_0_0</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="tv_detail_item_label2">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/rgb_163_163_163</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="tv_detail_item_label3">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/rgb_0_0_0</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textSize">17sp</item>
     </style>
 </resources>

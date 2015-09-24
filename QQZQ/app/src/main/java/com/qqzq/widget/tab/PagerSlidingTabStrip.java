@@ -1,4 +1,4 @@
-package com.qqzq.view;
+package com.qqzq.widget.tab;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -42,9 +42,9 @@
     <string name="team_name">球队名称：</string>
     <string name="team_captain">球队队长： </string>
     <string name="team_members">球队人数： </string>
-    <string name="team_establish_day">成立时间: </string>
-    <string name="financial_statistics">财务统计: </string>
-    <string name="duty_statistics">出勤概况: </string>
+    <string name="team_establish_day">成立时间： </string>
+    <string name="financial_statistics">财务统计： </string>
+    <string name="duty_statistics">出勤概况： </string>
     <string name="duty_detail">实际出勤13人，王哥放鸽子1次。</string>
     <string name="team_default_establish_day">2015年9月22日</string>
 
@@ -102,7 +102,7 @@
     <string name="find_team_team_name">球队名称：</string>
     <string name="find_team_team_captain">球队队长： </string>
     <string name="find_team_team_members">球队人数： </string>
-    <string name="find_team_establish_day">成立时间: </string>
+    <string name="find_team_establish_day">成立时间： </string>
 
     <string name="my_team_top_menu_1">球队管理</string>
     <string name="my_team_top_menu_2">球队内部活动</string>
@@ -110,6 +110,20 @@
     <string name="take_photo">拍照</string>
     <string name="pick_photo">从手机相册选择</string>
     <string name="cancel_photo">取消</string>
+
+    <!-- 球队详情页面-->
+    <string name="team_detail_name">球队名称：</string>
+    <string name="team_detail_captain">队长：</string>
+    <string name="team_detail_game_times">球队活动次数：</string>
+    <string name="team_detail_points">球队积分：</string>
+    <string name="team_detail_location">常活动地点：</string>
+    <string name="team_detail_establish_date">成立时间：</string>
+    <string name="team_detail_member">球队成员</string>
+    <string name="team_detail_game_list">球队活动列表</string>
+    <string name="team_detail_rule">球队管理章程</string>
+    <string name="team_detail_gallery">球队相册</string>
+    <string name="team_detail_description">球队简介</string>
+    <string name="join_team">申请加入</string>
 
     <!-- 发起活动页面-->
     <string name="game_title">活动标题</string>

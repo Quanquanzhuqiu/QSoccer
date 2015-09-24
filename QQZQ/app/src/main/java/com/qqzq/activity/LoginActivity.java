@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 8/25/2015.
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private Context context = this;
     private EditText edt_username;
@@ -45,10 +45,14 @@ public class LoginActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        init();
+
+        initView();
+        initListener();
+
+        initTestData();
     }
 
-    private void init() {
+    private void initView() {
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("登陆");
         iv_back = (ImageView) findViewById(R.id.iv_back);
@@ -56,27 +60,25 @@ public class LoginActivity extends BaseActivity {
         edt_password = (EditText) findViewById(R.id.edt_password);
         btn_register = (Button) findViewById(R.id.btn_register);
         btn_login = (Button) findViewById(R.id.btn_login);
+    }
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void initListener() {
+        btn_register.setOnClickListener(this);
+        btn_login.setOnClickListener(this);
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_login:
+                login();
+                break;
+            case R.id.btn_register:
                 Intent intent = new Intent(context, RegisterActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-
-
-        //for test only
-        checkMetrics();
-        edt_username.setText("13551063785");
-        edt_password.setText("123");
+                break;
+        }
     }
 
     private void login() {
@@ -93,7 +95,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private Map<String, Object> prepareRequestJson() {
-        Map<String, Object> mParameters = new HashMap<String,Object>();
+        Map<String, Object> mParameters = new HashMap<String, Object>();
         username = edt_username.getText().toString();
         password = edt_password.getText().toString();
 
@@ -155,4 +157,11 @@ public class LoginActivity extends BaseActivity {
             jumpPage();
         }
     };
+
+    private void initTestData() {
+        //for test only
+        checkMetrics();
+        edt_username.setText("13551063785");
+        edt_password.setText("123");
+    }
 }
