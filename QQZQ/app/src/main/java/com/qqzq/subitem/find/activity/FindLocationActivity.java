@@ -1,4 +1,4 @@
-package com.qqzq.activity;
+package com.qqzq.subitem.find.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.qqzq.R;
+import com.qqzq.activity.BaseActivity;
+import com.qqzq.activity.RegisterActivity;
 import com.qqzq.adapter.LocationListViewAdapter;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntLocationInfo;
@@ -26,7 +28,7 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 9/8/2015.
  */
-public class SelectLocationActivity extends BaseActivity {
+public class FindLocationActivity extends BaseActivity {
 
     private Context context = this;
     private TextView tv_title;
@@ -106,7 +108,7 @@ public class SelectLocationActivity extends BaseActivity {
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectLocationActivity.this.finish();
+                FindLocationActivity.this.finish();
             }
         });
 

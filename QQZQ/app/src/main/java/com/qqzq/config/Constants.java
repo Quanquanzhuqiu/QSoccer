@@ -35,12 +35,12 @@ public class Constants {
 
 
     //extra configuration
-    public static final String EXTRA_SELECTED_LOCATION = "location";
-    public static final String EXTRA_SELECTED_PROVINCE_CODE = "province_code";
-    public static final String EXTRA_SELECTED_CITY_CODE = "city_code";
+    public static final String EXTRA_SELECTED_LOCATION = "EXTRA_SELECTED_LOCATION";
+    public static final String EXTRA_SELECTED_PROVINCE_CODE = "EXTRA_SELECTED_PROVINCE_CODE";
+    public static final String EXTRA_SELECTED_CITY_CODE = "EXTRA_SELECTED_CITY_CODE";
     public static final String EXTRA_SELECTED_TEAM = "EXTRA_SELECTED_TEAM";
     public static final String EXTRA_SELECTED_TEAM_ID = "EXTRA_SELECTED_TEAM_ID";
-    public static final String EXTRA_PAGE_TYEP = "page_type";
+    public static final String EXTRA_PAGE_TYEP = "EXTRA_PAGE_TYEP";
     public static final String EXTRA_PREV_PAGE_NAME = "EXTRA_PREV_PAGE_NAME";
 
     public static final String HTTP_HEADER_TOKER = "Token";
@@ -50,6 +50,11 @@ public class Constants {
     public static final String PAGE_TYPE_HAVE_TEAM = "have_team";
     public static final String PAGE_TYPE_NO_GAME = "no_game";
     public static final String PAGE_TYPE_HAVE_GAME = "have_game";
+
+    //网络状况
+    public static final String NET_GOOD = "网络状况良好";
+    public static final String NET_BAD = "网络状况不佳，请检查网络连接!";
+    public static final String FIAL_GET_INFO = "获取信息失败，请检查网络连接";
 
     //=================================== 后台API调用列表 ===================================
     public static final String FILE_SERVER_HOST = "http://121.43.229.24/";
@@ -77,6 +82,8 @@ public class Constants {
     public static final String API_CREATE_TEAM_URL = API_SERVER_HOST + "/team/teams";
     //根据条件查询球队信息
     public static final String API_FIND_TEAM_URL = API_SERVER_HOST + "/team/teams";
+    //根据球队id获取球队详细信息
+    public static final String API_FIND_TEAM_BY_ID_URL = API_SERVER_HOST + "/team/teams/{0}";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 活动发起部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队

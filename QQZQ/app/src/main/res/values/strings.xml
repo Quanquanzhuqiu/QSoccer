@@ -17,6 +17,8 @@
     <string name="select_time">日期选择</string>
     <string name="save">保存</string>
 
+    <string name="error_version_number_wrong">版本号错误</string>
+
     <!-- 我的球队首页-->
     <string name="create_team">创建球队</string>
     <string name="find_team">查找球队</string>

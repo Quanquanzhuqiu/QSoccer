@@ -1,8 +1,10 @@
 package com.qqzq.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -51,6 +53,31 @@ public class BaseActivity extends Activity {
                 Toast.makeText(activity, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         };
+    }
+
+
+    // 弹出Toast
+
+    public static void showLongToast(Context ctx, String text) {
+        Toast.makeText(ctx, text, Toast.LENGTH_LONG).show();
+    }
+
+    public static void showShortToast(Context ctx, String text) {
+        Toast toast = Toast.makeText(ctx, text, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
+    public static void showSuccessShortToast(Context ctx) {
+        Toast toast = Toast.makeText(ctx, "操作成功", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
+    public static void showFailShortToast(Context ctx) {
+        Toast toast = Toast.makeText(ctx, "操作失败", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
 }

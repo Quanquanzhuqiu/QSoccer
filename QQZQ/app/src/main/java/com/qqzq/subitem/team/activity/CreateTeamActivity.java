@@ -23,7 +23,7 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.activity.BaseApplication;
 import com.qqzq.activity.MainActivity;
-import com.qqzq.activity.SelectLocationActivity;
+import com.qqzq.subitem.find.activity.FindLocationActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntTeamInfo;
@@ -275,7 +275,7 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.edt_team_location:
-                Intent intent = new Intent(context, SelectLocationActivity.class);
+                Intent intent = new Intent(context, FindLocationActivity.class);
                 intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "CreateTeamActivity");
                 startActivity(intent);
                 break;

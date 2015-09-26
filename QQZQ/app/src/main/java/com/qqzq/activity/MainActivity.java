@@ -82,6 +82,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     private String teamPageType = Constants.PAGE_TYPE_NO_TEAM;
     private String gamePageType = Constants.PAGE_TYPE_NO_GAME;
     private ImageView iv_more_menu;
+    private LinearLayout ll_more_menu;
     private PopupMenuWindow popupMenuWindow;
 
     @Override
@@ -104,6 +105,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         loadTeamListFromBackend();
 
         iv_more_menu = (ImageView) findViewById(R.id.iv_more_menu);
+        ll_more_menu = (LinearLayout) findViewById(R.id.ll_more_menu);
         dm = getResources().getDisplayMetrics();
         pager = (ViewPager) findViewById(R.id.pager);
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
@@ -111,7 +113,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         popupMenuWindow = new PopupMenuWindow(context, null);
         popupMenuWindow.dismiss();
 
-        iv_more_menu.setOnClickListener(this);
+        ll_more_menu.setOnClickListener(this);
     }
 
     /**
@@ -187,7 +189,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_more_menu:
+            case R.id.ll_more_menu:
 //                Toast.makeText(context, "已点中弹出菜单", Toast.LENGTH_LONG).show();
                 popupMenuWindow.showAsDropDown(iv_more_menu);
                 break;

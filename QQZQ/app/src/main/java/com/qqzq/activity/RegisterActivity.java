@@ -26,6 +26,7 @@ import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntRegisterInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.subitem.find.activity.FindLocationActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -111,7 +112,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.iv_back:
                 RegisterActivity.this.finish();
             case R.id.edt_select_location:
-                Intent intent = new Intent(context, SelectLocationActivity.class);
+                Intent intent = new Intent(context, FindLocationActivity.class);
                 intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "RegisterActivity");
                 startActivity(intent);
                 break;

@@ -1,6 +1,8 @@
 package com.qqzq.subitem.find.activity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -9,12 +11,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.R;
+import com.qqzq.subitem.team.activity.CreateTeamActivity;
+import com.qqzq.subitem.team.activity.TeamDetailActivity;
 import com.qqzq.subitem.team.adapter.TeamListViewAdapter;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamInfo;
@@ -33,15 +38,16 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 15/9/4.
  */
-public class FindTeamActivity extends BaseActivity {
+public class FindTeamActivity extends BaseActivity implements View.OnClickListener, TextView.OnEditorActionListener, AdapterView.OnItemClickListener, PullToRefreshView.OnHeaderRefreshListener, PullToRefreshView.OnFooterRefreshListener {
+
+    private Activity context = this;
     private EditText et_search;
-    private LinearLayout layout_default_find_team;
+    private LinearLayout ll_find_team;
     private ListView lv_teams;
     private PullToRefreshView pullToRefreshListView;
     private ImageView iv_team_detail;
     private List<EntTeamListItem> teamList = new ArrayList<EntTeamListItem>();
     private TeamListViewAdapter listViewAdapter;
-    private Context context = this;
 
     private ImageView iv_back;
     private TextView tv_title;
@@ -50,114 +56,43 @@ public class FindTeamActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_team);
-        init();
+        initView();
+        initListener();
+        initData();
     }
 
-    private void init() {
+    private void initView() {
 
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("查找球队");
         iv_back = (ImageView) findViewById(R.id.iv_back);
-        layout_default_find_team = (LinearLayout) findViewById(R.id.layout_default_find_team);
+        ll_find_team = (LinearLayout) findViewById(R.id.ll_find_team);
         pullToRefreshListView = (PullToRefreshView) findViewById(R.id.pull_refresh_listview);
         lv_teams = (ListView) findViewById(R.id.lv_teams);
         et_search = (EditText) findViewById(R.id.et_search);
         iv_team_detail = (ImageView) findViewById(R.id.iv_team_detail);
+    }
+
+    private void initListener() {
 
         listViewAdapter = new TeamListViewAdapter(context, teamList);
         lv_teams.setAdapter(listViewAdapter);
 
-        iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FindTeamActivity.this.finish();
-            }
-        });
+        iv_back.setOnClickListener(this);
+        ll_find_team.setOnClickListener(this);
+        et_search.setOnEditorActionListener(this);
+        pullToRefreshListView.setOnHeaderRefreshListener(this);
+        pullToRefreshListView.setOnFooterRefreshListener(this);
+        lv_teams.setOnItemClickListener(this);
 
-        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+    }
 
-                if (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    Toast.makeText(context, "开始查找", Toast.LENGTH_LONG).show();
-
-                    if (listViewAdapter != null) {
-                        listViewAdapter.mList.clear();
-                    }
-
-                    Map<String, Object> mParameters = new HashMap<String, Object>();
-                    mParameters.put("offset", 0);
-                    mParameters.put("limit", Constants.PAGE_SIZE);
-                    mParameters.put("teamLeaderUsrNm", v.getText().toString());
-                    loadTeamListFromBackend(mParameters);
-                    return true;
-                }
-                return false;
-            }
-
-        });
-
-        layout_default_find_team.setOnClickListener(new View.OnClickListener()
-
-                                                    {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            et_search.setVisibility(View.VISIBLE);
-                                                        }
-                                                    }
-
-        );
-
-        pullToRefreshListView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener()
-
-                                                         {
-                                                             @Override
-                                                             public void onHeaderRefresh(PullToRefreshView view) {
-
-                                                                 if (listViewAdapter != null) {
-                                                                     listViewAdapter.mList.clear();
-                                                                 }
-
-                                                                 Map<String, Object> mParameters = new HashMap<String, Object>();
-                                                                 mParameters.put("offset", 0);
-                                                                 mParameters.put("limit", Constants.PAGE_SIZE);
-                                                                 loadTeamListFromBackend(mParameters);
-                                                             }
-                                                         }
-
-        );
-
-        pullToRefreshListView.setOnFooterRefreshListener(new PullToRefreshView.OnFooterRefreshListener()
-
-                                                         {
-                                                             @Override
-                                                             public void onFooterRefresh(PullToRefreshView view) {
-                                                                 Map<String, Object> mParameters = new HashMap<String, Object>();
-                                                                 mParameters.put("offset", listViewAdapter.pageIdx);
-                                                                 mParameters.put("limit", Constants.PAGE_SIZE);
-                                                                 loadTeamListFromBackend(mParameters);
-                                                             }
-                                                         }
-
-        );
-
-        lv_teams.setOnItemClickListener(new AdapterView.OnItemClickListener()
-
-                                        {
-                                            @Override
-                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                Toast.makeText(context, "选中第" + position + "个球队", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-
-        );
-
+    private void initData() {
         Map<String, Object> mParameters = new HashMap<String, Object>();
         mParameters.put("offset", 0);
         mParameters.put("limit", Constants.PAGE_SIZE);
 
         loadTeamListFromBackend(mParameters);
-
     }
 
     public void loadTeamListFromBackend(Map<String, Object> mParameters) {
@@ -174,6 +109,7 @@ public class FindTeamActivity extends BaseActivity {
         }
         for (EntTeamInfo entTeamInfo : entTeamInfos) {
             EntTeamListItem entTeamListItem = new EntTeamListItem();
+            entTeamListItem.setTeamId(String.valueOf(entTeamInfo.getId()));
             entTeamListItem.setLogoUrl(entTeamInfo.getTeamlogo());
             entTeamListItem.setTeamName(entTeamInfo.getTeamname());
             entTeamListItem.setTeamCaptain(entTeamInfo.getTeamleaderusrrnm());
@@ -206,4 +142,67 @@ public class FindTeamActivity extends BaseActivity {
     };
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                FindTeamActivity.this.finish();
+            case R.id.ll_find_team:
+                et_search.setVisibility(View.VISIBLE);
+                break;
+        }
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        if (teamList != null && teamList.get(position) != null) {
+            String teamId = teamList.get(position).getTeamId();
+            showLongToast(context, "选中第" + position + "个球队" + teamId);
+
+            Intent intent = new Intent(context, TeamDetailActivity.class);
+            intent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, teamList.get(position).getTeamId());
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onHeaderRefresh(PullToRefreshView view) {
+        if (listViewAdapter != null) {
+            listViewAdapter.mList.clear();
+        }
+
+        Map<String, Object> mParameters = new HashMap<String, Object>();
+        mParameters.put("offset", 0);
+        mParameters.put("limit", Constants.PAGE_SIZE);
+        loadTeamListFromBackend(mParameters);
+    }
+
+    @Override
+    public void onFooterRefresh(PullToRefreshView view) {
+        Map<String, Object> mParameters = new HashMap<String, Object>();
+        mParameters.put("offset", listViewAdapter.pageIdx);
+        mParameters.put("limit", Constants.PAGE_SIZE);
+        loadTeamListFromBackend(mParameters);
+    }
+
+
+    @Override
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+        if (keyEvent != null && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+            showLongToast(context, "开始查找");
+
+            if (listViewAdapter != null) {
+                listViewAdapter.mList.clear();
+            }
+
+            Map<String, Object> mParameters = new HashMap<String, Object>();
+            mParameters.put("offset", 0);
+            mParameters.put("limit", Constants.PAGE_SIZE);
+            mParameters.put("teamLeaderUsrNm", textView.getText().toString());
+            loadTeamListFromBackend(mParameters);
+            return true;
+        }
+        return false;
+    }
 }

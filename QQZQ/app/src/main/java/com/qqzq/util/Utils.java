@@ -1,6 +1,7 @@
 package com.qqzq.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -9,7 +10,8 @@ import java.util.Map;
  */
 public class Utils {
 
-    public static SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+    private static SimpleDateFormat simpleDateFormatFull = new SimpleDateFormat("yyyy年MM月dd日 hh时mm分");
+    private static SimpleDateFormat simpleDateFormatSimple = new SimpleDateFormat("yyyy年MM月dd日");
 
     public static String makeGetRequestUrl(String url, Map<String, Object> parameters) {
         StringBuilder makedUrl = new StringBuilder();
@@ -26,5 +28,13 @@ public class Utils {
         makedUrl.deleteCharAt(makedUrl.indexOf("&"));
 
         return makedUrl.toString();
+    }
+
+    public static String getFormatedSimpleDate(Date date) {
+        return simpleDateFormatSimple.format(date);
+    }
+
+    public static String getFormatedFullDate(Date date) {
+        return simpleDateFormatFull.format(date);
     }
 }

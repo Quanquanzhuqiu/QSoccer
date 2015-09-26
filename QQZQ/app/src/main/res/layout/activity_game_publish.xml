@@ -9,7 +9,7 @@
     <!-- TOP BAR-->
     <include
         android:id="@+id/top_bar"
-        layout="@layout/common_top_title_with_back_share" />
+        layout="@layout/common_top_title_with_commit" />
 
     <ScrollView
         android:layout_width="fill_parent"

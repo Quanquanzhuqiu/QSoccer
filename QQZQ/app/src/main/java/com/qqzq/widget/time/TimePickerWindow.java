@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.qqzq.R;
+import com.qqzq.util.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,7 +40,6 @@ public class TimePickerWindow extends PopupWindow implements WheelView.onSelectL
 
     int year, hour, minute, dayofweek, dayofyear;
     private static final String[] WEEK_LABEL = new String[]{"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 hh时mm分");
 
     public TimePickerWindow(Activity context, View.OnClickListener myOnClick) {
         super(context);
@@ -148,7 +148,7 @@ public class TimePickerWindow extends PopupWindow implements WheelView.onSelectL
             case R.id.tv_time_picker_save:
                 this.dismiss();
                 Date date = getSelectedTime();
-                String dateStr = simpleDateFormat.format(date);
+                String dateStr = Utils.getFormatedFullDate(date);
                 System.out.println("选中的时间为:" + dateStr);
 
                 if (edt_time != null) {
