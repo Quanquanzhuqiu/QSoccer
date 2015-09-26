@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,11 +29,11 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 9/8/2015.
  */
-public class FindLocationActivity extends BaseActivity {
+public class FindLocationActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private Context context = this;
     private TextView tv_title;
-    private ImageView iv_back;
+    private LinearLayout ll_back;
     private ListView lv_location;
     private TextView tv_selected_location;
     private LocationListViewAdapter adapter;
@@ -47,70 +48,31 @@ public class FindLocationActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_location);
-        init();
+        initView();
+        initListener();
+        initData();
     }
 
-    private void init() {
+    private void initView() {
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("选择地区");
-        iv_back = (ImageView) findViewById(R.id.iv_back);
+        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         tv_selected_location = (TextView) findViewById(R.id.tv_selected_location);
         lv_location = (ListView) findViewById(R.id.lv_location);
 
+
+    }
+
+    private void initListener() {
+        lv_location.setOnItemClickListener(this);
+        ll_back.setOnClickListener(this);
+    }
+
+    private void initData() {
         Bundle extras = this.getIntent().getExtras();
         if (extras.containsKey(Constants.EXTRA_PREV_PAGE_NAME)) {
             prevPageName = extras.getString(Constants.EXTRA_PREV_PAGE_NAME);
-            System.out.println(prevPageName);
         }
-
-        lv_location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if (locationInfos != null) {
-                    isProvincePage = TextUtils.isEmpty(tv_selected_location.getText()) ? true : false;
-                    EntLocationInfo selectedLocationInfo = locationInfos[position];
-                    String location = tv_selected_location.getText().toString();
-                    location = location + " " + selectedLocationInfo.getLocation();
-                    tv_selected_location.setText(location);
-
-                    if (isProvincePage) {
-                        selectedProvinceCode = Integer.parseInt(selectedLocationInfo.getId());
-                        requestCityList(selectedProvinceCode);
-                    } else {
-                        selectedCityCode = Integer.parseInt(selectedLocationInfo.getId());
-
-                        if (TextUtils.isEmpty(prevPageName)) {
-                            return;
-                        }
-
-                        Intent intent = null;
-                        System.out.println(RegisterActivity.class.getName());
-                        if ("CreateTeamActivity".equals(prevPageName)) {
-                            intent = new Intent(context, CreateTeamActivity.class);
-                        } else if ("RegisterActivity".equals(prevPageName)) {
-                            intent = new Intent(context, RegisterActivity.class);
-                        }
-
-                        if (intent != null) {
-                            intent.putExtra(Constants.EXTRA_SELECTED_LOCATION, location);
-                            intent.putExtra(Constants.EXTRA_SELECTED_PROVINCE_CODE, selectedProvinceCode);
-                            intent.putExtra(Constants.EXTRA_SELECTED_CITY_CODE, selectedCityCode);
-                            startActivity(intent);
-                        }
-                    }
-                }
-
-
-            }
-        });
-
-        iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FindLocationActivity.this.finish();
-            }
-        });
 
         //请求地区数据-省
         requestProvinceList();
@@ -157,4 +119,46 @@ public class FindLocationActivity extends BaseActivity {
             refreshLocationListView(locationInfos);
         }
     };
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (locationInfos != null) {
+            isProvincePage = TextUtils.isEmpty(tv_selected_location.getText()) ? true : false;
+            EntLocationInfo selectedLocationInfo = locationInfos[position];
+            String location = tv_selected_location.getText().toString();
+            location = location + " " + selectedLocationInfo.getLocation();
+            tv_selected_location.setText(location);
+
+            if (isProvincePage) {
+                selectedProvinceCode = Integer.parseInt(selectedLocationInfo.getId());
+                requestCityList(selectedProvinceCode);
+            } else {
+                selectedCityCode = Integer.parseInt(selectedLocationInfo.getId());
+
+                if (TextUtils.isEmpty(prevPageName)) {
+                    return;
+                }
+
+                Intent intent = null;
+                System.out.println(RegisterActivity.class.getName());
+                if ("CreateTeamActivity".equals(prevPageName)) {
+                    intent = new Intent(context, CreateTeamActivity.class);
+                } else if ("RegisterActivity".equals(prevPageName)) {
+                    intent = new Intent(context, RegisterActivity.class);
+                }
+
+                if (intent != null) {
+                    intent.putExtra(Constants.EXTRA_SELECTED_LOCATION, location);
+                    intent.putExtra(Constants.EXTRA_SELECTED_PROVINCE_CODE, selectedProvinceCode);
+                    intent.putExtra(Constants.EXTRA_SELECTED_CITY_CODE, selectedCityCode);
+                    startActivity(intent);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        finish();
+    }
 }

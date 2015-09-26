@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -44,8 +45,9 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
 
     private Context context = this;
     private TextView tv_title;
-    private ImageView iv_back;
+    private LinearLayout ll_back;
     private TextView tv_commit;
+    private LinearLayout ll_commit;
     private EditText edt_team_name;
     private EditText edt_team_location;
     private EditText edt_team_detail;
@@ -81,9 +83,9 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
 
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("创建球队");
-        iv_back = (ImageView) findViewById(R.id.iv_back);
+        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         ll_create_team = findViewById(R.id.ll_create_team);
-        tv_commit = (TextView) findViewById(R.id.tv_commit);
+        ll_commit = (LinearLayout) findViewById(R.id.ll_commit);
         edt_team_name = (EditText) findViewById(R.id.edt_team_name);
         edt_team_location = (EditText) findViewById(R.id.edt_team_location);
         edt_team_detail = (EditText) findViewById(R.id.edt_team_detail);
@@ -99,9 +101,9 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initListener() {
-        iv_back.setOnClickListener(this);
+        ll_back.setOnClickListener(this);
         iv_logo.setOnClickListener(this);
-        tv_commit.setOnClickListener(this);
+        ll_commit.setOnClickListener(this);
         edt_team_location.setOnClickListener(this);
     }
 
@@ -264,10 +266,10 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.iv_back:
-                CreateTeamActivity.this.finish();
+            case R.id.ll_back:
+                finish();
                 break;
-            case R.id.tv_commit:
+            case R.id.ll_commit:
                 uploadLogoAndTeamBasicInfo();
                 break;
             case R.id.iv_logo:

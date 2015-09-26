@@ -39,8 +39,9 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
 
     private Activity context = this;
     private TextView tv_titile;
+    private LinearLayout ll_commit;
     private TextView tv_commit;
-    private ImageView iv_back;
+    private LinearLayout ll_back;
     private EditText edt_game_name;
     private EditText edt_game_location;
     private EditText edt_game_date;
@@ -93,9 +94,10 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private void initView() {
         tv_titile = (TextView) findViewById(R.id.tv_title);
         tv_titile.setText("发起活动");
+        ll_commit = (LinearLayout) findViewById(R.id.ll_commit);
         tv_commit = (TextView) findViewById(R.id.tv_commit);
         tv_commit.setText("发布");
-        iv_back = (ImageView) findViewById(R.id.iv_back);
+        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         edt_game_name = (EditText) findViewById(R.id.edt_game_name);
         edt_game_location = (EditText) findViewById(R.id.edt_game_location);
         edt_game_date = (EditText) findViewById(R.id.edt_game_date);
@@ -128,8 +130,8 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private void initLinstener() {
 
         // 初始化控件监听器
-        tv_commit.setOnClickListener(this);
-        iv_back.setOnClickListener(this);
+        ll_commit.setOnClickListener(this);
+        ll_back.setOnClickListener(this);
         tv_select_team.setOnClickListener(this);
         edt_game_date.setOnClickListener(this);
         edt_game_location.setOnClickListener(this);
@@ -161,10 +163,10 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
-                GamePublishActivity.this.finish();
+            case R.id.ll_back:
+                finish();
                 break;
-            case R.id.tv_commit:
+            case R.id.ll_commit:
                 if (formCheck()) {
                     commitToBackend();
                 }

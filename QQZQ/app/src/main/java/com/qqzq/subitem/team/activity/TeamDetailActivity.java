@@ -1,10 +1,13 @@
 package com.qqzq.subitem.team.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +31,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
 
     private Activity context = this;
     private TextView tv_titile;
-    private ImageView iv_back;
+    private LinearLayout ll_back;
     private ImageView iv_share;
     private TextView tv_team_name;
     private TextView tv_team_captain;
@@ -37,8 +40,10 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private TextView tv_team_location;
     private TextView tv_team_establish_day;
     private TextView tv_team_description;
+    private LinearLayout ll_team_rule;
+    private LinearLayout ll_team_gallery;
+    private Button btn_commit;
 
-    private Bundle extras;
     private final String TAG = "TeamDetailActivity";
     private String selectedTeamId;
 
@@ -56,7 +61,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private void initView() {
         tv_titile = (TextView) findViewById(R.id.tv_title);
         tv_titile.setText("球队资料");
-        iv_back = (ImageView) findViewById(R.id.iv_back);
+        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         iv_share = (ImageView) findViewById(R.id.iv_share);
         tv_team_name = (TextView) findViewById(R.id.tv_team_name);
         tv_team_captain = (TextView) findViewById(R.id.tv_team_captain);
@@ -65,17 +70,23 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         tv_team_location = (TextView) findViewById(R.id.tv_team_location);
         tv_team_establish_day = (TextView) findViewById(R.id.tv_team_establish_day);
         tv_team_description = (TextView) findViewById(R.id.tv_team_description);
+        ll_team_rule = (LinearLayout) findViewById(R.id.ll_team_rule);
+        ll_team_gallery = (LinearLayout) findViewById(R.id.ll_team_gallery);
+        btn_commit = (Button) findViewById(R.id.btn_commit);
     }
 
     private void initLinstener() {
 
         // 初始化控件监听器
-        iv_back.setOnClickListener(this);
+        ll_back.setOnClickListener(this);
         iv_share.setOnClickListener(this);
+        ll_team_rule.setOnClickListener(this);
+        ll_team_gallery.setOnClickListener(this);
+        btn_commit.setOnClickListener(this);
     }
 
     private void initData() {
-        extras = this.getIntent().getExtras();
+        Bundle extras = this.getIntent().getExtras();
         if (extras != null
                 && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_ID)) {
 
@@ -109,11 +120,23 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
+            case R.id.ll_back:
+                finish();
                 break;
             case R.id.iv_share:
                 break;
-
+            case R.id.ll_team_rule:
+                Intent teamRuleIntent = new Intent(context, TeamRuleActivity.class);
+                teamRuleIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                startActivity(teamRuleIntent);
+                break;
+            case R.id.ll_team_gallery:
+                Intent teamGalleryIntent = new Intent(context, TeamGalleryActivity.class);
+                teamGalleryIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                startActivity(teamGalleryIntent);
+                break;
+            case R.id.btn_commit:
+                break;
         }
     }
 

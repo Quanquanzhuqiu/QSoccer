@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/default_layout">
+
+    <!-- TOP BAR-->
+    <include layout="@layout/common_top_title_with_back_photo" />
+
+</LinearLayout>

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     private Context context = this;
     private TextView tv_title;
-    private ImageView iv_back;
+    private LinearLayout ll_back;
     private EditText edt_select_location;
     private EditText edt_phone_no;
     private EditText edt_verify_code;
@@ -68,7 +69,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private void initView() {
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("注册");
-        iv_back = (ImageView) findViewById(R.id.iv_back);
+        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         tv_qqzq_agreement = (TextView) findViewById(R.id.tv_qqzq_agreement);
         edt_select_location = (EditText) findViewById(R.id.edt_select_location);
         edt_phone_no = (EditText) findViewById(R.id.edt_phone_no);
@@ -82,7 +83,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initListener() {
-        iv_back.setOnClickListener(this);
+        ll_back.setOnClickListener(this);
         edt_select_location.setOnClickListener(this);
         btn_verify_code.setOnClickListener(this);
         btn_register.setOnClickListener(this);
@@ -109,8 +110,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
-                RegisterActivity.this.finish();
+            case R.id.ll_back:
+                finish();
             case R.id.edt_select_location:
                 Intent intent = new Intent(context, FindLocationActivity.class);
                 intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "RegisterActivity");

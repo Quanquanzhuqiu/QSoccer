@@ -49,7 +49,7 @@ public class FindTeamActivity extends BaseActivity implements View.OnClickListen
     private List<EntTeamListItem> teamList = new ArrayList<EntTeamListItem>();
     private TeamListViewAdapter listViewAdapter;
 
-    private ImageView iv_back;
+    private LinearLayout ll_back;
     private TextView tv_title;
 
     @Override
@@ -65,7 +65,7 @@ public class FindTeamActivity extends BaseActivity implements View.OnClickListen
 
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("查找球队");
-        iv_back = (ImageView) findViewById(R.id.iv_back);
+        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         ll_find_team = (LinearLayout) findViewById(R.id.ll_find_team);
         pullToRefreshListView = (PullToRefreshView) findViewById(R.id.pull_refresh_listview);
         lv_teams = (ListView) findViewById(R.id.lv_teams);
@@ -78,7 +78,7 @@ public class FindTeamActivity extends BaseActivity implements View.OnClickListen
         listViewAdapter = new TeamListViewAdapter(context, teamList);
         lv_teams.setAdapter(listViewAdapter);
 
-        iv_back.setOnClickListener(this);
+        ll_back.setOnClickListener(this);
         ll_find_team.setOnClickListener(this);
         et_search.setOnEditorActionListener(this);
         pullToRefreshListView.setOnHeaderRefreshListener(this);
@@ -145,7 +145,7 @@ public class FindTeamActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
+            case R.id.ll_back:
                 FindTeamActivity.this.finish();
             case R.id.ll_find_team:
                 et_search.setVisibility(View.VISIBLE);

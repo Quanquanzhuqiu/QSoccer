@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +32,12 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 15/9/20.
  */
-public class SelectTeamActivity extends BaseActivity {
+public class SelectTeamActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private Activity context = this;
     private TextView tv_title;
     private ListView lv_team;
+    private LinearLayout ll_back;
     private TeamListViewAdapter listViewAdapter;
     private List<EntTeamListItem> teamList = new ArrayList<EntTeamListItem>();
     private String prevPageName = "";
@@ -45,47 +47,36 @@ public class SelectTeamActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_team);
 
-        init();
+        initView();
+        initListener();
+        initData();
     }
 
-    private void init() {
-        Bundle extras = context.getIntent().getExtras();
-        if (extras.containsKey(Constants.EXTRA_PREV_PAGE_NAME)) {
-            prevPageName = extras.getString(Constants.EXTRA_PREV_PAGE_NAME);
-            System.out.println(prevPageName);
-        }
+    private void initView() {
 
         tv_title = (TextView) findViewById(R.id.tv_title);
         lv_team = (ListView) findViewById(R.id.lv_team);
         tv_title.setText("选择球队");
+        ll_back = (LinearLayout) findViewById(R.id.ll_back);
 
         listViewAdapter = new TeamListViewAdapter(context, teamList);
         listViewAdapter.setHasDetail(false);
         lv_team.setAdapter(listViewAdapter);
 
 
-        lv_team.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (!teamList.isEmpty() && !TextUtils.isEmpty(prevPageName)) {
+    }
 
-                    Intent intent = null;
-                    if ("GamePublishActivity".equals(prevPageName)) {
-                        intent = new Intent(context, GamePublishActivity.class);
-                    }
+    private void initListener() {
+        lv_team.setOnItemClickListener(this);
+        ll_back.setOnClickListener(this);
+    }
 
-                    if (intent != null) {
-                        EntTeamListItem entTeamListItem = teamList.get(position);
-                        String teamName = entTeamListItem.getTeamName();
-                        String teamId = entTeamListItem.getTeamId();
-
-                        intent.putExtra(Constants.EXTRA_SELECTED_TEAM, teamName);
-                        intent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, teamId);
-                        startActivity(intent);
-                    }
-                }
-            }
-        });
+    private void initData() {
+        Bundle extras = context.getIntent().getExtras();
+        if (extras.containsKey(Constants.EXTRA_PREV_PAGE_NAME)) {
+            prevPageName = extras.getString(Constants.EXTRA_PREV_PAGE_NAME);
+            System.out.println(prevPageName);
+        }
 
         reqeustTeamList();
     }
@@ -135,4 +126,33 @@ public class SelectTeamActivity extends BaseActivity {
         }
     };
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_back:
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (!teamList.isEmpty() && !TextUtils.isEmpty(prevPageName)) {
+
+            Intent intent = null;
+            if ("GamePublishActivity".equals(prevPageName)) {
+                intent = new Intent(context, GamePublishActivity.class);
+            }
+
+            if (intent != null) {
+                EntTeamListItem entTeamListItem = teamList.get(position);
+                String teamName = entTeamListItem.getTeamName();
+                String teamId = entTeamListItem.getTeamId();
+
+                intent.putExtra(Constants.EXTRA_SELECTED_TEAM, teamName);
+                intent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, teamId);
+                startActivity(intent);
+            }
+        }
+    }
 }

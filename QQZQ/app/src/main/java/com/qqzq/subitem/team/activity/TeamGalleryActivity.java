@@ -2,35 +2,30 @@ package com.qqzq.subitem.team.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
 
 /**
- * Created by jie.xiao on 15/9/20.
+ * Created by jie.xiao on 15/9/27.
  */
-public class TeamRuleActivity extends BaseActivity implements View.OnClickListener {
+public class TeamGalleryActivity extends BaseActivity implements View.OnClickListener {
 
     private Activity context = this;
-    private EditText edt_team_rule;
-    private TextView tv_title;
-    private TextView tv_commit;
-    private LinearLayout ll_back;
+    private final String TAG = this.getClass().getSimpleName();
 
-    private final String TAG = "TeamRuleActivity";
+    private LinearLayout ll_back;
+    private LinearLayout ll_take_photo;
+
     private String selectedTeamId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team_rule);
+        setContentView(R.layout.activity_team_gallery);
 
         initView();
         initListener();
@@ -38,19 +33,12 @@ public class TeamRuleActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView() {
-        tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_commit = (TextView) findViewById(R.id.tv_commit);
         ll_back = (LinearLayout) findViewById(R.id.ll_back);
-        edt_team_rule = (EditText) findViewById(R.id.edt_team_rule);
-
-        tv_title.setText("球队章程");
-        tv_commit.setText("发布");
-
-
+        ll_take_photo = (LinearLayout) findViewById(R.id.ll_take_photo);
     }
 
     private void initListener() {
-        tv_commit.setOnClickListener(this);
+        ll_take_photo.setOnClickListener(this);
         ll_back.setOnClickListener(this);
     }
 
@@ -63,11 +51,10 @@ public class TeamRuleActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_commit:
+            case R.id.ll_take_photo:
                 break;
             case R.id.ll_back:
                 finish();
@@ -77,7 +64,4 @@ public class TeamRuleActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    private void prepareRequestJson() {
-
-    }
 }

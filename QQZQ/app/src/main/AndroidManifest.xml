@@ -54,6 +54,9 @@
         <activity
             android:name=".subitem.team.activity.TeamDetailActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".subitem.team.activity.TeamGalleryActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />
