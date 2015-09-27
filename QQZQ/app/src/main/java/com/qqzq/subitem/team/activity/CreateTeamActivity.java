@@ -24,6 +24,7 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.activity.BaseApplication;
 import com.qqzq.activity.MainActivity;
+import com.qqzq.listener.BackButtonListener;
 import com.qqzq.subitem.find.activity.FindLocationActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
@@ -101,7 +102,7 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initListener() {
-        ll_back.setOnClickListener(this);
+        ll_back.setOnClickListener(new BackButtonListener(this));
         iv_logo.setOnClickListener(this);
         ll_commit.setOnClickListener(this);
         edt_team_location.setOnClickListener(this);
@@ -266,9 +267,6 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.ll_back:
-                finish();
-                break;
             case R.id.ll_commit:
                 uploadLogoAndTeamBasicInfo();
                 break;

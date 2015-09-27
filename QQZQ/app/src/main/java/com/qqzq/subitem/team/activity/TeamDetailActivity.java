@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,11 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Cache;
 import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
+import com.qqzq.activity.BaseApplication;
 import com.qqzq.config.Constants;
+import com.qqzq.entity.EntLocationInfo;
 import com.qqzq.entity.EntTeamInfo;
+import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.util.Utils;
@@ -82,7 +87,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private void initLinstener() {
 
         // 初始化控件监听器
-        ll_back.setOnClickListener(this);
+        ll_back.setOnClickListener(new BackButtonListener(this));
         iv_share.setOnClickListener(this);
         ll_team_rule.setOnClickListener(this);
         ll_team_gallery.setOnClickListener(this);
@@ -108,9 +113,14 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         tv_team_captain.setText(entTeamInfo.getTeamleadernm());
         tv_team_game_times.setText(entTeamInfo.getStat());
         tv_team_points.setText(entTeamInfo.getStat());
-        tv_team_location.setText(String.valueOf(entTeamInfo.getOftencity()));
         tv_team_establish_day.setText(Utils.getFormatedSimpleDate(entTeamInfo.getEstablishdate()));
         tv_team_description.setText(entTeamInfo.getSumary());
+
+        EntLocationInfo cityInfo = BaseApplication.locationInfoMap.get(entTeamInfo.getOftencity());
+        EntLocationInfo distinctInfo = BaseApplication.locationInfoMap.get(entTeamInfo.getOftendistinct());
+        if (cityInfo != null && distinctInfo != null) {
+            tv_team_location.setText(String.valueOf(cityInfo.getLocation() + "市" + distinctInfo.getLocation()));
+        }
     }
 
     public void loadTeamDetailFromBackend(String id) {
@@ -126,9 +136,6 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_back:
-                finish();
-                break;
             case R.id.iv_share:
                 break;
             case R.id.ll_team_rule:
@@ -156,7 +163,6 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     ResponseListener findTeamResponseListener = new ResponseListener<EntTeamInfo>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            showLongToast(context, volleyError.toString());
         }
 
         @Override

@@ -18,6 +18,7 @@ import com.qqzq.activity.RegisterActivity;
 import com.qqzq.adapter.LocationListViewAdapter;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntLocationInfo;
+import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.team.activity.CreateTeamActivity;
@@ -29,7 +30,7 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 9/8/2015.
  */
-public class FindLocationActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class FindLocationActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private Context context = this;
     private TextView tv_title;
@@ -65,7 +66,7 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
 
     private void initListener() {
         lv_location.setOnItemClickListener(this);
-        ll_back.setOnClickListener(this);
+        ll_back.setOnClickListener(new BackButtonListener(this));
     }
 
     private void initData() {
@@ -157,8 +158,4 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        finish();
-    }
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -45,14 +46,8 @@ public class BaseActivity extends Activity {
         RequestManager.addRequest(request, this);
     }
 
-    protected Response.ErrorListener errorListener() {
-        return new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error.getMessage());
-                Toast.makeText(activity, error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        };
+    protected Cache.Entry getRequestCache(String url) {
+        return RequestManager.getRequestQueue().getCache().get(url);
     }
 
 

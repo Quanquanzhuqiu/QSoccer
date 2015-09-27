@@ -17,6 +17,7 @@ import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntTeamListItem;
+import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.game.activity.GamePublishActivity;
@@ -32,7 +33,7 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 15/9/20.
  */
-public class SelectTeamActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class SelectTeamActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private Activity context = this;
     private TextView tv_title;
@@ -68,7 +69,7 @@ public class SelectTeamActivity extends BaseActivity implements AdapterView.OnIt
 
     private void initListener() {
         lv_team.setOnItemClickListener(this);
-        ll_back.setOnClickListener(this);
+        ll_back.setOnClickListener(new BackButtonListener(this));
     }
 
     private void initData() {
@@ -123,14 +124,6 @@ public class SelectTeamActivity extends BaseActivity implements AdapterView.OnIt
         }
     };
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_back:
-                finish();
-                break;
-        }
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

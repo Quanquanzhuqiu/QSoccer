@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
+import com.qqzq.listener.BackButtonListener;
 
 /**
  * Created by jie.xiao on 15/9/27.
@@ -39,7 +40,7 @@ public class TeamGalleryActivity extends BaseActivity implements View.OnClickLis
 
     private void initListener() {
         ll_take_photo.setOnClickListener(this);
-        ll_back.setOnClickListener(this);
+        ll_back.setOnClickListener(new BackButtonListener(this));
     }
 
     private void initData() {
@@ -55,9 +56,6 @@ public class TeamGalleryActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_take_photo:
-                break;
-            case R.id.ll_back:
-                finish();
                 break;
             default:
                 break;

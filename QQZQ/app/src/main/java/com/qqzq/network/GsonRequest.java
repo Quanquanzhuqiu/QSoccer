@@ -41,6 +41,11 @@ public class GsonRequest<T> extends Request<T> {
         this(Method.GET, url, clazz, null, null, listener);
     }
 
+    public GsonRequest(String url, Class<T> clazz, ResponseListener listener, boolean shouldCache) {
+        this(Method.GET, url, clazz, null, null, listener);
+        setShouldCache(shouldCache);
+    }
+
     public GsonRequest(int method, String url, Class<T> clazz, Map<String, String> headers, Map<String, Object> parameters,
                        ResponseListener listener) {
         super(method, url, listener);

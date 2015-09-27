@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.R;
+import com.qqzq.listener.BackButtonListener;
 import com.qqzq.subitem.team.activity.CreateTeamActivity;
 import com.qqzq.subitem.team.activity.TeamDetailActivity;
 import com.qqzq.subitem.team.adapter.TeamListViewAdapter;
@@ -78,7 +79,7 @@ public class FindTeamActivity extends BaseActivity implements View.OnClickListen
         listViewAdapter = new TeamListViewAdapter(context, teamList);
         lv_teams.setAdapter(listViewAdapter);
 
-        ll_back.setOnClickListener(this);
+        ll_back.setOnClickListener(new BackButtonListener(this));
         ll_find_team.setOnClickListener(this);
         et_search.setOnEditorActionListener(this);
         pullToRefreshListView.setOnHeaderRefreshListener(this);
@@ -145,8 +146,6 @@ public class FindTeamActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_back:
-                FindTeamActivity.this.finish();
             case R.id.ll_find_team:
                 et_search.setVisibility(View.VISIBLE);
                 break;

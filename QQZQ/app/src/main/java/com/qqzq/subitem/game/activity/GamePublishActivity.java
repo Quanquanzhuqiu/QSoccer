@@ -23,6 +23,7 @@ import com.qqzq.activity.MainActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntGameInfo;
+import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.team.activity.SelectTeamActivity;
@@ -131,7 +132,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
 
         // 初始化控件监听器
         ll_commit.setOnClickListener(this);
-        ll_back.setOnClickListener(this);
+        ll_back.setOnClickListener(new BackButtonListener(this));
         tv_select_team.setOnClickListener(this);
         edt_game_date.setOnClickListener(this);
         edt_game_location.setOnClickListener(this);
@@ -163,9 +164,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_back:
-                finish();
-                break;
             case R.id.ll_commit:
                 if (formCheck()) {
                     commitToBackend();

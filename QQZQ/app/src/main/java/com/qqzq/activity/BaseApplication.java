@@ -4,9 +4,17 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
+import com.android.volley.VolleyError;
 import com.qqzq.config.Constants;
+import com.qqzq.entity.EntLocationInfo;
+import com.qqzq.network.GsonRequest;
 import com.qqzq.network.RequestManager;
+import com.qqzq.network.ResponseListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.smssdk.SMSSDK;
 
@@ -26,6 +34,9 @@ public class BaseApplication extends Application {
     public static String QQZQ_PASSWORD = "";
     public static String QQZQ_TOKENT = "";
     public static SharedPreferences spQQZQ;
+    private final String TAG = "BaseApplication";
+
+    public static Map<String, EntLocationInfo> locationInfoMap = new HashMap<>();
 
     public static BaseApplication getInstance() {
 
@@ -36,6 +47,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         init();
+        initBasicData();
     }
 
     private void init() {
@@ -117,6 +129,27 @@ public class BaseApplication extends Application {
         setPassword(null);
 //		setContactList(null);
 
+    }
+
+    public void initBasicData() {
+        GsonRequest gsonRequest = new GsonRequest<EntLocationInfo[]>(Constants.API_FIND_NATIONS_URL, EntLocationInfo[].class,
+                new ResponseListener<EntLocationInfo[]>() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.e(TAG, volleyError.toString());
+                    }
+
+                    @Override
+                    public void onResponse(EntLocationInfo[] entLocationInfos) {
+                        Log.i(TAG, "找到地区->" + entLocationInfos.length);
+
+                        locationInfoMap.clear();
+                        for (EntLocationInfo entLocationInfo : entLocationInfos) {
+                            locationInfoMap.put(entLocationInfo.getId(), entLocationInfo);
+                        }
+                    }
+                }, true);
+        RequestManager.getRequestQueue().add(gsonRequest);
     }
 
 }

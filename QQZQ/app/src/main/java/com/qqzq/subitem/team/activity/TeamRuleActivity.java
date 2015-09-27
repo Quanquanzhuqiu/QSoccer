@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
+import com.qqzq.listener.BackButtonListener;
 
 /**
  * Created by jie.xiao on 15/9/20.
@@ -51,7 +52,7 @@ public class TeamRuleActivity extends BaseActivity implements View.OnClickListen
 
     private void initListener() {
         tv_commit.setOnClickListener(this);
-        ll_back.setOnClickListener(this);
+        ll_back.setOnClickListener(new BackButtonListener(this));
     }
 
     private void initData() {
@@ -68,9 +69,6 @@ public class TeamRuleActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_commit:
-                break;
-            case R.id.ll_back:
-                finish();
                 break;
             default:
                 break;

@@ -13,6 +13,7 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamMember;
+import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.team.adapter.TeamMemberListViewAdapter;
@@ -63,7 +64,7 @@ public class TeamMemberActivity extends BaseActivity implements AdapterView.OnIt
 
     private void initListener() {
         tv_commit.setOnClickListener(this);
-        ll_back.setOnClickListener(this);
+        ll_back.setOnClickListener(new BackButtonListener(this));
     }
 
     private void initData() {
@@ -83,7 +84,7 @@ public class TeamMemberActivity extends BaseActivity implements AdapterView.OnIt
         }
 //        memberList = Arrays.asList(entTeamMembers);
         memberList.clear();
-        for(EntTeamMember entTeamMember:entTeamMembers){
+        for (EntTeamMember entTeamMember : entTeamMembers) {
             memberList.add(entTeamMember);
         }
         listViewAdapter.notifyDataSetChanged();
@@ -93,9 +94,6 @@ public class TeamMemberActivity extends BaseActivity implements AdapterView.OnIt
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_commit:
-                break;
-            case R.id.ll_back:
-                finish();
                 break;
             default:
                 break;
