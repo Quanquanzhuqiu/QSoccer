@@ -104,10 +104,7 @@ public class SelectTeamActivity extends BaseActivity implements AdapterView.OnIt
             entTeamListItem.setTeamName(entTeamInfo.getTeamname());
             entTeamListItem.setTeamCaptain(entTeamInfo.getTeamleaderusrrnm());
             entTeamListItem.setTeamMembers(entTeamInfo.getOftensoccerpernum());
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(entTeamInfo.getEstablishdate());
-            String establishDay = calendar.get(Calendar.YEAR) + "年" + calendar.get(Calendar.MONTH) + "月" + calendar.get(Calendar.DAY_OF_MONTH) + "日";
-            entTeamListItem.setTeamEstablishDay(establishDay);
+            entTeamListItem.setTeamEstablishDay(Utils.getFormatedSimpleDate(entTeamInfo.getEstablishdate()));
             teamList.add(entTeamListItem);
         }
 

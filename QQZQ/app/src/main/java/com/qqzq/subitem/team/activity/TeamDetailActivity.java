@@ -42,6 +42,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private TextView tv_team_description;
     private LinearLayout ll_team_rule;
     private LinearLayout ll_team_gallery;
+    private LinearLayout ll_team_member;
+    private LinearLayout ll_game_list;
     private Button btn_commit;
 
     private final String TAG = "TeamDetailActivity";
@@ -72,6 +74,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         tv_team_description = (TextView) findViewById(R.id.tv_team_description);
         ll_team_rule = (LinearLayout) findViewById(R.id.ll_team_rule);
         ll_team_gallery = (LinearLayout) findViewById(R.id.ll_team_gallery);
+        ll_game_list = (LinearLayout) findViewById(R.id.ll_game_list);
+        ll_team_member = (LinearLayout) findViewById(R.id.ll_team_member);
         btn_commit = (Button) findViewById(R.id.btn_commit);
     }
 
@@ -82,6 +86,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         iv_share.setOnClickListener(this);
         ll_team_rule.setOnClickListener(this);
         ll_team_gallery.setOnClickListener(this);
+        ll_game_list.setOnClickListener(this);
+        ll_team_member.setOnClickListener(this);
         btn_commit.setOnClickListener(this);
     }
 
@@ -134,6 +140,13 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
                 Intent teamGalleryIntent = new Intent(context, TeamGalleryActivity.class);
                 teamGalleryIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
                 startActivity(teamGalleryIntent);
+                break;
+            case R.id.ll_team_member:
+                Intent teamMemberIntent = new Intent(context, TeamMemberActivity.class);
+                teamMemberIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                startActivity(teamMemberIntent);
+                break;
+            case R.id.ll_game_list:
                 break;
             case R.id.btn_commit:
                 break;

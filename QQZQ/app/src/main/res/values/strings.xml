@@ -160,6 +160,12 @@
     <string name="game_description">活动介绍</string>
     <string name="game_description_hint">请输入本次活动的简介</string>
 
+    <!-- 球队成员页面-->
+    <string name="member_name">队员：</string>
+    <string name="member_on_duty_times">出勤次数：</string>
+    <string name="member_points">积分：</string>
+    <string name="member_join_date">加入时间：</string>
+
     <!-- pull to refresh txt -->
     <string name="pull_to_refresh_pull_label">下拉刷新</string>
     <string name="pull_to_refresh_release_label">释放刷新</string>

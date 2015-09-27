@@ -158,6 +158,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ll_team_member"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -167,7 +168,8 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/ic_team_member" />
+                        android:background="@drawable/ic_team_member"
+                        android:gravity="center" />
 
                     <TextView
                         style="@style/tv_detail_item_label3"
@@ -175,9 +177,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_game_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageView
@@ -188,7 +192,7 @@
 
                     <TextView
                         style="@style/tv_detail_item_label3"
-                        android:text="@string/team_detail_gallery" />
+                        android:text="@string/team_detail_game_list" />
                 </LinearLayout>
 
 
@@ -225,8 +229,8 @@
 
 
                 <LinearLayout
-                    style="@style/ll_detail_content"
                     android:id="@+id/ll_team_gallery"
+                    style="@style/ll_detail_content"
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="16dp"
@@ -327,8 +331,8 @@
             </LinearLayout>
 
             <Button
-                style="@style/login_buttons"
                 android:id="@+id/btn_commit"
+                style="@style/login_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/bg_login"

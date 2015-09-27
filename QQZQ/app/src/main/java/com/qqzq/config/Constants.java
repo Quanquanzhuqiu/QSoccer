@@ -77,13 +77,15 @@ public class Constants {
     public static final String API_FIND_PROVINCE_URL = API_SERVER_HOST + "/system/provinces";
     public static final String API_FIND_CITY_URL = API_SERVER_HOST + "/system/citys";
 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~ 注册球队部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~ 球队部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队
     public static final String API_CREATE_TEAM_URL = API_SERVER_HOST + "/team/teams";
     //根据条件查询球队信息
     public static final String API_FIND_TEAM_URL = API_SERVER_HOST + "/team/teams";
     //根据球队id获取球队详细信息
     public static final String API_FIND_TEAM_BY_ID_URL = API_SERVER_HOST + "/team/teams/{0}";
+    //根据球队id查询球队成员信息
+    public static final String API_FIND_TEAM_MEMBER_BY_ID_URL = API_SERVER_HOST + "/team/teams/{0}/members";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 活动发起部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队

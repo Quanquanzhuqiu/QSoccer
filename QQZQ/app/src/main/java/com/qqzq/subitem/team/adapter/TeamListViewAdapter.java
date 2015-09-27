@@ -14,6 +14,7 @@ import com.qqzq.R;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamListItem;
 import com.qqzq.network.RequestManager;
+import com.qqzq.util.Utils;
 
 import java.util.List;
 
@@ -66,7 +67,7 @@ public class TeamListViewAdapter extends BaseAdapter {
         // 初始化item view
         if (convertView == null) {
             // 通过LayoutInflater将xml中定义的视图实例化到一个View中
-            convertView = LayoutInflater.from(context).inflate(R.layout.row_select_team_list, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_lv_team, null);
             // 实例化一个封装类ListItemView，并实例化它的所有域
             viewHolder = new ViewHolder();
             viewHolder.iv_logo = (ImageView) convertView.findViewById(R.id.iv_team_list_logo);
@@ -96,10 +97,10 @@ public class TeamListViewAdapter extends BaseAdapter {
             } else {
                 displayUrlImg(viewHolder.iv_logo, logoUrl);
             }
-            viewHolder.tv_team_name.setText(context.getResources().getString(R.string.find_team_team_name) + teamName);
-            viewHolder.tv_team_captain.setText(context.getResources().getString(R.string.find_team_team_captain) + teamCaptain);
-            viewHolder.tv_team_members.setText(context.getResources().getString(R.string.find_team_team_members) + teamMembers);
-            viewHolder.tv_team_establish_day.setText(context.getResources().getString(R.string.find_team_establish_day) + teamEstablishDay);
+            viewHolder.tv_team_name.setText(teamName);
+            viewHolder.tv_team_captain.setText(teamCaptain);
+            viewHolder.tv_team_members.setText(teamMembers);
+            viewHolder.tv_team_establish_day.setText(teamEstablishDay);
             viewHolder.iv_team_detail.setVisibility(hasDetail ? View.VISIBLE : View.GONE);
         }
 
