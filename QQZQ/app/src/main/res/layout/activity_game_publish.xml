@@ -198,27 +198,27 @@
 
 
                         <RadioButton
-                            android:id="@+id/rbtn_game_court_type_5"
+                            android:id="@+id/rbtn_soccer_person_type_5"
                             style="@style/my_radio_button"
-                            android:text="@string/game_court_type_5" />
+                            android:text="@string/soccer_person_type_5" />
 
                         <RadioButton
-                            android:id="@+id/rbtn_game_court_type_7"
+                            android:id="@+id/rbtn_soccer_person_type_7"
                             style="@style/my_radio_button"
                             android:layout_marginLeft="10dp"
-                            android:text="@string/game_court_type_7" />
+                            android:text="@string/soccer_person_type_7" />
 
                         <RadioButton
-                            android:id="@+id/rbtn_game_court_type_9"
+                            android:id="@+id/rbtn_soccer_person_type_9"
                             style="@style/my_radio_button"
                             android:layout_marginLeft="10dp"
-                            android:text="@string/game_court_type_9" />
+                            android:text="@string/soccer_person_type_9" />
 
                         <RadioButton
-                            android:id="@+id/rbtn_game_court_type_11"
+                            android:id="@+id/rbtn_soccer_person_type_11"
                             style="@style/my_radio_button"
                             android:layout_marginLeft="10dp"
-                            android:text="@string/game_court_type_11" />
+                            android:text="@string/soccer_person_type_11" />
 
                     </RadioGroup>
                 </LinearLayout>
@@ -246,103 +246,114 @@
 
                     <TextView
                         style="@style/create_team_basic_info_label"
-                        android:text="@string/game_cost" />
+                        android:text="@string/game_pay" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/rbtn_game_cost_average"
+                        android:id="@+id/rbtn_game_pay_average"
                         style="@style/my_radio_button"
                         android:layout_marginLeft="25dp"
-                        android:text="@string/game_cost_average" />
+                        android:text="@string/game_pay_average" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+
+                    <EditText
+                        android:id="@+id/edt_game_pay_average"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/game_cost_average_hint"
+                        android:enabled="false"
+                        android:hint="@string/game_pay_average_hint"
+                        android:inputType="numberDecimal"
                         android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/rbtn_game_cost_fixed"
+                        android:id="@+id/rbtn_game_pay_fixed"
                         style="@style/my_radio_button"
                         android:layout_marginLeft="25dp"
-                        android:text="@string/game_cost_fixed" />
+                        android:text="@string/game_pay_fixed" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/edt_game_pay_fixed"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/game_cost_fixed_hint"
+                        android:enabled="false"
+                        android:hint="@string/game_pay_fixed_hint"
+                        android:inputType="numberDecimal"
                         android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/rbtn_game_cost_member_charge"
+                        android:id="@+id/rbtn_game_pay_member_charge"
                         style="@style/my_radio_button"
                         android:layout_marginLeft="25dp"
-                        android:text="@string/game_cost_member_charge" />
+                        android:text="@string/game_pay_member_charge" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/edt_game_pay_member_charge"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/game_cost_member_charge_hint"
+                        android:enabled="false"
+                        android:hint="@string/game_pay_member_charge_hint"
+                        android:inputType="numberDecimal"
                         android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ll_game_cost_member_no_registrator"
+                    android:id="@+id/ll_game_pay_member_no_registrator"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
+                    android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:visibility="gone">
 
                     <RadioButton
-                        android:id="@+id/rbtn_game_cost_member_no_registrator"
+                        android:id="@+id/rbtn_game_pay_member_no_registrator"
                         style="@style/my_radio_button"
-                        android:text="@string/game_cost_member_no_registrator" />
+                        android:text="@string/game_pay_member_no_registrator" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/game_cost_member_no_registrator_hint"
+                        android:text="@string/game_pay_member_no_registrator_hint"
                         android:textSize="12sp" />
                 </LinearLayout>
 
 
                 <LinearLayout
-                    android:id="@+id/ll_game_cost_member_link_registrator"
+                    android:id="@+id/ll_game_pay_member_link_registrator"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal"
                     android:visibility="gone">
 
                     <RadioButton
-                        android:id="@+id/rbtn_game_cost_member_link_registrator"
+                        android:id="@+id/rbtn_game_pay_member_link_registrator"
                         style="@style/my_radio_button"
                         android:layout_marginTop="5dp"
-                        android:text="@string/game_cost_member_link_registrator" />
+                        android:text="@string/game_pay_member_link_registrator" />
 
                 </LinearLayout>
 

@@ -120,7 +120,7 @@
                         android:id="@+id/tv_team_location"
                         style="@style/create_team_basic_info_label"
                         android:layout_width="wrap_content"
-                        android:text="成都武侯区"
+                        android:text=""
                         android:textColor="@color/rgb_163_163_163"
                         android:textSize="14sp" />
 

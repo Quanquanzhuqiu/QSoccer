@@ -116,10 +116,13 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         tv_team_establish_day.setText(Utils.getFormatedSimpleDate(entTeamInfo.getEstablishdate()));
         tv_team_description.setText(entTeamInfo.getSumary());
 
-        EntLocationInfo cityInfo = BaseApplication.locationInfoMap.get(entTeamInfo.getOftencity());
-        EntLocationInfo distinctInfo = BaseApplication.locationInfoMap.get(entTeamInfo.getOftendistinct());
+
+        EntLocationInfo cityInfo = BaseApplication.locationInfoMap.get(String.valueOf(entTeamInfo.getOftencity()));
+        EntLocationInfo distinctInfo = BaseApplication.locationInfoMap.get(String.valueOf(entTeamInfo.getOftendistinct()));
+        System.out.println(cityInfo);
+        System.out.println(distinctInfo);
         if (cityInfo != null && distinctInfo != null) {
-            tv_team_location.setText(String.valueOf(cityInfo.getLocation() + "市" + distinctInfo.getLocation()));
+            tv_team_location.setText(String.valueOf(cityInfo.getLocation() + " " + distinctInfo.getLocation()));
         }
     }
 

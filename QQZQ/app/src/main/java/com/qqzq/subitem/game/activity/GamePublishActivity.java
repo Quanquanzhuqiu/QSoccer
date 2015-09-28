@@ -48,16 +48,19 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private EditText edt_game_date;
     private RadioButton rbtn_game_type_public;
     private RadioButton rbtn_game_type_private;
-    private RadioButton rbtn_game_court_type_5;
-    private RadioButton rbtn_game_court_type_7;
-    private RadioButton rbtn_game_court_type_9;
-    private RadioButton rbtn_game_court_type_11;
+    private RadioButton rbtn_soccer_person_type_5;
+    private RadioButton rbtn_soccer_person_type_7;
+    private RadioButton rbtn_soccer_person_type_9;
+    private RadioButton rbtn_soccer_person_type_11;
     private CheckBox cbox_eat_and_play;
-    private RadioButton rbtn_game_cost_average;
-    private RadioButton rbtn_game_cost_fixed;
-    private RadioButton rbtn_game_cost_member_charge;
-    private RadioButton rbtn_game_cost_member_no_registrator;
-    private RadioButton rbtn_game_cost_member_link_registrator;
+    private RadioButton rbtn_game_pay_average;
+    private RadioButton rbtn_game_pay_fixed;
+    private RadioButton rbtn_game_pay_member_charge;
+    private RadioButton rbtn_game_pay_member_no_registrator;
+    private RadioButton rbtn_game_pay_member_link_registrator;
+    private EditText edt_game_pay_average;
+    private EditText edt_game_pay_fixed;
+    private EditText edt_game_pay_member_charge;
     private EditText edt_game_registrator_upper_limit;
     private EditText edt_game_registrator_lower_limit;
     private EditText edt_game_description;
@@ -65,8 +68,8 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private TextView tv_selected_team;
     private LinearLayout ll_game_publish;
     private LinearLayout ll_select_team;
-    private LinearLayout ll_game_cost_member_no_registrator;
-    private LinearLayout ll_game_cost_member_link_registrator;
+    private LinearLayout ll_game_pay_member_no_registrator;
+    private LinearLayout ll_game_pay_member_link_registrator;
 
     private TimePickerWindow timePickerWindow; // 时间选择器窗口
 
@@ -104,16 +107,19 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         edt_game_date = (EditText) findViewById(R.id.edt_game_date);
         rbtn_game_type_public = (RadioButton) findViewById(R.id.rbtn_game_type_public);
         rbtn_game_type_private = (RadioButton) findViewById(R.id.rbtn_game_type_private);
-        rbtn_game_court_type_5 = (RadioButton) findViewById(R.id.rbtn_game_court_type_5);
-        rbtn_game_court_type_7 = (RadioButton) findViewById(R.id.rbtn_game_court_type_7);
-        rbtn_game_court_type_9 = (RadioButton) findViewById(R.id.rbtn_game_court_type_9);
-        rbtn_game_court_type_11 = (RadioButton) findViewById(R.id.rbtn_game_court_type_11);
+        rbtn_soccer_person_type_5 = (RadioButton) findViewById(R.id.rbtn_soccer_person_type_5);
+        rbtn_soccer_person_type_7 = (RadioButton) findViewById(R.id.rbtn_soccer_person_type_7);
+        rbtn_soccer_person_type_9 = (RadioButton) findViewById(R.id.rbtn_soccer_person_type_9);
+        rbtn_soccer_person_type_11 = (RadioButton) findViewById(R.id.rbtn_soccer_person_type_11);
         cbox_eat_and_play = (CheckBox) findViewById(R.id.cbox_eat_and_play);
-        rbtn_game_cost_fixed = (RadioButton) findViewById(R.id.rbtn_game_cost_fixed);
-        rbtn_game_cost_average = (RadioButton) findViewById(R.id.rbtn_game_cost_average);
-        rbtn_game_cost_member_charge = (RadioButton) findViewById(R.id.rbtn_game_cost_member_charge);
-        rbtn_game_cost_member_no_registrator = (RadioButton) findViewById(R.id.rbtn_game_cost_member_no_registrator);
-        rbtn_game_cost_member_link_registrator = (RadioButton) findViewById(R.id.rbtn_game_cost_member_link_registrator);
+        rbtn_game_pay_fixed = (RadioButton) findViewById(R.id.rbtn_game_pay_fixed);
+        rbtn_game_pay_average = (RadioButton) findViewById(R.id.rbtn_game_pay_average);
+        rbtn_game_pay_member_charge = (RadioButton) findViewById(R.id.rbtn_game_pay_member_charge);
+        rbtn_game_pay_member_no_registrator = (RadioButton) findViewById(R.id.rbtn_game_pay_member_no_registrator);
+        rbtn_game_pay_member_link_registrator = (RadioButton) findViewById(R.id.rbtn_game_pay_member_link_registrator);
+        edt_game_pay_average = (EditText) findViewById(R.id.edt_game_pay_average);
+        edt_game_pay_fixed = (EditText) findViewById(R.id.edt_game_pay_fixed);
+        edt_game_pay_member_charge = (EditText) findViewById(R.id.edt_game_pay_member_charge);
         edt_game_registrator_upper_limit = (EditText) findViewById(R.id.edt_game_registrator_upper_limit);
         edt_game_registrator_lower_limit = (EditText) findViewById(R.id.edt_game_registrator_lower_limit);
         edt_game_description = (EditText) findViewById(R.id.edt_game_description);
@@ -121,8 +127,8 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         tv_selected_team = (TextView) findViewById(R.id.tv_selected_team);
         ll_game_publish = (LinearLayout) findViewById(R.id.ll_game_publish);
         ll_select_team = (LinearLayout) findViewById(R.id.ll_select_team);
-        ll_game_cost_member_no_registrator = (LinearLayout) findViewById(R.id.ll_game_cost_member_no_registrator);
-        ll_game_cost_member_link_registrator = (LinearLayout) findViewById(R.id.ll_game_cost_member_link_registrator);
+        ll_game_pay_member_no_registrator = (LinearLayout) findViewById(R.id.ll_game_pay_member_no_registrator);
+        ll_game_pay_member_link_registrator = (LinearLayout) findViewById(R.id.ll_game_pay_member_link_registrator);
 
         timePickerWindow = new TimePickerWindow(GamePublishActivity.this, null);
         timePickerWindow.dismiss();
@@ -138,9 +144,9 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         edt_game_location.setOnClickListener(this);
         rbtn_game_type_private.setOnClickListener(this);
         rbtn_game_type_public.setOnClickListener(this);
-        rbtn_game_cost_member_charge.setOnClickListener(this);
-        rbtn_game_cost_average.setOnClickListener(this);
-        rbtn_game_cost_fixed.setOnClickListener(this);
+        rbtn_game_pay_member_charge.setOnClickListener(this);
+        rbtn_game_pay_average.setOnClickListener(this);
+        rbtn_game_pay_fixed.setOnClickListener(this);
     }
 
     /**
@@ -185,23 +191,32 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
                 rbtn_game_type_public.setChecked(false);
                 ll_select_team.setVisibility(View.GONE);
                 break;
-            case R.id.rbtn_game_cost_member_charge:
-                rbtn_game_cost_average.setChecked(false);
-                rbtn_game_cost_fixed.setChecked(false);
-                ll_game_cost_member_no_registrator.setVisibility(View.VISIBLE);
-                ll_game_cost_member_link_registrator.setVisibility(View.VISIBLE);
+            case R.id.rbtn_game_pay_member_charge:
+                rbtn_game_pay_average.setChecked(false);
+                rbtn_game_pay_fixed.setChecked(false);
+                ll_game_pay_member_no_registrator.setVisibility(View.VISIBLE);
+                ll_game_pay_member_link_registrator.setVisibility(View.VISIBLE);
+                edt_game_pay_average.setEnabled(false);
+                edt_game_pay_fixed.setEnabled(false);
+                edt_game_pay_member_charge.setEnabled(true);
                 break;
-            case R.id.rbtn_game_cost_average:
-                rbtn_game_cost_member_charge.setChecked(false);
-                rbtn_game_cost_fixed.setChecked(false);
-                ll_game_cost_member_no_registrator.setVisibility(View.GONE);
-                ll_game_cost_member_link_registrator.setVisibility(View.GONE);
+            case R.id.rbtn_game_pay_average:
+                rbtn_game_pay_member_charge.setChecked(false);
+                rbtn_game_pay_fixed.setChecked(false);
+                ll_game_pay_member_no_registrator.setVisibility(View.GONE);
+                ll_game_pay_member_link_registrator.setVisibility(View.GONE);
+                edt_game_pay_average.setEnabled(true);
+                edt_game_pay_fixed.setEnabled(false);
+                edt_game_pay_member_charge.setEnabled(false);
                 break;
-            case R.id.rbtn_game_cost_fixed:
-                rbtn_game_cost_member_charge.setChecked(false);
-                rbtn_game_cost_average.setChecked(false);
-                ll_game_cost_member_no_registrator.setVisibility(View.GONE);
-                ll_game_cost_member_link_registrator.setVisibility(View.GONE);
+            case R.id.rbtn_game_pay_fixed:
+                rbtn_game_pay_member_charge.setChecked(false);
+                rbtn_game_pay_average.setChecked(false);
+                ll_game_pay_member_no_registrator.setVisibility(View.GONE);
+                ll_game_pay_member_link_registrator.setVisibility(View.GONE);
+                edt_game_pay_fixed.setEnabled(true);
+                edt_game_pay_average.setEnabled(false);
+                edt_game_pay_member_charge.setEnabled(false);
                 break;
             case R.id.edt_game_date:
                 timePickerWindow.showAtLocation(ll_game_publish,
@@ -244,31 +259,31 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         }
 
         int soccerpersonnum = -1;
-        if (rbtn_game_court_type_5.isChecked()) {
+        if (rbtn_soccer_person_type_5.isChecked()) {
             soccerpersonnum = 5;
-        } else if (rbtn_game_court_type_7.isChecked()) {
+        } else if (rbtn_soccer_person_type_7.isChecked()) {
             soccerpersonnum = 7;
-        } else if (rbtn_game_court_type_9.isChecked()) {
+        } else if (rbtn_soccer_person_type_9.isChecked()) {
             soccerpersonnum = 9;
-        } else if (rbtn_game_court_type_11.isChecked()) {
+        } else if (rbtn_soccer_person_type_11.isChecked()) {
             soccerpersonnum = 11;
         }
 
         boolean eatAndPlay = (cbox_eat_and_play.isChecked()) ? true : false;
 
-        int gameCostType = -1;
-        if (rbtn_game_cost_average.isChecked()) {
-            gameCostType = 1;
-        } else if (rbtn_game_cost_fixed.isChecked()) {
-            gameCostType = 2;
-        } else if (rbtn_game_cost_member_charge.isChecked()) {
-            gameCostType = 3;
+        int gamepayType = -1;
+        if (rbtn_game_pay_average.isChecked()) {
+            gamepayType = 1;
+        } else if (rbtn_game_pay_fixed.isChecked()) {
+            gamepayType = 2;
+        } else if (rbtn_game_pay_member_charge.isChecked()) {
+            gamepayType = 3;
         }
 
         boolean relatelist = true;
-        if (rbtn_game_cost_member_no_registrator.isChecked()) {
+        if (rbtn_game_pay_member_no_registrator.isChecked()) {
             relatelist = false;
-        } else if (rbtn_game_cost_member_link_registrator.isChecked()) {
+        } else if (rbtn_game_pay_member_link_registrator.isChecked()) {
             relatelist = true;
         }
 
@@ -293,7 +308,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         entGameInfo.setPersonmaxlimit(personMaxLimit);
         entGameInfo.setPersonminlimit(personMinLimit);
         entGameInfo.setActtype(gameType);
-        entGameInfo.setActpaytype(gameCostType);
+        entGameInfo.setActpaytype(gamepayType);
         entGameInfo.setIsrelatelist(relatelist);
         entGameInfo.setSoccerpersonnum(soccerpersonnum);
         entGameInfo.setIsdinner(eatAndPlay);
@@ -325,8 +340,8 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         edt_game_name.setText("周末约球");
         edt_game_location.setText("天府四街");
         rbtn_game_type_private.setChecked(true);
-        rbtn_game_court_type_7.setChecked(true);
-        rbtn_game_cost_fixed.setChecked(true);
+        rbtn_soccer_person_type_7.setChecked(true);
+        rbtn_game_pay_fixed.setChecked(true);
         edt_game_registrator_lower_limit.setText("5");
         edt_game_description.setText("周末约球活动简介，与老曼联比赛。");
     }
