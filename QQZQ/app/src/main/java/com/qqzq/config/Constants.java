@@ -60,7 +60,7 @@ public class Constants {
     public static final String FILE_SERVER_HOST = "http://121.43.229.24/";
     public static final String API_SERVER_HOST = "http://121.43.229.24:8080/qqzq/rest";
     public static final String IMAGE_PHOTO_TMP_PATH = Environment.getExternalStorageDirectory().getPath() + "/qqzq/tmp/";
-    public static final String PNG_PHOTO_TMP_PATH = "/qqzq/tmp/";
+    public static final String DB_PATH = Environment.getExternalStorageDirectory().getPath() + "/qqzq/db/";
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 注册认证部分 ~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -11,6 +11,7 @@ import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.qqzq.db.DbOpenHelper;
 import com.qqzq.network.RequestManager;
 
 import cn.smssdk.SMSSDK;
@@ -31,15 +32,7 @@ public class BaseActivity extends Activity {
     @Override
     public void onStop() {
         super.onStop();
-        try {
-            System.out.println("Cancel all json request!!!");
-            RequestManager.cancelAll(this);
 
-            //主要所有SMSSDK监听事件
-            SMSSDK.unregisterAllEventHandler();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     protected void executeRequest(Request<?> request) {

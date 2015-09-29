@@ -19,6 +19,8 @@ import com.qqzq.util.json.ObjectDeserializer;
 
 import java.util.BitSet;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -51,10 +53,15 @@ public class GsonRequest<T> extends Request<T> {
         super(method, url, listener);
         Log.i(TAG, url);
         this.mClazz = clazz;
-        this.mHeaders = headers;
         this.mParameters = parameters;
         this.mListener = listener;
         setShouldCache(false);
+
+        if (headers == null) {
+            headers = new HashMap<>();
+            headers.put("User-Agent", "Android");
+        }
+        this.mHeaders = headers;
 
         // Gson init
         this.mGson = new GsonBuilder()

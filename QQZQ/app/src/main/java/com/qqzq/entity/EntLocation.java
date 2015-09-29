@@ -1,5 +1,7 @@
 package com.qqzq.entity;
 
+import android.text.TextUtils;
+
 /**
  * Created by jie.xiao on 9/29/2015.
  */
@@ -57,5 +59,15 @@ public class EntLocation {
 
     public void setParent(String parent) {
         this.parent = parent;
+    }
+
+    public String getLocation() {
+        if (!TextUtils.isEmpty(province)) {
+            return province;
+        } else if (!TextUtils.isEmpty(city)) {
+            return city;
+        } else {
+            return district;
+        }
     }
 }

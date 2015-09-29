@@ -10,13 +10,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.Cache;
 import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
-import com.qqzq.activity.BaseApplication;
 import com.qqzq.config.Constants;
-import com.qqzq.entity.EntLocationDto;
+import com.qqzq.db.LocationDao;
+import com.qqzq.entity.EntLocation;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
@@ -112,9 +111,10 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         tv_team_establish_day.setText(Utils.getFormatedSimpleDate(entTeamInfo.getEstablishdate()));
         tv_team_description.setText(entTeamInfo.getSumary());
 
+        LocationDao locationDao = new LocationDao(context);
 
-        EntLocationDto cityInfo = BaseApplication.locationInfoMap.get(String.valueOf(entTeamInfo.getOftencity()));
-        EntLocationDto distinctInfo = BaseApplication.locationInfoMap.get(String.valueOf(entTeamInfo.getOftendistinct()));
+        EntLocation cityInfo = locationDao.findLocationById(entTeamInfo.getOftencity());
+        EntLocation distinctInfo = locationDao.findLocationById(entTeamInfo.getOftendistinct());
         System.out.println(cityInfo);
         System.out.println(distinctInfo);
         if (cityInfo != null && distinctInfo != null) {

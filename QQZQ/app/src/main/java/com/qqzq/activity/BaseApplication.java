@@ -6,14 +6,17 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.VolleyError;
 import com.qqzq.config.Constants;
-import com.qqzq.entity.EntLocationDto;
+import com.qqzq.db.DbOpenHelper;
+import com.qqzq.db.LocationDao;
+import com.qqzq.entity.EntLocation;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.RequestManager;
 import com.qqzq.network.ResponseListener;
 
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import cn.smssdk.SMSSDK;
@@ -35,8 +38,6 @@ public class BaseApplication extends Application {
     public static String QQZQ_TOKENT = "";
     public static SharedPreferences spQQZQ;
     private final String TAG = "BaseApplication";
-
-    public static Map<String, EntLocationDto> locationInfoMap = new HashMap<>();
 
     public static BaseApplication getInstance() {
 
@@ -125,27 +126,33 @@ public class BaseApplication extends Application {
      * 退出登录,清空数据
      */
     public void logout() {
-        // reset password to null
-        setPassword(null);
-//		setContactList(null);
+        try {
+            System.out.println("Cancel all json request!!!");
+            RequestManager.cancelAll(applicationContext);
+
+            //主要所有SMSSDK监听事件
+            SMSSDK.unregisterAllEventHandler();
+            DbOpenHelper.getInstance(applicationContext).closeDB();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     public void initBasicData() {
-        GsonRequest gsonRequest = new GsonRequest<EntLocationDto[]>(Constants.API_FIND_NATIONS_URL, EntLocationDto[].class,
-                new ResponseListener<EntLocationDto[]>() {
+        GsonRequest gsonRequest = new GsonRequest<EntLocation[]>(Constants.API_FIND_NATIONS_URL, EntLocation[].class,
+                new ResponseListener<EntLocation[]>() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         Log.e(TAG, volleyError.toString());
                     }
 
                     @Override
-                    public void onResponse(EntLocationDto[] entLocationInfos) {
+                    public void onResponse(EntLocation[] entLocationInfos) {
                         Log.i(TAG, "找到地区->" + entLocationInfos.length);
-
-                        locationInfoMap.clear();
-                        for (EntLocationDto entLocationInfo : entLocationInfos) {
-                            locationInfoMap.put(entLocationInfo.getId(), entLocationInfo);
+                        LocationDao locationDao = new LocationDao(applicationContext);
+                        if (locationDao.findAll().size() != entLocationInfos.length) {
+                            locationDao.saveLocaitonList(entLocationInfos);
                         }
                     }
                 }, true);
