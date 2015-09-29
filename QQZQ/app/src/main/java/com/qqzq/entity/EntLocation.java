@@ -1,32 +1,21 @@
 package com.qqzq.entity;
 
-import android.text.TextUtils;
-
 /**
- * Created by jie.xiao on 9/8/2015.
+ * Created by jie.xiao on 9/29/2015.
  */
-
-//     {
-//        "id": 372,
-//        "code": "150000",
-//        "province": "内蒙古自治区",
-//        "city": "",
-//        "district": "",
-//        "parent": "1"
-//      }
-public class EntLocationInfo {
-    private String id;
+public class EntLocation {
+    private int id;
     private String code;
     private String province;
     private String city;
     private String district;
     private String parent;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -68,15 +57,5 @@ public class EntLocationInfo {
 
     public void setParent(String parent) {
         this.parent = parent;
-    }
-
-    public String getLocation() {
-        if (!TextUtils.isEmpty(province)) {
-            return province;
-        } else if (!TextUtils.isEmpty(city)) {
-            return city;
-        } else {
-            return district;
-        }
     }
 }

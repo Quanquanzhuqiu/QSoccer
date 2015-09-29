@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,7 +16,7 @@ import com.qqzq.activity.BaseActivity;
 import com.qqzq.activity.RegisterActivity;
 import com.qqzq.adapter.LocationListViewAdapter;
 import com.qqzq.config.Constants;
-import com.qqzq.entity.EntLocationInfo;
+import com.qqzq.entity.EntLocationDto;
 import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
@@ -39,7 +38,7 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
     private TextView tv_selected_location;
     private LocationListViewAdapter adapter;
 
-    private EntLocationInfo[] locationInfos;
+    private EntLocationDto[] locationInfos;
     private boolean isProvincePage = true;
     private int selectedProvinceCode = 0;
     private int selectedCityCode = 0;
@@ -79,7 +78,7 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
         requestProvinceList();
     }
 
-    private void refreshLocationListView(EntLocationInfo[] locationInfos) {
+    private void refreshLocationListView(EntLocationDto[] locationInfos) {
         adapter = new LocationListViewAdapter(this, locationInfos);
         lv_location.setAdapter(adapter);
     }
@@ -91,7 +90,7 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
         mParameters.put("limit", Constants.UNLIMITED_PAGE_SIZE);
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_PROVINCE_URL, mParameters);
         System.out.println(queryUrl);
-        GsonRequest gsonRequest = new GsonRequest<EntLocationInfo[]>(queryUrl, EntLocationInfo[].class,
+        GsonRequest gsonRequest = new GsonRequest<EntLocationDto[]>(queryUrl, EntLocationDto[].class,
                 findLocationResponseListener);
         executeRequest(gsonRequest);
     }
@@ -103,19 +102,19 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
         mParameters.put("provinceId", provinceId);
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_CITY_URL, mParameters);
         System.out.println(queryUrl);
-        GsonRequest gsonRequest = new GsonRequest<EntLocationInfo[]>(queryUrl, EntLocationInfo[].class,
+        GsonRequest gsonRequest = new GsonRequest<EntLocationDto[]>(queryUrl, EntLocationDto[].class,
                 findLocationResponseListener);
         executeRequest(gsonRequest);
     }
 
-    ResponseListener findLocationResponseListener = new ResponseListener<EntLocationInfo[]>() {
+    ResponseListener findLocationResponseListener = new ResponseListener<EntLocationDto[]>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             System.out.println(new String(volleyError.networkResponse.data));
         }
 
         @Override
-        public void onResponse(EntLocationInfo[] respLocationInfos) {
+        public void onResponse(EntLocationDto[] respLocationInfos) {
             locationInfos = respLocationInfos;
             refreshLocationListView(locationInfos);
         }
@@ -125,7 +124,7 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (locationInfos != null) {
             isProvincePage = TextUtils.isEmpty(tv_selected_location.getText()) ? true : false;
-            EntLocationInfo selectedLocationInfo = locationInfos[position];
+            EntLocationDto selectedLocationInfo = locationInfos[position];
             String location = tv_selected_location.getText().toString();
             location = location + " " + selectedLocationInfo.getLocation();
             tv_selected_location.setText(location);

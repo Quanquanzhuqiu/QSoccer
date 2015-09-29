@@ -18,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
-import com.qqzq.entity.EntLoginRequest;
+import com.qqzq.entity.EntLoginDto;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 
@@ -99,11 +99,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         username = edt_username.getText().toString();
         password = edt_password.getText().toString();
 
-        EntLoginRequest entLoginRequest = new EntLoginRequest();
-        entLoginRequest.setUsername(username);
-        entLoginRequest.setPassword(password);
-        entLoginRequest.setRememberme(false);
-        mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entLoginRequest);
+        EntLoginDto entLoginDto = new EntLoginDto();
+        entLoginDto.setUsername(username);
+        entLoginDto.setPassword(password);
+        entLoginDto.setRememberme(false);
+        mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entLoginDto);
         return mParameters;
     }
 

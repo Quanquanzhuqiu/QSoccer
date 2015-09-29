@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Cache;
 import com.android.volley.VolleyError;
@@ -18,7 +16,7 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.activity.BaseApplication;
 import com.qqzq.config.Constants;
-import com.qqzq.entity.EntLocationInfo;
+import com.qqzq.entity.EntLocationDto;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
@@ -26,8 +24,6 @@ import com.qqzq.network.ResponseListener;
 import com.qqzq.util.Utils;
 
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by jie.xiao on 15/9/24.
@@ -117,8 +113,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         tv_team_description.setText(entTeamInfo.getSumary());
 
 
-        EntLocationInfo cityInfo = BaseApplication.locationInfoMap.get(String.valueOf(entTeamInfo.getOftencity()));
-        EntLocationInfo distinctInfo = BaseApplication.locationInfoMap.get(String.valueOf(entTeamInfo.getOftendistinct()));
+        EntLocationDto cityInfo = BaseApplication.locationInfoMap.get(String.valueOf(entTeamInfo.getOftencity()));
+        EntLocationDto distinctInfo = BaseApplication.locationInfoMap.get(String.valueOf(entTeamInfo.getOftendistinct()));
         System.out.println(cityInfo);
         System.out.println(distinctInfo);
         if (cityInfo != null && distinctInfo != null) {

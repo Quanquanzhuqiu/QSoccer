@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.android.volley.VolleyError;
 import com.qqzq.config.Constants;
-import com.qqzq.entity.EntLocationInfo;
+import com.qqzq.entity.EntLocationDto;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.RequestManager;
 import com.qqzq.network.ResponseListener;
@@ -36,7 +36,7 @@ public class BaseApplication extends Application {
     public static SharedPreferences spQQZQ;
     private final String TAG = "BaseApplication";
 
-    public static Map<String, EntLocationInfo> locationInfoMap = new HashMap<>();
+    public static Map<String, EntLocationDto> locationInfoMap = new HashMap<>();
 
     public static BaseApplication getInstance() {
 
@@ -132,19 +132,19 @@ public class BaseApplication extends Application {
     }
 
     public void initBasicData() {
-        GsonRequest gsonRequest = new GsonRequest<EntLocationInfo[]>(Constants.API_FIND_NATIONS_URL, EntLocationInfo[].class,
-                new ResponseListener<EntLocationInfo[]>() {
+        GsonRequest gsonRequest = new GsonRequest<EntLocationDto[]>(Constants.API_FIND_NATIONS_URL, EntLocationDto[].class,
+                new ResponseListener<EntLocationDto[]>() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         Log.e(TAG, volleyError.toString());
                     }
 
                     @Override
-                    public void onResponse(EntLocationInfo[] entLocationInfos) {
+                    public void onResponse(EntLocationDto[] entLocationInfos) {
                         Log.i(TAG, "找到地区->" + entLocationInfos.length);
 
                         locationInfoMap.clear();
-                        for (EntLocationInfo entLocationInfo : entLocationInfos) {
+                        for (EntLocationDto entLocationInfo : entLocationInfos) {
                             locationInfoMap.put(entLocationInfo.getId(), entLocationInfo);
                         }
                     }

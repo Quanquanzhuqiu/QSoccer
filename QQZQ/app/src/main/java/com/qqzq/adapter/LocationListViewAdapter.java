@@ -8,19 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.qqzq.R;
-import com.qqzq.entity.EntLocationInfo;
-
-import java.util.List;
+import com.qqzq.entity.EntLocationDto;
 
 /**
  * Created by jie.xiao on 15/9/8.
  */
-public class LocationListViewAdapter extends ArrayAdapter<EntLocationInfo> {
+public class LocationListViewAdapter extends ArrayAdapter<EntLocationDto> {
 
     protected LayoutInflater mInflater;
     private static final int mLayout = R.layout.location_list_item;
 
-    public LocationListViewAdapter(Context context, EntLocationInfo[] locationInfos) {
+    public LocationListViewAdapter(Context context, EntLocationDto[] locationInfos) {
         super(context, mLayout, locationInfos);
         mInflater = LayoutInflater.from(context);
     }

@@ -9,7 +9,7 @@ package com.qqzq.entity;
 //      "password": "string",
 //      "rememberme": true
 //  }
-public class EntLoginRequest {
+public class EntLoginDto {
 
     private String username;
     private String password;
