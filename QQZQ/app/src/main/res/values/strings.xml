@@ -216,6 +216,11 @@
     <string name="game_detail_publisher">活动发起人（收款人）：</string>
     <string name="game_sign_up_list">报名名单：</string>
 
+    <!-- 出勤管理 -->
+    <string name="actual_attend_count">实际出勤人数：</string>
+    <string name="attendance_member">成员</string>
+    <string name="attendance_time">参赛次数</string>
+    <string name="attendance_rate">出勤率</string>
 
     <!-- pull to refresh txt -->
     <string name="pull_to_refresh_pull_label">下拉刷新</string>
