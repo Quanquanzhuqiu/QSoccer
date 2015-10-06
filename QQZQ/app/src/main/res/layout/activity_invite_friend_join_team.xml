@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/default_layout">
+
+    <!-- TOP BAR-->
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/common_top_title_with_commit" />
+
+    <RelativeLayout
+        android:id="@+id/layout_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="12dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:id="@+id/ll_find_friends"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/default_white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_default"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_search" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="@string/find_friends"
+                android:textColor="@color/find_team_bar_text_color"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSearch"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <!-- body -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/default_white">
+
+        <com.qqzq.widget.tab.PullToRefreshView
+            android:id="@+id/pull_refresh_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/lv_friends"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/default_white"
+                android:cacheColorHint="#00000000"
+                android:divider="#b8b8b8" />
+
+        </com.qqzq.widget.tab.PullToRefreshView>
+
+    </RelativeLayout>
+
+</LinearLayout>
