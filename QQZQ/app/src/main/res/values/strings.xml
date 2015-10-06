@@ -202,11 +202,19 @@
     <string name="game_click_join">点击报名</string>
 
     <!-- 球队现金消费记录 -->
+    <string name="game_cost_page_description">说明：此栏目记录由圈圈足球进行代收费的【收费活动】消费情况</string>
     <string name="game_consume_statistics">消费合计：</string>
     <string name="game_person_type">场地类型：</string>
     <string name="game_sign_up_count">报名人数：</string>
     <string name="game_average_pay">人均：</string>
     <string name="game_cost_share_type">费用分摊模式：</string>
+
+    <!-- 球队现金消费记录详情 -->
+    <string name="game_name">活动名称：</string>
+    <string name="game_detail_date">活动日期：</string>
+    <string name="game_detail_time">活动时间：</string>
+    <string name="game_detail_publisher">活动发起人（收款人）：</string>
+    <string name="game_sign_up_list">报名名单：</string>
 
 
     <!-- pull to refresh txt -->
