@@ -271,12 +271,16 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
 
         boolean eatAndPlay = (cbox_eat_and_play.isChecked()) ? true : false;
 
+        int cost = -1;
         int gamepayType = -1;
-        if (rbtn_game_pay_average.isChecked()) {
+        if (rbtn_game_pay_average.isChecked() && edt_game_pay_average.getText() != null) {
             gamepayType = 1;
-        } else if (rbtn_game_pay_fixed.isChecked()) {
+            cost = Integer.valueOf(edt_game_pay_average.getText().toString());
+        } else if (rbtn_game_pay_fixed.isChecked() && edt_game_pay_fixed.getText() != null) {
             gamepayType = 2;
-        } else if (rbtn_game_pay_member_charge.isChecked()) {
+            cost = Integer.valueOf(edt_game_pay_fixed.getText().toString());
+        } else if (rbtn_game_pay_member_charge.isChecked() && edt_game_pay_member_charge.getText() != null) {
+            cost = Integer.valueOf(edt_game_pay_member_charge.getText().toString());
             gamepayType = 3;
         }
 

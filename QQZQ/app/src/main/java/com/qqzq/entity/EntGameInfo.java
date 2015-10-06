@@ -7,30 +7,31 @@ import java.util.Date;
  */
 
 /*
-    {
-        "id": 0,
-        "acttitle": "string",
-        "actaddress": "string",
-        "actcity": 0,
-        "actdistrict": 0,
-        "actdatetime": "2015-09-16T13:30:13.866Z",
-        "actdate": "2015-09-16T13:30:13.866Z",
-        "acttime": "2015-09-16T13:30:13.866Z",
-        "personmaxlimit": 0,
-        "personminlimit": 0,
-        "acttype": 0,
-        "actpaytype": 0,
-        "isrelatelist": true,
-        "soccerpersonnum": 0,
-        "isdinner": true,
-        "publisher": "string",
-        "publishdate": "2015-09-16T13:30:13.867Z",
-        "stat": "string",
-        "flag": "string",
-        "createdate": "2015-09-16T13:30:13.867Z",
-        "updatedate": "2015-09-16T13:30:13.867Z",
-        "teamid": 0
-        }
+QqzqActivity {
+    id (integer, optional),
+    acttitle (string, optional),
+    actaddress (string, optional),
+    actcity (integer, optional),
+    actdistrict (integer, optional),
+    actdatetime (string, optional),
+    actdate (string, optional),
+    acttime (string, optional),
+    personmaxlimit (integer, optional),
+    personminlimit (integer, optional),
+    acttype (integer, optional),
+    actpaytype (integer, optional),
+    cost (undefined, optional),
+    isrelatelist (boolean, optional),
+    soccerpersonnum (integer, optional),
+    isdinner (boolean, optional),
+    publisher (string, optional),
+    publishdate (string, optional),
+    stat (string, optional),
+    flag (string, optional),
+    createdate (string, optional),
+    updatedate (string, optional),
+    teamid (integer, optional)
+}
 */
 public class EntGameInfo {
     private int id;
@@ -55,6 +56,7 @@ public class EntGameInfo {
     private Date createdate;
     private Date updatedate;
     private int teamid;
+    private int cost;
 
     public int getId() {
         return id;
@@ -230,5 +232,13 @@ public class EntGameInfo {
 
     public void setTeamid(int teamid) {
         this.teamid = teamid;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 }

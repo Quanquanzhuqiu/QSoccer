@@ -166,6 +166,49 @@
     <string name="member_points">积分：</string>
     <string name="member_join_date">加入时间：</string>
 
+    <!-- 报名名单页面-->
+    <string name="game_attendee_play_times">活动次数：</string>
+    <string name="game_attendee_points">积分：</string>
+
+    <!-- 查找好友页面-->
+    <string name="find_friends">搜索好友</string>
+
+    <!-- 个人资料 -->
+    <string name="best_position">擅长位置：</string>
+    <string name="qqzq_no">圈圈号：</string>
+    <string name="my_game_count">参加活动次数</string>
+    <string name="my_point">积分</string>
+    <string name="my_team_count">球队数量</string>
+    <string name="his_team">他得球队</string>
+
+    <!-- 球队相册 -->
+    <string name="gallery_comment">评论</string>
+    <string name="gallery_good">点赞</string>
+
+    <!-- 活动详情 -->
+    <string name="game_publisher">发起人：</string>
+    <string name="game_already_join">已报名：</string>
+    <string name="game_remainder">剩余名额：</string>
+    <string name="game_detail_location">活动地点：</string>
+    <string name="game_detail_type">活动类型：</string>
+    <string name="game_start_date">活动开始日期：</string>
+    <string name="game_start_time">活动开始时间：</string>
+    <string name="game_cost">活动费用：</string>
+    <string name="game_cost_description">活动费用说明：</string>
+    <string name="game_pay_type">付费方式：</string>
+    <string name="game_pay_description">收费流程说明</string>
+    <string name="comment">评论</string>
+    <string name="chat_with_game_publisher">联系活动发起人</string>
+    <string name="game_click_join">点击报名</string>
+
+    <!-- 球队现金消费记录 -->
+    <string name="game_consume_statistics">消费合计：</string>
+    <string name="game_person_type">场地类型：</string>
+    <string name="game_sign_up_count">报名人数：</string>
+    <string name="game_average_pay">人均：</string>
+    <string name="game_cost_share_type">费用分摊模式：</string>
+
+
     <!-- pull to refresh txt -->
     <string name="pull_to_refresh_pull_label">下拉刷新</string>
     <string name="pull_to_refresh_release_label">释放刷新</string>

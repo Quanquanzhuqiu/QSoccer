@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/default_layout">
-
-    <!-- TOP BAR-->
-    <include layout="@layout/common_top_title_with_back_photo" />
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_white"
+    android:orientation="vertical">
     <ListView
         android:id="@+id/lv_gallery"
         android:layout_width="fill_parent"
