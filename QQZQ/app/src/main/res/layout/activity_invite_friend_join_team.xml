@@ -52,28 +52,43 @@
 
     <!-- body -->
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/default_white">
 
-        <com.qqzq.widget.tab.PullToRefreshView
-            android:id="@+id/pull_refresh_listview"
+
+        <ListView
+            android:id="@+id/lv_friends"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/default_white"
+            android:cacheColorHint="#00000000"
+            android:divider="#b8b8b8" />
 
-            <ListView
-                android:id="@+id/lv_friends"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/default_white"
-                android:cacheColorHint="#00000000"
-                android:divider="#b8b8b8" />
 
-        </com.qqzq.widget.tab.PullToRefreshView>
+        <com.qqzq.widget.Sidebar
+            android:id="@+id/sidebar"
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:clickable="true" />
+
+        <TextView
+            android:id="@+id/floating_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/show_head_toast_bg"
+            android:gravity="center"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@android:color/white"
+            android:textSize="40sp"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 

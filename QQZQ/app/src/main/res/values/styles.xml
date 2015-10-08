@@ -29,41 +29,56 @@
         <item name="android:layout_marginBottom">5dp</item>
     </style>
 
-    <!-- TOP BAR styles-->
-    <style name="top_bar_layout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dp</item>
+    <!-- TOP BAR-->
+    <style name="topbar_root_ll">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">46dp</item>
         <item name="android:background">@drawable/bg_topbar</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:weightSum">5</item>
     </style>
 
-    <style name="top_bar_return_btn">
-        <item name="android:layout_width">12dp</item>
-        <item name="android:layout_height">16dp</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_marginLeft">20dp</item>
-        <item name="android:background">@drawable/ic_return</item>
+    <style name="topbar_left_ll">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:weightSum">2</item>
     </style>
 
-    <style name="top_bar_middle_btn">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:textColor">@color/top_bar_text_center</item>
-        <item name="android:textSize">18sp</item>
+    <style name="topbar_right_ll">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="top_bar_right_btn">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_marginRight">20dp</item>
-        <item name="android:text">@string/commit</item>
-        <item name="android:textColor">@color/top_bar_text_right</item>
-        <item name="android:textSize">16sp</item>
+    <style name="topbar_ll_back">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:orientation">horizontal</item>
     </style>
+
+
+    <style name="topbar_tv_title">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">@color/rgb_255_255_255</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="topbar_iv_back">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:background">@drawable/ic_btn_back</item>
+    </style>
+
 
     <style name="linearLayout_create_team_or_activity">
         <item name="android:layout_width">fill_parent</item>
@@ -154,25 +169,25 @@
     <!-- 登陆页面styles -->
     <style name="login_edit_layout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">49dp</item>
+        <item name="android:layout_height">32.667dp</item>
         <item name="android:background">@drawable/shape_grey_divider</item>
         <item name="android:orientation">horizontal</item>
     </style>
 
     <style name="login_buttons">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">46dp</item>
-        <item name="android:layout_marginLeft">17dp</item>
-        <item name="android:layout_marginRight">17dp</item>
+        <item name="android:layout_height">30.667dp</item>
+        <item name="android:layout_marginLeft">11.333dp</item>
+        <item name="android:layout_marginRight">11.333dp</item>
         <item name="android:layout_marginTop">20dp</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">11sp</item>
     </style>
 
     <style name="login_image_view">
-        <item name="android:layout_width">27dp</item>
-        <item name="android:layout_height">27dp</item>
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
         <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:layout_marginLeft">17dp</item>
+        <item name="android:layout_marginLeft">11.333dp</item>
     </style>
 
     <style name="login_edit_text">
@@ -181,7 +196,7 @@
         <item name="android:layout_marginLeft">17dp</item>
         <item name="android:background">@null</item>
         <item name="android:textColorHint">@color/rgb_153_153_153</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
 

@@ -221,6 +221,16 @@
     <string name="attendance_member">成员</string>
     <string name="attendance_time">参赛次数</string>
     <string name="attendance_rate">出勤率</string>
+    <string name="is_attend_on_this_time">本次是否出勤</string>
+
+    <!-- 支出名单 -->
+    <string name="game_cost_list_description">选择对应活动完成扣费后可自动统计出勤情况</string>
+    <string name="sign_up_team_member">报名队员</string>
+    <string name="external_player">空降人员</string>
+    <string name="is_pay_on_this_time">本次是否扣费</string>
+
+    <!-- 发布球队相册 -->
+    <string name="hint_publish_team_gallery">有什么新鲜事儿，跟大家分享...</string>
 
     <!-- pull to refresh txt -->
     <string name="pull_to_refresh_pull_label">下拉刷新</string>

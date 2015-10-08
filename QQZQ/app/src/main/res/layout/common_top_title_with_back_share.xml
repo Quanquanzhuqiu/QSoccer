@@ -6,11 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="46dp"
-        android:background="@drawable/bg_topbar"
-        android:orientation="horizontal"
-        android:weightSum="5">
+        style="@style/topbar_root_ll">
 
         <LinearLayout
             android:layout_width="0dp"

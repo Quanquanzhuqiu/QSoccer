@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/default_layout">
 
-    <!-- top bar -->
+    <!-- TOP BAR -->
     <include
         android:id="@+id/top_bar"
         layout="@layout/common_top_title_with_back" />

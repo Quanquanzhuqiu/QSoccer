@@ -7,7 +7,7 @@
 
     <LinearLayout
         style="@style/login_edit_layout"
-        android:layout_marginTop="21dp">
+        android:layout_marginTop="14dp">
 
         <ImageView
             style="@style/login_image_view"
@@ -40,7 +40,7 @@
         android:gravity="right"
         android:text="@string/txt_forget_password"
         android:textColor="@color/rgb_153_153_153"
-        android:textSize="14sp" />
+        android:textSize="9.333sp" />
 
     <Button
         style="@style/login_buttons"
