@@ -46,6 +46,7 @@ import cn.smssdk.gui.layout.SendMsgDialogLayout;
 import cn.smssdk.utils.SMSLog;
 
 import com.mob.tools.FakeActivity;
+import com.mob.tools.utils.DeviceHelper;
 
 /** 验证码输入页面*/
 public class IdentifyNumPage extends FakeActivity implements OnClickListener,
@@ -141,19 +142,24 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 			countDown();
 		}
 
-		smsReceiver = new SMSReceiver(new SMSSDK.VerifyCodeReadListener() {
-			@Override
-			public void onReadVerifyCode(final String verifyCode) {
-				runOnUIThread(new Runnable() {
-					@Override
-					public void run() {
-						etIdentifyNum.setText(verifyCode);
+		try {
+			if (DeviceHelper.getInstance(activity).checkPermission("android.permission.RECEIVE_SMS")) {
+				smsReceiver = new SMSReceiver(new SMSSDK.VerifyCodeReadListener() {
+					public void onReadVerifyCode(final String verifyCode) {
+						runOnUIThread(new Runnable() {
+							public void run() {
+								etIdentifyNum.setText(verifyCode);
+							}
+						});
 					}
 				});
+				activity.registerReceiver(smsReceiver, new IntentFilter(
+						"android.provider.Telephony.SMS_RECEIVED"));
 			}
-		});
-		activity.registerReceiver(smsReceiver, new IntentFilter(
-				"android.provider.Telephony.SMS_RECEIVED"));
+		} catch (Throwable t) {
+			t.printStackTrace();
+			smsReceiver = null;
+		}
 	}
 
 	@Override
@@ -168,7 +174,13 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 
 	public boolean onFinish() {
 		SMSSDK.unregisterEventHandler(handler);
-		activity.unregisterReceiver(smsReceiver);
+		if (smsReceiver != null) {
+			try {
+				activity.unregisterReceiver(smsReceiver);
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
+		}
 		return super.onFinish();
 	}
 
@@ -401,8 +413,20 @@ public class IdentifyNumPage extends FakeActivity implements OnClickListener,
 				} else {
 					((Throwable) data).printStackTrace();
 					// 验证码不正确
-					int resId = getStringRes(activity,
-							"smssdk_virificaition_code_wrong");
+					String message = ((Throwable) data).getMessage();
+					int resId = 0;
+					try {
+						JSONObject json = new JSONObject(message);
+						int status = json.getInt("status");
+						resId = getStringRes(activity,
+								"smssdk_error_detail_" + status);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if(resId == 0) {
+						resId = getStringRes(activity,"smssdk_virificaition_code_wrong");
+					}
 					if (resId > 0) {
 						Toast.makeText(activity, resId, Toast.LENGTH_SHORT).show();
 					}

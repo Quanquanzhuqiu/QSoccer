@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/F:/Repository/Git/qqzq/QQZQ/SMSSDK/build/intermediates/bundles/debug/res/values-en/values-en.xml -->
+    <!-- From: file:/Users/syouketu/Documents/repository/git/qqzq/QQZQ/SMSSDK/build/intermediates/bundles/debug/res/values-en/values-en.xml -->
     <eat-comment/>
     <string-array name="smssdk_country_group_a">
 		<item>Afghanistan,93,46,41220|41230|41240|41250|41201</item>
@@ -272,6 +272,7 @@
 		<item>Zambia,260,92,64502|64501|64503</item>
 		<item>Zimbabwe,263,95,64801|64803|64804</item>
     </string-array>
+    <string name="no_contacts_permission">no permission to read contacts</string>
     <string name="smssdk_add_contact">Add</string>
     <string name="smssdk_back">Back </string>
     <string name="smssdk_cancel">Cancel</string>
@@ -312,12 +313,15 @@
     <string name="smssdk_error_desc_464">Sending text message hits limit</string>
     <string name="smssdk_error_desc_465">Sending text message hits limit</string>
     <string name="smssdk_error_desc_466">The verification code is empty</string>
-    <string name="smssdk_error_desc_467">Too frequently</string>
+    <string name="smssdk_error_desc_467">Verification Code becomes invalid,Please request another one</string>
     <string name="smssdk_error_desc_468">Invalid validation code</string>
     <string name="smssdk_error_desc_469">Permission denied</string>
     <string name="smssdk_error_desc_470">Insufficient balance</string>
     <string name="smssdk_error_desc_471">Invalid IP</string>
     <string name="smssdk_error_desc_472">Unable to obtain data</string>
+    <string name="smssdk_error_desc_473">Obtaining the platform information error bases on DUID</string>
+    <string name="smssdk_error_desc_474">Server verification option is closed</string>
+    <string name="smssdk_error_desc_475">no application information exists</string>
     <string name="smssdk_error_desc_500">Internal Server Error</string>
     <string name="smssdk_error_desc_server_busy">Server is busy</string>
     <string name="smssdk_error_detail_400">The request could not be identified</string>
@@ -354,6 +358,9 @@
     <string name="smssdk_error_detail_470">Insufficient balance</string>
     <string name="smssdk_error_detail_471">The IP address of the verifier server is incorrect</string>
     <string name="smssdk_error_detail_472">Obtaining client platform information failed</string>
+    <string name="smssdk_error_detail_473">Obtaining the platform information error bases on DUID </string>
+    <string name="smssdk_error_detail_474">Server verification option is closed</string>
+    <string name="smssdk_error_detail_475">no application information exists</string>
     <string name="smssdk_error_detail_500">Internal Server Error</string>
     <string name="smssdk_get_phone_verifycode_today_frequentlly">I am sorry, the phone number for verification code number too much, please try again tomorrow!</string>
     <string name="smssdk_get_verifycode_frequentlly">Send verification code too frequently, please try later!</string>
@@ -377,6 +384,8 @@
     <string name="smssdk_send_mobile_detail"><Data>We have already sent &lt;font color=#209526>verification code&lt;/font> messages to this number:</Data></string>
     <string name="smssdk_send_sounds_identify_code">We will call you after your comfirmation. Vocie verification code. Please use message verification code service if you don\'t want to be called.</string>
     <string name="smssdk_send_sounds_success">Voice verification code sent successfully</string>
+    <string name="smssdk_smart_verify_already">Smart Verification already</string>
+    <string name="smssdk_smart_verify_tips">Credit phone number, no SMS verification:</string>
     <string name="smssdk_submit">Submit</string>
     <string name="smssdk_unreceive_identify_code"><Data>&lt;font color=#a8b8cb>Not receiving the verification code?&lt;/font></Data></string>
     <string name="smssdk_user_info_submited">User info has been submitted </string>

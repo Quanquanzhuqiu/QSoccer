@@ -29,6 +29,7 @@ import com.qqzq.subitem.team.MyTeamFragment;
 import com.qqzq.subitem.team.TeamMangmentFragment;
 import com.qqzq.util.Utils;
 import com.qqzq.widget.menu.PopupMenuWindow;
+import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.tab.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 8/25/2015.
  */
-public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
+public class MainActivity extends BaseFragmentActivity {
 
     private Activity context = this;
 
@@ -81,9 +82,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     private List<EntTeamInfo> teamList = new ArrayList<EntTeamInfo>();
     private String teamPageType = Constants.PAGE_TYPE_NO_TEAM;
     private String gamePageType = Constants.PAGE_TYPE_NO_GAME;
-    private ImageView iv_more_menu;
-    private LinearLayout ll_more_menu;
-    private PopupMenuWindow popupMenuWindow;
+
+    private TopBar topBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,24 +96,15 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     protected void onPause() {
         super.onPause();
-        if (popupMenuWindow != null && popupMenuWindow.isShowing()) {
-            popupMenuWindow.dismiss();
-        }
     }
 
     private void init() {
         loadTeamListFromBackend();
-
-        iv_more_menu = (ImageView) findViewById(R.id.iv_more_menu);
-        ll_more_menu = (LinearLayout) findViewById(R.id.ll_more_menu);
+        topBar = (TopBar) findViewById(R.id.topbar);
         dm = getResources().getDisplayMetrics();
         pager = (ViewPager) findViewById(R.id.pager);
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
-        popupMenuWindow = new PopupMenuWindow(context, null);
-        popupMenuWindow.dismiss();
-
-        ll_more_menu.setOnClickListener(this);
     }
 
     /**
@@ -184,18 +175,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             }
         }
 
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_more_menu:
-//                Toast.makeText(context, "已点中弹出菜单", Toast.LENGTH_LONG).show();
-                popupMenuWindow.showAsDropDown(iv_more_menu);
-                break;
-            default:
-                break;
-        }
     }
 
 

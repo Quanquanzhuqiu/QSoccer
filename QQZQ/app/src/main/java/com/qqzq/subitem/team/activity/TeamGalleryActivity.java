@@ -34,13 +34,9 @@ public class TeamGalleryActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initView() {
-        ll_back = (LinearLayout) findViewById(R.id.ll_back);
-        ll_take_photo = (LinearLayout) findViewById(R.id.ll_take_photo);
     }
 
     private void initListener() {
-        ll_take_photo.setOnClickListener(this);
-        ll_back.setOnClickListener(new BackButtonListener(this));
     }
 
     private void initData() {
@@ -55,8 +51,8 @@ public class TeamGalleryActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_take_photo:
-                break;
+//            case R.id.ll_take_photo:
+//                break;
             default:
                 break;
         }

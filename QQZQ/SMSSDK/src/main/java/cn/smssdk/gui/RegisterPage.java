@@ -152,7 +152,8 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 									onCountryListGot((ArrayList<HashMap<String, Object>>) data);
 								} else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
 									// 请求验证码后，跳转到验证码填写页面
-									afterVerificationCodeRequested();
+									boolean smart = (Boolean)data;
+									afterVerificationCodeRequested(smart);
 								}
 							} else {
 								if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE
@@ -308,6 +309,8 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 			} else if (page == 2) {
 				// 验证码校验返回
 				Object res = data.get("res");
+				//Object smart = data.get("smart");
+
 				HashMap<String, Object> phoneMap = (HashMap<String, Object>) data.get("phone");
 				if (res != null && phoneMap != null) {
 					int resId = getStringRes(activity, "smssdk_your_ccount_is_verified");
@@ -373,6 +376,13 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 
 		if (countryRules == null || countryRules.size() <= 0) {
 			if (code == "86") {
+				if(phone.length() != 11) {
+					int resId = getStringRes(activity, "smssdk_write_right_mobile_phone");
+					if (resId > 0) {
+						Toast.makeText(getContext(), resId, Toast.LENGTH_SHORT).show();
+					}
+					return;
+				}
 				showDialog(phone, code);
 			} else {
 				int resId = getStringRes(activity, "smssdk_country_not_support_currently");
@@ -450,17 +460,24 @@ public class RegisterPage extends FakeActivity implements OnClickListener,
 	}
 
 	/** 请求验证码后，跳转到验证码填写页面 */
-	private void afterVerificationCodeRequested() {
+	private void afterVerificationCodeRequested(boolean smart) {
 		String phone = etPhoneNum.getText().toString().trim().replaceAll("\\s*", "");
 		String code = tvCountryNum.getText().toString().trim();
 		if (code.startsWith("+")) {
 			code = code.substring(1);
 		}
 		String formatedPhone = "+" + code + " " + splitPhoneNum(phone);
+
 		// 验证码页面
-		IdentifyNumPage page = new IdentifyNumPage();
-		page.setPhone(phone, code, formatedPhone);
-		page.showForResult(activity, null, this);
+		if(smart) {
+			SmartVerifyPage smartPage = new SmartVerifyPage();
+			smartPage.setPhone(phone, code, formatedPhone);
+			smartPage.showForResult(activity, null, this);
+		} else {
+			IdentifyNumPage page = new IdentifyNumPage();
+			page.setPhone(phone, code, formatedPhone);
+			page.showForResult(activity, null, this);
+		}
 	}
 
 }

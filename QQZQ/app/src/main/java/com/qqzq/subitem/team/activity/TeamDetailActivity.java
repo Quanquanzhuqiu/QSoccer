@@ -61,10 +61,6 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
-        tv_titile = (TextView) findViewById(R.id.tv_title);
-        tv_titile.setText("球队资料");
-        ll_back = (LinearLayout) findViewById(R.id.ll_back);
-        iv_share = (ImageView) findViewById(R.id.iv_share);
         tv_team_name = (TextView) findViewById(R.id.tv_team_name);
         tv_team_captain = (TextView) findViewById(R.id.tv_team_captain);
         tv_team_game_times = (TextView) findViewById(R.id.tv_team_game_times);
@@ -82,8 +78,6 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private void initLinstener() {
 
         // 初始化控件监听器
-        ll_back.setOnClickListener(new BackButtonListener(this));
-        iv_share.setOnClickListener(this);
         ll_team_rule.setOnClickListener(this);
         ll_team_gallery.setOnClickListener(this);
         ll_game_list.setOnClickListener(this);
@@ -135,8 +129,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_share:
-                break;
+//            case R.id.iv_share:
+//                break;
             case R.id.ll_team_rule:
                 Intent teamRuleIntent = new Intent(context, TeamRuleActivity.class);
                 teamRuleIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);

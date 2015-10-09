@@ -96,12 +96,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initView() {
-        tv_titile = (TextView) findViewById(R.id.tv_title);
-        tv_titile.setText("发起活动");
-        ll_commit = (LinearLayout) findViewById(R.id.ll_commit);
-        tv_commit = (TextView) findViewById(R.id.tv_commit);
-        tv_commit.setText("发布");
-        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         edt_game_name = (EditText) findViewById(R.id.edt_game_name);
         edt_game_location = (EditText) findViewById(R.id.edt_game_location);
         edt_game_date = (EditText) findViewById(R.id.edt_game_date);
@@ -137,8 +131,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private void initLinstener() {
 
         // 初始化控件监听器
-        ll_commit.setOnClickListener(this);
-        ll_back.setOnClickListener(new BackButtonListener(this));
         tv_select_team.setOnClickListener(this);
         edt_game_date.setOnClickListener(this);
         edt_game_location.setOnClickListener(this);
@@ -170,11 +162,11 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_commit:
-                if (formCheck()) {
-                    commitToBackend();
-                }
-                break;
+//            case R.id.ll_commit:
+//                if (formCheck()) {
+//                    commitToBackend();
+//                }
+//                break;
             case R.id.tv_select_team:
                 Intent selectTeamIntent = new Intent(context, SelectTeamActivity.class);
                 selectTeamIntent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());

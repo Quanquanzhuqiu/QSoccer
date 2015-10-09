@@ -12,6 +12,7 @@
 	<string name="smssdk_error_desc_408">无效的参数</string>
 	<string name="smssdk_error_desc_418">内部接口调用失败</string>
 	<string name="smssdk_error_desc_419">duid对应的token不存在</string>
+	
 	<string name="smssdk_error_desc_450">权限不足</string>
 	<string name="smssdk_error_desc_451">User-Agent为空</string>
 	<string name="smssdk_error_desc_452">User-Agent格式错误</string>
@@ -35,6 +36,10 @@
 	<string name="smssdk_error_desc_470">账户余额不足</string>
 	<string name="smssdk_error_desc_471">请求IP错误</string>
 	<string name="smssdk_error_desc_472">获取客户端平台错误</string>
+	<string name="smssdk_error_desc_473">服务端根据duid获取平台错误 </string>
+	<string name="smssdk_error_desc_474">没有打开服务端验证开关</string>
+	<string name="smssdk_error_desc_475">appKey的应用信息不存在</string>
+	
 	<string name="smssdk_error_desc_500">服务器内部错误</string>
 	
 	<string name="smssdk_error_detail_400">客户端请求不能被识别。</string>
@@ -48,6 +53,7 @@
 	<string name="smssdk_error_detail_408">无效的请求参数。</string>
 	<string name="smssdk_error_detail_418">内部接口调用失败。</string>
 	<string name="smssdk_error_detail_419">appKey_token对应的duid不存在</string>
+	
 	<string name="smssdk_error_detail_450">无权执行该操作。</string>
 	<string name="smssdk_error_detail_451">所有访问服务器的接口，在请求的头部必须加入指定格式的User-Agent。</string>
 	<string name="smssdk_error_detail_452">请求头中的User-Agent格式错误。</string>
@@ -65,11 +71,15 @@
 	<string name="smssdk_error_detail_464">每台手机每天发送短信的次数超限。</string>
 	<string name="smssdk_error_detail_465">手机号码在APP中每天发送短信的数量超限。</string>
 	<string name="smssdk_error_detail_466">提交的校验验证码为空。</string>
-	<string name="smssdk_error_detail_467">请求校验验证码频繁（5分钟校验超过3次）</string>
+	<string name="smssdk_error_detail_467">验证失败3次，验证码失效，请重新请求</string>
 	<string name="smssdk_error_detail_468">用户提交校验的验证码错误。</string>
 	<string name="smssdk_error_detail_469">没有打开通过网页端发送短信的开关。</string>
 	<string name="smssdk_error_detail_470">账户的短信余额不足。</string>
 	<string name="smssdk_error_detail_471">通过服务端发送或验证短信的IP错误</string>
 	<string name="smssdk_error_detail_472">服务端根据duid获取平台错误。</string>
+	<string name="smssdk_error_detail_473">服务端根据duid获取平台错误 </string>
+	<string name="smssdk_error_detail_474">没有打开服务端验证开关</string>
+	<string name="smssdk_error_detail_475">appKey的应用信息不存在</string>
+	
 	<string name="smssdk_error_detail_500">服务端程序报错。</string>
 </resources>

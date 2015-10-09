@@ -83,7 +83,7 @@ public class IdentifyNumPageLayout extends BasePageLayout {
 		putIdentify.setInputType(InputType.TYPE_CLASS_NUMBER);
 		inputBg.addView(putIdentify);
 
-		RelativeLayout.LayoutParams clearImageParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams clearImageParams = new RelativeLayout.LayoutParams(SizeHelper.fromPxWidth(34),SizeHelper.fromPxWidth(34));
 		clearImageParams.addRule(RelativeLayout.CENTER_VERTICAL);
 		clearImageParams.addRule(RelativeLayout.ALIGN_RIGHT, Res.id.et_put_identify);
 		ImageView clearImage = new ImageView(context);

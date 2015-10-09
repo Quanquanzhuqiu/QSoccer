@@ -19,11 +19,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * TitleLayout
- * @author xusq
- *
- */
+/**TitleLayout*/
 public class TitleLayout {
 
 	static final int inHeight = 74;

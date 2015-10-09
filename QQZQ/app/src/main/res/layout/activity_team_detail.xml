@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/rgb_240_239_237"
     android:orientation="vertical">
 
     <!-- TOP BAR-->
-    <include
-        android:id="@+id/top_bar"
-        layout="@layout/common_top_title_with_back_share" />
+    <com.qqzq.widget.menu.TopBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:leftImage="@drawable/ic_btn_back"
+        app:rightImage="@drawable/ic_btn_share"
+        app:pageTitle="球队资料" />
 
     <ScrollView
         android:layout_width="fill_parent"

@@ -59,7 +59,7 @@ public class GsonRequest<T> extends Request<T> {
 
         if (headers == null) {
             headers = new HashMap<>();
-            headers.put("User-Agent", "Android");
+            headers.put("user-agent", "android");
         }
         this.mHeaders = headers;
 

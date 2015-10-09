@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_main"
     style="@style/default_layout">
 
-    <!-- top bar -->
-    <include
-        android:id="@+id/top_bar"
-        layout="@layout/common_top_title_with_more" />
+    <!-- TOP BAR-->
+    <com.qqzq.widget.menu.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:leftImage="@drawable/ic_btn_back"
+        app:rightImage="@drawable/ic_btn_more"
+        app:pageTitle="活动出勤管理详情" />
 
     <com.qqzq.widget.tab.PagerSlidingTabStrip
         android:id="@+id/tabs"

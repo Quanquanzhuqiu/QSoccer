@@ -7,7 +7,7 @@
     <com.qqzq.widget.menu.TopBar
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        app:title="登陆" />
+        app:pageTitle="登陆" />
 
     <LinearLayout
         style="@style/login_edit_layout"

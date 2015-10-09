@@ -12,6 +12,7 @@
 	<string name="smssdk_error_desc_408">Invalid parameter</string>
 	<string name="smssdk_error_desc_418">Internal interface failure</string>
 	<string name="smssdk_error_desc_419">DUID not match</string>
+	
 	<string name="smssdk_error_desc_450">Permission denied</string>
 	<string name="smssdk_error_desc_451">User-Agent is empty</string>
 	<string name="smssdk_error_desc_452">Bad Format User-Agent</string>
@@ -29,12 +30,16 @@
 	<string name="smssdk_error_desc_464">Sending text message hits limit</string>
 	<string name="smssdk_error_desc_465">Sending text message hits limit</string>
 	<string name="smssdk_error_desc_466">The verification code is empty</string>
-	<string name="smssdk_error_desc_467">Too frequently</string>
+	<string name="smssdk_error_desc_467">Verification Code becomes invalid,Please request another one</string>
 	<string name="smssdk_error_desc_468">Invalid validation code</string>
 	<string name="smssdk_error_desc_469">Permission denied</string>
 	<string name="smssdk_error_desc_470">Insufficient balance</string>
 	<string name="smssdk_error_desc_471">Invalid IP</string>
 	<string name="smssdk_error_desc_472">Unable to obtain data</string>
+	<string name="smssdk_error_desc_473">Obtaining the platform information error bases on DUID</string>
+	<string name="smssdk_error_desc_474">Server verification option is closed</string>
+	<string name="smssdk_error_desc_475">no application information exists</string>
+	
 	<string name="smssdk_error_desc_500">Internal Server Error</string>
 	
 	<string name="smssdk_error_detail_400">The request could not be identified</string>
@@ -48,6 +53,7 @@
 	<string name="smssdk_error_detail_408">There are illegal arguments in the request</string>
 	<string name="smssdk_error_detail_418">An error occurred when calling internal interface</string>
 	<string name="smssdk_error_detail_419">DUID does not match the token</string>
+	
 	<string name="smssdk_error_detail_450">The application attempts to perform an action it does not have permission for</string>
 	<string name="smssdk_error_detail_451">The User-Agent header must be join in the spacified format</string>
 	<string name="smssdk_error_detail_452">The User-Agent in the request header is malformed</string>
@@ -71,5 +77,9 @@
 	<string name="smssdk_error_detail_470">Insufficient balance</string>
 	<string name="smssdk_error_detail_471">The IP address of the verifier server is incorrect</string>
 	<string name="smssdk_error_detail_472">Obtaining client platform information failed</string>
+	<string name="smssdk_error_detail_473">Obtaining the platform information error bases on DUID </string>
+	<string name="smssdk_error_detail_474">Server verification option is closed</string>
+	<string name="smssdk_error_detail_475">no application information exists</string>
+	
 	<string name="smssdk_error_detail_500">Internal Server Error</string>
 </resources>

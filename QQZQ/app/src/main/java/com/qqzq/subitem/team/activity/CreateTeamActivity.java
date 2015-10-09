@@ -82,11 +82,7 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
 
     private void initView() {
 
-        tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_title.setText("创建球队");
-        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         ll_create_team = findViewById(R.id.ll_create_team);
-        ll_commit = (LinearLayout) findViewById(R.id.ll_commit);
         edt_team_name = (EditText) findViewById(R.id.edt_team_name);
         edt_team_location = (EditText) findViewById(R.id.edt_team_location);
         edt_team_detail = (EditText) findViewById(R.id.edt_team_detail);
@@ -102,9 +98,7 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initListener() {
-        ll_back.setOnClickListener(new BackButtonListener(this));
         iv_logo.setOnClickListener(this);
-        ll_commit.setOnClickListener(this);
         edt_team_location.setOnClickListener(this);
     }
 
@@ -267,9 +261,9 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.ll_commit:
-                uploadLogoAndTeamBasicInfo();
-                break;
+//            case R.id.ll_commit:
+//                uploadLogoAndTeamBasicInfo();
+//                break;
             case R.id.iv_logo:
                 photoPopupWindow.showAtLocation(ll_create_team,
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);

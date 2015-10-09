@@ -54,7 +54,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void initView() {
         tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_title.setText("登陆");
         iv_back = (ImageView) findViewById(R.id.iv_back);
         edt_username = (EditText) findViewById(R.id.edt_username);
         edt_password = (EditText) findViewById(R.id.edt_password);

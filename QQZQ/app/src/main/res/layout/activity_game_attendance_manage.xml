@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/default_layout">
 
-    <!-- TOP BAR -->
-    <include
-        android:id="@+id/top_bar"
-        layout="@layout/common_top_title_with_back" />
+    <!-- TOP BAR-->
+    <com.qqzq.widget.menu.TopBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:leftImage="@drawable/ic_btn_back"
+        app:pageTitle="出勤管理" />
 
     <com.qqzq.widget.tab.PagerSlidingTabStrip
         android:id="@+id/tabs"
