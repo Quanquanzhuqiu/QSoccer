@@ -2,13 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/topbar_root_ll">
 
-    <LinearLayout style="@style/topbar_left_ll" />
+    <include layout="@layout/topbar_left_layout"/>
 
 
-    <TextView
-        android:id="@+id/tv_title"
-        style="@style/topbar_tv_title"
-        android:text="@string/login" />
+    <include layout="@layout/topbar_title"/>
 
     <LinearLayout
         android:id="@+id/ll_invite_friend"

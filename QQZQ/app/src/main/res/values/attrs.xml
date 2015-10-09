@@ -29,4 +29,11 @@
         <attr name="isEnable" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="TopBar">
+        <attr name="title" format="string" />
+        <attr name="leftImage" format="integer" />
+        <attr name="rightText" format="string" />
+        <attr name="rightImage" format="integer" />
+    </declare-styleable>
+
 </resources>

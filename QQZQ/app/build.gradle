@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 23
     buildToolsVersion "23.0.0"
 
     defaultConfig {
         applicationId "com.qqzq"
         minSdkVersion 14
-        targetSdkVersion 19
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
@@ -30,12 +30,12 @@ android {
 
 dependencies {
     androidTestCompile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:19.0.0'
-    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/gson-2.2.3.jar')
-    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/httpclient-4.3.5.jar')
-    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/httpcore-4.3.2.jar')
-    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/httpmime-4.3.5.jar')
-    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/robotium-solo-5.4.1.jar')
-    compile files('/Users/syouketu/Documents/repository/git/qqzq/QQZQ/libs/Volley.jar')
     compile project(':smssdk')
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
+    compile 'org.apache.httpcomponents:httpclient:4.5.1'
+    compile 'org.apache.httpcomponents:httpmime:4.5.1'
+    compile 'org.apache.httpcomponents:httpcore:4.4.3'
+    compile 'com.jayway.android.robotium:robotium-solo:5.5.2'
+    compile 'com.android.support:support-v4:23.0.1'
 }

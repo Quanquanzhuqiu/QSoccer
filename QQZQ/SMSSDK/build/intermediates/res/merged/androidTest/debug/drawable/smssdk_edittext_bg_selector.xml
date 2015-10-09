@@ -6,4 +6,4 @@
     <item android:drawable="@drawable/smssdk_input_bg_focus" android:state_pressed="true"/>
     <item android:drawable="@drawable/smssdk_input_bg_focus" android:state_selected="true"/>
 
-</selector><!-- From: file:/Users/syouketu/Documents/repository/git/qqzq/QQZQ/SMSSDK/src/main/res/drawable/smssdk_edittext_bg_selector.xml --><!-- From: file:/Users/syouketu/Documents/repository/git/qqzq/QQZQ/SMSSDK/build/intermediates/bundles/debug/res/drawable/smssdk_edittext_bg_selector.xml -->
+</selector><!-- From: file:/F:/Repository/Git/qqzq/QQZQ/SMSSDK/src/main/res/drawable/smssdk_edittext_bg_selector.xml --><!-- From: file:/F:/Repository/Git/qqzq/QQZQ/SMSSDK/build/intermediates/bundles/debug/res/drawable/smssdk_edittext_bg_selector.xml -->
