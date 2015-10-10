@@ -10,6 +10,7 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,6 +40,8 @@ import cn.smssdk.SMSSDK;
  * Created by jie.xiao on 9/8/2015.
  */
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
+
+    private final String TAG = "RegisterActivity";
 
     private Context context = this;
     private TextView tv_title;
@@ -130,7 +133,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void sendSMS(String phoneNo) {
-        SMSSDK.getVerificationCode(Constants.CHINA_MOBLIE_NO, "13688390128");
+        Log.i(TAG, "phoneNo = " + phoneNo);
+        SMSSDK.getVerificationCode(Constants.CHINA_MOBLIE_NO, phoneNo);
     }
 
     private void initSpanableString() {

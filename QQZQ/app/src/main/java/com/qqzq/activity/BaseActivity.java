@@ -3,18 +3,12 @@ package com.qqzq.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import com.android.volley.Cache;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.qqzq.db.DbOpenHelper;
 import com.qqzq.network.RequestManager;
-
-import cn.smssdk.SMSSDK;
 
 /**
  * Created by jie.xiao on 8/25/2015.
