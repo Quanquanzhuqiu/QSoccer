@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qqzq.R;
+import com.qqzq.listener.TopBarListener;
 
 /**
  * Created by jie.xiao on 15/10/9.
@@ -36,6 +37,8 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
     private String rightText;
     private String pageTitle;
 
+    private TopBarListener mListener;
+
     public TopBar(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -46,6 +49,11 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
         this.context = (Activity) context;
         initAttribute(attrs);
         initView();
+        initListener();
+    }
+
+    public void setListener(TopBarListener mListener) {
+        this.mListener = mListener;
     }
 
     private void initAttribute(AttributeSet attrs) {
@@ -88,6 +96,7 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
             mCommitTextView.setVisibility(GONE);
 
             if (rightImage == R.drawable.ic_btn_more) {
+                Log.i(TAG, "含有弹出菜单的页面！");
                 popupMenuWindow = new PopupMenuWindow(context, null);
                 popupMenuWindow.dismiss();
             }
@@ -103,6 +112,11 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
 
     }
 
+    private void initListener() {
+        mBackLinearLayout.setOnClickListener(this);
+        mMoreLinearLayout.setOnClickListener(this);
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -111,8 +125,12 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
                 context.finish();
                 break;
             case R.id.ll_more:
-                Toast.makeText(context, "已点中弹出菜单", Toast.LENGTH_LONG).show();
-                popupMenuWindow.showAsDropDown(mMoreLinearLayout);
+                if (rightText != null && mListener != null) {
+                    mListener.rightButtonClick();
+                } else {
+                    Toast.makeText(context, "已点中弹出菜单", Toast.LENGTH_LONG).show();
+                    popupMenuWindow.showAsDropDown(mMoreLinearLayout);
+                }
                 break;
             default:
                 break;
