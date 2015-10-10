@@ -9,9 +9,14 @@
         android:layout_height="wrap_content"
         app:pageTitle="登陆" />
 
-    <LinearLayout
-        style="@style/login_edit_layout"
-        android:layout_marginTop="14dp">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/rgb_216_216_213" />
+
+    <LinearLayout style="@style/login_edit_layout">
 
         <ImageView
             style="@style/login_image_view"
@@ -20,8 +25,10 @@
         <EditText
             android:id="@+id/edt_username"
             style="@style/login_edit_text"
-            android:hint="@string/hint_username" />
+            android:hint="@string/hint_username"
+            android:text="13688390128" />
     </LinearLayout>
+
 
     <LinearLayout style="@style/login_edit_layout">
 
@@ -33,7 +40,8 @@
             android:id="@+id/edt_password"
             style="@style/login_edit_text"
             android:hint="@string/hint_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="123456" />
     </LinearLayout>
 
     <TextView
@@ -44,7 +52,7 @@
         android:gravity="right"
         android:text="@string/txt_forget_password"
         android:textColor="@color/rgb_153_153_153"
-        android:textSize="9.333sp" />
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/btn_login"

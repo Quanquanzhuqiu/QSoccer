@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.qqzq.entity.EntLocation;
 
@@ -15,6 +16,9 @@ import java.util.List;
  * Created by jie.xiao on 9/29/2015.
  */
 public class LocationDao {
+
+    public static final String TAG = "LocationDao";
+
     public static final String TABLE_NAME = "qqzq_nation";
     public static final String COLUMN_NAME_ID = "id";
     public static final String COLUMN_NAME_CODE = "code";
@@ -51,16 +55,15 @@ public class LocationDao {
         }
     }
 
-    public EntLocation findLocationById(int id) {
+    public EntLocation findLocationById(String id) {
         String sql = "SELECT * FROM {0} WHERE {1} = {2}";
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
         EntLocation entLocation = null;
         if (db.isOpen()) {
             Cursor cursor = db.rawQuery(MessageFormat.format(sql, TABLE_NAME, COLUMN_NAME_ID, id), null);
-            if (cursor != null) {
-                cursor.moveToFirst();
+            while (cursor.moveToNext()) {
                 entLocation = new EntLocation();
-                entLocation.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_NAME_ID)));
+                entLocation.setId(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)));
                 entLocation.setParent(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PARENT)));
                 entLocation.setProvince(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROVINCE)));
                 entLocation.setCity(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_CITY)));
@@ -79,7 +82,7 @@ public class LocationDao {
             Cursor cursor = db.rawQuery(MessageFormat.format(sql, TABLE_NAME, COLUMN_NAME_PARENT, parent), null);
             while (cursor.moveToNext()) {
                 EntLocation entLocation = new EntLocation();
-                entLocation.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_NAME_ID)));
+                entLocation.setId(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)));
                 entLocation.setParent(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PARENT)));
                 entLocation.setProvince(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROVINCE)));
                 entLocation.setCity(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_CITY)));
@@ -99,7 +102,7 @@ public class LocationDao {
             Cursor cursor = db.rawQuery(MessageFormat.format(sql, TABLE_NAME), null);
             while (cursor.moveToNext()) {
                 EntLocation entLocation = new EntLocation();
-                entLocation.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_NAME_ID)));
+                entLocation.setId(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)));
                 entLocation.setParent(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PARENT)));
                 entLocation.setProvince(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROVINCE)));
                 entLocation.setCity(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_CITY)));

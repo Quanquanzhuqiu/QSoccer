@@ -37,7 +37,7 @@ public class BaseApplication extends Application {
     public static String QQZQ_PASSWORD = "";
     public static String QQZQ_TOKENT = "";
     public static SharedPreferences spQQZQ;
-    private final String TAG = "BaseApplication";
+    private final static String TAG = "BaseApplication";
 
     public static BaseApplication getInstance() {
 
@@ -140,6 +140,15 @@ public class BaseApplication extends Application {
     }
 
     public void initBasicData() {
+
+        LocationDao locationDao = new LocationDao(this);
+        EntLocation location = locationDao.findLocationById("1");
+
+        if (location != null) {
+            Log.i(TAG, "本地已有省市信息，无需向后台请求！");
+            return;
+        }
+
         GsonRequest gsonRequest = new GsonRequest<EntLocation[]>(Constants.API_FIND_NATIONS_URL, EntLocation[].class,
                 new ResponseListener<EntLocation[]>() {
                     @Override

@@ -36,8 +36,8 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
 
     private List<EntLocation> locationInfos;
     private boolean isProvincePage = true;
-    private int selectedProvinceCode = 0;
-    private int selectedCityCode = 0;
+    private String selectedProvinceCode = null;
+    private String selectedCityCode = null;
     private String prevPageName = "";
 
     private LocationDao locationDao;
@@ -88,8 +88,8 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
         refreshLocationListView(locationInfos);
     }
 
-    private void requestCityList(int provinceId) {
-        locationInfos = locationDao.findLoactionByParent(String.valueOf(provinceId));
+    private void requestCityList(String provinceId) {
+        locationInfos = locationDao.findLoactionByParent(provinceId);
         refreshLocationListView(locationInfos);
     }
 

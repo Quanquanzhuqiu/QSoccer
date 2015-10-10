@@ -6,18 +6,18 @@ import android.text.TextUtils;
  * Created by jie.xiao on 9/29/2015.
  */
 public class EntLocation {
-    private int id;
+    private String id;
     private String code;
     private String province;
     private String city;
     private String district;
     private String parent;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

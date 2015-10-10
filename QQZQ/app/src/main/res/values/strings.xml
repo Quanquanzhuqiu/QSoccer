@@ -57,8 +57,8 @@
     <string name="main_game_address">地址：</string>
     <string name="main_game_datetime">时间：</string>
     <string name="main_game_type">类型：</string>
-    <string name="main_game_registering">报名中</string>
-    <string name="main_game_registered">报名结束</string>
+    <string name="registering">报名中</string>
+    <string name="registered">报名结束</string>
 
     <!-- 登陆页面-->
     <string name="hint_username">请输入用户名/手机号</string>
@@ -187,6 +187,8 @@
     <string name="gallery_comment">评论</string>
     <string name="gallery_good">点赞</string>
 
+    <!-- 球队活动列表 -->
+
     <!-- 活动详情 -->
     <string name="game_publisher">发起人：</string>
     <string name="game_already_join">已报名：</string>
@@ -253,6 +255,20 @@
     <string name="total_payout">支出总金额</string>
     <string name="total_payout_hint">本次总共支出了多少？</string>
     <string name="confirm_payout">确定支出</string>
+
+    <!-- 队员余额表 -->
+    <string name="team_balance">球队余额：</string>
+    <string name="deadline">截止时间：</string>
+    <string name="balance">余额</string>
+
+    <!-- 收支流水详情 -->
+    <string name="income_subject">收入科目</string>
+    <string name="income_amount">收入金额</string>
+    <string name="income_user">充值球员</string>
+    <string name="noter">记录人</string>
+    <string name="payout_subject">支出科目</string>
+    <string name="payout_amount">支出金额</string>
+    <string name="payout_user">支出球员</string>
 
     <!-- 发布球队相册 -->
     <string name="hint_publish_team_gallery">有什么新鲜事儿，跟大家分享...</string>

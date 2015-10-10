@@ -107,8 +107,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
 
         LocationDao locationDao = new LocationDao(context);
 
-        EntLocation cityInfo = locationDao.findLocationById(entTeamInfo.getOftencity());
-        EntLocation distinctInfo = locationDao.findLocationById(entTeamInfo.getOftendistinct());
+        EntLocation cityInfo = locationDao.findLocationById(String.valueOf(entTeamInfo.getOftencity()));
+        EntLocation distinctInfo = locationDao.findLocationById(String.valueOf(entTeamInfo.getOftendistinct()));
         System.out.println(cityInfo);
         System.out.println(distinctInfo);
         if (cityInfo != null && distinctInfo != null) {

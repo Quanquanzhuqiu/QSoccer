@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -60,19 +61,13 @@ public class MainActivity extends BaseFragmentActivity {
     //我的球队页面布局
     private View myTeamLayout;
 
-    private ViewPager pager;
-
     //球队管理页面的Fragment
     private TeamMangmentFragment teamMangmentFragment;
 
     //球队内部活动的Fragment
     private GameManagementFragment gameManagementFragment;
 
-
-    /**
-     * PagerSlidingTabStrip的实例
-     */
-    private PagerSlidingTabStrip tabs;
+    private Button[] mTabs;
 
     /**
      * 获取当前屏幕的密度
@@ -83,13 +78,23 @@ public class MainActivity extends BaseFragmentActivity {
     private String teamPageType = Constants.PAGE_TYPE_NO_TEAM;
     private String gamePageType = Constants.PAGE_TYPE_NO_GAME;
 
-    private TopBar topBar;
+    /**
+     * PagerSlidingTabStrip的实例
+     */
+    private TopBar mTopbarTopBar;
+    private PagerSlidingTabStrip mTabsPagerSlidingTabStrip;
+    private ViewPager mPagerViewPager;
+    private LinearLayout mMainLinearLayout;
+    LinearLayout ll_bottom_myteam, ll_bottom_chat, ll_bottom_find, ll_bottom_me;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+
         init();
     }
 
@@ -100,11 +105,21 @@ public class MainActivity extends BaseFragmentActivity {
 
     private void init() {
         loadTeamListFromBackend();
-        topBar = (TopBar) findViewById(R.id.topbar);
-        dm = getResources().getDisplayMetrics();
-        pager = (ViewPager) findViewById(R.id.pager);
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
+        mTopbarTopBar = (TopBar) findViewById(R.id.topbar);
+        mTabsPagerSlidingTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        mPagerViewPager = (ViewPager) findViewById(R.id.pager);
+        mMainLinearLayout = (LinearLayout) findViewById(R.id.ll_main);
+        dm = getResources().getDisplayMetrics();
+
+
+        mTabs = new Button[4];
+        mTabs[0] = (Button) findViewById(R.id.btn_my_team);
+        mTabs[1] = (Button) findViewById(R.id.btn_chat);
+        mTabs[2] = (Button) findViewById(R.id.btn_find);
+        mTabs[3] = (Button) findViewById(R.id.btn_me);
+        // 把第一个tab设为选中状态
+        mTabs[0].setSelected(true);
     }
 
     /**
@@ -112,24 +127,24 @@ public class MainActivity extends BaseFragmentActivity {
      */
     private void setTabsValue() {
         // 设置Tab是自动填充满屏幕的
-        tabs.setShouldExpand(true);
+        mTabsPagerSlidingTabStrip.setShouldExpand(true);
         // 设置Tab的分割线是透明的
-        tabs.setDividerColor(Color.TRANSPARENT);
+        mTabsPagerSlidingTabStrip.setDividerColor(Color.TRANSPARENT);
         // 设置Tab底部线的高度
-        tabs.setUnderlineHeight((int) TypedValue.applyDimension(
+        mTabsPagerSlidingTabStrip.setUnderlineHeight((int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 1, dm));
         // 设置Tab Indicator的高度
-        tabs.setIndicatorHeight((int) TypedValue.applyDimension(
+        mTabsPagerSlidingTabStrip.setIndicatorHeight((int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 2, dm));
         // 设置Tab标题文字的大小
-        tabs.setTextSize((int) TypedValue.applyDimension(
+        mTabsPagerSlidingTabStrip.setTextSize((int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_SP, 16, dm));
         // 设置Tab Indicator的颜色
-        tabs.setIndicatorColor(Color.parseColor("#45c01a"));
+        mTabsPagerSlidingTabStrip.setIndicatorColor(Color.parseColor("#45c01a"));
         // 设置选中Tab文字的颜色 (这是我自定义的一个方法)
-        tabs.setSelectedTextColor(Color.parseColor("#45c01a"));
+        mTabsPagerSlidingTabStrip.setSelectedTextColor(Color.parseColor("#45c01a"));
         // 取消点击Tab时的背景色
-        tabs.setTabBackground(0);
+        mTabsPagerSlidingTabStrip.setTabBackground(0);
     }
 
 
@@ -205,8 +220,8 @@ public class MainActivity extends BaseFragmentActivity {
             } else {
                 teamPageType = Constants.PAGE_TYPE_NO_TEAM;
             }
-            pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-            tabs.setViewPager(pager);
+            mPagerViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+            mTabsPagerSlidingTabStrip.setViewPager(mPagerViewPager);
             setTabsValue();
         }
     };

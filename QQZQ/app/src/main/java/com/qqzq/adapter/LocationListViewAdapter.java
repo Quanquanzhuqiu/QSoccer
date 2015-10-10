@@ -18,7 +18,7 @@ import java.util.List;
 public class LocationListViewAdapter extends ArrayAdapter<EntLocation> {
 
     protected LayoutInflater mInflater;
-    private static final int mLayout = R.layout.location_list_item;
+    private static final int mLayout = R.layout.item_lv_location;
 
     public LocationListViewAdapter(Context context, List<EntLocation> locationInfos) {
         super(context, mLayout, locationInfos);

@@ -10,8 +10,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:leftImage="@drawable/ic_btn_back"
-        app:rightImage="@drawable/ic_btn_more"
-        app:pageTitle="活动出勤管理详情" />
+        app:pageTitle="活动出勤管理详情"
+        app:rightImage="@drawable/ic_btn_more" />
 
     <com.qqzq.widget.tab.PagerSlidingTabStrip
         android:id="@+id/tabs"
@@ -29,13 +29,22 @@
         android:layout_weight="1" />
 
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/rgb_216_216_213" />
+
     <LinearLayout
         android:id="@+id/ll_main_bottom"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+
+        android:weightSum="4">
 
 
         <RelativeLayout
@@ -44,16 +53,17 @@
             android:layout_weight="1">
 
             <Button
+                android:id="@+id/btn_my_team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_bottom_item_bg"
-                android:drawableTop="@drawable/tab_myteam_bg"
+                android:drawableTop="@drawable/bg_tab_myteam"
                 android:paddingBottom="2dp"
                 android:paddingTop="7dp"
                 android:scaleType="matrix"
                 android:text="@string/my_team"
-                android:textColor="@color/main_bottom_text_color"
-                android:textSize="12sp" />
+                android:textColor="@color/rgb_153_153_153"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -62,16 +72,17 @@
             android:layout_weight="1">
 
             <Button
+                android:id="@+id/btn_chat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_bottom_item_bg"
-                android:drawableTop="@drawable/tab_chat_bg"
+                android:drawableTop="@drawable/bg_tab_chat"
                 android:paddingBottom="2dp"
                 android:paddingTop="7dp"
                 android:scaleType="matrix"
                 android:text="@string/chat"
-                android:textColor="@color/main_bottom_text_color"
-                android:textSize="12sp" />
+                android:textColor="@color/rgb_153_153_153"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -80,16 +91,17 @@
             android:layout_weight="1">
 
             <Button
+                android:id="@+id/btn_find"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_bottom_item_bg"
-                android:drawableTop="@drawable/tab_find_bg"
+                android:drawableTop="@drawable/bg_tab_find"
                 android:paddingBottom="2dp"
                 android:paddingTop="7dp"
                 android:scaleType="matrix"
                 android:text="@string/find"
-                android:textColor="@color/main_bottom_text_color"
-                android:textSize="12sp" />
+                android:textColor="@color/rgb_153_153_153"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -98,16 +110,17 @@
             android:layout_weight="1">
 
             <Button
+                android:id="@+id/btn_me"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/main_bottom_item_bg"
-                android:drawableTop="@drawable/tab_me_bg"
+                android:drawableTop="@drawable/bg_tab_me"
                 android:paddingBottom="2dp"
                 android:paddingTop="7dp"
                 android:scaleType="matrix"
                 android:text="@string/me"
-                android:textColor="@color/main_bottom_text_color"
-                android:textSize="12sp" />
+                android:textColor="@color/rgb_153_153_153"
+                android:textSize="14sp" />
         </RelativeLayout>
 
     </LinearLayout>

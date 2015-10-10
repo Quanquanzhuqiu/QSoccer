@@ -160,7 +160,5 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void initTestData() {
         //for test only
         checkMetrics();
-        edt_username.setText("13551063785");
-        edt_password.setText("123");
     }
 }
