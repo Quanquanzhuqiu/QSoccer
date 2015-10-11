@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +39,9 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 15/9/15.
  */
-public class GamePublishActivity extends BaseActivity implements View.OnClickListener {
+public class GamePublishActivity extends BaseActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+
+    private final static String TAG = "GamePublishActivity";
 
     private Activity context = this;
     private TextView tv_titile;
@@ -48,16 +53,10 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private EditText edt_game_date;
     private RadioButton rbtn_game_type_public;
     private RadioButton rbtn_game_type_private;
-    private RadioButton rbtn_soccer_person_type_5;
-    private RadioButton rbtn_soccer_person_type_7;
-    private RadioButton rbtn_soccer_person_type_9;
-    private RadioButton rbtn_soccer_person_type_11;
     private CheckBox cbox_eat_and_play;
-    private RadioButton rbtn_game_pay_average;
-    private RadioButton rbtn_game_pay_fixed;
-    private RadioButton rbtn_game_pay_member_charge;
-    private RadioButton rbtn_game_pay_member_no_registrator;
-    private RadioButton rbtn_game_pay_member_link_registrator;
+    private RadioGroup rgrp_soccer_person;
+    private RadioGroup rgrp_game_pay;
+    private RadioGroup rgrp_link_member_list;
     private EditText edt_game_pay_average;
     private EditText edt_game_pay_fixed;
     private EditText edt_game_pay_member_charge;
@@ -70,6 +69,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private LinearLayout ll_select_team;
     private LinearLayout ll_game_pay_member_no_registrator;
     private LinearLayout ll_game_pay_member_link_registrator;
+    private LinearLayout ll_link_member_list;
 
     private TimePickerWindow timePickerWindow; // 时间选择器窗口
 
@@ -101,16 +101,10 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         edt_game_date = (EditText) findViewById(R.id.edt_game_date);
         rbtn_game_type_public = (RadioButton) findViewById(R.id.rbtn_game_type_public);
         rbtn_game_type_private = (RadioButton) findViewById(R.id.rbtn_game_type_private);
-        rbtn_soccer_person_type_5 = (RadioButton) findViewById(R.id.rbtn_soccer_person_type_5);
-        rbtn_soccer_person_type_7 = (RadioButton) findViewById(R.id.rbtn_soccer_person_type_7);
-        rbtn_soccer_person_type_9 = (RadioButton) findViewById(R.id.rbtn_soccer_person_type_9);
-        rbtn_soccer_person_type_11 = (RadioButton) findViewById(R.id.rbtn_soccer_person_type_11);
+        rgrp_soccer_person = (RadioGroup) findViewById(R.id.rgrp_soccer_person);
+        rgrp_game_pay = (RadioGroup) findViewById(R.id.rgrp_game_pay);
+        rgrp_link_member_list = (RadioGroup) findViewById(R.id.rgrp_link_member_list);
         cbox_eat_and_play = (CheckBox) findViewById(R.id.cbox_eat_and_play);
-        rbtn_game_pay_fixed = (RadioButton) findViewById(R.id.rbtn_game_pay_fixed);
-        rbtn_game_pay_average = (RadioButton) findViewById(R.id.rbtn_game_pay_average);
-        rbtn_game_pay_member_charge = (RadioButton) findViewById(R.id.rbtn_game_pay_member_charge);
-        rbtn_game_pay_member_no_registrator = (RadioButton) findViewById(R.id.rbtn_game_pay_member_no_registrator);
-        rbtn_game_pay_member_link_registrator = (RadioButton) findViewById(R.id.rbtn_game_pay_member_link_registrator);
         edt_game_pay_average = (EditText) findViewById(R.id.edt_game_pay_average);
         edt_game_pay_fixed = (EditText) findViewById(R.id.edt_game_pay_fixed);
         edt_game_pay_member_charge = (EditText) findViewById(R.id.edt_game_pay_member_charge);
@@ -121,8 +115,9 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         tv_selected_team = (TextView) findViewById(R.id.tv_selected_team);
         ll_game_publish = (LinearLayout) findViewById(R.id.ll_game_publish);
         ll_select_team = (LinearLayout) findViewById(R.id.ll_select_team);
-        ll_game_pay_member_no_registrator = (LinearLayout) findViewById(R.id.ll_game_pay_member_no_registrator);
-        ll_game_pay_member_link_registrator = (LinearLayout) findViewById(R.id.ll_game_pay_member_link_registrator);
+//        ll_game_pay_member_no_registrator = (LinearLayout) findViewById(R.id.ll_game_pay_member_no_registrator);
+//        ll_game_pay_member_link_registrator = (LinearLayout) findViewById(R.id.ll_game_pay_member_link_registrator);
+        ll_link_member_list = (LinearLayout) findViewById(R.id.ll_link_member_list);
 
         timePickerWindow = new TimePickerWindow(GamePublishActivity.this, null);
         timePickerWindow.dismiss();
@@ -136,9 +131,9 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         edt_game_location.setOnClickListener(this);
         rbtn_game_type_private.setOnClickListener(this);
         rbtn_game_type_public.setOnClickListener(this);
-        rbtn_game_pay_member_charge.setOnClickListener(this);
-        rbtn_game_pay_average.setOnClickListener(this);
-        rbtn_game_pay_fixed.setOnClickListener(this);
+        rgrp_soccer_person.setOnCheckedChangeListener(this);
+        rgrp_game_pay.setOnCheckedChangeListener(this);
+        rgrp_link_member_list.setOnCheckedChangeListener(this);
     }
 
     /**
@@ -153,9 +148,43 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
                 selectedTeamName = extras.getString(Constants.EXTRA_SELECTED_TEAM);
                 selectedTeamId = extras.getString(Constants.EXTRA_SELECTED_TEAM_ID);
                 tv_selected_team.setText(selectedTeamName);
-                System.out.println("选中的球队是:" + selectedTeamName + " " + selectedTeamId);
+                Log.i(TAG, "选中的球队是:" + selectedTeamName + " " + selectedTeamId);
+                rbtn_game_type_private.setChecked(false);
+                rbtn_game_type_public.setChecked(true);
+                tv_select_team.setVisibility(View.VISIBLE);
                 ll_select_team.setVisibility(View.VISIBLE);
             }
+        }
+    }
+
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+        Log.i(TAG, "radioGroup.getId() = " + radioGroup.getId());
+
+        switch (radioGroup.getId()) {
+            case R.id.rgrp_soccer_person:
+                edt_game_pay_average.setEnabled(false);
+                edt_game_pay_fixed.setEnabled(false);
+                edt_game_pay_member_charge.setEnabled(true);
+                break;
+            case R.id.rgrp_game_pay:
+                edt_game_pay_average.setEnabled(true);
+                edt_game_pay_fixed.setEnabled(false);
+                edt_game_pay_member_charge.setEnabled(false);
+
+                Log.i(TAG, "rgrp_game_pay.getCheckedRadioButtonId() = " + i);
+
+                break;
+            case R.id.rgrp_link_member_list:
+                edt_game_pay_fixed.setEnabled(true);
+                edt_game_pay_average.setEnabled(false);
+                edt_game_pay_member_charge.setEnabled(false);
+
+                Log.i(TAG, "rgrp_link_member_list.getCheckedRadioButtonId() = " + i);
+
+                break;
         }
     }
 
@@ -175,40 +204,15 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
             case R.id.edt_game_location:
                 break;
             case R.id.rbtn_game_type_public:
+                tv_select_team.setVisibility(View.VISIBLE);
                 rbtn_game_type_private.setChecked(false);
                 break;
             case R.id.rbtn_game_type_private:
                 selectedTeamId = "";
                 selectedTeamName = "";
-                rbtn_game_type_public.setChecked(false);
+                tv_select_team.setVisibility(View.INVISIBLE);
                 ll_select_team.setVisibility(View.GONE);
-                break;
-            case R.id.rbtn_game_pay_member_charge:
-                rbtn_game_pay_average.setChecked(false);
-                rbtn_game_pay_fixed.setChecked(false);
-                ll_game_pay_member_no_registrator.setVisibility(View.VISIBLE);
-                ll_game_pay_member_link_registrator.setVisibility(View.VISIBLE);
-                edt_game_pay_average.setEnabled(false);
-                edt_game_pay_fixed.setEnabled(false);
-                edt_game_pay_member_charge.setEnabled(true);
-                break;
-            case R.id.rbtn_game_pay_average:
-                rbtn_game_pay_member_charge.setChecked(false);
-                rbtn_game_pay_fixed.setChecked(false);
-                ll_game_pay_member_no_registrator.setVisibility(View.GONE);
-                ll_game_pay_member_link_registrator.setVisibility(View.GONE);
-                edt_game_pay_average.setEnabled(true);
-                edt_game_pay_fixed.setEnabled(false);
-                edt_game_pay_member_charge.setEnabled(false);
-                break;
-            case R.id.rbtn_game_pay_fixed:
-                rbtn_game_pay_member_charge.setChecked(false);
-                rbtn_game_pay_average.setChecked(false);
-                ll_game_pay_member_no_registrator.setVisibility(View.GONE);
-                ll_game_pay_member_link_registrator.setVisibility(View.GONE);
-                edt_game_pay_fixed.setEnabled(true);
-                edt_game_pay_average.setEnabled(false);
-                edt_game_pay_member_charge.setEnabled(false);
+                rbtn_game_type_public.setChecked(false);
                 break;
             case R.id.edt_game_date:
                 timePickerWindow.showAtLocation(ll_game_publish,
@@ -251,7 +255,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         }
 
         int soccerpersonnum = -1;
-        if (rbtn_soccer_person_type_5.isChecked()) {
+        /*if (rbtn_soccer_person_type_5.isChecked()) {
             soccerpersonnum = 5;
         } else if (rbtn_soccer_person_type_7.isChecked()) {
             soccerpersonnum = 7;
@@ -259,13 +263,13 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
             soccerpersonnum = 9;
         } else if (rbtn_soccer_person_type_11.isChecked()) {
             soccerpersonnum = 11;
-        }
+        }*/
 
         boolean eatAndPlay = (cbox_eat_and_play.isChecked()) ? true : false;
 
         int cost = -1;
         int gamepayType = -1;
-        if (rbtn_game_pay_average.isChecked() && edt_game_pay_average.getText() != null) {
+        /*if (rbtn_game_pay_average.isChecked() && edt_game_pay_average.getText() != null) {
             gamepayType = 1;
             cost = Integer.valueOf(edt_game_pay_average.getText().toString());
         } else if (rbtn_game_pay_fixed.isChecked() && edt_game_pay_fixed.getText() != null) {
@@ -274,14 +278,14 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         } else if (rbtn_game_pay_member_charge.isChecked() && edt_game_pay_member_charge.getText() != null) {
             cost = Integer.valueOf(edt_game_pay_member_charge.getText().toString());
             gamepayType = 3;
-        }
+        }*/
 
         boolean relatelist = true;
-        if (rbtn_game_pay_member_no_registrator.isChecked()) {
+     /*   if (rbtn_game_pay_member_no_registrator.isChecked()) {
             relatelist = false;
         } else if (rbtn_game_pay_member_link_registrator.isChecked()) {
             relatelist = true;
-        }
+        }*/
 
         int personMaxLimit = -1;
         if (!TextUtils.isEmpty(edt_game_registrator_upper_limit.getText())) {
@@ -336,9 +340,10 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         edt_game_name.setText("周末约球");
         edt_game_location.setText("天府四街");
         rbtn_game_type_private.setChecked(true);
-        rbtn_soccer_person_type_7.setChecked(true);
-        rbtn_game_pay_fixed.setChecked(true);
+//        rbtn_soccer_person_type_7.setChecked(true);
+//        rbtn_game_pay_fixed.setChecked(true);
         edt_game_registrator_lower_limit.setText("5");
         edt_game_description.setText("周末约球活动简介，与老曼联比赛。");
     }
+
 }

@@ -82,6 +82,7 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
         mMoreImageView = (ImageView) findViewById(R.id.iv_more);
         mCommitTextView = (TextView) findViewById(R.id.tv_commit);
         mMoreLinearLayout = (LinearLayout) findViewById(R.id.ll_more);
+        mTitleTextView.setText(pageTitle);
 
         if (leftImage > 0) {
             mBackImageView.setBackgroundResource(leftImage);
@@ -125,7 +126,9 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
                 context.finish();
                 break;
             case R.id.ll_more:
-                if (rightText != null && mListener != null) {
+                if (rightText != null
+                        && (mListener.getButtonType() == TopBarListener.RIGHT
+                        || mListener.getButtonType() == TopBarListener.BOTH)) {
                     mListener.rightButtonClick();
                 } else {
                     Toast.makeText(context, "已点中弹出菜单", Toast.LENGTH_LONG).show();

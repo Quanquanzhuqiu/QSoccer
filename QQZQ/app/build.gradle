@@ -32,10 +32,9 @@ dependencies {
     androidTestCompile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.google.code.gson:gson:2.4'
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
-    compile 'org.apache.httpcomponents:httpclient:4.5.1'
-    compile 'org.apache.httpcomponents:httpmime:4.5.1'
-    compile 'org.apache.httpcomponents:httpcore:4.4.3'
     compile 'com.jayway.android.robotium:robotium-solo:5.5.2'
     compile 'com.android.support:support-v4:19.0.0'
     compile project(':smssdk')
+    compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
+    compile 'org.apache.httpcomponents:httpmime:4.3.5'
 }

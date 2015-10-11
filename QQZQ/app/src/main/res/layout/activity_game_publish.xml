@@ -12,8 +12,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:leftImage="@drawable/ic_btn_back"
-        app:rightText="发布"
-        app:pageTitle="发起活动" />
+        app:pageTitle="发起活动"
+        app:rightText="发布" />
 
 
     <ScrollView
@@ -26,15 +26,15 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
-            android:paddingBottom="20dp">
+            android:paddingBottom="10dp">
 
             <LinearLayout
-                style="@style/linearLayout_create_team_or_activity"
+                style="@style/ll_create_team_or_activity"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <!-- 活动标题-->
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout style="@style/create_team_edit_layout">
 
                     <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -51,9 +51,10 @@
 
                 </LinearLayout>
 
+                <ImageView style="@style/iv_grey_divider" />
 
                 <!-- 活动地点-->
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout style="@style/create_team_edit_layout">
 
                     <ImageView
                         style="@style/create_team_basic_info_image_view"
@@ -71,8 +72,10 @@
 
                 </LinearLayout>
 
+                <ImageView style="@style/iv_grey_divider" />
+
                 <!-- 活动时间-->
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout style="@style/create_team_edit_layout">
 
                     <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -94,11 +97,10 @@
 
             <!-- 活动类型-->
             <LinearLayout
-                style="@style/linearLayout_create_team_or_activity"
-                android:layout_weight="1"
+                style="@style/ll_create_team_or_activity"
                 android:orientation="vertical">
 
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout style="@style/create_team_label_layout">
 
                     <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -108,17 +110,17 @@
 
                 </LinearLayout>
 
+                <ImageView style="@style/iv_grey_divider" />
+
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -141,15 +143,16 @@
                             android:background="@drawable/bg_login"
                             android:gravity="center"
                             android:text="@string/select_team"
-                            android:textColor="@color/rgb_255_255_255" />
+                            android:textColor="@color/rgb_255_255_255"
+                            android:visibility="invisible" />
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:id="@+id/ll_select_team"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="15dp"
                         android:visibility="gone">
 
                         <TextView
@@ -160,6 +163,8 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <ImageView style="@style/iv_grey_divider" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -180,11 +185,11 @@
 
             <!-- 场地类型-->
             <LinearLayout
-                style="@style/linearLayout_create_team_or_activity"
+                style="@style/ll_create_team_or_activity"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout style="@style/create_team_label_layout">
 
                     <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -194,33 +199,31 @@
 
                 </LinearLayout>
 
-                <LinearLayout style="@style/create_team_basic_layout">
+                <ImageView style="@style/iv_grey_divider" />
+
+                <LinearLayout style="@style/create_team_label_layout">
 
                     <RadioGroup
+                        android:id="@+id/rgrp_soccer_person"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-
                         <RadioButton
-                            android:id="@+id/rbtn_soccer_person_type_5"
                             style="@style/my_radio_button"
                             android:text="@string/soccer_person_type_5" />
 
                         <RadioButton
-                            android:id="@+id/rbtn_soccer_person_type_7"
                             style="@style/my_radio_button"
                             android:layout_marginLeft="10dp"
                             android:text="@string/soccer_person_type_7" />
 
                         <RadioButton
-                            android:id="@+id/rbtn_soccer_person_type_9"
                             style="@style/my_radio_button"
                             android:layout_marginLeft="10dp"
                             android:text="@string/soccer_person_type_9" />
 
                         <RadioButton
-                            android:id="@+id/rbtn_soccer_person_type_11"
                             style="@style/my_radio_button"
                             android:layout_marginLeft="10dp"
                             android:text="@string/soccer_person_type_11" />
@@ -229,7 +232,7 @@
                 </LinearLayout>
                 Ï
 
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout style="@style/create_team_label_layout">
 
                     <CheckBox
                         android:id="@+id/cbox_eat_and_play"
@@ -241,11 +244,11 @@
 
             <!-- 活动费用-->
             <LinearLayout
-                style="@style/linearLayout_create_team_or_activity"
+                style="@style/ll_create_team_or_activity"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout style="@style/create_team_label_layout">
 
                     <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -255,123 +258,150 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rbtn_game_pay_average"
-                        style="@style/my_radio_button"
-                        android:layout_marginLeft="25dp"
-                        android:text="@string/game_pay_average" />
-
-
-                    <EditText
-                        android:id="@+id/edt_game_pay_average"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:hint="@string/game_pay_average_hint"
-                        android:inputType="numberDecimal"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                <ImageView style="@style/iv_grey_divider" />
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rbtn_game_pay_fixed"
-                        style="@style/my_radio_button"
-                        android:layout_marginLeft="25dp"
-                        android:text="@string/game_pay_fixed" />
-
-                    <EditText
-                        android:id="@+id/edt_game_pay_fixed"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:hint="@string/game_pay_fixed_hint"
-                        android:inputType="numberDecimal"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rbtn_game_pay_member_charge"
-                        style="@style/my_radio_button"
-                        android:layout_marginLeft="25dp"
-                        android:text="@string/game_pay_member_charge" />
-
-                    <EditText
-                        android:id="@+id/edt_game_pay_member_charge"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:hint="@string/game_pay_member_charge_hint"
-                        android:inputType="numberDecimal"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_game_pay_member_no_registrator"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:weightSum="2">
 
-                    <RadioButton
-                        android:id="@+id/rbtn_game_pay_member_no_registrator"
-                        style="@style/my_radio_button"
-                        android:text="@string/game_pay_member_no_registrator" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp">
 
-                    <TextView
+                        <RadioGroup
+                            android:id="@+id/rgrp_game_pay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:weightSum="3">
+
+                            <RadioButton
+                                style="@style/my_radio_button"
+                                android:layout_marginLeft="25dp"
+                                android:text="@string/game_pay_average" />
+
+                            <RadioButton
+                                style="@style/my_radio_button"
+                                android:layout_marginLeft="25dp"
+                                android:text="@string/game_pay_fixed" />
+
+                            <RadioButton
+                                style="@style/my_radio_button"
+                                android:layout_marginLeft="25dp"
+                                android:text="@string/game_pay_member_charge" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical">
+
+                            <EditText
+                                android:id="@+id/edt_game_pay_average"
+                                style="@style/create_team_basic_info_edit_font"
+                                android:enabled="false"
+                                android:hint="@string/game_pay_average_hint"
+                                android:inputType="numberDecimal" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical">
+
+                            <EditText
+                                android:id="@+id/edt_game_pay_fixed"
+                                style="@style/create_team_basic_info_edit_font"
+                                android:enabled="false"
+                                android:hint="@string/game_pay_fixed_hint"
+                                android:inputType="numberDecimal" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical">
+
+                            <EditText
+                                android:id="@+id/edt_game_pay_member_charge"
+                                style="@style/create_team_basic_info_edit_font"
+                                android:enabled="false"
+                                android:hint="@string/game_pay_member_charge_hint"
+                                android:inputType="numberDecimal" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_link_member_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="40dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <RadioGroup
+                            android:id="@+id/rgrp_link_member_list"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <RadioButton
+                                style="@style/my_radio_button"
+                                android:text="@string/game_pay_member_no_registrator" />
+
+                            <RadioButton
+                                style="@style/my_radio_button"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/game_pay_member_link_registrator" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/game_pay_member_no_registrator_hint"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_pay_member_no_registrator_hint"
+                            android:textSize="12sp" />
 
-                <LinearLayout
-                    android:id="@+id/ll_game_pay_member_link_registrator"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <RadioButton
-                        android:id="@+id/rbtn_game_pay_member_link_registrator"
-                        style="@style/my_radio_button"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/game_pay_member_link_registrator" />
+                    </LinearLayout>
 
                 </LinearLayout>
+
 
             </LinearLayout>
 
 
             <LinearLayout
-                style="@style/linearLayout_create_team_or_activity"
-                android:layout_weight="1"
+                style="@style/ll_create_team_or_activity"
                 android:orientation="vertical">
 
                 <!-- 人数下限-->
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout style="@style/create_team_edit_layout">
 
                     <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -389,7 +419,7 @@
                 </LinearLayout>
 
                 <!-- 人数上限-->
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout style="@style/create_team_edit_layout">
 
                     <ImageView
                         style="@style/create_team_basic_info_image_view"
@@ -411,12 +441,12 @@
             </LinearLayout>
 
             <LinearLayout
-                style="@style/linearLayout_create_team_or_activity"
-                android:layout_weight="1"
+                style="@style/ll_create_team_or_activity"
+                android:layout_height="120dp"
                 android:orientation="vertical">
 
                 <!-- 活动介绍-->
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout style="@style/create_team_label_layout">
 
                     <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -426,13 +456,14 @@
 
                 </LinearLayout>
 
-                <LinearLayout style="@style/create_team_basic_layout">
+                <LinearLayout
+                    style="@style/create_team_label_layout"
+                    android:layout_height="80dp">
 
                     <EditText
                         android:id="@+id/edt_game_description"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:hint="@string/game_description_hint"
                         android:inputType="textMultiLine"
                         android:maxLength="1000"

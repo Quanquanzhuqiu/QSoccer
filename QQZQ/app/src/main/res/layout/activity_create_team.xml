@@ -9,22 +9,24 @@
 
     <!-- TOP BAR-->
     <com.qqzq.widget.menu.TopBar
+        android:id="@+id/topbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:leftImage="@drawable/ic_btn_back"
-        app:rightText="提交"
-        app:pageTitle="创建球队" />
+        app:pageTitle="创建球队"
+        app:rightText="提交" />
 
     <!-- 球队头像，球队名称，球队ID，常活动地点-->
     <LinearLayout
-        style="@style/linearLayout_create_team_or_activity"
+        style="@style/ll_create_team_or_activity"
         android:orientation="vertical">
 
         <!-- 球队头像-->
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/ll_team_logo"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginTop="10dp">
+            android:gravity="center_vertical">
 
 
             <TextView
@@ -33,12 +35,13 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="30dp"
+                android:layout_weight="1"
                 android:text="@string/create_team_title_1" />
 
             <ImageView
                 android:id="@+id/iv_logo"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/ic_default_team_log" />
@@ -51,10 +54,12 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/ic_browse_img" />
 
-        </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView style="@style/iv_grey_divider" />
 
         <!-- 球队名称-->
-        <LinearLayout style="@style/create_team_basic_layout">
+        <LinearLayout style="@style/create_team_label_layout">
 
             <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -65,7 +70,8 @@
 
         </LinearLayout>
 
-        <LinearLayout style="@style/create_team_basic_layout">
+
+        <LinearLayout style="@style/create_team_edit_layout">
 
             <EditText
                 android:id="@+id/edt_team_name"
@@ -75,8 +81,10 @@
                 android:hint="@string/create_team_hint_2" />
         </LinearLayout>
 
+        <ImageView style="@style/iv_grey_divider" />
+
         <!-- 常活动地点-->
-        <LinearLayout style="@style/create_team_basic_layout">
+        <LinearLayout style="@style/create_team_label_layout">
 
             <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -86,13 +94,18 @@
 
         </LinearLayout>
 
-        <LinearLayout style="@style/create_team_basic_layout">
+
+        <LinearLayout
+            style="@style/create_team_edit_layout"
+            android:layout_height="45dp">
 
             <EditText
                 android:id="@+id/edt_team_location"
                 style="@style/create_team_basic_info_edit"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:editable="false"
+                android:focusable="false"
                 android:hint="@string/create_team_hint_4" />
 
         </LinearLayout>
@@ -102,20 +115,20 @@
 
     <!-- 常用活动类型-->
     <LinearLayout
-        style="@style/linearLayout_create_team_or_activity"
+        style="@style/ll_create_team_or_activity"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            style="@style/create_team_label_layout">
 
             <TextView
                 style="@style/create_team_basic_info_label"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:text="@string/create_team_title_5" />
 
         </LinearLayout>
+
+        <ImageView style="@style/iv_grey_divider" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -151,10 +164,10 @@
 
     <!-- 入队验证-->
     <LinearLayout
-        style="@style/linearLayout_create_team_or_activity"
+        style="@style/ll_create_team_or_activity"
         android:orientation="vertical">
 
-        <LinearLayout style="@style/create_team_basic_layout">
+        <LinearLayout style="@style/create_team_label_layout">
 
             <ImageView style="@style/create_team_basic_info_image_view" />
 
@@ -163,6 +176,8 @@
                 android:text="@string/create_team_title_6" />
 
         </LinearLayout>
+
+        <ImageView style="@style/iv_grey_divider" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -194,22 +209,24 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@color/default_white"
+        android:layout_weight="1"
+        android:background="@drawable/shape_grey_divider_top"
         android:orientation="vertical">
 
         <TextView
             style="@style/create_team_basic_info_label"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
             android:text="@string/create_team_title_7" />
 
         <EditText
             android:id="@+id/edt_team_detail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
             android:hint="@string/create_team_7_hint"
             android:inputType="textMultiLine"
             android:maxLength="1000"

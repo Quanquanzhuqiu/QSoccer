@@ -12,7 +12,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -26,10 +25,8 @@ import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.find.FindFragment;
 import com.qqzq.subitem.game.GameManagementFragment;
 import com.qqzq.subitem.me.MeFragment;
-import com.qqzq.subitem.team.MyTeamFragment;
 import com.qqzq.subitem.team.TeamMangmentFragment;
 import com.qqzq.util.Utils;
-import com.qqzq.widget.menu.PopupMenuWindow;
 import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.tab.PagerSlidingTabStrip;
 
@@ -45,9 +42,6 @@ import java.util.Map;
 public class MainActivity extends BaseFragmentActivity {
 
     private Activity context = this;
-
-    //我的球队页面的Fragment
-    private MyTeamFragment myTeamFragment;
 
     //聊天页面的Fragment
     private ChatFragment chatFragment;

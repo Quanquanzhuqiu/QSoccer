@@ -18,10 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_weight="1"
+            android:gravity="center"
             android:horizontalSpacing="8dp"
             android:numColumns="3"
-            android:gravity="center"
             android:stretchMode="columnWidth"
             android:verticalSpacing="5dp" />
 
@@ -46,83 +45,19 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="140dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@color/grey_bg"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/team_name"
-                    android:textColor="@color/text_color_1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/text_color_1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/team_default_establish_day"
-                    android:textColor="@color/text_color_1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/financial_statistics"
-                    android:textColor="@color/text_color_1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/text_color_1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/duty_statistics"
-                    android:textColor="@color/text_color_1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/text_color_1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/duty_detail"
-                    android:textColor="@color/text_color_1" />
-            </LinearLayout>
-
+            <ListView
+                android:id="@+id/lv_team_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:divider="@null" />
 
         </LinearLayout>
     </LinearLayout>

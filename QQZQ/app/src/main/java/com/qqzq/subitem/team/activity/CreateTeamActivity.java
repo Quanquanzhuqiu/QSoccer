@@ -25,6 +25,7 @@ import com.qqzq.activity.BaseActivity;
 import com.qqzq.activity.BaseApplication;
 import com.qqzq.activity.MainActivity;
 import com.qqzq.listener.BackButtonListener;
+import com.qqzq.listener.TopBarListener;
 import com.qqzq.subitem.find.activity.FindLocationActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
@@ -32,6 +33,7 @@ import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.MultipartRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.photo.PhotoPopupWindow;
 
 import java.io.File;
@@ -44,11 +46,9 @@ import java.util.Map;
  */
 public class CreateTeamActivity extends BaseActivity implements View.OnClickListener {
 
+    private final static String TAG = "CreateTeamActivity";
     private Context context = this;
-    private TextView tv_title;
-    private LinearLayout ll_back;
-    private TextView tv_commit;
-    private LinearLayout ll_commit;
+    private TopBar topBar;
     private EditText edt_team_name;
     private EditText edt_team_location;
     private EditText edt_team_detail;
@@ -57,6 +57,7 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     private CheckBox cbox_9_persons;
     private CheckBox cbox_11_persons;
     private RadioGroup radio_group_join_config;
+    private LinearLayout ll_team_logo;
     private ImageView iv_logo;
     private View ll_create_team;
 
@@ -67,8 +68,8 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     private String logoPathInServer;
 
     private Bundle extras;
-    private int selectedProvinceCode = 0;
-    private int selectedCityCode = 0;
+    private String selectedProvinceCode = "0";
+    private String selectedCityCode = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,9 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
 
     private void initView() {
 
+        topBar = (TopBar) findViewById(R.id.topbar);
         ll_create_team = findViewById(R.id.ll_create_team);
+        iv_logo = (ImageView) findViewById(R.id.iv_logo);
         edt_team_name = (EditText) findViewById(R.id.edt_team_name);
         edt_team_location = (EditText) findViewById(R.id.edt_team_location);
         edt_team_detail = (EditText) findViewById(R.id.edt_team_detail);
@@ -91,15 +94,33 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
         cbox_7_persons = (CheckBox) findViewById(R.id.cbox_7_persons);
         cbox_9_persons = (CheckBox) findViewById(R.id.cbox_9_persons);
         cbox_11_persons = (CheckBox) findViewById(R.id.cbox_11_persons);
-        iv_logo = (ImageView) findViewById(R.id.iv_logo);
+        ll_team_logo = (LinearLayout) findViewById(R.id.ll_team_logo);
         photoPopupWindow = new PhotoPopupWindow(CreateTeamActivity.this, null);
         photoPopupWindow.dismiss();
 
     }
 
     private void initListener() {
-        iv_logo.setOnClickListener(this);
+        ll_team_logo.setOnClickListener(this);
         edt_team_location.setOnClickListener(this);
+        topBar.setListener(new TopBarListener() {
+
+            @Override
+            public void leftButtonClick() {
+            }
+
+            @Override
+            public void rightButtonClick() {
+                uploadLogoAndTeamBasicInfo();
+            }
+
+            @Override
+            public int getButtonType() {
+                return TopBarListener.RIGHT;
+            }
+        });
+
+
     }
 
     private void initData() {
@@ -109,8 +130,8 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
                 && extras.containsKey(Constants.EXTRA_SELECTED_PROVINCE_CODE)
                 && extras.containsKey(Constants.EXTRA_SELECTED_CITY_CODE)) {
 
-            selectedProvinceCode = extras.getInt(Constants.EXTRA_SELECTED_PROVINCE_CODE);
-            selectedCityCode = extras.getInt(Constants.EXTRA_SELECTED_CITY_CODE);
+            selectedProvinceCode = extras.getString(Constants.EXTRA_SELECTED_PROVINCE_CODE);
+            selectedCityCode = extras.getString(Constants.EXTRA_SELECTED_CITY_CODE);
 
             String selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
             edt_team_location.setText(selectedLocation);
@@ -210,8 +231,8 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
         EntTeamInfo entTeamInfo = new EntTeamInfo();
         entTeamInfo.setTeamname(teamName);
         entTeamInfo.setTeamno("0");
-        entTeamInfo.setOftencity(selectedProvinceCode);
-        entTeamInfo.setOftendistinct(selectedCityCode);
+        entTeamInfo.setOftencity(Integer.valueOf(selectedProvinceCode));
+        entTeamInfo.setOftendistinct(Integer.valueOf(selectedCityCode));
         entTeamInfo.setJoinconfig(join_config);
         entTeamInfo.setOftensoccerpernum(soccerPersons);
         entTeamInfo.setSumary(teamDetail);
@@ -261,10 +282,7 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     public void onClick(View view) {
 
         switch (view.getId()) {
-//            case R.id.ll_commit:
-//                uploadLogoAndTeamBasicInfo();
-//                break;
-            case R.id.iv_logo:
+            case R.id.ll_team_logo:
                 photoPopupWindow.showAtLocation(ll_create_team,
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;

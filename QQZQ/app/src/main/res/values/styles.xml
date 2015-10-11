@@ -29,16 +29,22 @@
         <item name="android:layout_marginBottom">5dp</item>
     </style>
 
-    <style name="linearLayout_create_team_or_activity">
+    <style name="ll_create_team_or_activity">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_marginLeft">0dp</item>
         <item name="android:layout_marginRight">0dp</item>
-        <item name="android:background">@color/default_white</item>
+        <item name="android:background">@drawable/shape_grey_divider_top_bottom</item>
     </style>
 
+    <style name="iv_grey_divider">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:background">@color/rgb_216_216_213</item>
+    </style>
 
     <!-- 创建球队页面styles -->
     <style name="create_team_label">
@@ -46,12 +52,18 @@
         <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="create_team_basic_layout">
+    <style name="create_team_label_layout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_height">30dp</item>
         <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="create_team_edit_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="create_team_basic_info_image_view">
@@ -74,7 +86,7 @@
     </style>
 
     <style name="create_team_basic_info_edit_font">
-        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">33dp</item>
         <item name="android:textSize">12sp</item>
     </style>
@@ -88,6 +100,7 @@
     <style name="my_radio_button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/default_black</item>
         <item name="android:textSize">12sp</item>
         <item name="android:layout_marginLeft">20dp</item>
@@ -119,7 +132,7 @@
     <style name="login_edit_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
-        <item name="android:background">@drawable/shape_grey_divider_no_left_right</item>
+        <item name="android:background">@drawable/shape_grey_divider_bottom</item>
         <item name="android:orientation">horizontal</item>
     </style>
 
