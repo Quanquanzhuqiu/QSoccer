@@ -54,9 +54,10 @@
 
 
     <!-- body -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_weight="1"
         android:background="@color/default_white">
 
         <com.qqzq.widget.tab.PullToRefreshView
@@ -69,8 +70,6 @@
                 android:id="@+id/lv_teams"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/default_white"
                 android:cacheColorHint="#00000000"
@@ -78,6 +77,6 @@
 
         </com.qqzq.widget.tab.PullToRefreshView>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

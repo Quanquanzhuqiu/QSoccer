@@ -28,6 +28,8 @@ import java.util.List;
  */
 public class TeamMemberActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
+    private final static String TAG = "TeamMemberActivity";
+
     private Activity context = this;
     private TextView tv_title;
     private TextView tv_commit;
@@ -38,7 +40,6 @@ public class TeamMemberActivity extends BaseActivity implements AdapterView.OnIt
 
 
     private String selectedTeamId;
-    private final String TAG = "TeamMemberActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

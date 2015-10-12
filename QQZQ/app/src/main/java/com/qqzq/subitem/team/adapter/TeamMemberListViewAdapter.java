@@ -89,7 +89,7 @@ public class TeamMemberListViewAdapter extends BaseAdapter {
 //            String logoUrl = entTeamMember.getLogoUrl();
             Drawable logo = null;
             String logoUrl = null;
-            String name = entTeamMember.getUsername();
+            String name = entTeamMember.getUsernickname();
             String attendanceCount = entTeamMember.getAttendancecount() + "";
             String personalscore = entTeamMember.getPersonalscore() + "";
             String joinDate = Utils.getFormatedSimpleDate(entTeamMember.getJointime());

@@ -119,8 +119,8 @@
     <!-- 球队详情页面-->
     <string name="team_detail_name">球队名称：</string>
     <string name="team_detail_captain">队长：</string>
-    <string name="team_detail_game_times">球队活动次数：</string>
-    <string name="team_detail_points">球队积分：</string>
+    <string name="team_detail_attendance_count">球队活动次数：</string>
+    <string name="team_detail_personal_score">球队积分：</string>
     <string name="team_detail_location">常活动地点：</string>
     <string name="team_detail_establish_date">成立时间：</string>
     <string name="team_detail_member">球队成员</string>

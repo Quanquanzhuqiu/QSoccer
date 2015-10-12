@@ -2,32 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/grey_bg"
+    android:background="@drawable/shape_grey_divider_bottom"
     android:gravity="center"
     android:orientation="horizontal">
 
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
 
         <ImageView
-            android:id="@+id/iv_team_logo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:id="@+id/iv_game_logo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:background="@drawable/ic_default_team_log" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="10dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -35,7 +38,7 @@
                 android:text="@string/main_game_publisher" />
 
             <TextView
-                android:id="@+id/tv_game_publisher"
+                android:id="@+id/tv_game_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -62,7 +65,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,7 +73,7 @@
                 android:text="@string/main_game_datetime" />
 
             <TextView
-                android:id="@+id/tv_game_time"
+                android:id="@+id/tv_game_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -79,7 +82,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,7 +90,7 @@
                 android:text="@string/main_game_type" />
 
             <TextView
-                android:id="@+id/tv_game_type"
+                android:id="@+id/tv_soccer_person"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -96,13 +99,15 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="90dp"
+        android:layout_width="80dp"
         android:layout_height="match_parent"
         android:gravity="bottom|center_horizontal">
 
         <Button
+            android:id="@+id/btn_game_join"
             android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/bg_game_join"
             android:text="@string/registering"
             android:textColor="@color/rgb_255_79_87" />

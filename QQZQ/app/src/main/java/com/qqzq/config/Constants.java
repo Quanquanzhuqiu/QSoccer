@@ -87,6 +87,8 @@ public class Constants {
     public static final String API_FIND_TEAM_BY_ID_URL = API_SERVER_HOST + "/team/teams/{0}";
     //根据球队id查询球队成员信息
     public static final String API_FIND_TEAM_MEMBER_BY_ID_URL = API_SERVER_HOST + "/team/teams/{0}/members";
+    //当用户申请加入球队时调用此接口
+    public static final String API_JOIN_TEAM_URL = API_SERVER_HOST + "/team/teams/{0}/application";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 活动发起部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队

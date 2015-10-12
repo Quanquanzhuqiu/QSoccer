@@ -16,7 +16,7 @@
         android:theme="@android:style/Theme.NoTitleBar">
 
         <activity
-            android:name=".subitem.game.activity.GamePublishActivity"
+            android:name=".activity.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -42,9 +42,9 @@
         <activity
             android:name=".subitem.find.activity.FindTeamActivity"
             android:screenOrientation="portrait" />
-  <!--      <activity
+        <activity
             android:name=".subitem.game.activity.GamePublishActivity"
-            android:screenOrientation="portrait" />-->
+            android:screenOrientation="portrait" />
         <activity
             android:name=".subitem.team.activity.SelectTeamActivity"
             android:screenOrientation="portrait"></activity>

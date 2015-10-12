@@ -251,7 +251,7 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     ResponseListener createTeamResponseListener = new ResponseListener<EntTeamInfo>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            System.out.println(volleyError);
+            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -265,7 +265,6 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     ResponseListener uploadLogoResponseListner = new ResponseListener<EntClientResponse>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            System.out.println(volleyError);
             Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 

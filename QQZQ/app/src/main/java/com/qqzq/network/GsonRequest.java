@@ -76,22 +76,21 @@ public class GsonRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
         try {
 
-            System.out.println(networkResponse.headers);
+            Log.i(TAG, "networkResponse.headers = " + networkResponse.headers);
+
             if (networkResponse.headers.containsKey(Constants.HTTP_HEADER_TOKER)) {
                 String token = networkResponse.headers.get(Constants.HTTP_HEADER_TOKER);
-                Log.v(TAG, "TOKEN = " + token);
+                Log.i(TAG, "TOKEN = " + token);
                 BaseApplication.QQZQ_TOKENT = token;
             }
 
 
             String json = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
-            Log.v(TAG, json);
-            System.out.println(json);
+            Log.i(TAG, json);
 
             return Response.success(mGson.fromJson(json, mClazz),
                     HttpHeaderParser.parseCacheHeaders(networkResponse));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return Response.error(new ParseError(e));
         }
     }
@@ -99,7 +98,6 @@ public class GsonRequest<T> extends Request<T> {
     @Override
     protected VolleyError parseNetworkError(VolleyError volleyError) {
         if (volleyError.networkResponse != null && volleyError.networkResponse.data != null) {
-            System.out.println(new String(volleyError.networkResponse.data));
             VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
             volleyError = error;
         }
@@ -128,8 +126,7 @@ public class GsonRequest<T> extends Request<T> {
             if (mParameters != null) {
                 Object object = mParameters.get(Constants.GSON_REQUST_POST_PARAM_KEY);
                 String json = mGson.toJson(object);
-                Log.i(TAG, json);
-                System.out.println("Request json =>" + json);
+                Log.i(TAG, "Request json => " + json);
                 if (json != null) {
                     return json.getBytes(getParamsEncoding());
                 }

@@ -11,8 +11,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:leftImage="@drawable/ic_btn_back"
-        app:rightImage="@drawable/ic_btn_share"
-        app:pageTitle="球队资料" />
+        app:pageTitle="球队资料"
+        app:rightImage="@drawable/ic_btn_share" />
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -47,7 +47,7 @@
                         android:id="@+id/tv_team_name"
                         style="@style/create_team_basic_info_label"
                         android:layout_width="wrap_content"
-                        android:text="成都老曼联"
+                        android:text=""
                         android:textSize="17sp" />
 
                 </LinearLayout>
@@ -65,7 +65,7 @@
                         android:id="@+id/tv_team_captain"
                         style="@style/create_team_basic_info_label"
                         android:layout_width="wrap_content"
-                        android:text="王老吉"
+                        android:text=""
                         android:textSize="17sp" />
 
                 </LinearLayout>
@@ -76,13 +76,13 @@
 
                     <TextView
                         style="@style/tv_detail_item_label2"
-                        android:text="@string/team_detail_game_times" />
+                        android:text="@string/team_detail_attendance_count" />
 
                     <TextView
-                        android:id="@+id/tv_team_game_times"
+                        android:id="@+id/tv_attendance_count"
                         style="@style/create_team_basic_info_label"
                         android:layout_width="wrap_content"
-                        android:text="165"
+                        android:text=""
                         android:textColor="@color/rgb_163_163_163"
                         android:textSize="14sp" />
 
@@ -95,15 +95,15 @@
                     <TextView
                         style="@style/tv_detail_item_label2"
                         android:layout_width="wrap_content"
-                        android:text="@string/team_detail_points"
+                        android:text="@string/team_detail_personal_score"
                         android:textColor="@color/rgb_163_163_163"
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_team_points"
+                        android:id="@+id/tv_personal_score"
                         style="@style/create_team_basic_info_label"
                         android:layout_width="wrap_content"
-                        android:text="1080"
+                        android:text=""
                         android:textColor="@color/rgb_163_163_163"
                         android:textSize="14sp" />
 
@@ -147,7 +147,7 @@
                         android:id="@+id/tv_team_establish_day"
                         style="@style/create_team_basic_info_label"
                         android:layout_width="wrap_content"
-                        android:text="2015年04月25日"
+                        android:text=""
                         android:textColor="@color/rgb_163_163_163"
                         android:textSize="14sp" />
 

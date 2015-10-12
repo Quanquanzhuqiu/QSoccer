@@ -142,6 +142,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 + scaledDensity + "  densityDpi = " + densityDpi);
     }
 
+
     ResponseListener<EntClientResponse> loginResponseListener = new ResponseListener<EntClientResponse>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {

@@ -27,9 +27,11 @@ import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntGameInfo;
 import com.qqzq.listener.BackButtonListener;
+import com.qqzq.listener.TopBarListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.team.activity.SelectTeamActivity;
+import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.time.TimePickerWindow;
 
 import java.util.Date;
@@ -44,6 +46,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     private final static String TAG = "GamePublishActivity";
 
     private Activity context = this;
+    private TopBar topBar;
     private TextView tv_titile;
     private LinearLayout ll_commit;
     private TextView tv_commit;
@@ -75,6 +78,11 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
 
     private String selectedTeamName;
     private String selectedTeamId;
+    private int selectedSoccerPerson = -1;
+    private int selectedPayType = -1;
+    private boolean isRelatedMemberList = false;
+    private int cost = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +92,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         initLinstener();
         initData();
 
-        initTestData();
     }
 
     @Override
@@ -96,6 +103,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initView() {
+        topBar = (TopBar) findViewById(R.id.topbar);
         edt_game_name = (EditText) findViewById(R.id.edt_game_name);
         edt_game_location = (EditText) findViewById(R.id.edt_game_location);
         edt_game_date = (EditText) findViewById(R.id.edt_game_date);
@@ -115,8 +123,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         tv_selected_team = (TextView) findViewById(R.id.tv_selected_team);
         ll_game_publish = (LinearLayout) findViewById(R.id.ll_game_publish);
         ll_select_team = (LinearLayout) findViewById(R.id.ll_select_team);
-//        ll_game_pay_member_no_registrator = (LinearLayout) findViewById(R.id.ll_game_pay_member_no_registrator);
-//        ll_game_pay_member_link_registrator = (LinearLayout) findViewById(R.id.ll_game_pay_member_link_registrator);
         ll_link_member_list = (LinearLayout) findViewById(R.id.ll_link_member_list);
 
         timePickerWindow = new TimePickerWindow(GamePublishActivity.this, null);
@@ -134,6 +140,23 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         rgrp_soccer_person.setOnCheckedChangeListener(this);
         rgrp_game_pay.setOnCheckedChangeListener(this);
         rgrp_link_member_list.setOnCheckedChangeListener(this);
+
+        topBar.setListener(new TopBarListener() {
+
+            @Override
+            public void leftButtonClick() {
+            }
+
+            @Override
+            public void rightButtonClick() {
+                commitToBackend();
+            }
+
+            @Override
+            public int getButtonType() {
+                return TopBarListener.RIGHT;
+            }
+        });
     }
 
     /**
@@ -161,20 +184,43 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-        Log.i(TAG, "radioGroup.getId() = " + radioGroup.getId());
+        RadioButton selectedRadioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
+        Log.i(TAG, "选中的RadioButton是：" + selectedRadioButton.getText());
 
         switch (radioGroup.getId()) {
             case R.id.rgrp_soccer_person:
                 edt_game_pay_average.setEnabled(false);
                 edt_game_pay_fixed.setEnabled(false);
                 edt_game_pay_member_charge.setEnabled(true);
+
+                String selectedSoccerPersonText = selectedRadioButton.getText().toString().replace("人制", "");
+                selectedSoccerPerson = Integer.parseInt(selectedSoccerPersonText);
+
                 break;
             case R.id.rgrp_game_pay:
-                edt_game_pay_average.setEnabled(true);
+
+                edt_game_pay_average.setText("");
+                edt_game_pay_fixed.setText("");
+                edt_game_pay_member_charge.setText("");
+                edt_game_pay_average.setEnabled(false);
                 edt_game_pay_fixed.setEnabled(false);
                 edt_game_pay_member_charge.setEnabled(false);
+                ll_link_member_list.setVisibility(View.GONE);
 
-                Log.i(TAG, "rgrp_game_pay.getCheckedRadioButtonId() = " + i);
+                if (selectedRadioButton.getText().equals(getString(R.string.game_pay_average))) {
+                    edt_game_pay_average.setEnabled(true);
+                    edt_game_pay_average.requestFocus();
+                    selectedPayType = 1;
+                } else if (selectedRadioButton.getText().equals(getString(R.string.game_pay_fixed))) {
+                    edt_game_pay_fixed.setEnabled(true);
+                    edt_game_pay_fixed.requestFocus();
+                    selectedPayType = 2;
+                } else if (selectedRadioButton.getText().equals(getString(R.string.game_pay_member_charge))) {
+                    edt_game_pay_member_charge.setEnabled(true);
+                    edt_game_pay_member_charge.requestFocus();
+                    selectedPayType = 3;
+                    ll_link_member_list.setVisibility(View.VISIBLE);
+                }
 
                 break;
             case R.id.rgrp_link_member_list:
@@ -182,7 +228,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
                 edt_game_pay_average.setEnabled(false);
                 edt_game_pay_member_charge.setEnabled(false);
 
-                Log.i(TAG, "rgrp_link_member_list.getCheckedRadioButtonId() = " + i);
+                isRelatedMemberList = selectedRadioButton.getText().toString().contains("不关联") ? false : true;
 
                 break;
         }
@@ -191,11 +237,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-//            case R.id.ll_commit:
-//                if (formCheck()) {
-//                    commitToBackend();
-//                }
-//                break;
             case R.id.tv_select_team:
                 Intent selectTeamIntent = new Intent(context, SelectTeamActivity.class);
                 selectTeamIntent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());
@@ -203,16 +244,16 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.edt_game_location:
                 break;
-            case R.id.rbtn_game_type_public:
-                tv_select_team.setVisibility(View.VISIBLE);
-                rbtn_game_type_private.setChecked(false);
-                break;
             case R.id.rbtn_game_type_private:
+                tv_select_team.setVisibility(View.VISIBLE);
+                rbtn_game_type_public.setChecked(false);
+                break;
+            case R.id.rbtn_game_type_public:
                 selectedTeamId = "";
                 selectedTeamName = "";
                 tv_select_team.setVisibility(View.INVISIBLE);
                 ll_select_team.setVisibility(View.GONE);
-                rbtn_game_type_public.setChecked(false);
+                rbtn_game_type_private.setChecked(false);
                 break;
             case R.id.edt_game_date:
                 timePickerWindow.showAtLocation(ll_game_publish,
@@ -228,25 +269,19 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         return true;
     }
 
-    private void commitToBackend() {
-        Map<String, Object> mParameters = prepareRequestJson();
-
-        if (mParameters == null || mParameters.isEmpty()) {
-            return;
-        }
-
-        GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_GAME_PUBLISH_URL,
-                EntGameInfo.class, null, mParameters, publishGameResponseListener);
-
-        executeRequest(gsonRequest);
-    }
-
     public Map<String, Object> prepareRequestJson() {
         Map<String, Object> mParameters = new HashMap<String, Object>();
+
+        Log.i(TAG, "selectedSoccerPerson = " + selectedSoccerPerson);
+        Log.i(TAG, "selectedPayType = " + selectedPayType);
+        Log.i(TAG, "isRelatedMemberList = " + isRelatedMemberList);
 
         String gameName = edt_game_name.getText().toString();
         String gameLocation = edt_game_location.getText().toString();
         Date gameDate = timePickerWindow.getSelectedTime();
+        boolean eatAndPlay = (cbox_eat_and_play.isChecked()) ? true : false;
+        String gameDescription = edt_game_description.getText().toString();
+
         int gameType = -1;
         if (rbtn_game_type_private.isChecked()) {
             gameType = 0;
@@ -254,38 +289,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
             gameType = 1;
         }
 
-        int soccerpersonnum = -1;
-        /*if (rbtn_soccer_person_type_5.isChecked()) {
-            soccerpersonnum = 5;
-        } else if (rbtn_soccer_person_type_7.isChecked()) {
-            soccerpersonnum = 7;
-        } else if (rbtn_soccer_person_type_9.isChecked()) {
-            soccerpersonnum = 9;
-        } else if (rbtn_soccer_person_type_11.isChecked()) {
-            soccerpersonnum = 11;
-        }*/
-
-        boolean eatAndPlay = (cbox_eat_and_play.isChecked()) ? true : false;
-
-        int cost = -1;
-        int gamepayType = -1;
-        /*if (rbtn_game_pay_average.isChecked() && edt_game_pay_average.getText() != null) {
-            gamepayType = 1;
-            cost = Integer.valueOf(edt_game_pay_average.getText().toString());
-        } else if (rbtn_game_pay_fixed.isChecked() && edt_game_pay_fixed.getText() != null) {
-            gamepayType = 2;
-            cost = Integer.valueOf(edt_game_pay_fixed.getText().toString());
-        } else if (rbtn_game_pay_member_charge.isChecked() && edt_game_pay_member_charge.getText() != null) {
-            cost = Integer.valueOf(edt_game_pay_member_charge.getText().toString());
-            gamepayType = 3;
-        }*/
-
-        boolean relatelist = true;
-     /*   if (rbtn_game_pay_member_no_registrator.isChecked()) {
-            relatelist = false;
-        } else if (rbtn_game_pay_member_link_registrator.isChecked()) {
-            relatelist = true;
-        }*/
 
         int personMaxLimit = -1;
         if (!TextUtils.isEmpty(edt_game_registrator_upper_limit.getText())) {
@@ -297,7 +300,14 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
             personMinLimit = Integer.parseInt(edt_game_registrator_lower_limit.getText().toString());
         }
 
-        String gameDescription = edt_game_description.getText().toString();
+        if (!TextUtils.isEmpty(edt_game_pay_average.getText())) {
+            cost = Integer.parseInt(edt_game_pay_average.getText().toString());
+        } else if (!TextUtils.isEmpty(edt_game_pay_fixed.getText())) {
+            cost = Integer.parseInt(edt_game_pay_fixed.getText().toString());
+        } else if (!TextUtils.isEmpty(edt_game_pay_member_charge.getText())) {
+            cost = Integer.parseInt(edt_game_pay_member_charge.getText().toString());
+        }
+
 
         EntGameInfo entGameInfo = new EntGameInfo();
         entGameInfo.setActtitle(gameName);
@@ -308,9 +318,9 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         entGameInfo.setPersonmaxlimit(personMaxLimit);
         entGameInfo.setPersonminlimit(personMinLimit);
         entGameInfo.setActtype(gameType);
-        entGameInfo.setActpaytype(gamepayType);
-        entGameInfo.setIsrelatelist(relatelist);
-        entGameInfo.setSoccerpersonnum(soccerpersonnum);
+        entGameInfo.setActpaytype(selectedPayType);
+        entGameInfo.setIsrelatelist(isRelatedMemberList);
+        entGameInfo.setSoccerpersonnum(selectedSoccerPerson);
         entGameInfo.setIsdinner(eatAndPlay);
         entGameInfo.setPublisher(BaseApplication.QQZQ_USER);
         entGameInfo.setPublishdate(new Date());
@@ -322,6 +332,25 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         return mParameters;
     }
 
+
+    private void commitToBackend() {
+
+        if (!formCheck()) {
+            return;
+        }
+
+        Map<String, Object> mParameters = prepareRequestJson();
+
+        if (mParameters == null || mParameters.isEmpty()) {
+            return;
+        }
+
+        GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_GAME_PUBLISH_URL,
+                EntClientResponse.class, null, mParameters, publishGameResponseListener);
+
+        executeRequest(gsonRequest);
+    }
+
     ResponseListener publishGameResponseListener = new ResponseListener<EntClientResponse>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
@@ -330,20 +359,9 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onResponse(EntClientResponse response) {
-            System.out.println("发起活动成功");
             Intent intent = new Intent(context, MainActivity.class);
             startActivity(intent);
         }
     };
-
-    private void initTestData() {
-        edt_game_name.setText("周末约球");
-        edt_game_location.setText("天府四街");
-        rbtn_game_type_private.setChecked(true);
-//        rbtn_soccer_person_type_7.setChecked(true);
-//        rbtn_game_pay_fixed.setChecked(true);
-        edt_game_registrator_lower_limit.setText("5");
-        edt_game_description.setText("周末约球活动简介，与老曼联比赛。");
-    }
 
 }

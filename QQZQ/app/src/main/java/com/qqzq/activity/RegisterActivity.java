@@ -41,7 +41,7 @@ import cn.smssdk.SMSSDK;
  */
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
-    private final String TAG = "RegisterActivity";
+    private final static String TAG = "RegisterActivity";
 
     private Context context = this;
     private TextView tv_title;
@@ -70,9 +70,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView() {
-        tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_title.setText("注册");
-        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         tv_qqzq_agreement = (TextView) findViewById(R.id.tv_qqzq_agreement);
         edt_select_location = (EditText) findViewById(R.id.edt_select_location);
         edt_phone_no = (EditText) findViewById(R.id.edt_phone_no);
@@ -86,7 +83,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initListener() {
-        ll_back.setOnClickListener(this);
         edt_select_location.setOnClickListener(this);
         btn_verify_code.setOnClickListener(this);
         btn_register.setOnClickListener(this);
@@ -176,7 +172,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         Map<String, Object> mParameters = prepareRequestJson();
         GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_REGISTER_URL,
-                EntRegisterInfo.class, null, mParameters, registerUserResponseListener);
+                EntClientResponse.class, null, mParameters, registerUserResponseListener);
 
         executeRequest(gsonRequest);
     }

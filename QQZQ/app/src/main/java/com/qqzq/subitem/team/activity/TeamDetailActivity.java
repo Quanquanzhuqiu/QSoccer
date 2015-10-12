@@ -4,25 +4,36 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
+import com.qqzq.activity.BaseApplication;
+import com.qqzq.activity.MainActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.db.LocationDao;
+import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntLocation;
 import com.qqzq.entity.EntTeamInfo;
+import com.qqzq.entity.EntTeamJoinInfo;
 import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.util.Utils;
 
 import java.text.MessageFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jie.xiao on 15/9/24.
@@ -30,13 +41,10 @@ import java.text.MessageFormat;
 public class TeamDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private Activity context = this;
-    private TextView tv_titile;
-    private LinearLayout ll_back;
-    private ImageView iv_share;
     private TextView tv_team_name;
     private TextView tv_team_captain;
-    private TextView tv_team_game_times;
-    private TextView tv_team_points;
+    private TextView tv_attendance_count;
+    private TextView tv_personal_score;
     private TextView tv_team_location;
     private TextView tv_team_establish_day;
     private TextView tv_team_description;
@@ -46,7 +54,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private LinearLayout ll_game_list;
     private Button btn_commit;
 
-    private final String TAG = "TeamDetailActivity";
+    private final static String TAG = "TeamDetailActivity";
     private String selectedTeamId;
 
     @Override
@@ -63,8 +71,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private void initView() {
         tv_team_name = (TextView) findViewById(R.id.tv_team_name);
         tv_team_captain = (TextView) findViewById(R.id.tv_team_captain);
-        tv_team_game_times = (TextView) findViewById(R.id.tv_team_game_times);
-        tv_team_points = (TextView) findViewById(R.id.tv_team_points);
+        tv_attendance_count = (TextView) findViewById(R.id.tv_attendance_count);
+        tv_personal_score = (TextView) findViewById(R.id.tv_personal_score);
         tv_team_location = (TextView) findViewById(R.id.tv_team_location);
         tv_team_establish_day = (TextView) findViewById(R.id.tv_team_establish_day);
         tv_team_description = (TextView) findViewById(R.id.tv_team_description);
@@ -100,8 +108,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private void initForm(EntTeamInfo entTeamInfo) {
         tv_team_name.setText(entTeamInfo.getTeamname());
         tv_team_captain.setText(entTeamInfo.getTeamleadernm());
-        tv_team_game_times.setText(entTeamInfo.getStat());
-        tv_team_points.setText(entTeamInfo.getStat());
+        tv_attendance_count.setText(entTeamInfo.getStat());
+        tv_personal_score.setText(entTeamInfo.getStat());
         tv_team_establish_day.setText(Utils.getFormatedSimpleDate(entTeamInfo.getEstablishdate()));
         tv_team_description.setText(entTeamInfo.getSumary());
 
@@ -109,20 +117,9 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
 
         EntLocation cityInfo = locationDao.findLocationById(String.valueOf(entTeamInfo.getOftencity()));
         EntLocation distinctInfo = locationDao.findLocationById(String.valueOf(entTeamInfo.getOftendistinct()));
-        System.out.println(cityInfo);
-        System.out.println(distinctInfo);
         if (cityInfo != null && distinctInfo != null) {
             tv_team_location.setText(String.valueOf(cityInfo.getLocation() + " " + distinctInfo.getLocation()));
         }
-    }
-
-    public void loadTeamDetailFromBackend(String id) {
-
-        String queryUrl = MessageFormat.format(Constants.API_FIND_TEAM_BY_ID_URL, id);
-        System.out.println(queryUrl);
-        GsonRequest gsonRequest = new GsonRequest<EntTeamInfo>(queryUrl, EntTeamInfo.class,
-                findTeamResponseListener);
-        executeRequest(gsonRequest);
     }
 
 
@@ -149,18 +146,93 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
             case R.id.ll_game_list:
                 break;
             case R.id.btn_commit:
+                joinTeam();
                 break;
         }
     }
 
+    private void loadTeamDetailFromBackend(String id) {
+
+        String queryUrl = MessageFormat.format(Constants.API_FIND_TEAM_BY_ID_URL, id);
+        GsonRequest gsonRequest = new GsonRequest<EntTeamInfo>(queryUrl, EntTeamInfo.class,
+                findTeamResponseListener);
+        executeRequest(gsonRequest);
+    }
+
+    private void joinTeam() {
+        String url = MessageFormat.format(Constants.API_JOIN_TEAM_URL, selectedTeamId);
+
+        Map<String, Object> mParameters = prepareRequestJson();
+
+        if (mParameters == null || mParameters.isEmpty()) {
+            return;
+        }
+
+        GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, url,
+                EntClientResponse.class, null, mParameters, joinTeamResponseListener);
+
+        executeRequest(gsonRequest);
+    }
+
+    public Map<String, Object> prepareRequestJson() {
+        Map<String, Object> mParameters = new HashMap<String, Object>();
+
+        String teamName = tv_team_name.getText().toString();
+
+        int personalScore = 0;
+        if (!TextUtils.isEmpty(tv_personal_score.getText())) {
+            personalScore = Integer.valueOf(tv_personal_score.getText().toString());
+        }
+
+        int attendanceCount = 0;
+        if (!TextUtils.isEmpty(tv_attendance_count.getText())) {
+            attendanceCount = Integer.valueOf(tv_attendance_count.getText().toString());
+        }
+
+        String userId = BaseApplication.QQZQ_USER;
+        int teamId = Integer.valueOf(selectedTeamId);
+        Date joinTime = new Date();
+
+        EntTeamJoinInfo entTeamJoinInfo = new EntTeamJoinInfo();
+//        entTeamJoinInfo.setUserid("2");
+        entTeamJoinInfo.setUsername(userId);
+        entTeamJoinInfo.setAttendancecount(attendanceCount);
+        entTeamJoinInfo.setPersonalscore(personalScore);
+        entTeamJoinInfo.setJointime(joinTime);
+        entTeamJoinInfo.setCreatedate(joinTime);
+        entTeamJoinInfo.setUpdatedate(joinTime);
+        entTeamJoinInfo.setTeamname(teamName);
+        entTeamJoinInfo.setTeamid(teamId);
+
+        mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entTeamJoinInfo);
+        return mParameters;
+    }
+
+
     ResponseListener findTeamResponseListener = new ResponseListener<EntTeamInfo>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onResponse(EntTeamInfo entTeamInfo) {
             initForm(entTeamInfo);
+        }
+    };
+
+    ResponseListener joinTeamResponseListener = new ResponseListener<EntClientResponse>() {
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            Log.e(TAG, volleyError.toString());
+            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onResponse(EntClientResponse entClientResponse) {
+            Log.i(TAG, "加入球队成功！");
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
         }
     };
 }

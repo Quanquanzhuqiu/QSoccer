@@ -3,6 +3,7 @@ package com.qqzq.subitem.team;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import java.util.List;
  */
 public class TeamMangmentFragment extends BaseFragment {
 
+    private final static String TAG = "TeamMangementFragment";
     String pageType = "";
 
     private Context context;
@@ -42,12 +44,12 @@ public class TeamMangmentFragment extends BaseFragment {
         if (bundle != null && bundle.containsKey(Constants.EXTRA_PAGE_TYEP)) {
             pageType = bundle.getString(Constants.EXTRA_PAGE_TYEP);
             if (Constants.PAGE_TYPE_NO_TEAM.equals(pageType)) {
-                System.out.println("没有加入任何球队");
+                Log.i(TAG, "没有加入任何球队");
                 view = inflater.inflate(R.layout.fragment_main_no_team, container, false);
                 context = view.getContext();
                 initNoTeamPage(view);
             } else if (Constants.PAGE_TYPE_HAVE_TEAM.equals(pageType)) {
-                System.out.println("已加入球队");
+                Log.i(TAG, "已加入球队");
                 view = inflater.inflate(R.layout.fragment_main_with_team, container, false);
                 context = view.getContext();
                 initHaveTeamPage(view);
@@ -80,8 +82,6 @@ public class TeamMangmentFragment extends BaseFragment {
 
     private void initHaveTeamPage(View view) {
         gv_team = (GridView) view.findViewById(R.id.gv_team);
-//        loadTeamListFromBackend();
-
         teamGridViewAdapter = new TeamGridViewAdapter(getActivity(), list);
         gv_team.setAdapter(teamGridViewAdapter);
     }

@@ -12,6 +12,7 @@ import com.qqzq.config.Constants;
 import com.qqzq.db.DbOpenHelper;
 import com.qqzq.db.LocationDao;
 import com.qqzq.entity.EntLocation;
+import com.qqzq.entity.EntUserInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.RequestManager;
 import com.qqzq.network.ResponseListener;
@@ -33,6 +34,7 @@ public class BaseApplication extends Application {
     private String password = null;
 
 
+    public static EntUserInfo entUserInfo;
     public static String QQZQ_USER = "";
     public static String QQZQ_PASSWORD = "";
     public static String QQZQ_TOKENT = "";

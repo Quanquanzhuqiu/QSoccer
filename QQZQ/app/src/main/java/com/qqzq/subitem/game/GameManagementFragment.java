@@ -3,24 +3,37 @@ package com.qqzq.subitem.game;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.qqzq.R;
 import com.qqzq.activity.BaseFragment;
 import com.qqzq.config.Constants;
+import com.qqzq.entity.EntGameInfo;
+import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.subitem.game.activity.GamePublishActivity;
+import com.qqzq.subitem.game.adapter.GameListViewAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jie.xiao on 15/9/12.
  */
 public class GameManagementFragment extends BaseFragment {
-    String pageType = "";
+
+    private final static String TAG = "GameManagementFragment";
 
     private Context context;
     private TextView tv_game_publish;
+    private String pageType = "";
+    private ListView lv_games;
+    private GameListViewAdapter adapter;
+    public static List<EntGameInfo> list = new ArrayList<EntGameInfo>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,12 +42,14 @@ public class GameManagementFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey(Constants.EXTRA_PAGE_TYEP)) {
             pageType = bundle.getString(Constants.EXTRA_PAGE_TYEP);
+
+            Log.i(TAG, "pageType = " + pageType);
             if (Constants.PAGE_TYPE_NO_GAME.equals(pageType)) {
                 view = inflater.inflate(R.layout.fragment_main_no_game, container, false);
                 context = view.getContext();
                 initNoGamePage(view);
             } else if (Constants.PAGE_TYPE_HAVE_GAME.equals(pageType)) {
-                view = inflater.inflate(R.layout.fragment_main_with_team, container, false);
+                view = inflater.inflate(R.layout.fragment_main_with_game, container, false);
                 context = view.getContext();
                 initHaveGamePage(view);
             }
@@ -56,6 +71,8 @@ public class GameManagementFragment extends BaseFragment {
     }
 
     private void initHaveGamePage(View view) {
-
+        lv_games = (ListView) view.findViewById(R.id.lv_games);
+        adapter = new GameListViewAdapter(context, list);
+        lv_games.setAdapter(adapter);
     }
 }
