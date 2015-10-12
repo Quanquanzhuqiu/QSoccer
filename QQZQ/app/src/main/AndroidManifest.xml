@@ -60,6 +60,9 @@
         <activity
             android:name=".subitem.team.activity.TeamMemberActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".subitem.game.activity.GameDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />

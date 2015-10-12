@@ -80,7 +80,7 @@ public class GameListViewAdapter extends BaseAdapter {
             viewHolder.tv_game_address = (TextView) convertView.findViewById(R.id.tv_game_address);
             viewHolder.tv_game_date = (TextView) convertView.findViewById(R.id.tv_game_date);
             viewHolder.tv_soccer_person = (TextView) convertView.findViewById(R.id.tv_soccer_person);
-            viewHolder.btn_game_join = (Button) convertView.findViewById(R.id.btn_game_join);
+            viewHolder.tv_game_join = (TextView) convertView.findViewById(R.id.tv_game_join);
             // 将ListItemView对象传递给convertView
             convertView.setTag(viewHolder);
         } else {
@@ -127,6 +127,6 @@ public class GameListViewAdapter extends BaseAdapter {
         TextView tv_game_address;
         TextView tv_game_date;
         TextView tv_soccer_person;
-        Button btn_game_join;
+        TextView tv_game_join;
     }
 }

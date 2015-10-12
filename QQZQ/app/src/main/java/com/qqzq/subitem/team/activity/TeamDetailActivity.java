@@ -212,6 +212,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     ResponseListener findTeamResponseListener = new ResponseListener<EntTeamInfo>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            Log.e(TAG, volleyError.toString());
             Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 

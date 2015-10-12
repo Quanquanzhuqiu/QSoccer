@@ -22,9 +22,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:orientation="vertical">
 
         <LinearLayout
@@ -103,14 +103,21 @@
         android:layout_height="match_parent"
         android:gravity="bottom|center_horizontal">
 
-        <Button
-            android:id="@+id/btn_game_join"
+
+        <LinearLayout
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/bg_game_join"
-            android:text="@string/registering"
-            android:textColor="@color/rgb_255_79_87" />
+            android:background="@drawable/bg_game_join">
 
+            <TextView
+                android:id="@+id/tv_game_join"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/registering"
+                android:gravity="center"
+                android:textColor="@color/rgb_255_79_87"
+                android:textSize="13sp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

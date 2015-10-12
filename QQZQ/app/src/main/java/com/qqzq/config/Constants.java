@@ -42,6 +42,7 @@ public class Constants {
     public static final String EXTRA_SELECTED_TEAM_ID = "EXTRA_SELECTED_TEAM_ID";
     public static final String EXTRA_PAGE_TYEP = "EXTRA_PAGE_TYEP";
     public static final String EXTRA_PREV_PAGE_NAME = "EXTRA_PREV_PAGE_NAME";
+    public static final String EXTRA_SELECTED_GAME_ID = "EXTRA_SELECTED_GAME_ID";
 
     public static final String HTTP_HEADER_TOKER = "Token";
 
@@ -90,11 +91,13 @@ public class Constants {
     //当用户申请加入球队时调用此接口
     public static final String API_JOIN_TEAM_URL = API_SERVER_HOST + "/team/teams/{0}/application";
 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~ 活动发起部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~ 活动部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队
     public static final String API_GAME_PUBLISH_URL = API_SERVER_HOST + "/activity/activities";
     //根据条件查询球队信息
     public static final String API_FIND_GAME_URL = API_SERVER_HOST + "/activity/activities";
+    //根据用户id获取活动详细信息
+    public static final String API_FIND_GAME_BY_ID_URL = API_SERVER_HOST + "/activity/activities/{0}";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 上传文件部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //上传文件到分布式文件系统

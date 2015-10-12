@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseFragment;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntGameInfo;
-import com.qqzq.entity.EntTeamInfo;
+import com.qqzq.subitem.game.activity.GameDetailActivity;
 import com.qqzq.subitem.game.activity.GamePublishActivity;
 import com.qqzq.subitem.game.adapter.GameListViewAdapter;
 
@@ -74,5 +75,23 @@ public class GameManagementFragment extends BaseFragment {
         lv_games = (ListView) view.findViewById(R.id.lv_games);
         adapter = new GameListViewAdapter(context, list);
         lv_games.setAdapter(adapter);
+        lv_games.setOnItemClickListener(mOnClickListener);
     }
+
+    final private AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.i(TAG, "选中的活动位置 = " + position);
+            if (!list.isEmpty()) {
+                EntGameInfo entGameInfo = list.get(position);
+                Log.i(TAG, "选中的活动ID = " + entGameInfo.getId());
+
+                Intent intent = new Intent(context, GameDetailActivity.class);
+                intent.putExtra(Constants.EXTRA_SELECTED_GAME_ID, entGameInfo.getId());
+                startActivity(intent);
+            }
+        }
+    };
+
 }
