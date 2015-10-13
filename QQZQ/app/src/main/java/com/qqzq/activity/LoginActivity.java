@@ -35,8 +35,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText edt_password;
     private Button btn_register;
     private Button btn_login;
-    private TextView tv_title;
-    private ImageView iv_back;
+    private TextView tv_forgot_password;
 
     String username;
     String password;
@@ -53,8 +52,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initView() {
-        tv_title = (TextView) findViewById(R.id.tv_title);
-        iv_back = (ImageView) findViewById(R.id.iv_back);
+
+        tv_forgot_password = (TextView) findViewById(R.id.tv_forgot_password);
         edt_username = (EditText) findViewById(R.id.edt_username);
         edt_password = (EditText) findViewById(R.id.edt_password);
         btn_register = (Button) findViewById(R.id.btn_register);
@@ -62,6 +61,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initListener() {
+        tv_forgot_password.setOnClickListener(this);
         btn_register.setOnClickListener(this);
         btn_login.setOnClickListener(this);
     }
@@ -76,6 +76,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.btn_register:
                 Intent intent = new Intent(context, RegisterActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.tv_forgot_password:
+                Intent forgotPasswordIntent = new Intent(context, PasswordModifyActivity.class);
+                startActivity(forgotPasswordIntent);
                 break;
         }
     }

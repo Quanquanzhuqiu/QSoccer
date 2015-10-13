@@ -68,8 +68,8 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     private String logoPathInServer;
 
     private Bundle extras;
-    private String selectedProvinceCode = "0";
-    private String selectedCityCode = "0";
+    private String selectedProvinceCode = null;
+    private String selectedCityCode = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,13 +189,34 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    public void commit() {
-        Map<String, Object> mParameters = prepareRequestJson();
+    private String formCheck() {
 
-        if (mParameters == null || mParameters.isEmpty()) {
+        if (selectedProvinceCode == null
+                || selectedCityCode == null
+                || TextUtils.isEmpty(edt_team_location.getText())) {
+            return "请输入球队常活动地点";
+        }
+
+        if (TextUtils.isEmpty(edt_team_name.getText())) {
+            return "请输入球队名";
+        }
+
+        RadioButton radioButton = (RadioButton) findViewById(radio_group_join_config.getCheckedRadioButtonId());
+        if (radioButton == null) {
+            return "请选择入队验证的方式";
+        }
+
+        return null;
+    }
+
+    public void commit() {
+        String checkResult = formCheck();
+        if (!TextUtils.isEmpty(checkResult)) {
+            Toast.makeText(context, checkResult, Toast.LENGTH_LONG).show();
             return;
         }
 
+        Map<String, Object> mParameters = prepareRequestJson();
         GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_CREATE_TEAM_URL,
                 EntTeamInfo.class, null, mParameters, createTeamResponseListener);
 
@@ -205,7 +226,6 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     public Map<String, Object> prepareRequestJson() {
         Map<String, Object> mParameters = new HashMap<String, Object>();
         String teamName = edt_team_name.getText().toString();
-        String teamLocation = edt_team_location.getText().toString();
         String teamDetail = edt_team_detail.getText().toString();
 
         int join_config = -1;

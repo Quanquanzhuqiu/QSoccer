@@ -98,8 +98,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 && extras.containsKey(Constants.EXTRA_SELECTED_PROVINCE_CODE)
                 && extras.containsKey(Constants.EXTRA_SELECTED_CITY_CODE)) {
 
-            selectedProvinceCode = extras.getInt(Constants.EXTRA_SELECTED_PROVINCE_CODE);
-            selectedCityCode = extras.getInt(Constants.EXTRA_SELECTED_CITY_CODE);
+            selectedProvinceCode = Integer.valueOf(extras.getString(Constants.EXTRA_SELECTED_PROVINCE_CODE));
+            selectedCityCode = Integer.valueOf(extras.getString(Constants.EXTRA_SELECTED_CITY_CODE));
 
             String selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
             edt_select_location.setText(selectedLocation);
@@ -109,8 +109,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_back:
-                finish();
             case R.id.edt_select_location:
                 Intent intent = new Intent(context, FindLocationActivity.class);
                 intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "RegisterActivity");

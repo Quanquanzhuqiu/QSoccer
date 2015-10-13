@@ -28,8 +28,6 @@ import java.util.List;
 public class FindLocationActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private Context context = this;
-    private TextView tv_title;
-    private LinearLayout ll_back;
     private ListView lv_location;
     private TextView tv_selected_location;
     private LocationListViewAdapter adapter;
@@ -52,9 +50,6 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
     }
 
     private void initView() {
-        tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_title.setText("选择地区");
-        ll_back = (LinearLayout) findViewById(R.id.ll_back);
         tv_selected_location = (TextView) findViewById(R.id.tv_selected_location);
         lv_location = (ListView) findViewById(R.id.lv_location);
 
@@ -63,7 +58,6 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
 
     private void initListener() {
         lv_location.setOnItemClickListener(this);
-        ll_back.setOnClickListener(new BackButtonListener(this));
     }
 
     private void initData() {

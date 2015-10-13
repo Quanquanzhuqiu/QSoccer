@@ -265,10 +265,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    private boolean formCheck() {
-        return true;
-    }
-
     public Map<String, Object> prepareRequestJson() {
         Map<String, Object> mParameters = new HashMap<String, Object>();
 
@@ -295,18 +291,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
             personMaxLimit = Integer.parseInt(edt_game_registrator_upper_limit.getText().toString());
         }
 
-        int personMinLimit = -1;
-        if (!TextUtils.isEmpty(edt_game_registrator_lower_limit.getText())) {
-            personMinLimit = Integer.parseInt(edt_game_registrator_lower_limit.getText().toString());
-        }
-
-        if (!TextUtils.isEmpty(edt_game_pay_average.getText())) {
-            cost = Integer.parseInt(edt_game_pay_average.getText().toString());
-        } else if (!TextUtils.isEmpty(edt_game_pay_fixed.getText())) {
-            cost = Integer.parseInt(edt_game_pay_fixed.getText().toString());
-        } else if (!TextUtils.isEmpty(edt_game_pay_member_charge.getText())) {
-            cost = Integer.parseInt(edt_game_pay_member_charge.getText().toString());
-        }
+        int personMinLimit = Integer.parseInt(edt_game_registrator_lower_limit.getText().toString());
 
 
         EntGameInfo entGameInfo = new EntGameInfo();
@@ -319,6 +304,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         entGameInfo.setPersonminlimit(personMinLimit);
         entGameInfo.setActtype(gameType);
         entGameInfo.setActpaytype(selectedPayType);
+        entGameInfo.setCost(cost);
         entGameInfo.setIsrelatelist(isRelatedMemberList);
         entGameInfo.setSoccerpersonnum(selectedSoccerPerson);
         entGameInfo.setIsdinner(eatAndPlay);
@@ -332,10 +318,61 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         return mParameters;
     }
 
+    private String formCheck() {
+
+        if (!TextUtils.isEmpty(edt_game_pay_average.getText())) {
+            cost = Integer.parseInt(edt_game_pay_average.getText().toString());
+        } else if (!TextUtils.isEmpty(edt_game_pay_fixed.getText())) {
+            cost = Integer.parseInt(edt_game_pay_fixed.getText().toString());
+        } else if (!TextUtils.isEmpty(edt_game_pay_member_charge.getText())) {
+            cost = Integer.parseInt(edt_game_pay_member_charge.getText().toString());
+        }
+
+        Log.i(TAG, "selectedPayType = " + selectedPayType);
+        Log.i(TAG, "cost = " + cost);
+
+
+        if (TextUtils.isEmpty(edt_game_name.getText())) {
+            return "请输入活动标题";
+        }
+
+        if (TextUtils.isEmpty(edt_game_date.getText())) {
+            return "请输入活动时间";
+        }
+
+        if (rbtn_game_type_private.isChecked() || rbtn_game_type_public.isChecked()) {
+        } else {
+            return "请选择活动类型";
+        }
+
+        if (selectedSoccerPerson < 0) {
+            return "请选择场地类型";
+        }
+
+        if (selectedPayType < 0) {
+            return "请选择活动费用类型";
+        }
+
+        if (cost < 0) {
+            return "请输入活动费用";
+        }
+
+        if (TextUtils.isEmpty(edt_game_registrator_lower_limit.getText())) {
+            return "请输入活动人数下限";
+        }
+
+        if (TextUtils.isEmpty(edt_game_description.getText())) {
+            return "请输入活动的简介";
+        }
+
+        return null;
+    }
 
     private void commitToBackend() {
 
-        if (!formCheck()) {
+        String checkResult = formCheck();
+        if (!TextUtils.isEmpty(checkResult)) {
+            Toast.makeText(context, checkResult, Toast.LENGTH_LONG).show();
             return;
         }
 

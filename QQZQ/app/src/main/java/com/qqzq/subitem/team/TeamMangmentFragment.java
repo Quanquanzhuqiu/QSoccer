@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -15,7 +16,9 @@ import com.qqzq.activity.BaseFragment;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.subitem.find.activity.FindTeamActivity;
+import com.qqzq.subitem.game.activity.GameDetailActivity;
 import com.qqzq.subitem.team.activity.CreateTeamActivity;
+import com.qqzq.subitem.team.activity.TeamDetailActivity;
 import com.qqzq.subitem.team.adapter.TeamGridViewAdapter;
 
 import java.util.ArrayList;
@@ -84,6 +87,21 @@ public class TeamMangmentFragment extends BaseFragment {
         gv_team = (GridView) view.findViewById(R.id.gv_team);
         teamGridViewAdapter = new TeamGridViewAdapter(getActivity(), list);
         gv_team.setAdapter(teamGridViewAdapter);
+        gv_team.setOnItemClickListener(mOnClickListener);
     }
 
+    final private AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.i(TAG, "选中的球队位置 = " + position);
+            if (!list.isEmpty()) {
+                EntTeamInfo entTeamInfo = list.get(position);
+
+                Intent intent = new Intent(context, TeamDetailActivity.class);
+                intent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, String.valueOf(entTeamInfo.getId()));
+                startActivity(intent);
+            }
+        }
+    };
 }
