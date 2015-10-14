@@ -2,6 +2,7 @@ package com.qqzq.subitem.game.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +32,8 @@ public class GameListActivity extends BaseActivity {
     private ListView lv_games;
     private GameListViewAdapter adapter;
     public static List<EntGameInfo> list = new ArrayList<EntGameInfo>();
+    String selectedTeamId;
+    String selectedTeamName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +45,23 @@ public class GameListActivity extends BaseActivity {
 
     private void initView() {
         topBar = (TopBar) findViewById(R.id.topbar);
+        topBar.pageTitle = selectedTeamName;
+        topBar.initView();
         lv_games = (ListView) findViewById(R.id.lv_games);
         adapter = new GameListViewAdapter(context, list);
         lv_games.setAdapter(adapter);
     }
 
     private void initData() {
+        Bundle extras = this.getIntent().getExtras();
+        if (extras != null
+                && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_ID)
+                && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_NAME)) {
+
+            selectedTeamId = extras.getString(Constants.EXTRA_SELECTED_TEAM_ID);
+            selectedTeamName = extras.getString(Constants.EXTRA_SELECTED_TEAM_NAME);
+        }
+
         loadGameList();
     }
 
@@ -55,6 +69,7 @@ public class GameListActivity extends BaseActivity {
         Map<String, Object> mParameters = new HashMap<String, Object>();
         mParameters.put("offset", 0);
         mParameters.put("limit", 10);
+        mParameters.put("teamId", selectedTeamId);
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_GAME_URL, mParameters);
         GsonRequest gsonRequest = new GsonRequest<EntGameInfo[]>(queryUrl, EntGameInfo[].class,
                 findGameResponseListener);

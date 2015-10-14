@@ -237,6 +237,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
                 case EntTeamOperation.TEAM_GAME_LIST:
                     Intent gameListIntent = new Intent(context, GameListActivity.class);
                     gameListIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                    gameListIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_NAME, tv_team_name.getText().toString());
                     startActivity(gameListIntent);
                     break;
                 case EntTeamOperation.TEAM_CASH_PAY_RECORD:

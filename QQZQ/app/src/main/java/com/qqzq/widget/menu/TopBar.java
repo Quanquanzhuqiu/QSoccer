@@ -35,7 +35,7 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
     private int leftImage;
     private int rightImage;
     private String rightText;
-    private String pageTitle;
+    public String pageTitle;
 
     private TopBarListener mListener;
 
@@ -74,7 +74,7 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
     }
 
 
-    private void initView() {
+    public void initView() {
         LayoutInflater.from(context).inflate(R.layout.common_topbar, this);
         mBackImageView = (ImageView) findViewById(R.id.iv_back);
         mBackLinearLayout = (LinearLayout) findViewById(R.id.ll_back);
