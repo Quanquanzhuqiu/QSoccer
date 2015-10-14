@@ -6,7 +6,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/iv_team_list_logo"
+        android:id="@+id/iv_gamer_logo"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/ic_default_team_log" />
@@ -29,7 +29,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_member_name"
+                android:id="@+id/tv_gamer_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="小鱼儿"
@@ -47,12 +47,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/game_attendee_play_times"
+                android:text="@string/gamer_attendee_times"
                 android:textColor="@color/rgb_163_163_163"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tv_member_attendance_count"
+                android:id="@+id/tv_gamer_attendance_count"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="100次"
@@ -70,12 +70,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/game_attendee_points"
+                android:text="@string/gamer_points"
                 android:textColor="@color/rgb_163_163_163"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tv_game_attendee_points"
+                android:id="@+id/tv_gamer_points"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="1300"
@@ -90,7 +90,7 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/iv_team_detail"
+            android:id="@+id/iv_gamer_detail"
             android:layout_width="17dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"

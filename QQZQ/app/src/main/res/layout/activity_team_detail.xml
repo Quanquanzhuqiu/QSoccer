@@ -29,6 +29,7 @@
             <LinearLayout
                 style="@style/ll_detail_content"
                 android:layout_weight="1"
+                android:background="@drawable/shape_grey_divider_top_bottom"
                 android:orientation="vertical">
 
                 <!-- 球队名称-->
@@ -158,47 +159,18 @@
 
             <LinearLayout
                 style="@style/ll_detail_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:background="@drawable/shape_grey_divider_top_bottom">
 
-                <LinearLayout
-                    android:id="@+id/ll_team_member"
+                <GridView
+                    android:id="@+id/gv_team_operation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/ic_team_member"
-                        android:gravity="center" />
-
-                    <TextView
-                        style="@style/tv_detail_item_label3"
-                        android:text="@string/team_detail_member" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_game_list"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/ic_team_gallery" />
-
-                    <TextView
-                        style="@style/tv_detail_item_label3"
-                        android:text="@string/team_detail_game_list" />
-                </LinearLayout>
-
+                    android:horizontalSpacing="8dp"
+                    android:numColumns="4"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="5dp" />
 
             </LinearLayout>
 
@@ -206,8 +178,9 @@
             <LinearLayout
                 android:id="@+id/ll_team_rule"
                 style="@style/ll_detail_content"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
+                android:background="@drawable/shape_grey_divider_top_bottom"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -229,16 +202,17 @@
             <LinearLayout
                 style="@style/ll_detail_content"
                 android:layout_weight="1"
+                android:background="@drawable/shape_grey_divider_top_bottom"
                 android:orientation="vertical">
 
 
                 <LinearLayout
                     android:id="@+id/ll_team_gallery"
                     style="@style/ll_detail_content"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="16dp"
                     android:gravity="center_vertical"
+                    android:background="@drawable/shape_grey_divider_bottom"
                     android:orientation="horizontal">
 
                     <TextView
@@ -258,31 +232,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp">
 
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/ic_default_team_log" />
-
-                    <ImageView
-                        android:layout_width="72dp"
-                        android:layout_height="70dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/ic_default_team_log" />
-
-                    <ImageView
-                        android:layout_width="73dp"
-                        android:layout_height="70dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/ic_default_team_log" />
-
-                    <ImageView
-                        android:layout_width="75dp"
-                        android:layout_height="70dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/ic_default_team_log" />
+                    <GridView
+                        android:id="@+id/gv_game_gallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:horizontalSpacing="8dp"
+                        android:numColumns="4"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="5dp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -292,6 +253,7 @@
             <LinearLayout
                 style="@style/ll_detail_content"
                 android:layout_weight="1"
+                android:background="@drawable/shape_grey_divider_top_bottom"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -299,6 +261,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="16dp"
+                    android:background="@drawable/shape_grey_divider_bottom"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -309,10 +272,6 @@
 
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_grey_divider" />
 
                 <LinearLayout
                     style="@style/ll_detail_content"

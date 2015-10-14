@@ -8,8 +8,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:leftImage="@drawable/ic_btn_back"
-        app:pageTitle="球队成员列表"
-        app:rightText="提交" />
+        app:pageTitle="球队成员"
+        app:rightText="踢出" />
 
     <LinearLayout
         android:layout_width="fill_parent"

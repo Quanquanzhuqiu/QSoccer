@@ -174,8 +174,8 @@
     <string name="member_join_date">加入时间：</string>
 
     <!-- 报名名单页面-->
-    <string name="game_attendee_play_times">活动次数：</string>
-    <string name="game_attendee_points">积分：</string>
+    <string name="gamer_attendee_times">活动次数：</string>
+    <string name="gamer_points">积分：</string>
 
     <!-- 查找好友页面-->
     <string name="find_friends">搜索好友</string>

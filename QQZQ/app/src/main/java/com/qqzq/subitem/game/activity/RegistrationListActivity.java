@@ -1,38 +1,31 @@
-package com.qqzq.subitem.team.activity;
+package com.qqzq.subitem.game.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamMember;
-import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
-import com.qqzq.subitem.team.adapter.TeamMemberListViewAdapter;
+import com.qqzq.subitem.game.adapter.RegistrationListViewAdapter;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by jie.xiao on 15/9/27.
+ * Created by jie.xiao on 15/10/14.
  */
-public class TeamMemberActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class RegistrationListActivity extends BaseActivity {
 
-    private final static String TAG = "TeamMemberActivity";
-
+    private final static String TAG = "RegistrationListActivity";
     private Activity context = this;
-    private ListView lv_team_member;
-    private TeamMemberListViewAdapter listViewAdapter;
+    private ListView lv_game_registration;
+    private RegistrationListViewAdapter listViewAdapter;
     private List<EntTeamMember> memberList = new ArrayList<EntTeamMember>();
 
     private String selectedTeamId;
@@ -40,21 +33,15 @@ public class TeamMemberActivity extends BaseActivity implements AdapterView.OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team_memeber);
+        setContentView(R.layout.activity_game_detail);
 
         initView();
-        initListener();
-        initData();
     }
 
     private void initView() {
-
-        lv_team_member = (ListView) findViewById(R.id.lv_team_member);
-        listViewAdapter = new TeamMemberListViewAdapter(context, memberList);
-        lv_team_member.setAdapter(listViewAdapter);
-    }
-
-    private void initListener() {
+        lv_game_registration = (ListView) findViewById(R.id.lv_game_registration);
+        listViewAdapter = new RegistrationListViewAdapter(context, memberList);
+        lv_game_registration.setAdapter(listViewAdapter);
     }
 
     private void initData() {
@@ -64,15 +51,13 @@ public class TeamMemberActivity extends BaseActivity implements AdapterView.OnIt
 
             selectedTeamId = extras.getString(Constants.EXTRA_SELECTED_TEAM_ID);
         }
-
-        reqeustTeamMemberList(selectedTeamId);
+        reqeustRegistrationList(selectedTeamId);
     }
 
-    private void refreshTeamMemberListView(EntTeamMember[] entTeamMembers) {
+    private void refreshListView(EntTeamMember[] entTeamMembers) {
         if (entTeamMembers == null) {
             return;
         }
-//        memberList = Arrays.asList(entTeamMembers);
         memberList.clear();
         for (EntTeamMember entTeamMember : entTeamMembers) {
             memberList.add(entTeamMember);
@@ -80,25 +65,15 @@ public class TeamMemberActivity extends BaseActivity implements AdapterView.OnIt
         listViewAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tv_commit:
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void reqeustTeamMemberList(String id) {
+    private void reqeustRegistrationList(String id) {
         String queryUrl = MessageFormat.format(Constants.API_FIND_TEAM_MEMBER_BY_ID_URL, id);
         System.out.println(queryUrl);
         GsonRequest gsonRequest = new GsonRequest<EntTeamMember[]>(queryUrl, EntTeamMember[].class,
-                findTeamMemberResponseListener);
+                findRegistrationResponseListener);
         executeRequest(gsonRequest);
     }
 
-    ResponseListener findTeamMemberResponseListener = new ResponseListener<EntTeamMember[]>() {
+    ResponseListener findRegistrationResponseListener = new ResponseListener<EntTeamMember[]>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             showLongToast(context, volleyError.toString());
@@ -106,12 +81,7 @@ public class TeamMemberActivity extends BaseActivity implements AdapterView.OnIt
 
         @Override
         public void onResponse(EntTeamMember[] entTeamMembers) {
-            refreshTeamMemberListView(entTeamMembers);
+            refreshListView(entTeamMembers);
         }
     };
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
 }

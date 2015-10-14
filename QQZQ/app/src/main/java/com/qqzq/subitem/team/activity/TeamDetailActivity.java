@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,20 +27,24 @@ import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntLocation;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntTeamJoinInfo;
-import com.qqzq.listener.BackButtonListener;
+import com.qqzq.entity.EntTeamOperation;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.subitem.team.adapter.TeamGalleryGridViewAdapter;
+import com.qqzq.subitem.team.adapter.TeamOperationGridViewAdapter;
 import com.qqzq.util.Utils;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by jie.xiao on 15/9/24.
  */
-public class TeamDetailActivity extends BaseActivity implements View.OnClickListener {
+public class TeamDetailActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private Activity context = this;
     private TextView tv_team_name;
@@ -50,9 +56,14 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private TextView tv_team_description;
     private LinearLayout ll_team_rule;
     private LinearLayout ll_team_gallery;
-    private LinearLayout ll_team_member;
-    private LinearLayout ll_game_list;
     private Button btn_commit;
+
+    private GridView gv_team_operation;
+    private TeamOperationGridViewAdapter teamOperationGridViewAdapter;
+    private List<EntTeamOperation> operationList = new ArrayList<EntTeamOperation>();
+
+    private GridView gv_team_gallery;
+    private TeamGalleryGridViewAdapter teamGalleryGridViewAdapter;
 
     private final static String TAG = "TeamDetailActivity";
     private String selectedTeamId;
@@ -61,9 +72,9 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_detail);
+        initData();
         initView();
         initLinstener();
-        initData();
 
 //        initTestData();
     }
@@ -78,9 +89,17 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         tv_team_description = (TextView) findViewById(R.id.tv_team_description);
         ll_team_rule = (LinearLayout) findViewById(R.id.ll_team_rule);
         ll_team_gallery = (LinearLayout) findViewById(R.id.ll_team_gallery);
-        ll_game_list = (LinearLayout) findViewById(R.id.ll_game_list);
-        ll_team_member = (LinearLayout) findViewById(R.id.ll_team_member);
+        gv_team_operation = (GridView) findViewById(R.id.gv_team_operation);
+        gv_team_gallery = (GridView) findViewById(R.id.gv_game_gallery);
         btn_commit = (Button) findViewById(R.id.btn_commit);
+
+        teamOperationGridViewAdapter = new TeamOperationGridViewAdapter(context, operationList);
+        gv_team_operation.setAdapter(teamOperationGridViewAdapter);
+        setListViewHeightBaseOnChildren(gv_team_operation);
+        teamOperationGridViewAdapter.notifyDataSetChanged();
+
+        teamGalleryGridViewAdapter = new TeamGalleryGridViewAdapter(context, operationList);
+        gv_team_gallery.setAdapter(teamGalleryGridViewAdapter);
     }
 
     private void initLinstener() {
@@ -88,9 +107,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         // 初始化控件监听器
         ll_team_rule.setOnClickListener(this);
         ll_team_gallery.setOnClickListener(this);
-        ll_game_list.setOnClickListener(this);
-        ll_team_member.setOnClickListener(this);
         btn_commit.setOnClickListener(this);
+        gv_team_operation.setOnItemClickListener(this);
     }
 
     private void initData() {
@@ -103,6 +121,38 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
                 loadTeamDetailFromBackend(selectedTeamId);
             }
         }
+
+        //================球队操作列表================
+        //球队成员
+        EntTeamOperation teamMemberOperation = new EntTeamOperation();
+        teamMemberOperation.setId(EntTeamOperation.TEAM_MEMBER);
+        teamMemberOperation.setOperation("球队成员");
+        teamMemberOperation.setLogo(getResources().getDrawable(R.drawable.ic_team_member));
+        operationList.add(teamMemberOperation);
+        //球队活动列表
+        EntTeamOperation teamGamesOperation = new EntTeamOperation();
+        teamGamesOperation.setId(EntTeamOperation.TEAM_GAME_LIST);
+        teamGamesOperation.setOperation("球队活动列表");
+        teamGamesOperation.setLogo(getResources().getDrawable(R.drawable.ic_team_games));
+        operationList.add(teamGamesOperation);
+        //现金消费记录
+        EntTeamOperation teamCashPayRecordOperation = new EntTeamOperation();
+        teamCashPayRecordOperation.setId(EntTeamOperation.TEAM_CASH_PAY_RECORD);
+        teamCashPayRecordOperation.setOperation("现金消费记录");
+        teamCashPayRecordOperation.setLogo(getResources().getDrawable(R.drawable.ic_team_cash_pay));
+        operationList.add(teamCashPayRecordOperation);
+        //会员费管理
+        EntTeamOperation teamMemberFeeOperation = new EntTeamOperation();
+        teamMemberFeeOperation.setId(EntTeamOperation.TEAM_MEMBER_FEE_MANAGE);
+        teamMemberFeeOperation.setOperation("会员费管理");
+        teamMemberFeeOperation.setLogo(getResources().getDrawable(R.drawable.ic_team_member_fee_manage));
+        operationList.add(teamMemberFeeOperation);
+        //出勤管理
+        EntTeamOperation teamAttendanceManageOperation = new EntTeamOperation();
+        teamAttendanceManageOperation.setId(EntTeamOperation.TEAM_ATTENDANCE_MANAGE);
+        teamAttendanceManageOperation.setOperation("出勤管理");
+        teamAttendanceManageOperation.setLogo(getResources().getDrawable(R.drawable.ic_team_attendance));
+        operationList.add(teamAttendanceManageOperation);
     }
 
     private void initForm(EntTeamInfo entTeamInfo) {
@@ -122,12 +172,41 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    private void setListViewHeightBaseOnChildren(GridView gridView) {
+        // 获取listview的adapter
+        ListAdapter listAdapter = gridView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        // 固定列宽，有多少列
+        int col = 4;
+        int totalHeight = 40;
+        // i每次加4，相当于listAdapter.getCount()小于等于4时 循环一次，计算一次item的高度，
+        // listAdapter.getCount()小于等于8时计算两次高度相加
+        for (int i = 0; i < listAdapter.getCount(); i += col) {
+            // 获取listview的每一个item
+            View listItem = listAdapter.getView(i, null, gridView);
+            listItem.measure(0, 0);
+            Log.i(TAG, "listItem.getMeasuredHeight() = " + listItem.getMeasuredHeight());
+            // 获取item的高度和
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        // 获取listview的布局参数
+        ViewGroup.LayoutParams params = gridView.getLayoutParams();
+        // 设置高度
+        params.height = totalHeight;
+        Log.i(TAG, "totalHeight = " + totalHeight);
+        // 设置margin
+        ((ViewGroup.MarginLayoutParams) params).setMargins(0, 10, 0, 10);
+        // 设置参数
+        gridView.setLayoutParams(params);
+    }
+
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-//            case R.id.iv_share:
-//                break;
             case R.id.ll_team_rule:
                 Intent teamRuleIntent = new Intent(context, TeamRuleActivity.class);
                 teamRuleIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
@@ -138,16 +217,31 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
                 teamGalleryIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
                 startActivity(teamGalleryIntent);
                 break;
-            case R.id.ll_team_member:
-                Intent teamMemberIntent = new Intent(context, TeamMemberActivity.class);
-                teamMemberIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
-                startActivity(teamMemberIntent);
-                break;
-            case R.id.ll_game_list:
-                break;
             case R.id.btn_commit:
                 joinTeam();
                 break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        Log.i(TAG, "选中的球队操作 = " + id);
+        if (!operationList.isEmpty()) {
+            switch ((int) id) {
+                case EntTeamOperation.TEAM_MEMBER:
+                    Intent teamMemberIntent = new Intent(context, TeamMemberActivity.class);
+                    teamMemberIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                    startActivity(teamMemberIntent);
+                    break;
+                case EntTeamOperation.TEAM_GAME_LIST:
+                    break;
+                case EntTeamOperation.TEAM_CASH_PAY_RECORD:
+                    break;
+                case EntTeamOperation.TEAM_MEMBER_FEE_MANAGE:
+                    break;
+                case EntTeamOperation.TEAM_ATTENDANCE_MANAGE:
+                    break;
+            }
         }
     }
 
@@ -236,4 +330,5 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
             startActivity(intent);
         }
     };
+
 }
