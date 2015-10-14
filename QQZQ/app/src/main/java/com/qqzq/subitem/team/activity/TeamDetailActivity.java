@@ -30,6 +30,7 @@ import com.qqzq.entity.EntTeamJoinInfo;
 import com.qqzq.entity.EntTeamOperation;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.subitem.game.activity.GameListActivity;
 import com.qqzq.subitem.team.adapter.TeamGalleryGridViewAdapter;
 import com.qqzq.subitem.team.adapter.TeamOperationGridViewAdapter;
 import com.qqzq.util.Utils;
@@ -234,6 +235,9 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
                     startActivity(teamMemberIntent);
                     break;
                 case EntTeamOperation.TEAM_GAME_LIST:
+                    Intent gameListIntent = new Intent(context, GameListActivity.class);
+                    gameListIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                    startActivity(gameListIntent);
                     break;
                 case EntTeamOperation.TEAM_CASH_PAY_RECORD:
                     break;

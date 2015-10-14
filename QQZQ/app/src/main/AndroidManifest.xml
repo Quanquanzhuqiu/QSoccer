@@ -66,6 +66,9 @@
         <activity
             android:name=".subitem.game.activity.GameDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".subitem.game.activity.GameListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />

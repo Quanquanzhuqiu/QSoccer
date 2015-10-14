@@ -36,9 +36,7 @@ import java.util.Map;
 public class SelectTeamActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private Activity context = this;
-    private TextView tv_title;
     private ListView lv_team;
-    private LinearLayout ll_back;
     private TeamListViewAdapter listViewAdapter;
     private List<EntTeamListItem> teamList = new ArrayList<EntTeamListItem>();
     private String prevPageName = "";
@@ -55,11 +53,7 @@ public class SelectTeamActivity extends BaseActivity implements AdapterView.OnIt
 
     private void initView() {
 
-        tv_title = (TextView) findViewById(R.id.tv_title);
         lv_team = (ListView) findViewById(R.id.lv_team);
-        tv_title.setText("选择球队");
-        ll_back = (LinearLayout) findViewById(R.id.ll_back);
-
         listViewAdapter = new TeamListViewAdapter(context, teamList);
         listViewAdapter.setHasDetail(false);
         lv_team.setAdapter(listViewAdapter);
@@ -69,7 +63,6 @@ public class SelectTeamActivity extends BaseActivity implements AdapterView.OnIt
 
     private void initListener() {
         lv_team.setOnItemClickListener(this);
-        ll_back.setOnClickListener(new BackButtonListener(this));
     }
 
     private void initData() {
