@@ -99,6 +99,8 @@ public class Constants {
     public static final String API_FIND_GAME_URL = API_SERVER_HOST + "/activity/activities";
     //根据用户id获取活动详细信息
     public static final String API_FIND_GAME_BY_ID_URL = API_SERVER_HOST + "/activity/activities/{0}";
+    //用户参加活动报名
+    public static final String API_GAME_JOIN_APPLICATION = API_SERVER_HOST + "/activity/activities/{0}/application";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 上传文件部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //上传文件到分布式文件系统

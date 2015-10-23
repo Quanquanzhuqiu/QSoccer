@@ -60,9 +60,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_team_game_name"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:text="［CD.HOT］周三报名开始咯，大家搞快"
+                            android:text=""
                             android:textColor="@color/rgb_0_0_0" />
                     </LinearLayout>
 
@@ -79,9 +80,10 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:id="@+id/tv_game_publisher"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="小鱼儿"
+                            android:text=""
                             android:textColor="@color/rgb_62_199_139"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -95,6 +97,7 @@
                     android:layout_marginRight="10dp">
 
                     <Button
+                        android:id="@+id/btn_join_game"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
                         android:background="@drawable/bg_game_join"
@@ -230,6 +233,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_game_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
@@ -261,6 +265,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_game_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
@@ -292,6 +297,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_game_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
@@ -323,6 +329,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_game_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
@@ -363,6 +370,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_game_cost"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
@@ -452,6 +460,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_game_pay_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
@@ -546,10 +555,11 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_game_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:text="今晚七点半 锐博足球公  25元一位  送水一件包爽包出汗 时间无限制 踢到虚脱为止 小伙伴们不要犹豫要来的赶紧联系我  人多踢大场  人少踢小场  地址：天府新区政务服务中心背后（华阳正东下街141号院内）锐博足球公园"
+                        android:text=""
                         android:textColor="@color/rgb_144_144_144"
                         android:textSize="14sp" />
 
@@ -567,6 +577,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_game_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -594,6 +605,7 @@
                     android:background="@color/rgb_216_216_213" />
 
                 <LinearLayout
+                    android:id="@+id/ll_contact_game_publisher"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -142,12 +142,41 @@ public class EntGameInfo {
         return acttype;
     }
 
+    public String getActTypeName() {
+        String actTypeName = "";
+        if (acttype == 0) {
+            actTypeName = "内部活动";
+        } else if (acttype == 1) {
+            actTypeName = "公开活动";
+        }
+        return actTypeName;
+    }
+
     public void setActtype(int acttype) {
         this.acttype = acttype;
     }
 
     public int getActpaytype() {
         return actpaytype;
+    }
+
+    public String getActPayTypeName() {
+        String actPayTypeName = "";
+        switch (actpaytype) {
+            case 0:
+                actPayTypeName = "总价分摊";
+                break;
+            case 1:
+                actPayTypeName = "固定单价";
+                break;
+            case 2:
+                actPayTypeName = "会员费用记账支付";
+                break;
+            default:
+                actPayTypeName = "总价分摊";
+                break;
+        }
+        return actPayTypeName;
     }
 
     public void setActpaytype(int actpaytype) {

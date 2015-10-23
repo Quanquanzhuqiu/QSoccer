@@ -44,8 +44,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private final static String TAG = "RegisterActivity";
 
     private Context context = this;
-    private TextView tv_title;
-    private LinearLayout ll_back;
     private EditText edt_select_location;
     private EditText edt_phone_no;
     private EditText edt_verify_code;
@@ -251,6 +249,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+            Log.e(TAG, volleyError.toString());
         }
 
         @Override

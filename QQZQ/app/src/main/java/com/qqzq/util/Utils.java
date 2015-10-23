@@ -12,6 +12,7 @@ public class Utils {
 
     private static SimpleDateFormat simpleDateFormatFull = new SimpleDateFormat("yyyy年MM月dd日 hh时mm分");
     private static SimpleDateFormat simpleDateFormatSimple = new SimpleDateFormat("yyyy年MM月dd日");
+    private static SimpleDateFormat timeFormat = new SimpleDateFormat("hh:ss");
 
     public static String makeGetRequestUrl(String url, Map<String, Object> parameters) {
         StringBuilder makedUrl = new StringBuilder();
@@ -36,5 +37,16 @@ public class Utils {
 
     public static String getFormatedFullDate(Date date) {
         return simpleDateFormatFull.format(date);
+    }
+
+    public static String getStrDateWithWeek(Date date) {
+        String strDate = getFormatedSimpleDate(date);
+        SimpleDateFormat dateFm = new SimpleDateFormat("EEEE");
+        String dayOfWeek = dateFm.format(date);
+        return strDate + " " + dayOfWeek;
+    }
+
+    public static String getStrTime(Date date) {
+        return timeFormat.format(date);
     }
 }
