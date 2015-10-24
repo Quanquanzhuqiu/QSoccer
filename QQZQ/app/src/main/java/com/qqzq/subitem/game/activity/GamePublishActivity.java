@@ -383,7 +383,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         }
 
         GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_GAME_PUBLISH_URL,
-                EntClientResponse.class, null, mParameters, publishGameResponseListener);
+                EntClientResponse.class, null, null, publishGameResponseListener);
 
         executeRequest(gsonRequest);
     }

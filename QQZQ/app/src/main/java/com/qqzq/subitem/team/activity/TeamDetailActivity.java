@@ -68,6 +68,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
 
     private final static String TAG = "TeamDetailActivity";
     private String selectedTeamId;
+    private String selectedTeamRule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +158,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initForm(EntTeamInfo entTeamInfo) {
+        selectedTeamRule = entTeamInfo.getTeamrule();
         tv_team_name.setText(entTeamInfo.getTeamname());
         tv_team_captain.setText(entTeamInfo.getTeamleadernm());
         tv_attendance_count.setText(entTeamInfo.getStat());
@@ -211,6 +213,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
             case R.id.ll_team_rule:
                 Intent teamRuleIntent = new Intent(context, TeamRuleActivity.class);
                 teamRuleIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                teamRuleIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_RULE, selectedTeamRule);
                 startActivity(teamRuleIntent);
                 break;
             case R.id.ll_team_gallery:

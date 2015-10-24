@@ -23,6 +23,7 @@ public class EntTeamInfo {
     private String flag;
     private Date createdate;
     private Date updatedate;
+    private String teamrule;
 
     public int getId() {
         return id;
@@ -158,6 +159,14 @@ public class EntTeamInfo {
 
     public void setUpdatedate(Date updatedate) {
         this.updatedate = updatedate;
+    }
+
+    public String getTeamrule() {
+        return teamrule;
+    }
+
+    public void setTeamrule(String teamrule) {
+        this.teamrule = teamrule;
     }
 
     @Override

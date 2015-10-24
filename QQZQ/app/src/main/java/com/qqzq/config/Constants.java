@@ -40,6 +40,7 @@ public class Constants {
     public static final String EXTRA_SELECTED_CITY_CODE = "EXTRA_SELECTED_CITY_CODE";
     public static final String EXTRA_SELECTED_TEAM = "EXTRA_SELECTED_TEAM";
     public static final String EXTRA_SELECTED_TEAM_ID = "EXTRA_SELECTED_TEAM_ID";
+    public static final String EXTRA_SELECTED_TEAM_RULE = "EXTRA_SELECTED_TEAM_RULE";
     public static final String EXTRA_SELECTED_TEAM_NAME = "EXTRA_SELECTED_TEAM_NAME";
     public static final String EXTRA_PAGE_TYEP = "EXTRA_PAGE_TYEP";
     public static final String EXTRA_PREV_PAGE_NAME = "EXTRA_PREV_PAGE_NAME";
@@ -91,6 +92,8 @@ public class Constants {
     public static final String API_FIND_TEAM_MEMBER_BY_ID_URL = API_SERVER_HOST + "/team/teams/{0}/members";
     //当用户申请加入球队时调用此接口
     public static final String API_JOIN_TEAM_URL = API_SERVER_HOST + "/team/teams/{0}/application";
+    //创建球队章程
+    public static final String API_CREATE_TEAM_RULE_URL = API_SERVER_HOST + "/team/teams/{0}/rule";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 活动部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队

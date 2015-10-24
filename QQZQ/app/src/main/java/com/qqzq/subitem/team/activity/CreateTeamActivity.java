@@ -285,6 +285,7 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     ResponseListener uploadLogoResponseListner = new ResponseListener<EntClientResponse>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            Log.i(TAG, volleyError.toString());
             Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 
