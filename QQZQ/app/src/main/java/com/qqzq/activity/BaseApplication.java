@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.qqzq.config.Constants;
 import com.qqzq.db.DbOpenHelper;
 import com.qqzq.db.LocationDao;
@@ -57,6 +58,7 @@ public class BaseApplication extends Application {
         applicationContext = this;
         instance = this;
         startVolleyRequestManager();
+        VolleyLog.setTag(Constants.APP_NAME);
         startSmsSDK();
 
         spQQZQ = getSharedPreferences(Constants.PREF_APP, Context.MODE_PRIVATE);

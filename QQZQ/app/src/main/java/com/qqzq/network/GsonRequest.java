@@ -1,5 +1,6 @@
 package com.qqzq.network;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -57,11 +58,17 @@ public class GsonRequest<T> extends Request<T> {
         this.mListener = listener;
         setShouldCache(false);
 
-        if (headers == null) {
-            headers = new HashMap<>();
-            headers.put("user-agent", "android");
+
+        mHeaders = new HashMap<>();
+        mHeaders.put("Content-Type", PROTOCOL_CONTENT_TYPE);
+        mHeaders.put("user-agent", "android");
+        if (!TextUtils.isEmpty(BaseApplication.QQZQ_USER)) {
+            mHeaders.put("X-Subject", BaseApplication.QQZQ_USER);
         }
-        this.mHeaders = headers;
+
+        if (headers != null) {
+            mHeaders.putAll(headers);
+        }
 
         // Gson init
         this.mGson = new GsonBuilder()
@@ -111,7 +118,8 @@ public class GsonRequest<T> extends Request<T> {
 
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
-        return mHeaders != null ? mHeaders : super.getHeaders();
+
+        return mHeaders == null ? super.getHeaders() : mHeaders;
     }
 
     @Override
