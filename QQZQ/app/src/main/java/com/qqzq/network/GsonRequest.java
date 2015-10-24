@@ -32,8 +32,8 @@ public class GsonRequest<T> extends Request<T> {
     private final Gson mGson;
     private final Class<T> mClazz;
     private final Response.Listener<T> mListener;
-    private final Map<String, String> mHeaders;
     private final Map<String, Object> mParameters;
+    private Map<String, String> mHeaders;
 
     private static final String TAG = "GsonRequest";
     private static final String PROTOCOL_CHARSET = "utf-8";
@@ -56,19 +56,9 @@ public class GsonRequest<T> extends Request<T> {
         this.mClazz = clazz;
         this.mParameters = parameters;
         this.mListener = listener;
+        this.mHeaders = headers;
         setShouldCache(false);
 
-
-        mHeaders = new HashMap<>();
-        mHeaders.put("Content-Type", PROTOCOL_CONTENT_TYPE);
-        mHeaders.put("user-agent", "android");
-        if (!TextUtils.isEmpty(BaseApplication.QQZQ_USER)) {
-            mHeaders.put("X-Subject", BaseApplication.QQZQ_USER);
-        }
-
-        if (headers != null) {
-            mHeaders.putAll(headers);
-        }
 
         // Gson init
         this.mGson = new GsonBuilder()
@@ -119,7 +109,17 @@ public class GsonRequest<T> extends Request<T> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
 
-        return mHeaders == null ? super.getHeaders() : mHeaders;
+        if (mHeaders == null) {
+            mHeaders = new HashMap<String, String>();
+        }
+
+        mHeaders.put("Content-Type", PROTOCOL_CONTENT_TYPE);
+        mHeaders.put("user-agent", "android");
+        if (!TextUtils.isEmpty(BaseApplication.QQZQ_USER)) {
+            mHeaders.put("X-Subject", BaseApplication.QQZQ_USER);
+        }
+
+        return mHeaders;
     }
 
     @Override
