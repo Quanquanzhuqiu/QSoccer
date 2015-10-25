@@ -57,6 +57,9 @@ public class EntGameInfo {
     private Date updatedate;
     private int teamid;
     private int cost;
+    private int signupcount;
+    private int attendancecount;
+    private int belatecount;
 
     public int getId() {
         return id;
@@ -269,5 +272,29 @@ public class EntGameInfo {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public int getSignupcount() {
+        return signupcount;
+    }
+
+    public void setSignupcount(int signupcount) {
+        this.signupcount = signupcount;
+    }
+
+    public int getAttendancecount() {
+        return attendancecount;
+    }
+
+    public void setAttendancecount(int attendancecount) {
+        this.attendancecount = attendancecount;
+    }
+
+    public int getBelatecount() {
+        return belatecount;
+    }
+
+    public void setBelatecount(int belatecount) {
+        this.belatecount = belatecount;
     }
 }

@@ -30,6 +30,7 @@ import com.qqzq.entity.EntTeamJoinInfo;
 import com.qqzq.entity.EntTeamOperation;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.subitem.game.activity.GameAttendanceActivity;
 import com.qqzq.subitem.game.activity.GameListActivity;
 import com.qqzq.subitem.team.adapter.TeamGalleryGridViewAdapter;
 import com.qqzq.subitem.team.adapter.TeamOperationGridViewAdapter;
@@ -248,6 +249,10 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
                 case EntTeamOperation.TEAM_MEMBER_FEE_MANAGE:
                     break;
                 case EntTeamOperation.TEAM_ATTENDANCE_MANAGE:
+                    Intent teamAttendanceIntent = new Intent(context, GameAttendanceActivity.class);
+                    teamAttendanceIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                    teamAttendanceIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_NAME, tv_team_name.getText().toString());
+                    startActivity(teamAttendanceIntent);
                     break;
             }
         }

@@ -93,13 +93,7 @@ public class MainActivity extends BaseFragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-
         init();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     private void init() {

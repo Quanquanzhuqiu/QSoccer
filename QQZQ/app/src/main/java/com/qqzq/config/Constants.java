@@ -46,6 +46,8 @@ public class Constants {
     public static final String EXTRA_PAGE_TYEP = "EXTRA_PAGE_TYEP";
     public static final String EXTRA_PREV_PAGE_NAME = "EXTRA_PREV_PAGE_NAME";
     public static final String EXTRA_SELECTED_GAME_ID = "EXTRA_SELECTED_GAME_ID";
+    public static final String EXTRA_SELECTED_GAME_NAME = "EXTRA_SELECTED_GAME_NAME";
+    public static final String EXTRA_SELECTED_GAME_DATE = "EXTRA_SELECTED_GAME_DATE";
 
     public static final String HTTP_HEADER_TOKER = "Token";
 
