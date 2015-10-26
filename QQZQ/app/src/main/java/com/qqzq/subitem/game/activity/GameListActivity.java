@@ -3,6 +3,7 @@ package com.qqzq.subitem.game.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ import java.util.Map;
  * Created by jie.xiao on 15/10/15.
  */
 public class GameListActivity extends BaseActivity {
+
+    private final static String TAG = "GameListActivity";
 
     private Activity context = this;
     private TopBar topBar;
@@ -79,6 +82,7 @@ public class GameListActivity extends BaseActivity {
     ResponseListener findGameResponseListener = new ResponseListener<EntGameInfo[]>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            Log.i(TAG, volleyError.toString());
             Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 

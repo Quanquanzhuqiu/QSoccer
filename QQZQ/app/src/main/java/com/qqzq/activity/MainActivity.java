@@ -32,6 +32,7 @@ import com.qqzq.util.Utils;
 import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.tab.PagerSlidingTabStrip;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -187,10 +188,12 @@ public class MainActivity extends BaseFragmentActivity {
 
 
     public void loadTeamList() {
+//        String queryUrl = MessageFormat.format(Constants.API_FIND_TEAM_MEMBER_BY_ID_URL, BaseApplication.QQZQ_USER);
+//        queryUrl = Utils.makeGetRequestUrl(queryUrl, null);
+
         Map<String, Object> mParameters = new HashMap<String, Object>();
         mParameters.put("offset", 0);
-        mParameters.put("limit", 6);
-        mParameters.put("loginName", BaseApplication.QQZQ_USER);
+        mParameters.put("limit", 10);
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_TEAM_URL, mParameters);
         GsonRequest gsonRequest = new GsonRequest<EntTeamInfo[]>(queryUrl, EntTeamInfo[].class,
                 findTeamResponseListener);

@@ -2,6 +2,7 @@ package com.qqzq.subitem.team.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 public class TeamListViewAdapter extends BaseAdapter {
 
+    private final static String TAG = "TeamListViewAdp";
     private Context context;
     public List<EntTeamListItem> mList;
     public int pageIdx = 0;
@@ -119,7 +121,7 @@ public class TeamListViewAdapter extends BaseAdapter {
     public void displayUrlImg(ImageView imageView, String url) {
 
         String logoUrl = Constants.FILE_SERVER_HOST + url;
-        System.out.println(logoUrl);
+        Log.i(TAG, logoUrl);
 
         ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.drawable.ic_default_team_log, R.drawable.ic_default_team_log);
         RequestManager.getImageLoader().get(logoUrl, listener);

@@ -128,7 +128,7 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void joinGame(int id) {
-        String queryUrl = MessageFormat.format(Constants.API_GAME_JOIN_APPLICATION, id);
+        String queryUrl = MessageFormat.format(Constants.API_GAME_JOIN_APPLICATION_URL, id);
 
         GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, queryUrl,
                 EntClientResponse.class, null, null, joinGameResponseListener);

@@ -15,6 +15,12 @@ public class Utils {
     private static SimpleDateFormat timeFormat = new SimpleDateFormat("hh:ss");
 
     public static String makeGetRequestUrl(String url, Map<String, Object> parameters) {
+
+        //如果参数为空，直接返回URL
+        if (parameters == null) {
+            return url;
+        }
+
         StringBuilder makedUrl = new StringBuilder();
         makedUrl.append(url);
         makedUrl.append("?");

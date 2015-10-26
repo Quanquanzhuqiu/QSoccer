@@ -377,13 +377,8 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         }
 
         Map<String, Object> mParameters = prepareRequestJson();
-
-        if (mParameters == null || mParameters.isEmpty()) {
-            return;
-        }
-
         GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_GAME_PUBLISH_URL,
-                EntClientResponse.class, null, null, publishGameResponseListener);
+                EntClientResponse.class, null, mParameters, publishGameResponseListener);
 
         executeRequest(gsonRequest);
     }
@@ -391,6 +386,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
     ResponseListener publishGameResponseListener = new ResponseListener<EntClientResponse>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            Log.e(TAG, volleyError.toString());
             Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 

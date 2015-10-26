@@ -92,7 +92,7 @@ public class Constants {
     //根据球队id获取球队详细信息
     public static final String API_FIND_TEAM_BY_ID_URL = API_SERVER_HOST + "/team/teams/{0}";
     //根据球队id查询球队成员信息
-    public static final String API_FIND_TEAM_MEMBER_BY_ID_URL = API_SERVER_HOST + "/team/teams/{0}/members";
+    public static final String API_FIND_TEAM_MEMBER_BY_ID_URL = API_SERVER_HOST + "/team/teams/members/{0}";
     //当用户申请加入球队时调用此接口
     public static final String API_JOIN_TEAM_URL = API_SERVER_HOST + "/team/teams/{0}/application";
     //创建球队章程
@@ -106,7 +106,11 @@ public class Constants {
     //根据用户id获取活动详细信息
     public static final String API_FIND_GAME_BY_ID_URL = API_SERVER_HOST + "/activity/activities/{0}";
     //用户参加活动报名
-    public static final String API_GAME_JOIN_APPLICATION = API_SERVER_HOST + "/activity/activities/{0}/application";
+    public static final String API_GAME_JOIN_APPLICATION_URL = API_SERVER_HOST + "/activity/activities/{0}/application";
+    //获取活动报名名单
+    public static final String API_GAME_SIGNUP_LIST_URL = API_SERVER_HOST + "/activity/activities/{0}/signup_list";
+    //记录出勤情况
+    public static final String API_ATTENDANCE_URL = API_SERVER_HOST + "/activity/activities/{0}/attendance";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 上传文件部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //上传文件到分布式文件系统
