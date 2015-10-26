@@ -113,7 +113,7 @@ public class GameAttendanceManagerListViewAdapter extends BaseAdapter {
         isSelected.clear();
         for (int i = 0; i < mList.size(); i++) {
             EntSignupUser entSignupUser = mList.get(i);
-            isSelected.put(i, !entSignupUser.isHasattendance());
+            isSelected.put(i, entSignupUser.isHasattendance());
         }
     }
 
