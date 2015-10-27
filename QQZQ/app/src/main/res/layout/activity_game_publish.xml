@@ -417,7 +417,8 @@
                         style="@style/create_team_basic_info_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
-                        android:hint="@string/game_registrator_lower_limit_hint" />
+                        android:hint="@string/game_registrator_lower_limit_hint"
+                        android:inputType="number" />
 
                 </LinearLayout>
 
@@ -437,7 +438,8 @@
                         style="@style/create_team_basic_info_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
-                        android:hint="@string/game_registrator_upper_limit_hint" />
+                        android:hint="@string/game_registrator_upper_limit_hint"
+                        android:inputType="number" />
 
                 </LinearLayout>
 

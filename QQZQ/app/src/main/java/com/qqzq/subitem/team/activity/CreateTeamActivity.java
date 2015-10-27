@@ -67,9 +67,9 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
 
     private String logoPathInServer;
 
-    private Bundle extras;
-    private String selectedProvinceCode = null;
-    private String selectedCityCode = null;
+    private int selectedProvinceCode = 0;
+    private int selectedCityCode = 0;
+    private String selectedLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,18 +124,6 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initData() {
-        extras = this.getIntent().getExtras();
-        if (extras != null
-                && extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)
-                && extras.containsKey(Constants.EXTRA_SELECTED_PROVINCE_CODE)
-                && extras.containsKey(Constants.EXTRA_SELECTED_CITY_CODE)) {
-
-            selectedProvinceCode = extras.getString(Constants.EXTRA_SELECTED_PROVINCE_CODE);
-            selectedCityCode = extras.getString(Constants.EXTRA_SELECTED_CITY_CODE);
-
-            String selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
-            edt_team_location.setText(selectedLocation);
-        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -171,6 +159,20 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
                     }
                 }
                 break;
+
+            //选择地区
+            case 10:
+                if (resultCode == RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    selectedProvinceCode = bundle.getInt(Constants.EXTRA_SELECTED_PROVINCE_CODE);
+                    selectedCityCode = bundle.getInt(Constants.EXTRA_SELECTED_CITY_CODE);
+                    selectedLocation = bundle.getString(Constants.EXTRA_SELECTED_LOCATION);
+
+                    if (!TextUtils.isEmpty(selectedLocation)) {
+                        edt_team_location.setText(selectedLocation);
+                    }
+                }
+                break;
             default:
                 break;
         }
@@ -191,8 +193,8 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
 
     private String formCheck() {
 
-        if (selectedProvinceCode == null
-                || selectedCityCode == null
+        if (selectedProvinceCode == 0
+                || selectedCityCode == 0
                 || TextUtils.isEmpty(edt_team_location.getText())) {
             return "请输入球队常活动地点";
         }
@@ -309,7 +311,7 @@ public class CreateTeamActivity extends BaseActivity implements View.OnClickList
             case R.id.edt_team_location:
                 Intent intent = new Intent(context, FindLocationActivity.class);
                 intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "CreateTeamActivity");
-                startActivity(intent);
+                startActivityForResult(intent, 10);
                 break;
         }
     }

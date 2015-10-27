@@ -54,9 +54,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private Button btn_verify_code;
     private Button btn_register;
 
-    private Bundle extras;
     private int selectedProvinceCode = 0;
     private int selectedCityCode = 0;
+    private String selectedLocation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,42 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         initView();
         initListener();
         initData();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            selectedProvinceCode = bundle.getInt(Constants.EXTRA_SELECTED_PROVINCE_CODE);
+            selectedCityCode = bundle.getInt(Constants.EXTRA_SELECTED_CITY_CODE);
+            selectedLocation = bundle.getString(Constants.EXTRA_SELECTED_LOCATION);
+
+            if (!TextUtils.isEmpty(selectedLocation)) {
+                edt_select_location.setText(selectedLocation);
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.edt_select_location:
+                Intent intent = new Intent(context, FindLocationActivity.class);
+                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "RegisterActivity");
+                startActivityForResult(intent, 1);
+                break;
+            case R.id.btn_verify_code:
+                if (edt_phone_no != null && !TextUtils.isEmpty(edt_phone_no.getText())) {
+                    Toast.makeText(context, "验证码将通过短信发送到你的手机，请注意查收！", Toast.LENGTH_LONG).show();
+                    sendSMS(edt_phone_no.getText().toString());
+                }
+                break;
+            case R.id.btn_register:
+                registerUser();
+                break;
+        }
     }
 
     private void initView() {
@@ -90,39 +126,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     private void initData() {
         initSpanableString();
-        extras = this.getIntent().getExtras();
-        if (extras != null
-                && extras.containsKey(Constants.EXTRA_SELECTED_LOCATION)
-                && extras.containsKey(Constants.EXTRA_SELECTED_PROVINCE_CODE)
-                && extras.containsKey(Constants.EXTRA_SELECTED_CITY_CODE)) {
-
-            selectedProvinceCode = Integer.valueOf(extras.getString(Constants.EXTRA_SELECTED_PROVINCE_CODE));
-            selectedCityCode = Integer.valueOf(extras.getString(Constants.EXTRA_SELECTED_CITY_CODE));
-
-            String selectedLocation = extras.getString(Constants.EXTRA_SELECTED_LOCATION);
-            edt_select_location.setText(selectedLocation);
-        }
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.edt_select_location:
-                Intent intent = new Intent(context, FindLocationActivity.class);
-                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "RegisterActivity");
-                startActivity(intent);
-                break;
-            case R.id.btn_verify_code:
-                if (edt_phone_no != null && !TextUtils.isEmpty(edt_phone_no.getText())) {
-                    Toast.makeText(context, "验证码将通过短信发送到你的手机，请注意查收！", Toast.LENGTH_LONG).show();
-                    sendSMS(edt_phone_no.getText().toString());
-                }
-                break;
-            case R.id.btn_register:
-                registerUser();
-                break;
-        }
-    }
 
     private void sendSMS(String phoneNo) {
         Log.i(TAG, "phoneNo = " + phoneNo);

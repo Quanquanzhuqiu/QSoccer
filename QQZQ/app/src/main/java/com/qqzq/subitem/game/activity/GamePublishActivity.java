@@ -91,8 +91,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_game_publish);
         initView();
         initLinstener();
-        initData();
-
     }
 
     @Override
@@ -100,6 +98,23 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         super.onPause();
         if (timePickerWindow != null && timePickerWindow.isShowing()) {
             timePickerWindow.dismiss();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            selectedTeamName = bundle.getString(Constants.EXTRA_SELECTED_TEAM);
+            selectedTeamId = bundle.getString(Constants.EXTRA_SELECTED_TEAM_ID);
+            tv_selected_team.setText(selectedTeamName);
+            Log.i(TAG, "选中的球队是:" + selectedTeamName + " " + selectedTeamId);
+            rbtn_game_type_private.setChecked(true);
+            rbtn_game_type_public.setChecked(false);
+            tv_select_team.setVisibility(View.VISIBLE);
+            ll_select_team.setVisibility(View.VISIBLE);
         }
     }
 
@@ -160,28 +175,6 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
-    /**
-     * 初始化数据
-     */
-    private void initData() {
-
-        Bundle extras = context.getIntent().getExtras();
-        if (extras != null) {
-            if (extras.containsKey(Constants.EXTRA_SELECTED_TEAM)
-                    && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_ID)) {
-                selectedTeamName = extras.getString(Constants.EXTRA_SELECTED_TEAM);
-                selectedTeamId = extras.getString(Constants.EXTRA_SELECTED_TEAM_ID);
-                tv_selected_team.setText(selectedTeamName);
-                Log.i(TAG, "选中的球队是:" + selectedTeamName + " " + selectedTeamId);
-                rbtn_game_type_private.setChecked(true);
-                rbtn_game_type_public.setChecked(false);
-                tv_select_team.setVisibility(View.VISIBLE);
-                ll_select_team.setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
-
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
@@ -241,7 +234,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
             case R.id.tv_select_team:
                 Intent selectTeamIntent = new Intent(context, SelectTeamActivity.class);
                 selectTeamIntent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, context.getClass().getSimpleName());
-                startActivity(selectTeamIntent);
+                startActivityForResult(selectTeamIntent, 1);
                 break;
             case R.id.edt_game_location:
                 break;

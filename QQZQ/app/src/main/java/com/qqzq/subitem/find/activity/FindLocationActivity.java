@@ -34,8 +34,8 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
 
     private List<EntLocation> locationInfos;
     private boolean isProvincePage = true;
-    private String selectedProvinceCode = null;
-    private String selectedCityCode = null;
+    private int selectedProvinceCode;
+    private int selectedCityCode;
     private String prevPageName = "";
 
     private LocationDao locationDao;
@@ -82,8 +82,8 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
         refreshLocationListView(locationInfos);
     }
 
-    private void requestCityList(String provinceId) {
-        locationInfos = locationDao.findLoactionByParent(provinceId);
+    private void requestCityList(int provinceId) {
+        locationInfos = locationDao.findLoactionByParent(provinceId + "");
         refreshLocationListView(locationInfos);
     }
 
@@ -98,10 +98,10 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
             tv_selected_location.setText(location);
 
             if (isProvincePage) {
-                selectedProvinceCode = selectedLocationInfo.getId();
+                selectedProvinceCode = Integer.valueOf(selectedLocationInfo.getId());
                 requestCityList(selectedProvinceCode);
             } else {
-                selectedCityCode = selectedLocationInfo.getId();
+                selectedCityCode = Integer.valueOf(selectedLocationInfo.getId());
 
                 if (TextUtils.isEmpty(prevPageName)) {
                     return;
@@ -118,7 +118,8 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
                     intent.putExtra(Constants.EXTRA_SELECTED_LOCATION, location);
                     intent.putExtra(Constants.EXTRA_SELECTED_PROVINCE_CODE, selectedProvinceCode);
                     intent.putExtra(Constants.EXTRA_SELECTED_CITY_CODE, selectedCityCode);
-                    startActivity(intent);
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
             }
         }

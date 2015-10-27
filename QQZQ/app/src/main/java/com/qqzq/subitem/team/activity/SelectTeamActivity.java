@@ -144,7 +144,8 @@ public class SelectTeamActivity extends BaseActivity implements AdapterView.OnIt
 
                 intent.putExtra(Constants.EXTRA_SELECTED_TEAM, teamName);
                 intent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, teamId);
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }
     }
