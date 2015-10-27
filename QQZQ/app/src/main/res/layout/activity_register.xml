@@ -25,6 +25,8 @@
         <EditText
             android:id="@+id/edt_select_location"
             style="@style/login_edit_text"
+            android:editable="false"
+            android:focusable="false"
             android:hint="@string/hint_location" />
     </LinearLayout>
 

@@ -60,6 +60,7 @@ public class EntGameInfo {
     private int signupcount;
     private int attendancecount;
     private int belatecount;
+    private String teamname;
 
     public int getId() {
         return id;
@@ -296,5 +297,13 @@ public class EntGameInfo {
 
     public void setBelatecount(int belatecount) {
         this.belatecount = belatecount;
+    }
+
+    public String getTeamname() {
+        return teamname;
+    }
+
+    public void setTeamname(String teamname) {
+        this.teamname = teamname;
     }
 }

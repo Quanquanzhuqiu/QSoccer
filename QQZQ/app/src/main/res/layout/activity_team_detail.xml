@@ -80,7 +80,7 @@
                         android:text="@string/team_detail_attendance_count" />
 
                     <TextView
-                        android:id="@+id/tv_attendance_count"
+                        android:id="@+id/tv_team_play_times"
                         style="@style/create_team_basic_info_label"
                         android:layout_width="wrap_content"
                         android:text=""
@@ -101,7 +101,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_personal_score"
+                        android:id="@+id/tv_team_score"
                         style="@style/create_team_basic_info_label"
                         android:layout_width="wrap_content"
                         android:text=""

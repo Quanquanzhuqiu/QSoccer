@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -172,8 +173,8 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
                 selectedTeamId = extras.getString(Constants.EXTRA_SELECTED_TEAM_ID);
                 tv_selected_team.setText(selectedTeamName);
                 Log.i(TAG, "选中的球队是:" + selectedTeamName + " " + selectedTeamId);
-                rbtn_game_type_private.setChecked(false);
-                rbtn_game_type_public.setChecked(true);
+                rbtn_game_type_private.setChecked(true);
+                rbtn_game_type_public.setChecked(false);
                 tv_select_team.setVisibility(View.VISIBLE);
                 ll_select_team.setVisibility(View.VISIBLE);
             }
@@ -292,7 +293,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         }
 
         int personMinLimit = Integer.parseInt(edt_game_registrator_lower_limit.getText().toString());
-
+        int teamId = TextUtils.isEmpty(selectedTeamId) ? 0 : Integer.valueOf(selectedTeamId);
 
         EntGameInfo entGameInfo = new EntGameInfo();
         entGameInfo.setActtitle(gameName);
@@ -313,6 +314,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         entGameInfo.setCreatedate(new Date());
         entGameInfo.setUpdatedate(new Date());
         entGameInfo.setStat(gameDescription);
+        entGameInfo.setTeamid(teamId);
 
         mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entGameInfo);
         return mParameters;

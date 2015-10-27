@@ -61,6 +61,8 @@ public class GameAttendanceManagementFragment extends BaseFragment {
                 Log.i(TAG, "选中的活动ID = " + entGameInfo.getId());
 
                 Intent intent = new Intent(context, GameAttendanceDetailActivity.class);
+                intent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, entGameInfo.getTeamid());
+                intent.putExtra(Constants.EXTRA_SELECTED_TEAM_NAME, entGameInfo.getTeamname());
                 intent.putExtra(Constants.EXTRA_SELECTED_GAME_ID, entGameInfo.getId());
                 intent.putExtra(Constants.EXTRA_SELECTED_GAME_NAME, entGameInfo.getActtitle());
                 intent.putExtra(Constants.EXTRA_SELECTED_GAME_DATE, Utils.getFormatedSimpleDate(entGameInfo.getActdate()));

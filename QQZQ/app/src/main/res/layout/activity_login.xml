@@ -26,7 +26,7 @@
             android:id="@+id/edt_username"
             style="@style/login_edit_text"
             android:hint="@string/hint_username"
-            android:text="13688390128" />
+            android:text="13811111112" />
     </LinearLayout>
 
 
@@ -41,7 +41,7 @@
             style="@style/login_edit_text"
             android:hint="@string/hint_password"
             android:inputType="textPassword"
-            android:text="123456" />
+            android:text="123" />
     </LinearLayout>
 
     <TextView

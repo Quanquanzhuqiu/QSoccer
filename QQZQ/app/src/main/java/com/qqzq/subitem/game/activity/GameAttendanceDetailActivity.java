@@ -1,6 +1,7 @@
 package com.qqzq.subitem.game.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,8 +41,8 @@ public class GameAttendanceDetailActivity extends BaseActivity implements Adapte
 
     private final static String TAG = "GameAttendanceDetail";
     private Activity context = this;
-    private int selectedGameId;
-    private String selectedGameName, selectedGameDate;
+    private int selectedTeamId, selectedGameId;
+    private String selectedGameName, selectedGameDate, selectedTeamName;
 
     private TopBar topBar;
     private TextView tv_game_name;
@@ -64,15 +65,21 @@ public class GameAttendanceDetailActivity extends BaseActivity implements Adapte
         if (extras != null
                 && extras.containsKey(Constants.EXTRA_SELECTED_GAME_ID)
                 && extras.containsKey(Constants.EXTRA_SELECTED_GAME_NAME)
-                && extras.containsKey(Constants.EXTRA_SELECTED_GAME_DATE)) {
+                && extras.containsKey(Constants.EXTRA_SELECTED_GAME_DATE)
+                && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_ID)
+                && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_NAME)) {
 
             selectedGameId = extras.getInt(Constants.EXTRA_SELECTED_GAME_ID);
             selectedGameName = extras.getString(Constants.EXTRA_SELECTED_GAME_NAME);
             selectedGameDate = extras.getString(Constants.EXTRA_SELECTED_GAME_DATE);
+            selectedTeamId = extras.getInt(Constants.EXTRA_SELECTED_TEAM_ID);
+            selectedTeamName = extras.getString(Constants.EXTRA_SELECTED_TEAM_NAME);
 
             Log.i(TAG, "selectedGameId = " + selectedGameId);
             Log.i(TAG, "selectedGameName = " + selectedGameName);
             Log.i(TAG, "selectedGameDate = " + selectedGameDate);
+            Log.i(TAG, "selectedTeamId = " + selectedTeamId);
+            Log.i(TAG, "selectedTeamName = " + selectedTeamName);
 
             loadSignupUser();
         }
@@ -182,7 +189,10 @@ public class GameAttendanceDetailActivity extends BaseActivity implements Adapte
         @Override
         public void onResponse(EntClientResponse response) {
             Log.i(TAG, "出勤信息提交成功.");
-            context.finish();
+            Intent teamAttendanceIntent = new Intent(context, GameAttendanceActivity.class);
+            teamAttendanceIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+            teamAttendanceIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_NAME, selectedTeamName);
+            startActivity(teamAttendanceIntent);
         }
     };
 

@@ -2,6 +2,7 @@ package com.qqzq.subitem.game.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -91,7 +92,6 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initForm(EntGameInfo entGameInfo) {
-        long teamId = entGameInfo.getTeamid();
         String actTitle = entGameInfo.getActtitle();
         String gamePublisher = entGameInfo.getPublisher();
         String gameAddress = entGameInfo.getActaddress();
@@ -103,8 +103,10 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
 
         String gameDateWithWeek = Utils.getStrDateWithWeek(gameDate);
         String gameTime = Utils.getStrTime(gameDate);
+        String teamName = entGameInfo.getTeamname();
+        teamName = TextUtils.isEmpty(teamName) ? "公开活动" : teamName;
 
-        String gameDetailTitle = MessageFormat.format(GAME_DETAIL_TITLE_FORMAT, teamId, actTitle);
+        String gameDetailTitle = MessageFormat.format(GAME_DETAIL_TITLE_FORMAT, teamName, actTitle);
         mTeamGameNameTextView.setText(gameDetailTitle);
         mPublisherTextView.setText(gamePublisher);
         mAddressTextView.setText(gameAddress);

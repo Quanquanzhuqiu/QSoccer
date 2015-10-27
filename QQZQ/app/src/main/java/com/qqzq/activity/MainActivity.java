@@ -188,13 +188,13 @@ public class MainActivity extends BaseFragmentActivity {
 
 
     public void loadTeamList() {
-//        String queryUrl = MessageFormat.format(Constants.API_FIND_TEAM_MEMBER_BY_ID_URL, BaseApplication.QQZQ_USER);
-//        queryUrl = Utils.makeGetRequestUrl(queryUrl, null);
+        String queryUrl = MessageFormat.format(Constants.API_FIND_TEAM_MEMBER_BY_ID_URL, BaseApplication.QQZQ_USER);
+        queryUrl = Utils.makeGetRequestUrl(queryUrl, null);
 
-        Map<String, Object> mParameters = new HashMap<String, Object>();
-        mParameters.put("offset", 0);
-        mParameters.put("limit", 10);
-        String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_TEAM_URL, mParameters);
+//        Map<String, Object> mParameters = new HashMap<String, Object>();
+//        mParameters.put("offset", 0);
+//        mParameters.put("limit", 10);
+//        String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_TEAM_URL, mParameters);
         GsonRequest gsonRequest = new GsonRequest<EntTeamInfo[]>(queryUrl, EntTeamInfo[].class,
                 findTeamResponseListener);
         executeRequest(gsonRequest);

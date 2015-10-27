@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -19,14 +18,16 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseFragmentActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntGameInfo;
+import com.qqzq.entity.EntTeamMember;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.subitem.game.AttendanceStatisticsFragment;
 import com.qqzq.subitem.game.GameAttendanceManagementFragment;
-import com.qqzq.subitem.game.GameAttendanceStatisticsFragment;
 import com.qqzq.util.Utils;
 import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.tab.PagerSlidingTabStrip;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class GameAttendanceActivity extends BaseFragmentActivity {
     GameAttendanceManagementFragment gameAttendanceManagementFragment;
 
     //球队出勤统计Fragment
-    GameAttendanceStatisticsFragment gameAttendanceStatisticsFragment;
+    AttendanceStatisticsFragment attendanceStatisticsFragment;
 
     /**
      * 获取当前屏幕的密度
@@ -57,7 +58,7 @@ public class GameAttendanceActivity extends BaseFragmentActivity {
     private PagerSlidingTabStrip mTabsPagerSlidingTabStrip;
     private ViewPager mPagerViewPager;
 
-    private String selectedTeamId;
+    private int selectedTeamId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +74,8 @@ public class GameAttendanceActivity extends BaseFragmentActivity {
         if (extras != null
                 && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_ID)) {
 
-            selectedTeamId = extras.getString(Constants.EXTRA_SELECTED_TEAM_ID);
-            if (!TextUtils.isEmpty(selectedTeamId)) {
+            selectedTeamId = extras.getInt(Constants.EXTRA_SELECTED_TEAM_ID);
+            if (selectedTeamId > 0) {
                 loadGameList();
             }
         }
@@ -141,10 +142,10 @@ public class GameAttendanceActivity extends BaseFragmentActivity {
                     }
                     return gameAttendanceManagementFragment;
                 case 1:
-                    if (gameAttendanceStatisticsFragment == null) {
-                        gameAttendanceStatisticsFragment = new GameAttendanceStatisticsFragment();
+                    if (attendanceStatisticsFragment == null) {
+                        attendanceStatisticsFragment = new AttendanceStatisticsFragment();
                     }
-                    return gameAttendanceStatisticsFragment;
+                    return attendanceStatisticsFragment;
                 default:
                     return null;
             }
@@ -167,12 +168,35 @@ public class GameAttendanceActivity extends BaseFragmentActivity {
     ResponseListener findGameResponseListener = new ResponseListener<EntGameInfo[]>() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
+            Log.e(TAG, volleyError.toString());
             Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onResponse(EntGameInfo[] entGameInfos) {
             GameAttendanceManagementFragment.list = Arrays.asList(entGameInfos);
+            loadMemberAttendceInfo();
+        }
+    };
+
+    public void loadMemberAttendceInfo() {
+        String queryUrl = MessageFormat.format(Constants.API_FIND_TEAM_MEMBER_DETAIL_BY_ID_URL, selectedTeamId);
+        GsonRequest gsonRequest = new GsonRequest<EntTeamMember[]>(queryUrl, EntTeamMember[].class,
+                findTeamMemberResponseListener);
+        executeRequest(gsonRequest);
+    }
+
+    ResponseListener findTeamMemberResponseListener = new ResponseListener<EntTeamMember[]>() {
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            Log.e(TAG, volleyError.toString());
+            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onResponse(EntTeamMember[] entTeamMembers) {
+            Log.i(TAG, "找到本队球员" + entTeamMembers.length);
+            AttendanceStatisticsFragment.list = Arrays.asList(entTeamMembers);
             mPagerViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
             mTabsPagerSlidingTabStrip.setViewPager(mPagerViewPager);
             setTabsValue();

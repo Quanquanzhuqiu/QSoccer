@@ -99,7 +99,7 @@ public class TeamMangmentFragment extends BaseFragment {
                 EntTeamInfo entTeamInfo = list.get(position);
 
                 Intent intent = new Intent(context, TeamDetailActivity.class);
-                intent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, String.valueOf(entTeamInfo.getId()));
+                intent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, entTeamInfo.getId());
                 startActivity(intent);
             }
         }

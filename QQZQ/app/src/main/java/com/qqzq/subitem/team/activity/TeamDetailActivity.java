@@ -51,8 +51,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private Activity context = this;
     private TextView tv_team_name;
     private TextView tv_team_captain;
-    private TextView tv_attendance_count;
-    private TextView tv_personal_score;
+    private TextView tv_team_play_times;
+    private TextView tv_team_score;
     private TextView tv_team_location;
     private TextView tv_team_establish_day;
     private TextView tv_team_description;
@@ -68,7 +68,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private TeamGalleryGridViewAdapter teamGalleryGridViewAdapter;
 
     private final static String TAG = "TeamDetailActivity";
-    private String selectedTeamId;
+    private int selectedTeamId;
     private String selectedTeamRule;
 
     @Override
@@ -85,8 +85,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
     private void initView() {
         tv_team_name = (TextView) findViewById(R.id.tv_team_name);
         tv_team_captain = (TextView) findViewById(R.id.tv_team_captain);
-        tv_attendance_count = (TextView) findViewById(R.id.tv_attendance_count);
-        tv_personal_score = (TextView) findViewById(R.id.tv_personal_score);
+        tv_team_play_times = (TextView) findViewById(R.id.tv_team_play_times);
+        tv_team_score = (TextView) findViewById(R.id.tv_team_score);
         tv_team_location = (TextView) findViewById(R.id.tv_team_location);
         tv_team_establish_day = (TextView) findViewById(R.id.tv_team_establish_day);
         tv_team_description = (TextView) findViewById(R.id.tv_team_description);
@@ -119,8 +119,8 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         if (extras != null
                 && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_ID)) {
 
-            selectedTeamId = extras.getString(Constants.EXTRA_SELECTED_TEAM_ID);
-            if (!TextUtils.isEmpty(selectedTeamId)) {
+            selectedTeamId = extras.getInt(Constants.EXTRA_SELECTED_TEAM_ID);
+            if (selectedTeamId > 0) {
                 loadTeamDetailFromBackend(selectedTeamId);
             }
         }
@@ -162,8 +162,9 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         selectedTeamRule = entTeamInfo.getTeamrule();
         tv_team_name.setText(entTeamInfo.getTeamname());
         tv_team_captain.setText(entTeamInfo.getTeamleadernm());
-        tv_attendance_count.setText(entTeamInfo.getStat());
-        tv_personal_score.setText(entTeamInfo.getStat());
+        tv_team_play_times.setText(entTeamInfo.getActcount() + "");
+        tv_team_score.setText(entTeamInfo.getTeamscore() + "");
+        tv_team_location.setText(entTeamInfo.getOftencity() + "");
         tv_team_establish_day.setText(Utils.getFormatedSimpleDate(entTeamInfo.getEstablishdate()));
         tv_team_description.setText(entTeamInfo.getSumary());
 
@@ -258,7 +259,7 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    private void loadTeamDetailFromBackend(String id) {
+    private void loadTeamDetailFromBackend(int id) {
 
         String queryUrl = MessageFormat.format(Constants.API_FIND_TEAM_BY_ID_URL, id);
         GsonRequest gsonRequest = new GsonRequest<EntTeamInfo>(queryUrl, EntTeamInfo.class,
@@ -287,13 +288,13 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
         String teamName = tv_team_name.getText().toString();
 
         int personalScore = 0;
-        if (!TextUtils.isEmpty(tv_personal_score.getText())) {
-            personalScore = Integer.valueOf(tv_personal_score.getText().toString());
+        if (!TextUtils.isEmpty(tv_team_score.getText())) {
+            personalScore = Integer.valueOf(tv_team_score.getText().toString());
         }
 
         int attendanceCount = 0;
-        if (!TextUtils.isEmpty(tv_attendance_count.getText())) {
-            attendanceCount = Integer.valueOf(tv_attendance_count.getText().toString());
+        if (!TextUtils.isEmpty(tv_team_play_times.getText())) {
+            attendanceCount = Integer.valueOf(tv_team_play_times.getText().toString());
         }
 
         String userId = BaseApplication.QQZQ_USER;
