@@ -37,8 +37,8 @@ import java.util.Map;
  */
 public class GameAttendanceActivity extends BaseFragmentActivity {
 
-    private Activity context = this;
     private final static String TAG = "GameAttendanceActivity";
+    private Activity context = this;
 
     //球队出勤管理Fragment
     GameAttendManageFragment gameAttendanceManagementFragment;

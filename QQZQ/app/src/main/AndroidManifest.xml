@@ -78,6 +78,12 @@
         <activity
             android:name=".subitem.game.activity.GameAttendanceDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".subitem.team.activity.MemberFeeManageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".subitem.team.activity.MemberFeeIncomeActivity"
+            android:screenOrientation="portrait" />
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -96,6 +102,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
     <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />

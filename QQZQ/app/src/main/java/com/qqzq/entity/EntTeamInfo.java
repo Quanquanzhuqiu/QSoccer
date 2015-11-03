@@ -49,6 +49,7 @@ public class EntTeamInfo {
     private Date createdate;
     private Date updatedate;
     private String teamrule;
+    private float teambalance;
 
     public void setId(int id) {
         this.id = id;
@@ -210,4 +211,11 @@ public class EntTeamInfo {
         return teamrule;
     }
 
+    public float getTeambalance() {
+        return teambalance;
+    }
+
+    public void setTeambalance(float teambalance) {
+        this.teambalance = teambalance;
+    }
 }

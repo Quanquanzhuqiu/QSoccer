@@ -33,9 +33,10 @@
                 android:textSize="17sp" />
 
             <TextView
+                android:id="@+id/tv_team_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="成都老曼联"
+                android:text=""
                 android:textColor="@color/rgb_0_0_0"
                 android:textSize="17sp" />
 
@@ -55,9 +56,10 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/tv_team_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1980元"
+                android:text=""
                 android:textColor="@color/rgb_163_163_163"
                 android:textSize="15sp" />
 
@@ -69,14 +71,16 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rbtn_sponsor"
                 style="@style/my_radio_button"
                 android:layout_weight="1"
                 android:text="@string/sponsor_donation"
                 android:textSize="15sp" />
 
             <EditText
+                android:id="@+id/edt_sponsor"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="35dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -95,21 +99,43 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
-            <RadioButton
-                style="@style/my_radio_button"
-                android:text="@string/member_payment"
-                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/rgb_255_255_255"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbtn_member_fee"
+                    style="@style/my_radio_button"
+                    android:layout_width="120dp"
+                    android:layout_weight="0"
+                    android:text="@string/member_payment"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/bg_login"
+                    android:gravity="center"
+                    android:text="@string/member_list_select"
+                    android:textColor="@color/rgb_0_0_0" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="16dp"
+
                 android:background="@color/rgb_255_255_255">
 
                 <ListView
-                    android:id="@+id/lv_team"
+                    android:id="@+id/lv_member_fee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="17dp"
@@ -132,6 +158,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/edt_fee_description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/member_fee_manager_description_hint"
@@ -143,11 +170,10 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="bottom">
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_commit"
                 style="@style/login_buttons"
                 android:background="@drawable/bg_login"
                 android:text="@string/confirm_income"

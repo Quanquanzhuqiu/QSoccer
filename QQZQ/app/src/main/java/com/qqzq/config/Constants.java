@@ -101,6 +101,10 @@ public class Constants {
     public static final String API_JOIN_TEAM_URL = API_SERVER_HOST + "/team/teams/{0}/application";
     //创建球队章程
     public static final String API_CREATE_TEAM_RULE_URL = API_SERVER_HOST + "/team/teams/{0}/rule";
+    //录入球队余额
+    public static final String API_ADD_INCOME_SPONSOR_URL = API_SERVER_HOST + "/team/teams/{0}/teambalance";
+    //录入球队队员余额
+    public static final String API_ADD_INCOME_MEMBER_URL = API_SERVER_HOST + "/team/teams/{0}/memberbalance";
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 活动部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队
