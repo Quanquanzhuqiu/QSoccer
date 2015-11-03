@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by jie.xiao on 8/25/2015.
  */
-public class TeamMangmentFragment extends BaseFragment {
+public class TeamManageFragment extends BaseFragment {
 
     private final static String TAG = "TeamMangementFragment";
     String pageType = "";

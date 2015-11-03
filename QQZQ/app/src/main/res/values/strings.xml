@@ -239,7 +239,7 @@
     <string name="is_pay_on_this_time">本次是否扣费</string>
 
     <!-- 会员费收支管理 -->
-    <string name="membership_fee_balance">球队会员费余额：</string>
+    <string name="membership_fee_balance">球队余额：</string>
     <string name="membership_fee_balance_table">队员余额表</string>
     <string name="total_fee">合计：</string>
 

@@ -43,6 +43,8 @@ public class Constants {
     public static final String EXTRA_SELECTED_TEAM_ID = "EXTRA_SELECTED_TEAM_ID";
     public static final String EXTRA_SELECTED_TEAM_RULE = "EXTRA_SELECTED_TEAM_RULE";
     public static final String EXTRA_SELECTED_TEAM_NAME = "EXTRA_SELECTED_TEAM_NAME";
+    public static final String EXTRA_SELECTED_TEAM_BALANCE = "EXTRA_SELECTED_TEAM_BALANCE";
+    public static final String EXTRA_SELECTED_TEAM_BALANCE_DEADLINE = "EXTRA_SELECTED_TEAM_BALANCE_DEADLINE";
     public static final String EXTRA_PAGE_TYEP = "EXTRA_PAGE_TYEP";
     public static final String EXTRA_PREV_PAGE_NAME = "EXTRA_PREV_PAGE_NAME";
     public static final String EXTRA_SELECTED_GAME_ID = "EXTRA_SELECTED_GAME_ID";

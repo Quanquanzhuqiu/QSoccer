@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Created by jie.xiao on 15/10/24.
  */
-public class GameAttendanceManagementFragment extends BaseFragment {
+public class GameAttendManageFragment extends BaseFragment {
 
     private final static String TAG = "AttendanceMgrFragment";
     private Context context;

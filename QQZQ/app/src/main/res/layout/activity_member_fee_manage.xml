@@ -50,38 +50,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/membership_fee_balance"
-                android:textColor="@color/rgb_163_163_163"
+                android:textColor="@color/rgb_0_0_0"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1980元"
-                android:textColor="@color/rgb_163_163_163"
+                android:textColor="@color/rgb_0_0_0"
                 android:textSize="15sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/ic_membership_fee_balance" />
 
             <TextView
-                android:id="@+id/tv_team_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="@string/membership_fee_balance_table"
-                android:textColor="@color/default_black"
-                android:textSize="16sp" />
+                android:text="@string/deadline"
+                android:textColor="@color/rgb_0_0_0"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015年04月25日"
+                android:textColor="@color/rgb_0_0_0"
+                android:textSize="15sp" />
         </LinearLayout>
 
     </LinearLayout>

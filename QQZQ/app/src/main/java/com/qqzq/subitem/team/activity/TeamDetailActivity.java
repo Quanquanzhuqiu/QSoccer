@@ -248,6 +248,10 @@ public class TeamDetailActivity extends BaseActivity implements View.OnClickList
                 case EntTeamOperation.TEAM_CASH_PAY_RECORD:
                     break;
                 case EntTeamOperation.TEAM_MEMBER_FEE_MANAGE:
+                    Intent memberFeeManageIntent = new Intent(context,MemberFeeManageActivity.class);
+                    memberFeeManageIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                    memberFeeManageIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_NAME, tv_team_name.getText().toString());
+                    memberFeeManageIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_BALANCE, tv_team_name.getText().toString());
                     break;
                 case EntTeamOperation.TEAM_ATTENDANCE_MANAGE:
                     Intent teamAttendanceIntent = new Intent(context, GameAttendanceActivity.class);

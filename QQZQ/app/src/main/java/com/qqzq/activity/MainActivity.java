@@ -27,7 +27,7 @@ import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.find.FindFragment;
 import com.qqzq.subitem.game.GameManagementFragment;
 import com.qqzq.subitem.me.MeFragment;
-import com.qqzq.subitem.team.TeamMangmentFragment;
+import com.qqzq.subitem.team.TeamManageFragment;
 import com.qqzq.util.Utils;
 import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.tab.PagerSlidingTabStrip;
@@ -60,7 +60,7 @@ public class MainActivity extends BaseFragmentActivity {
     private View myTeamLayout;
 
     //球队管理页面的Fragment
-    private TeamMangmentFragment teamMangmentFragment;
+    private TeamManageFragment teamMangmentFragment;
 
     //球队内部活动的Fragment
     private GameManagementFragment gameManagementFragment;
@@ -165,7 +165,7 @@ public class MainActivity extends BaseFragmentActivity {
             switch (position) {
                 case 0:
                     if (teamMangmentFragment == null) {
-                        teamMangmentFragment = new TeamMangmentFragment();
+                        teamMangmentFragment = new TeamManageFragment();
                         Bundle bundle = new Bundle();
                         bundle.putString(Constants.EXTRA_PAGE_TYEP, teamPageType);
                         teamMangmentFragment.setArguments(bundle);
@@ -220,7 +220,7 @@ public class MainActivity extends BaseFragmentActivity {
         public void onResponse(EntTeamInfo[] entTeamInfos) {
             if (entTeamInfos.length > 0) {
                 teamList = Arrays.asList(entTeamInfos);
-                TeamMangmentFragment.list = teamList;
+                TeamManageFragment.list = teamList;
                 teamPageType = Constants.PAGE_TYPE_HAVE_TEAM;
             } else {
                 teamPageType = Constants.PAGE_TYPE_NO_TEAM;

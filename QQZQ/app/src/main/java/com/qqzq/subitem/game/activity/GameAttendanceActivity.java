@@ -22,7 +22,7 @@ import com.qqzq.entity.EntTeamMember;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.game.AttendanceStatisticsFragment;
-import com.qqzq.subitem.game.GameAttendanceManagementFragment;
+import com.qqzq.subitem.game.GameAttendManageFragment;
 import com.qqzq.util.Utils;
 import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.tab.PagerSlidingTabStrip;
@@ -41,7 +41,7 @@ public class GameAttendanceActivity extends BaseFragmentActivity {
     private final static String TAG = "GameAttendanceActivity";
 
     //球队出勤管理Fragment
-    GameAttendanceManagementFragment gameAttendanceManagementFragment;
+    GameAttendManageFragment gameAttendanceManagementFragment;
 
     //球队出勤统计Fragment
     AttendanceStatisticsFragment attendanceStatisticsFragment;
@@ -138,7 +138,7 @@ public class GameAttendanceActivity extends BaseFragmentActivity {
             switch (position) {
                 case 0:
                     if (gameAttendanceManagementFragment == null) {
-                        gameAttendanceManagementFragment = new GameAttendanceManagementFragment();
+                        gameAttendanceManagementFragment = new GameAttendManageFragment();
                     }
                     return gameAttendanceManagementFragment;
                 case 1:
@@ -174,7 +174,7 @@ public class GameAttendanceActivity extends BaseFragmentActivity {
 
         @Override
         public void onResponse(EntGameInfo[] entGameInfos) {
-            GameAttendanceManagementFragment.list = Arrays.asList(entGameInfos);
+            GameAttendManageFragment.list = Arrays.asList(entGameInfos);
             loadMemberAttendceInfo();
         }
     };
