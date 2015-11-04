@@ -4,55 +4,47 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:background="@color/default_white"
+    android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="150dp"
+
+    <ImageView
+        android:id="@+id/iv_member_logo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_member_logo" />
+
+    <TextView
+        android:id="@+id/tv_member_name"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_member_logo"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_marginLeft="10dp"
+        android:text="朋友名字"
+        android:textColor="@color/default_black"
+        android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/iv_member_logo"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_member_logo" />
-
-        <TextView
-            android:id="@+id/tv_member_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="朋友名字"
-            android:textColor="@color/default_black"
-            android:textSize="16sp" />
-    </LinearLayout>
+    <EditText
+        android:id="@+id/edt_member_fee"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:text="" />
 
 
+<!--
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginRight="15dp"
         android:layout_weight="1"
-        android:gravity="center_vertical|right"
-        android:orientation="horizontal">
+        android:gravity="right">
 
-        <TextView
+        <CheckBox
+            android:id="@+id/cbox_pay_fee"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/actual_member_fee" />
-
-        <EditText
-            android:id="@+id/edt_member_fee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="200.00" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/yuan" />
-
+            android:layout_height="match_parent" />
     </LinearLayout>
+-->
+
 
 </LinearLayout>

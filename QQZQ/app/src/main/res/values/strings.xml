@@ -248,7 +248,7 @@
     <string name="sponsor_donation_description">（说明：赞助商捐款收入平均分摊到所有队员头上）</string>
     <string name="member_payment">队员缴费</string>
     <string name="member_list_select">充值名单选择</string>
-    <string name="actual_member_fee">实缴金额</string>
+    <string name="charge_memeber_fee">充值金额</string>
     <string name="member_fee_manager_description">说明</string>
     <string name="member_fee_manager_description_hint">示例：赞助商捐款！!140字以内</string>
     <string name="confirm_income">确定收入</string>

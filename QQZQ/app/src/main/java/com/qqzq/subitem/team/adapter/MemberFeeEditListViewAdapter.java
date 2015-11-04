@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -90,6 +92,7 @@ public class MemberFeeEditListViewAdapter extends BaseAdapter {
 //            String logoUrl = entTeamMember.getLogoUrl();
             Drawable logo = null;
             String logoUrl = null;
+            final int memberId = entTeamMember.getUserid();
             String name = entTeamMember.getUsernickname();
             String balance = entTeamMember.getPersonalbalance() + "";
 
@@ -117,7 +120,7 @@ public class MemberFeeEditListViewAdapter extends BaseAdapter {
                 @Override
                 public void afterTextChanged(Editable s) {
                     //将editText中改变的值设置的HashMap中
-                    balanceMap.put(position, Float.valueOf(s.toString()));
+                    balanceMap.put(memberId, Float.valueOf(s.toString()));
                 }
             });
         }
@@ -132,6 +135,10 @@ public class MemberFeeEditListViewAdapter extends BaseAdapter {
 
         ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.drawable.ic_default_team_log, R.drawable.ic_default_team_log);
         RequestManager.getImageLoader().get(logoUrl, listener);
+    }
+
+    public Map<Integer, Float> getSelectedData() {
+        return balanceMap;
     }
 
     class ViewHolder {

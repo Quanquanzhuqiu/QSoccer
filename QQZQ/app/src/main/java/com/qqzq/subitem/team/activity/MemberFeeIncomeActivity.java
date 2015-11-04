@@ -1,6 +1,7 @@
 package com.qqzq.subitem.team.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
+import com.qqzq.entity.EntMemberBalanceInfo;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntTeamMember;
 import com.qqzq.network.GsonRequest;
@@ -36,17 +38,19 @@ import java.util.Map;
 public class MemberFeeIncomeActivity extends BaseActivity implements View.OnClickListener {
 
     private final static String TAG = "MemberFeeIncomeActivity";
-    public static List<EntTeamMember> list = new ArrayList<EntTeamMember>();
+    private List<EntTeamMember> list = new ArrayList<EntTeamMember>();
     private Activity context = this;
     private MemberFeeListViewAdapter adapter;
     private ListView lv_member_fee;
     private TextView tv_team_name;
     private TextView tv_team_balance;
+    private TextView tv_member_select;
     private ImageView iv_add_income;
     private ImageView iv_add_payout;
     private RadioButton rbtn_sponsor;
     private RadioButton rbtn_member_fee;
     private EditText edt_sponsor;
+    private TextView tv_yuan;
     private EditText edt_fee_description;
     private Button btn_commit;
 
@@ -54,6 +58,7 @@ public class MemberFeeIncomeActivity extends BaseActivity implements View.OnClic
     private String selectedTeamName;
     private float selectedTeamBalance;
     private boolean isSponsorIncome;
+    private EntMemberBalanceInfo entMemberBalanceInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +75,55 @@ public class MemberFeeIncomeActivity extends BaseActivity implements View.OnClic
             case R.id.rbtn_sponsor:
                 rbtn_member_fee.setChecked(false);
                 isSponsorIncome = true;
+                tv_yuan.setVisibility(View.VISIBLE);
+                edt_sponsor.setVisibility(View.VISIBLE);
+                tv_member_select.setVisibility(View.INVISIBLE);
+                lv_member_fee.setVisibility(View.INVISIBLE);
                 break;
             case R.id.rbtn_member_fee:
                 rbtn_sponsor.setChecked(false);
+                tv_yuan.setVisibility(View.INVISIBLE);
+                edt_sponsor.setVisibility(View.INVISIBLE);
+                tv_member_select.setVisibility(View.VISIBLE);
+                lv_member_fee.setVisibility(View.VISIBLE);
                 isSponsorIncome = false;
                 break;
+            case R.id.tv_member_select:
+                Intent intent = new Intent(context, MemberFeeEditListActivity.class);
+                intent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                startActivityForResult(intent, 0);
+                break;
             case R.id.btn_commit:
-                commit();
+
+                if (isSponsorIncome) {
+                    commitSponsorMoney();
+                } else {
+                    commitMemberFee();
+                }
+
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            entMemberBalanceInfo = (EntMemberBalanceInfo) bundle.getSerializable(Constants.EXTRA_EDITED_MEMBER_FEE);
+            if (entMemberBalanceInfo != null) {
+                list.clear();
+                for (EntTeamMember memberBalancesEntity : entMemberBalanceInfo.getMemberBalances()) {
+                    if (memberBalancesEntity.getPersonalbalance() > 0) {
+                        list.add(memberBalancesEntity);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+                tv_member_select.setVisibility(View.VISIBLE);
+                lv_member_fee.setVisibility(View.VISIBLE);
+            }
+        }
+
     }
 
     private void initData() {
@@ -109,10 +154,11 @@ public class MemberFeeIncomeActivity extends BaseActivity implements View.OnClic
         iv_add_payout = (ImageView) findViewById(R.id.iv_add_payout);
         rbtn_sponsor = (RadioButton) findViewById(R.id.rbtn_sponsor);
         rbtn_member_fee = (RadioButton) findViewById(R.id.rbtn_member_fee);
+        tv_member_select = (TextView) findViewById(R.id.tv_member_select);
         edt_sponsor = (EditText) findViewById(R.id.edt_sponsor);
+        tv_yuan = (TextView) findViewById(R.id.tv_yuan);
         edt_fee_description = (EditText) findViewById(R.id.edt_fee_description);
         btn_commit = (Button) findViewById(R.id.btn_commit);
-        rbtn_sponsor.setChecked(true);
 
         adapter = new MemberFeeListViewAdapter(context, list);
         lv_member_fee.setAdapter(adapter);
@@ -121,14 +167,28 @@ public class MemberFeeIncomeActivity extends BaseActivity implements View.OnClic
     private void initListener() {
         rbtn_sponsor.setOnClickListener(this);
         rbtn_member_fee.setOnClickListener(this);
+        tv_member_select.setOnClickListener(this);
         btn_commit.setOnClickListener(this);
     }
 
-    private void commit() {
+
+    private void commitSponsorMoney() {
         Map<String, Object> mParameters = prepareAddSponsorJson();
         String url = MessageFormat.format(Constants.API_ADD_INCOME_SPONSOR_URL, selectedTeamId);
         GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, url,
-                EntClientResponse.class, null, mParameters, addIncomeResponseListener);
+                EntClientResponse.class, null, mParameters, new ResponseListener<EntClientResponse>() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e(TAG, volleyError.toString());
+                Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(EntClientResponse response) {
+                Log.i(TAG, "添加一笔赞助商收入成功.");
+                context.finish();
+            }
+        });
 
         executeRequest(gsonRequest);
     }
@@ -143,17 +203,31 @@ public class MemberFeeIncomeActivity extends BaseActivity implements View.OnClic
         return mParameters;
     }
 
-    ResponseListener addIncomeResponseListener = new ResponseListener<EntClientResponse>() {
-        @Override
-        public void onErrorResponse(VolleyError volleyError) {
-            Log.e(TAG, volleyError.toString());
-            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
-        }
+    private void commitMemberFee() {
+        Map<String, Object> mParameters = prepareAddMemberFeeJson();
+        String url = MessageFormat.format(Constants.API_ADD_INCOME_MEMBER_URL, selectedTeamId);
+        GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, url,
+                EntClientResponse.class, null, mParameters, new ResponseListener<EntClientResponse>() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e(TAG, volleyError.toString());
+                Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+            }
 
-        @Override
-        public void onResponse(EntClientResponse response) {
-            Log.i(TAG, "添加一笔收入成功.");
-            context.finish();
-        }
-    };
+            @Override
+            public void onResponse(EntClientResponse response) {
+                Log.i(TAG, "添加一笔会费收入成功.");
+                context.finish();
+            }
+        });
+
+        executeRequest(gsonRequest);
+    }
+
+    private Map<String, Object> prepareAddMemberFeeJson() {
+        Map<String, Object> mParameters = new HashMap<String, Object>();
+        mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entMemberBalanceInfo);
+        return mParameters;
+    }
+
 }

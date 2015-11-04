@@ -80,13 +80,16 @@
             <EditText
                 android:id="@+id/edt_sponsor"
                 android:layout_width="70dp"
-                android:layout_height="35dp" />
+                android:layout_height="35dp"
+                android:visibility="gone" />
 
             <TextView
+                android:id="@+id/tv_yuan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/yuan"
-                android:textColor="@color/rgb_153_153_153" />
+                android:textColor="@color/rgb_153_153_153"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -119,12 +122,14 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_member_select"
                     android:layout_width="100dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_login"
                     android:gravity="center"
                     android:text="@string/member_list_select"
-                    android:textColor="@color/rgb_0_0_0" />
+                    android:textColor="@color/rgb_0_0_0"
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <LinearLayout
@@ -140,7 +145,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="17dp"
                     android:layout_marginRight="17dp"
-                    android:divider="@null" />
+                    android:divider="@null"
+                    android:visibility="invisible" />
             </LinearLayout>
 
         </LinearLayout>

@@ -5,11 +5,12 @@
 
     <!-- TOP BAR-->
     <com.qqzq.widget.menu.TopBar
+        android:id="@+id/topbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:leftImage="@drawable/ic_btn_back"
-        app:pageTitle="球队成员"
-        app:rightText="踢出" />
+        app:pageTitle="收入名单选择"
+        app:rightText="完成" />
 
     <LinearLayout
         android:layout_width="fill_parent"

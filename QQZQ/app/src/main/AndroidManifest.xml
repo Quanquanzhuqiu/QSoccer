@@ -84,6 +84,9 @@
         <activity
             android:name=".subitem.team.activity.MemberFeeIncomeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".subitem.team.activity.MemberFeeEditListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />

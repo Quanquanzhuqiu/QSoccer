@@ -1,11 +1,12 @@
 package com.qqzq.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by jie.xiao on 15/10/27.
  */
-public class EntTeamMember {
+public class EntTeamMember implements Serializable{
 
     /**
      * id : 12
@@ -37,7 +38,7 @@ public class EntTeamMember {
     private int joinway;
     private boolean isleader;
     private Date jointime;
-    private int personalbalance;
+    private float personalbalance;
     private int personalscore;
     private int attendancecount;
     private int attendancerate;
@@ -81,10 +82,6 @@ public class EntTeamMember {
 
     public void setJointime(Date jointime) {
         this.jointime = jointime;
-    }
-
-    public void setPersonalbalance(int personalbalance) {
-        this.personalbalance = personalbalance;
     }
 
     public void setPersonalscore(int personalscore) {
@@ -155,10 +152,6 @@ public class EntTeamMember {
         return jointime;
     }
 
-    public int getPersonalbalance() {
-        return personalbalance;
-    }
-
     public int getPersonalscore() {
         return personalscore;
     }
@@ -189,5 +182,17 @@ public class EntTeamMember {
 
     public String getUserLogo() {
         return userLogo;
+    }
+
+    public boolean isleader() {
+        return isleader;
+    }
+
+    public float getPersonalbalance() {
+        return personalbalance;
+    }
+
+    public void setPersonalbalance(float personalbalance) {
+        this.personalbalance = personalbalance;
     }
 }

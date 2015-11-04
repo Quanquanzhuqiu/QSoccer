@@ -92,7 +92,6 @@ public class MemberBalanceFragment extends BaseFragment implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_add_income:
-                MemberFeeIncomeActivity.list = list;
                 Intent incomeIntent = new Intent(context, MemberFeeIncomeActivity.class);
                 incomeIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
                 incomeIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_NAME, selectedTeamName);

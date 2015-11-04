@@ -45,6 +45,7 @@ public class Constants {
     public static final String EXTRA_SELECTED_TEAM_NAME = "EXTRA_SELECTED_TEAM_NAME";
     public static final String EXTRA_SELECTED_TEAM_BALANCE = "EXTRA_SELECTED_TEAM_BALANCE";
     public static final String EXTRA_SELECTED_TEAM_BALANCE_DEADLINE = "EXTRA_SELECTED_TEAM_BALANCE_DEADLINE";
+    public static final String EXTRA_EDITED_MEMBER_FEE = "EXTRA_EDITED_MEMBER_FEE";
     public static final String EXTRA_PAGE_TYEP = "EXTRA_PAGE_TYEP";
     public static final String EXTRA_PREV_PAGE_NAME = "EXTRA_PREV_PAGE_NAME";
     public static final String EXTRA_SELECTED_GAME_ID = "EXTRA_SELECTED_GAME_ID";
@@ -93,9 +94,9 @@ public class Constants {
     public static final String API_FIND_TEAM_URL = API_SERVER_HOST + "/team/teams";
     //根据球队id获取球队详细信息
     public static final String API_FIND_TEAM_BY_ID_URL = API_SERVER_HOST + "/team/teams/{0}";
-    //根据球队id查询球队成员信息
+    //查询用户所在球队
     public static final String API_FIND_TEAM_MEMBER_BY_ID_URL = API_SERVER_HOST + "/team/teams/members/{0}";
-    //根据球队ID查询球队成员信息，返回球队与用户关系对象集合
+    //哈讯球队成员列表
     public static final String API_FIND_TEAM_MEMBER_DETAIL_BY_ID_URL = API_SERVER_HOST + "/team/teams/{0}/members";
     //当用户申请加入球队时调用此接口
     public static final String API_JOIN_TEAM_URL = API_SERVER_HOST + "/team/teams/{0}/application";
