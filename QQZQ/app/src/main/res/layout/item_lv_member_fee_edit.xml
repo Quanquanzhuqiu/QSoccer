@@ -14,13 +14,13 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/iv_team_list_logo"
+            android:id="@+id/iv_member_logo"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/ic_member_logo" />
 
         <TextView
-            android:id="@+id/tv_team_name"
+            android:id="@+id/tv_member_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -43,6 +43,7 @@
             android:text="@string/actual_member_fee" />
 
         <EditText
+            android:id="@+id/edt_member_fee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="200.00" />
