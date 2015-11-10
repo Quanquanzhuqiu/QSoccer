@@ -26,9 +26,10 @@
         android:textSize="14sp" />
 
     <TextView
+        android:id="@+id/tv_fee_description"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:text="@string/charge_memeber_fee"
+        android:text="@string/charge_member_fee"
         android:textColor="@color/rgb_0_0_0"
         android:textSize="14sp" />
 

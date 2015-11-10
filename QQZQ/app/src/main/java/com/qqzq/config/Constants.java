@@ -46,7 +46,7 @@ public class Constants {
     public static final String EXTRA_SELECTED_TEAM_BALANCE = "EXTRA_SELECTED_TEAM_BALANCE";
     public static final String EXTRA_SELECTED_TEAM_BALANCE_DEADLINE = "EXTRA_SELECTED_TEAM_BALANCE_DEADLINE";
     public static final String EXTRA_EDITED_MEMBER_FEE = "EXTRA_EDITED_MEMBER_FEE";
-    public static final String EXTRA_PAGE_TYEP = "EXTRA_PAGE_TYEP";
+    public static final String EXTRA_PAGE_TYPE = "EXTRA_PAGE_TYPE";
     public static final String EXTRA_PREV_PAGE_NAME = "EXTRA_PREV_PAGE_NAME";
     public static final String EXTRA_SELECTED_GAME_ID = "EXTRA_SELECTED_GAME_ID";
     public static final String EXTRA_SELECTED_GAME_NAME = "EXTRA_SELECTED_GAME_NAME";
@@ -106,7 +106,10 @@ public class Constants {
     public static final String API_ADD_INCOME_SPONSOR_URL = API_SERVER_HOST + "/team/teams/{0}/teambalance";
     //录入球队队员余额
     public static final String API_ADD_INCOME_MEMBER_URL = API_SERVER_HOST + "/team/teams/{0}/memberbalance";
-
+    //扣除球队余额
+    public static final String API_PAY_USE_TEAM_COMMON_FEE_URL = API_SERVER_HOST + "/team/teams/{0}/teambalancededuction";
+    //扣除球队队员余额
+    public static final String API_PAY_USE_TEAM_MEMBER_FEE_URL = API_SERVER_HOST + "/team/teams/{0}/memberbalancededuction";
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 活动部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队
     public static final String API_GAME_PUBLISH_URL = API_SERVER_HOST + "/activity/activities";

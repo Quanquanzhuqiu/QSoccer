@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/membership_fee_balance"
+                android:text="@string/member_fee_balance"
                 android:textColor="@color/rgb_163_163_163"
                 android:textSize="15sp" />
 

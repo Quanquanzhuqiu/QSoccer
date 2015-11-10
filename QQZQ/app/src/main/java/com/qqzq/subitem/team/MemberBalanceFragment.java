@@ -18,6 +18,7 @@ import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamMember;
 import com.qqzq.subitem.team.activity.MemberFeeIncomeActivity;
 import com.qqzq.subitem.team.activity.MemberFeeManageActivity;
+import com.qqzq.subitem.team.activity.MemberFeePayoutActivity;
 import com.qqzq.subitem.team.adapter.MemberFeeListViewAdapter;
 
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class MemberBalanceFragment extends BaseFragment implements View.OnClickL
         iv_add_income = (ImageView) view.findViewById(R.id.iv_add_income);
         iv_add_payout = (ImageView) view.findViewById(R.id.iv_add_payout);
 
-        adapter = new MemberFeeListViewAdapter(context, list);
+        adapter = new MemberFeeListViewAdapter(context, list, true);
         lv_member_fee.setAdapter(adapter);
     }
 
@@ -99,6 +100,11 @@ public class MemberBalanceFragment extends BaseFragment implements View.OnClickL
                 startActivity(incomeIntent);
                 break;
             case R.id.iv_add_payout:
+                Intent payoutIntent = new Intent(context, MemberFeePayoutActivity.class);
+                payoutIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, selectedTeamId);
+                payoutIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_NAME, selectedTeamName);
+                payoutIntent.putExtra(Constants.EXTRA_SELECTED_TEAM_BALANCE, selectedTeamBalance);
+                startActivity(payoutIntent);
                 break;
             default:
                 break;

@@ -167,7 +167,7 @@ public class MainActivity extends BaseFragmentActivity {
                     if (teamMangmentFragment == null) {
                         teamMangmentFragment = new TeamManageFragment();
                         Bundle bundle = new Bundle();
-                        bundle.putString(Constants.EXTRA_PAGE_TYEP, teamPageType);
+                        bundle.putString(Constants.EXTRA_PAGE_TYPE, teamPageType);
                         teamMangmentFragment.setArguments(bundle);
                     }
                     return teamMangmentFragment;
@@ -175,7 +175,7 @@ public class MainActivity extends BaseFragmentActivity {
                     if (gameManagementFragment == null) {
                         gameManagementFragment = new GameManagementFragment();
                         Bundle bundle = new Bundle();
-                        bundle.putString(Constants.EXTRA_PAGE_TYEP, gamePageType);
+                        bundle.putString(Constants.EXTRA_PAGE_TYPE, gamePageType);
                         gameManagementFragment.setArguments(bundle);
                     }
                     return gameManagementFragment;

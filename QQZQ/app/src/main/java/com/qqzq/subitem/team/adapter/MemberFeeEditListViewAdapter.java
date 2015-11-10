@@ -93,7 +93,7 @@ public class MemberFeeEditListViewAdapter extends BaseAdapter {
             Drawable logo = null;
             String logoUrl = null;
             final int memberId = entTeamMember.getUserid();
-            String name = entTeamMember.getUsernickname();
+            String name = entTeamMember.getUsername();
             String balance = entTeamMember.getPersonalbalance() + "";
 
             if (logo != null) {

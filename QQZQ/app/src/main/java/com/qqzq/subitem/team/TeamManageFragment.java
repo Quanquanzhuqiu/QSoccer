@@ -44,8 +44,8 @@ public class TeamManageFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;
         Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey(Constants.EXTRA_PAGE_TYEP)) {
-            pageType = bundle.getString(Constants.EXTRA_PAGE_TYEP);
+        if (bundle != null && bundle.containsKey(Constants.EXTRA_PAGE_TYPE)) {
+            pageType = bundle.getString(Constants.EXTRA_PAGE_TYPE);
             if (Constants.PAGE_TYPE_NO_TEAM.equals(pageType)) {
                 Log.i(TAG, "没有加入任何球队");
                 view = inflater.inflate(R.layout.fragment_main_no_team, container, false);

@@ -27,10 +27,12 @@ public class MemberFeeListViewAdapter extends BaseAdapter {
 
     private Context context;
     public List<EntTeamMember> mList;
+    private boolean isIncome;
 
-    public MemberFeeListViewAdapter(Context context, List<EntTeamMember> mList) {
+    public MemberFeeListViewAdapter(Context context, List<EntTeamMember> mList, boolean isIncome) {
         this.context = context;
         this.mList = mList;
+        this.isIncome = isIncome;
     }
 
     /**
@@ -73,6 +75,9 @@ public class MemberFeeListViewAdapter extends BaseAdapter {
             viewHolder.iv_member_logo = (ImageView) convertView.findViewById(R.id.iv_logo);
             viewHolder.tv_member_name = (TextView) convertView.findViewById(R.id.tv_member_name);
             viewHolder.tv_team_balance = (TextView) convertView.findViewById(R.id.tv_team_balance);
+            viewHolder.tv_fee_description = (TextView) convertView.findViewById(R.id.tv_fee_description);
+
+            viewHolder.tv_fee_description.setText(isIncome ? "充值金额" : "支出金额");
             // 将ListItemView对象传递给convertView
             convertView.setTag(viewHolder);
         } else {
@@ -86,8 +91,8 @@ public class MemberFeeListViewAdapter extends BaseAdapter {
 //            String logoUrl = entTeamMember.getLogoUrl();
             Drawable logo = null;
             String logoUrl = null;
-            String name = entTeamMember.getUsernickname();
-            String balance = entTeamMember.getPersonalbalance()+"";
+            String name = entTeamMember.getUsername();
+            String balance = entTeamMember.getPersonalbalance() + "";
 
             if (logo != null) {
                 viewHolder.iv_member_logo.setImageDrawable(logo);
@@ -114,5 +119,6 @@ public class MemberFeeListViewAdapter extends BaseAdapter {
         ImageView iv_member_logo;
         TextView tv_member_name;
         TextView tv_team_balance;
+        TextView tv_fee_description;
     }
 }

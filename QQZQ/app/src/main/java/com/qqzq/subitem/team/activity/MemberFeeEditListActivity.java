@@ -37,6 +37,7 @@ public class MemberFeeEditListActivity extends BaseActivity {
     private MemberFeeEditListViewAdapter adapter;
     private List<EntTeamMember> mList = new ArrayList<>();
     private int selectedTeamId;
+    private String pageType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +59,15 @@ public class MemberFeeEditListActivity extends BaseActivity {
     private void initData() {
         Bundle extras = this.getIntent().getExtras();
         if (extras != null
-                && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_ID)) {
+                && extras.containsKey(Constants.EXTRA_SELECTED_TEAM_ID)
+                && extras.containsKey(Constants.EXTRA_PAGE_TYPE)) {
 
             selectedTeamId = extras.getInt(Constants.EXTRA_SELECTED_TEAM_ID);
-            Log.i(TAG, "selectedTeamId=" + selectedTeamId);
+            pageType = extras.getString(Constants.EXTRA_PAGE_TYPE);
+            Log.i(TAG, "selectedTeamId = " + selectedTeamId);
+            Log.i(TAG, "pageType = " + pageType);
+            topBar.pageTitle = pageType;
+            topBar.initView();
         }
 
         reqeustTeamMemberList(selectedTeamId);
@@ -112,17 +118,13 @@ public class MemberFeeEditListActivity extends BaseActivity {
     private void sendEditedMemberFee() {
         EntMemberBalanceInfo entMemberBalanceInfo = new EntMemberBalanceInfo();
         Map<Integer, Float> selectedData = adapter.getSelectedData();
-        if (selectedData != null) {
-            Iterator<Integer> it = selectedData.keySet().iterator();
-            while (it.hasNext()) {
-                int memberId = it.next();
-                float personalBalance = selectedData.get(memberId);
-                EntTeamMember memberBalancesEntity = new EntTeamMember();
-                memberBalancesEntity.setId(memberId);
-                memberBalancesEntity.setUserid(memberId);
-                memberBalancesEntity.setPersonalbalance(personalBalance);
-                Log.i(TAG, "会员 " + memberId + " = " + personalBalance);
-                entMemberBalanceInfo.getMemberBalances().add(memberBalancesEntity);
+        for (EntTeamMember entTeamMember : mList) {
+            int userId = entTeamMember.getUserid();
+            if (selectedData.containsKey(userId) && selectedData.get(userId) > 0) {
+                float personalBalance = selectedData.get(userId);
+                entTeamMember.setPersonalbalance(personalBalance);
+                Log.i(TAG, "会员 " + userId + " = " + personalBalance);
+                entMemberBalanceInfo.getMemberBalances().add(entTeamMember);
             }
         }
 

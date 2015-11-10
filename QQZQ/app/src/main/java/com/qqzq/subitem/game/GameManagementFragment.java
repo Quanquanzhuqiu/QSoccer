@@ -41,8 +41,8 @@ public class GameManagementFragment extends BaseFragment {
 
         View view = null;
         Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey(Constants.EXTRA_PAGE_TYEP)) {
-            pageType = bundle.getString(Constants.EXTRA_PAGE_TYEP);
+        if (bundle != null && bundle.containsKey(Constants.EXTRA_PAGE_TYPE)) {
+            pageType = bundle.getString(Constants.EXTRA_PAGE_TYPE);
 
             Log.i(TAG, "pageType = " + pageType);
             if (Constants.PAGE_TYPE_NO_GAME.equals(pageType)) {

@@ -239,8 +239,9 @@
     <string name="is_pay_on_this_time">本次是否扣费</string>
 
     <!-- 会员费收支管理 -->
-    <string name="membership_fee_balance">球队余额：</string>
-    <string name="membership_fee_balance_table">队员余额表</string>
+    <string name="member_fee_balance">球队余额合计：</string>
+    <string name="team_common_fee_balance">球队公共资金金额：</string>
+    <string name="member_fee_balance_table">队员余额表</string>
     <string name="total_fee">合计：</string>
 
     <!-- 收入一笔 -->
@@ -248,18 +249,21 @@
     <string name="sponsor_donation_description">（说明：赞助商捐款收入平均分摊到所有队员头上）</string>
     <string name="member_payment">队员缴费</string>
     <string name="member_list_select">充值名单选择</string>
-    <string name="charge_memeber_fee">充值金额</string>
+    <string name="charge_member_fee">充值金额</string>
     <string name="member_fee_manager_description">说明</string>
     <string name="member_fee_manager_description_hint">示例：赞助商捐款！!140字以内</string>
     <string name="confirm_income">确定收入</string>
 
     <!-- 支出一笔 -->
-    <string name="link_member_list">不关联名单</string>
-    <string name="ignore_member_list">关联成员名单</string>
-    <string name="link_member_list_hint">（说明：总费用平摊到所有成员扣除）</string>
-    <string name="select_member">选择名单</string>
-    <string name="total_payout">支出总金额</string>
-    <string name="total_payout_hint">本次总共支出了多少？</string>
+    <string name="common_fee_pay">球队公共资金支出</string>
+    <string name="link_member_list_pay">关联成员名单支出</string>
+    <string name="link_member_list_hint">（根据选择名单平摊支出）</string>
+    <string name="select_member">支出名单选择</string>
+    <string name="pay_member_fee">支出金额</string>
+    <string name="total_payout">支出总金额：</string>
+    <string name="total_payout_hint">请输入支出总金额？</string>
+    <string name="payout_description">支出说明：</string>
+    <string name="payout_description_hint">说点什么吧！140字以内......</string>
     <string name="confirm_payout">确定支出</string>
 
     <!-- 队员余额表 -->

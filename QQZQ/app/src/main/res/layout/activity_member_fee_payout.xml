@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/default_layout">
+
+    <!-- TOP BAR-->
+    <com.qqzq.widget.menu.TopBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:leftImage="@drawable/ic_btn_back"
+        app:pageTitle="支出一笔" />
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/team_name"
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_team_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/member_fee_balance"
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_team_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yuan"
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/team_common_fee_balance"
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_team_common_fee_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yuan"
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbtn_common_fee_pay"
+            style="@style/my_radio_button"
+            android:layout_weight="1"
+            android:text="@string/common_fee_pay"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/edt_common_fee_pay"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tv_yuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yuan"
+            android:textColor="@color/rgb_153_153_153"
+            android:visibility="invisible" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbtn_link_member_list_pay"
+            style="@style/my_radio_button"
+            android:layout_weight="1"
+            android:text="@string/link_member_list_pay"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_member_select"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_login"
+            android:gravity="center"
+            android:text="@string/member_list_select"
+            android:textColor="@color/rgb_0_0_0"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="5dp"
+
+        android:background="@color/rgb_255_255_255">
+
+        <ListView
+            android:id="@+id/lv_member_fee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:divider="@null"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_payout"
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/total_payout_hint"
+                android:textColor="@color/rgb_0_0_0"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yuan"
+                android:textColor="@color/rgb_153_153_153"
+                android:visibility="visible" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payout_description"
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/payout_description_hint"
+            android:textColor="@color/rgb_0_0_0"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_commit"
+            style="@style/login_buttons"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/bg_login"
+            android:text="@string/confirm_payout"
+            android:textColor="@color/rgb_255_255_255" />
+
+    </LinearLayout>
+
+</LinearLayout>
