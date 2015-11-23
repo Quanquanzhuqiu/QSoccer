@@ -44,8 +44,8 @@ public class EntTeamInfo {
     private String teamlogo;
     private int actcount;
     private int teamscore;
-    private int stat;
-    private int flag;
+    private String stat;
+    private String flag;
     private Date createdate;
     private Date updatedate;
     private String teamrule;
@@ -109,14 +109,6 @@ public class EntTeamInfo {
 
     public void setTeamscore(int teamscore) {
         this.teamscore = teamscore;
-    }
-
-    public void setStat(int stat) {
-        this.stat = stat;
-    }
-
-    public void setFlag(int flag) {
-        this.flag = flag;
     }
 
     public void setCreatedate(Date createdate) {
@@ -191,14 +183,6 @@ public class EntTeamInfo {
         return teamscore;
     }
 
-    public int getStat() {
-        return stat;
-    }
-
-    public int getFlag() {
-        return flag;
-    }
-
     public Date getCreatedate() {
         return createdate;
     }
@@ -217,5 +201,21 @@ public class EntTeamInfo {
 
     public void setTeambalance(float teambalance) {
         this.teambalance = teambalance;
+    }
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 }

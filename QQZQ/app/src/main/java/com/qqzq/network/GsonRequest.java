@@ -88,6 +88,8 @@ public class GsonRequest<T> extends Request<T> {
             return Response.success(mGson.fromJson(json, mClazz),
                     HttpHeaderParser.parseCacheHeaders(networkResponse));
         } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
             return Response.error(new ParseError(e));
         }
     }

@@ -90,6 +90,13 @@
         <activity
             android:name=".subitem.team.activity.MemberFeePayoutActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".subitem.me.activity.MeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".subitem.me.activity.MeSettingActivity"
+            android:screenOrientation="portrait" />
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />

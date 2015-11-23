@@ -1,6 +1,7 @@
 package com.qqzq.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,15 +19,14 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.qqzq.R;
-import com.qqzq.chat.ChatFragment;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntGameInfo;
 import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
-import com.qqzq.subitem.find.FindFragment;
 import com.qqzq.subitem.game.GameManagementFragment;
-import com.qqzq.subitem.me.MeFragment;
+import com.qqzq.subitem.me.activity.MeActivity;
+import com.qqzq.subitem.me.activity.MeSettingActivity;
 import com.qqzq.subitem.team.TeamManageFragment;
 import com.qqzq.util.Utils;
 import com.qqzq.widget.menu.TopBar;
@@ -42,19 +42,10 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 8/25/2015.
  */
-public class MainActivity extends BaseFragmentActivity {
+public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
 
     private Activity context = this;
     private final static String TAG = "MainActivity";
-
-    //聊天页面的Fragment
-    private ChatFragment chatFragment;
-
-    //发现页面的Fragment
-    private FindFragment findFragment;
-
-    //我页面的Fragment
-    private MeFragment meFragment;
 
     //我的球队页面布局
     private View myTeamLayout;
@@ -94,12 +85,16 @@ public class MainActivity extends BaseFragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        init();
+        initDate();
+        initView();
+        initListener();
     }
 
-    private void init() {
+    private void initDate() {
         loadTeamList();
+    }
 
+    private void initView() {
         mTopbarTopBar = (TopBar) findViewById(R.id.topbar);
         mTabsPagerSlidingTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         mPagerViewPager = (ViewPager) findViewById(R.id.pager);
@@ -114,6 +109,10 @@ public class MainActivity extends BaseFragmentActivity {
         mTabs[3] = (Button) findViewById(R.id.btn_me);
         // 把第一个tab设为选中状态
         mTabs[0].setSelected(true);
+    }
+
+    private void initListener() {
+        mTabs[3].setOnClickListener(this);
     }
 
     /**
@@ -139,6 +138,18 @@ public class MainActivity extends BaseFragmentActivity {
         mTabsPagerSlidingTabStrip.setSelectedTextColor(Color.parseColor("#45c01a"));
         // 取消点击Tab时的背景色
         mTabsPagerSlidingTabStrip.setTabBackground(0);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_me:
+                Intent intent = new Intent(context, MeSettingActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -196,7 +207,26 @@ public class MainActivity extends BaseFragmentActivity {
 //        mParameters.put("limit", 10);
 //        String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_TEAM_URL, mParameters);
         GsonRequest gsonRequest = new GsonRequest<EntTeamInfo[]>(queryUrl, EntTeamInfo[].class,
-                findTeamResponseListener);
+                new ResponseListener<EntTeamInfo[]>() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onResponse(EntTeamInfo[] entTeamInfos) {
+                        if (entTeamInfos.length > 0) {
+                            teamList = Arrays.asList(entTeamInfos);
+                            TeamManageFragment.list = teamList;
+                            teamPageType = Constants.PAGE_TYPE_HAVE_TEAM;
+                        } else {
+                            teamPageType = Constants.PAGE_TYPE_NO_TEAM;
+                        }
+
+                        Log.i(TAG, "teamPageType = " + teamPageType);
+                        loadGameList();
+                    }
+                });
         executeRequest(gsonRequest);
     }
 
@@ -206,52 +236,30 @@ public class MainActivity extends BaseFragmentActivity {
         mParameters.put("limit", 10);
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_GAME_URL, mParameters);
         GsonRequest gsonRequest = new GsonRequest<EntGameInfo[]>(queryUrl, EntGameInfo[].class,
-                findGameResponseListener);
+                new ResponseListener<EntGameInfo[]>() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onResponse(EntGameInfo[] entGameInfos) {
+
+                        if (entGameInfos.length > 0) {
+                            gameList = Arrays.asList(entGameInfos);
+                            GameManagementFragment.list = gameList;
+                            gamePageType = Constants.PAGE_TYPE_HAVE_GAME;
+                        } else {
+                            gamePageType = Constants.PAGE_TYPE_NO_GAME;
+                        }
+
+                        Log.i(TAG, "gamePageType = " + gamePageType);
+                        mPagerViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+                        mTabsPagerSlidingTabStrip.setViewPager(mPagerViewPager);
+                        setTabsValue();
+                    }
+                });
         executeRequest(gsonRequest);
     }
 
-    ResponseListener findTeamResponseListener = new ResponseListener<EntTeamInfo[]>() {
-        @Override
-        public void onErrorResponse(VolleyError volleyError) {
-            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onResponse(EntTeamInfo[] entTeamInfos) {
-            if (entTeamInfos.length > 0) {
-                teamList = Arrays.asList(entTeamInfos);
-                TeamManageFragment.list = teamList;
-                teamPageType = Constants.PAGE_TYPE_HAVE_TEAM;
-            } else {
-                teamPageType = Constants.PAGE_TYPE_NO_TEAM;
-            }
-
-            Log.i(TAG, "teamPageType = " + teamPageType);
-            loadGameList();
-        }
-    };
-
-    ResponseListener findGameResponseListener = new ResponseListener<EntGameInfo[]>() {
-        @Override
-        public void onErrorResponse(VolleyError volleyError) {
-            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onResponse(EntGameInfo[] entGameInfos) {
-
-            if (entGameInfos.length > 0) {
-                gameList = Arrays.asList(entGameInfos);
-                GameManagementFragment.list = gameList;
-                gamePageType = Constants.PAGE_TYPE_HAVE_GAME;
-            } else {
-                gamePageType = Constants.PAGE_TYPE_NO_GAME;
-            }
-
-            Log.i(TAG, "gamePageType = " + gamePageType);
-            mPagerViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-            mTabsPagerSlidingTabStrip.setViewPager(mPagerViewPager);
-            setTabsValue();
-        }
-    };
 }
