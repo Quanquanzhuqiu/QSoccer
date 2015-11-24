@@ -283,6 +283,15 @@
     <!-- 发布球队相册 -->
     <string name="hint_publish_team_gallery">有什么新鲜事儿，跟大家分享...</string>
 
+    <!-- -->
+    <string name="me_logo">头像</string>
+    <string name="me_nickname">昵称</string>
+    <string name="me_qqzq_id">圈圈号</string>
+    <string name="me_sex">性别</string>
+    <string name="me_location">所在地区</string>
+    <string name="me_best_position">擅长位置</string>
+    <string name="me_signature">个性签名：</string>
+
     <!-- pull to refresh txt -->
     <string name="pull_to_refresh_pull_label">下拉刷新</string>
     <string name="pull_to_refresh_release_label">释放刷新</string>

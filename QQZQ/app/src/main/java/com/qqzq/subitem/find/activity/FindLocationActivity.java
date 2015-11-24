@@ -18,6 +18,7 @@ import com.qqzq.config.Constants;
 import com.qqzq.db.LocationDao;
 import com.qqzq.entity.EntLocation;
 import com.qqzq.listener.BackButtonListener;
+import com.qqzq.subitem.me.activity.MeSettingActivity;
 import com.qqzq.subitem.team.activity.CreateTeamActivity;
 
 import java.util.List;
@@ -112,6 +113,8 @@ public class FindLocationActivity extends BaseActivity implements AdapterView.On
                     intent = new Intent(context, CreateTeamActivity.class);
                 } else if ("RegisterActivity".equals(prevPageName)) {
                     intent = new Intent(context, RegisterActivity.class);
+                } else if ("MeSettingActivity".equals(prevPageName)) {
+                    intent = new Intent(context, MeSettingActivity.class);
                 }
 
                 if (intent != null) {

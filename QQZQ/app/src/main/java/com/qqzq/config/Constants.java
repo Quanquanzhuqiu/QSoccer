@@ -128,4 +128,7 @@ public class Constants {
     //上传文件到分布式文件系统
     public static final String API_FILE_UPLOAD_FASTDFS_URL = API_SERVER_HOST + "/file/fastdfs";
 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~ 个人资料设置部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
+    //创建球队
+    public static final String API_ME_SETTING_URL = API_SERVER_HOST + "/user/users";
 }

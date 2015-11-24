@@ -10,10 +10,12 @@
 
     <!-- TOP BAR-->
     <com.qqzq.widget.menu.TopBar
+        android:id="@+id/topbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:leftImage="@drawable/ic_btn_back"
-        app:pageTitle="个人资料设置" />
+        app:pageTitle="个人资料设置"
+        app:rightText="保存" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -36,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="头像"
+                android:text="@string/me_logo"
                 android:textColor="@color/rgb_0_0_0" />
 
 
@@ -67,11 +69,12 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="昵称"
+                android:text="@string/me_nickname"
                 android:textColor="@color/rgb_0_0_0" />
 
 
             <EditText
+                android:id="@+id/edt_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -97,11 +100,12 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="圈圈号"
+                android:text="@string/me_qqzq_id"
                 android:textColor="@color/rgb_0_0_0" />
 
 
             <EditText
+                android:id="@+id/edt_qqzq_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -127,11 +131,12 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="性别"
+                android:text="@string/me_sex"
                 android:textColor="@color/rgb_0_0_0" />
 
 
             <EditText
+                android:id="@+id/edt_sex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -156,14 +161,17 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="所在地区"
+                android:text="@string/me_location"
                 android:textColor="@color/rgb_0_0_0" />
 
 
             <EditText
+                android:id="@+id/edt_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:editable="false"
+                android:focusable="false" />
 
 
             <ImageView
@@ -185,11 +193,12 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="擅长位置"
+                android:text="@string/me_best_position"
                 android:textColor="@color/rgb_0_0_0" />
 
 
             <EditText
+                android:id="@+id/edt_best_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -215,10 +224,11 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="个性签名："
+                android:text="@string/me_signature"
                 android:textColor="@color/rgb_0_0_0" />
 
             <EditText
+                android:id="@+id/edt_signature"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:maxEms="60" />
