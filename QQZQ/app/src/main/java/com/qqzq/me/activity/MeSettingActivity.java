@@ -45,6 +45,7 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
     private EditText edt_location;
     private EditText edt_best_position;
     private EditText edt_signature;
+    private EditText edt_age;
 
     private int selectedProvinceCode = 0;
     private int selectedCityCode = 0;
@@ -72,6 +73,7 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
         edt_location = (EditText) findViewById(R.id.edt_location);
         edt_best_position = (EditText) findViewById(R.id.edt_best_position);
         edt_signature = (EditText) findViewById(R.id.edt_signature);
+        edt_age = (EditText) findViewById(R.id.edt_age);
         LinearLayout mainLinearLayout = (LinearLayout) findViewById(R.id.ll_main);
     }
 
@@ -104,7 +106,7 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
         String gender = selectedGenderId;
         String best_position = edt_best_position.getText().toString();
         String signature = edt_signature.getText().toString();
-
+        String age = edt_age.getText().toString();
 
         EntUserInfoSettingDTO userInfoSetting = new EntUserInfoSettingDTO();
         userInfoSetting.setUsername(BaseApplication.QQZQ_USER);
@@ -114,6 +116,7 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
         userInfoSetting.setSex(gender);
         userInfoSetting.setArea(best_position);
         userInfoSetting.setAutograph(signature);
+        userInfoSetting.setAge(age);
 
         mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, userInfoSetting);
         return mParameters;

@@ -17,6 +17,7 @@ public class EntUserInfoSettingDTO implements Serializable {
      * province : 44444
      * autograph : sdafsadfsadf
      * avatar : sdafsadfsadf
+     * age : "31"
      */
 
     private String username;
@@ -27,6 +28,7 @@ public class EntUserInfoSettingDTO implements Serializable {
     private int province;
     private String autograph;
     private String avatar;
+    private String age;
 
     public void setUsername(String username) {
         this.username = username;
@@ -90,5 +92,13 @@ public class EntUserInfoSettingDTO implements Serializable {
 
     public String getAvatar() {
         return avatar;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 }
