@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class SelectLocationActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
+    private static final String TAG = "SelectLocationActivity";
     private Context context = this;
     private ListView lv_location;
     private TextView tv_selected_location;

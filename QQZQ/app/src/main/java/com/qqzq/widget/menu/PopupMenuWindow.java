@@ -15,6 +15,7 @@ import com.qqzq.R;
 import com.qqzq.common.activity.SelectTeamActivity;
 import com.qqzq.game.activity.GamePublishActivity;
 import com.qqzq.team.activity.CreateTeamActivity;
+import com.qqzq.team.activity.FindTeamActivity;
 
 /**
  * Created by jie.xiao on 15/9/20.
@@ -87,7 +88,7 @@ public class PopupMenuWindow extends PopupWindow {
                     context.startActivity(createTeamIntent);
                     break;
                 case R.id.ll_find_team:
-                    Intent findTeamIntent = new Intent(context, SelectTeamActivity.class);
+                    Intent findTeamIntent = new Intent(context, FindTeamActivity.class);
                     context.startActivity(findTeamIntent);
                     break;
                 case R.id.ll_game_publish:

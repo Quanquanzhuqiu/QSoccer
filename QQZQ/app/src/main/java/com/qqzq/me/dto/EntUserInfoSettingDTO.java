@@ -1,11 +1,11 @@
-package com.qqzq.entity;
+package com.qqzq.me.dto;
 
 import java.io.Serializable;
 
 /**
  * Created by syouketu on 15/11/24.
  */
-public class EntUserInfoSetting implements Serializable {
+public class EntUserInfoSettingDTO implements Serializable {
 
 
     /**

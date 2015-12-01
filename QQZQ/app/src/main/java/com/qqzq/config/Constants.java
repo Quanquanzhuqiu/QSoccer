@@ -51,6 +51,8 @@ public class Constants {
     public static final String EXTRA_SELECTED_GAME_ID = "EXTRA_SELECTED_GAME_ID";
     public static final String EXTRA_SELECTED_GAME_NAME = "EXTRA_SELECTED_GAME_NAME";
     public static final String EXTRA_SELECTED_GAME_DATE = "EXTRA_SELECTED_GAME_DATE";
+    public static final String EXTRA_SELECTED_GENDER = "EXTRA_SELECTED_GENDER";
+    public static final String EXTRA_SELECTED_GENDER_ID = "EXTRA_SELECTED_GENDER_ID";
 
     public static final String HTTP_HEADER_TOKER = "Token";
 
@@ -131,4 +133,6 @@ public class Constants {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 个人资料设置部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //创建球队
     public static final String API_ME_SETTING_URL = API_SERVER_HOST + "/user/users";
+    //根据用户ID获取用户信息
+    public static final String API_GET_ME_INFO_URL = API_SERVER_HOST + "/user/userinfos";
 }

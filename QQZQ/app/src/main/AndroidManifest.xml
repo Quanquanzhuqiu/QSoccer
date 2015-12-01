@@ -97,6 +97,14 @@
         <activity
             android:name=".me.activity.MeSettingActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".common.activity.SelectGenderActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".me.activity.MeCardActivity"
+            android:screenOrientation="portrait" />
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />

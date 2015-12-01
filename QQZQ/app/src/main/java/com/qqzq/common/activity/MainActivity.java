@@ -23,6 +23,7 @@ import com.qqzq.base.BaseApplication;
 import com.qqzq.base.BaseFragmentActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.game.dto.EntGameInfoDTO;
+import com.qqzq.me.activity.MeCardActivity;
 import com.qqzq.me.activity.MeSettingActivity;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
@@ -145,7 +146,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_me:
-                Intent intent = new Intent(context, MeSettingActivity.class);
+                Intent intent = new Intent(context, MeCardActivity.class);
                 startActivity(intent);
                 break;
             default:

@@ -17,11 +17,12 @@ import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.base.BaseActivity;
 import com.qqzq.base.BaseApplication;
+import com.qqzq.common.activity.SelectGenderActivity;
 import com.qqzq.common.activity.SelectLocationActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
-import com.qqzq.entity.EntUserInfoSetting;
 import com.qqzq.listener.TopBarListener;
+import com.qqzq.me.dto.EntUserInfoSettingDTO;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.widget.menu.TopBar;
@@ -40,7 +41,7 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
     private TopBar topBar;
     private EditText edt_nickname;
     private EditText edt_qqzq_id;
-    private EditText edt_sex;
+    private EditText edt_gender;
     private EditText edt_location;
     private EditText edt_best_position;
     private EditText edt_signature;
@@ -48,6 +49,8 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
     private int selectedProvinceCode = 0;
     private int selectedCityCode = 0;
     private String selectedLocation;
+    private String selectedGender;
+    private String selectedGenderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,7 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
         ImageView infoImageView = (ImageView) findViewById(R.id.iv_more_info);
         edt_nickname = (EditText) findViewById(R.id.edt_nickname);
         edt_qqzq_id = (EditText) findViewById(R.id.edt_qqzq_id);
-        edt_sex = (EditText) findViewById(R.id.edt_sex);
+        edt_gender = (EditText) findViewById(R.id.edt_gender);
         edt_location = (EditText) findViewById(R.id.edt_location);
         edt_best_position = (EditText) findViewById(R.id.edt_best_position);
         edt_signature = (EditText) findViewById(R.id.edt_signature);
@@ -74,6 +77,7 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
 
     private void initListener() {
         edt_location.setOnClickListener(this);
+        edt_gender.setOnClickListener(this);
         topBar.setListener(new TopBarListener() {
 
             @Override
@@ -97,20 +101,19 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
 
         String nickname = edt_nickname.getText().toString();
         String qqzq_id = edt_qqzq_id.getText().toString();
-        String sex = edt_sex.getText().toString();
+        String gender = selectedGenderId;
         String best_position = edt_best_position.getText().toString();
         String signature = edt_signature.getText().toString();
 
 
-        EntUserInfoSetting userInfoSetting = new EntUserInfoSetting();
+        EntUserInfoSettingDTO userInfoSetting = new EntUserInfoSettingDTO();
         userInfoSetting.setUsername(BaseApplication.QQZQ_USER);
         userInfoSetting.setNickname(nickname);
         userInfoSetting.setProvince(selectedProvinceCode);
         userInfoSetting.setCity(selectedCityCode);
-        userInfoSetting.setSex("0");
+        userInfoSetting.setSex(gender);
         userInfoSetting.setArea(best_position);
         userInfoSetting.setAutograph(signature);
-        userInfoSetting.setAutograph("");
 
         mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, userInfoSetting);
         return mParameters;
@@ -145,15 +148,21 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
                 intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "MeSettingActivity");
                 startActivityForResult(intent, 10);
                 break;
+            case R.id.edt_gender:
+                Intent selectedGenderIntent = new Intent(context, SelectGenderActivity.class);
+                selectedGenderIntent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "MeSettingActivity");
+                startActivityForResult(selectedGenderIntent, 20);
+                break;
         }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            //选择地区
-            case 10:
-                if (resultCode == RESULT_OK) {
-                    Bundle bundle = data.getExtras();
+        if (resultCode == RESULT_OK) {
+            Bundle bundle = null;
+            switch (requestCode) {
+                //选择地区
+                case 10:
+                    bundle = data.getExtras();
                     selectedProvinceCode = bundle.getInt(Constants.EXTRA_SELECTED_PROVINCE_CODE);
                     selectedCityCode = bundle.getInt(Constants.EXTRA_SELECTED_CITY_CODE);
                     selectedLocation = bundle.getString(Constants.EXTRA_SELECTED_LOCATION);
@@ -161,10 +170,19 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
                     if (!TextUtils.isEmpty(selectedLocation)) {
                         edt_location.setText(selectedLocation);
                     }
-                }
-                break;
-            default:
-                break;
+                    break;
+                //选择性别
+                case 20:
+                    bundle = data.getExtras();
+                    selectedGender = bundle.getString(Constants.EXTRA_SELECTED_GENDER);
+                    selectedGenderId = bundle.getString(Constants.EXTRA_SELECTED_GENDER_ID);
+                    if (!TextUtils.isEmpty(selectedGender)) {
+                        edt_gender.setText(selectedGender);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

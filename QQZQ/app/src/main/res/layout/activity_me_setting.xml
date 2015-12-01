@@ -132,10 +132,10 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
 
-                <ImageView
+          <!--      <ImageView
                     android:layout_width="15dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/ic_browse_img" />
+                    android:background="@drawable/ic_browse_img" />-->
             </LinearLayout>
         </LinearLayout>
 
@@ -156,10 +156,12 @@
 
 
             <EditText
-                android:id="@+id/edt_sex"
+                android:id="@+id/edt_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:editable="false"
+                android:focusable="false" />
 
             <LinearLayout
                 android:layout_width="60dp"
@@ -204,10 +206,10 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
 
-                <!--      <ImageView
-                          android:layout_width="15dp"
-                          android:layout_height="30dp"
-                          android:background="@drawable/ic_browse_img" />-->
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_browse_img" />
             </LinearLayout>
 
         </LinearLayout>

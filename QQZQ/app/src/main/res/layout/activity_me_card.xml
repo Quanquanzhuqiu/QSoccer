@@ -25,6 +25,7 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/iv_my_avatar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/ic_default_team_log" />
@@ -34,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:weightSum="3">
 
@@ -43,6 +45,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
+                    android:id="@+id/tv_my_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="测试人员"
@@ -61,11 +64,13 @@
                     android:background="@color/rgb_9_187_7">
 
                     <ImageView
+                        android:id="@+id/iv_my_gender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/icon_profile_male" />
 
                     <TextView
+                        android:id="@+id/tv_my_age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="24岁" />
@@ -78,6 +83,7 @@
                     android:layout_marginLeft="10dp">
 
                     <TextView
+                        android:id="@+id/tv_my_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="四川 成都"
@@ -98,6 +104,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_my_best_position"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="前锋"
@@ -113,6 +120,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_qqzq_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="yangzi"
@@ -136,6 +144,7 @@
             android:textColor="@color/rgb_0_0_0" />
 
         <TextView
+            android:id="@+id/tv_my_signature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -165,6 +174,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_my_play_times"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="180"
@@ -186,6 +196,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_my_personal_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="13000"
@@ -207,6 +218,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_my_team_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2"
@@ -226,7 +238,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/his_team"
+            android:text="@string/my_team"
             android:textColor="@color/default_black"
             android:textSize="17sp" />
     </LinearLayout>
