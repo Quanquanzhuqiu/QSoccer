@@ -1,4 +1,6 @@
-package com.qqzq.entity;
+package com.qqzq.dto;
+
+import java.io.Serializable;
 
 /**
  * Created by jie.xiao on 15/9/9.
@@ -13,7 +15,7 @@ package com.qqzq.entity;
         "province": 0
         }
 */
-public class EntRegisterInfo {
+public class EntRegisterDTO implements Serializable{
     private String username;
     private String password;
     private String verifyCode;

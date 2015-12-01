@@ -1,11 +1,12 @@
-package com.qqzq.entity;
+package com.qqzq.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by jie.xiao on 15/8/31.
  */
-public class EntTeamInfo {
+public class EntTeamInfoDTO implements Serializable{
     /**
      * id : 11
      * teamname : ssssssss

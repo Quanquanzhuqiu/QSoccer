@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.adapter;
+package com.qqzq.activity.team.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.qqzq.R;
 import com.qqzq.config.Constants;
-import com.qqzq.entity.EntTeamInfo;
+import com.qqzq.dto.EntTeamInfoDTO;
 import com.qqzq.network.RequestManager;
 
 import java.util.List;
@@ -22,9 +22,9 @@ import java.util.List;
 public class TeamGridViewAdapter extends BaseAdapter {
 
     private final Context mContext;
-    public List<EntTeamInfo> mList;
+    public List<EntTeamInfoDTO> mList;
 
-    public TeamGridViewAdapter(Context context, List<EntTeamInfo> list) {
+    public TeamGridViewAdapter(Context context, List<EntTeamInfoDTO> list) {
         this.mContext = context;
         this.mList = list;
     }
@@ -59,7 +59,7 @@ public class TeamGridViewAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        EntTeamInfo entTeamInfo = mList.get(position);
+        EntTeamInfoDTO entTeamInfo = mList.get(position);
         if (entTeamInfo != null) {
             String logoUrl = entTeamInfo.getTeamlogo();
             String teamName = entTeamInfo.getTeamname();

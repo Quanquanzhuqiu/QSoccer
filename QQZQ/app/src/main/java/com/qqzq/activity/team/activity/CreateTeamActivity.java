@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.activity;
+package com.qqzq.activity.team.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,12 +23,10 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.activity.BaseApplication;
 import com.qqzq.activity.MainActivity;
-import com.qqzq.listener.BackButtonListener;
 import com.qqzq.listener.TopBarListener;
 import com.qqzq.subitem.find.activity.FindLocationActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
-import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.MultipartRequest;
 import com.qqzq.network.ResponseListener;

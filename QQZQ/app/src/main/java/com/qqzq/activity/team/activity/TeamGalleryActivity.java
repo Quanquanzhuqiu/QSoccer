@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.activity;
+package com.qqzq.activity.team.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
-import com.qqzq.listener.BackButtonListener;
 
 /**
  * Created by jie.xiao on 15/9/27.

@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.adapter;
+package com.qqzq.activity.team.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +15,6 @@ import com.qqzq.R;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamMember;
 import com.qqzq.network.RequestManager;
-import com.qqzq.util.Utils;
 
 import java.util.List;
 

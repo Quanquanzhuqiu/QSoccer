@@ -28,22 +28,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.user.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.PasswordModifyActivity"
+            android:name=".activity.user.PasswordModifyActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".activity.user.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".subitem.find.activity.FindLocationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.team.activity.CreateTeamActivity"
+            android:name=".activity.team.activity.CreateTeamActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".subitem.find.activity.FindTeamActivity"
@@ -52,19 +52,19 @@
             android:name=".subitem.game.activity.GamePublishActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.team.activity.SelectTeamActivity"
+            android:name=".activity.team.activity.SelectTeamActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".subitem.team.activity.TeamRuleActivity"
+            android:name=".activity.team.activity.TeamRuleActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".subitem.team.activity.TeamDetailActivity"
+            android:name=".activity.team.activity.TeamDetailActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".subitem.team.activity.TeamGalleryActivity"
+            android:name=".activity.team.activity.TeamGalleryActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".subitem.team.activity.TeamMemberActivity"
+            android:name=".activity.team.activity.TeamMemberActivity"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".subitem.game.activity.GameDetailActivity"
@@ -79,16 +79,16 @@
             android:name=".subitem.game.activity.GameAttendanceDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.team.activity.MemberFeeManageActivity"
+            android:name=".activity.team.activity.MemberFeeManageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.team.activity.MemberFeeIncomeActivity"
+            android:name=".activity.team.activity.MemberFeeIncomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.team.activity.MemberFeeEditListActivity"
+            android:name=".activity.team.activity.MemberFeeEditListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.team.activity.MemberFeePayoutActivity"
+            android:name=".activity.team.activity.MemberFeePayoutActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".subitem.me.activity.MeActivity"

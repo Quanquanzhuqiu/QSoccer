@@ -14,7 +14,7 @@ import android.widget.PopupWindow;
 import com.qqzq.R;
 import com.qqzq.subitem.find.activity.FindTeamActivity;
 import com.qqzq.subitem.game.activity.GamePublishActivity;
-import com.qqzq.subitem.team.activity.CreateTeamActivity;
+import com.qqzq.activity.team.activity.CreateTeamActivity;
 
 /**
  * Created by jie.xiao on 15/9/20.

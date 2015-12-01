@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.activity;
+package com.qqzq.activity.team.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,11 +20,10 @@ import com.qqzq.config.Constants;
 import com.qqzq.entity.CreateMemberBalanceRequest;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntMemberBalanceInfo;
-import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntTeamMember;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
-import com.qqzq.subitem.team.adapter.MemberFeeListViewAdapter;
+import com.qqzq.activity.team.adapter.MemberFeeListViewAdapter;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
-package com.qqzq.activity;
+package com.qqzq.activity.user;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,9 +9,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.qqzq.R;
+import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
-import com.qqzq.subitem.find.activity.FindLocationActivity;
+import com.qqzq.dto.EntChangePasswordDTO;
+import com.qqzq.entity.EntClientResponse;
+import com.qqzq.network.GsonRequest;
+import com.qqzq.network.ResponseListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -67,6 +75,21 @@ public class PasswordModifyActivity extends BaseActivity implements View.OnClick
             return;
         }
         Log.i(TAG, "开始修改密码！");
+        Map<String, Object> mParameters = prepareRequestJson();
+        GsonRequest loginRequest = new GsonRequest(Request.Method.PUT, Constants.API_USER_MODIFY_PASSWORD_URL,
+                EntClientResponse.class, null, mParameters, new ResponseListener<EntClientResponse>() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e(TAG, volleyError.toString());
+                Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(EntClientResponse response) {
+
+            }
+        });
+        executeRequest(loginRequest);
     }
 
     private String formCheck() {
@@ -88,6 +111,18 @@ public class PasswordModifyActivity extends BaseActivity implements View.OnClick
         }
 
         return null;
+    }
+
+    private Map<String, Object> prepareRequestJson() {
+        Map<String, Object> mParameters = new HashMap<String, Object>();
+        String verifyCode = mVerifyCodeEditText.getText().toString();
+        String password = mPasswordEditText.getText().toString();
+
+        EntChangePasswordDTO dto = new EntChangePasswordDTO();
+        dto.setVerifyCode(verifyCode);
+        dto.setPassword(password);
+        mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, dto);
+        return mParameters;
     }
 
     @Override

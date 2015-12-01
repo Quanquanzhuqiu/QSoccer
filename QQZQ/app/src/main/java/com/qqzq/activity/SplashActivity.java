@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.qqzq.R;
 import com.qqzq.config.Constants;
+import com.qqzq.activity.user.LoginActivity;
 import com.qqzq.util.NetUtil;
 
 /**

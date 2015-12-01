@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.activity;
+package com.qqzq.activity.team.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,15 +25,14 @@ import com.qqzq.config.Constants;
 import com.qqzq.db.LocationDao;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.entity.EntLocation;
-import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntTeamJoinInfo;
 import com.qqzq.entity.EntTeamOperation;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.game.activity.GameAttendanceActivity;
 import com.qqzq.subitem.game.activity.GameListActivity;
-import com.qqzq.subitem.team.adapter.TeamGalleryGridViewAdapter;
-import com.qqzq.subitem.team.adapter.TeamOperationGridViewAdapter;
+import com.qqzq.activity.team.adapter.TeamGalleryGridViewAdapter;
+import com.qqzq.activity.team.adapter.TeamOperationGridViewAdapter;
 import com.qqzq.util.Utils;
 
 import java.text.MessageFormat;

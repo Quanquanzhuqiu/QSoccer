@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.activity;
+package com.qqzq.activity.team.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,9 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -17,18 +15,15 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.activity.BaseApplication;
 import com.qqzq.config.Constants;
-import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntTeamListItem;
-import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.game.activity.GamePublishActivity;
-import com.qqzq.subitem.team.adapter.TeamListViewAdapter;
+import com.qqzq.activity.team.adapter.TeamListViewAdapter;
 import com.qqzq.util.Utils;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

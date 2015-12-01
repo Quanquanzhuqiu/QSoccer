@@ -1,8 +1,7 @@
-package com.qqzq.subitem.team;
+package com.qqzq.activity.team;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,10 +15,9 @@ import com.qqzq.R;
 import com.qqzq.activity.BaseFragment;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamMember;
-import com.qqzq.subitem.team.activity.MemberFeeIncomeActivity;
-import com.qqzq.subitem.team.activity.MemberFeeManageActivity;
-import com.qqzq.subitem.team.activity.MemberFeePayoutActivity;
-import com.qqzq.subitem.team.adapter.MemberFeeListViewAdapter;
+import com.qqzq.activity.team.activity.MemberFeeIncomeActivity;
+import com.qqzq.activity.team.activity.MemberFeePayoutActivity;
+import com.qqzq.activity.team.adapter.MemberFeeListViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

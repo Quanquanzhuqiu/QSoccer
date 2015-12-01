@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.activity;
+package com.qqzq.activity.team.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,14 +15,11 @@ import com.qqzq.entity.EntTeamMember;
 import com.qqzq.listener.TopBarListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
-import com.qqzq.subitem.team.adapter.MemberFeeEditListViewAdapter;
+import com.qqzq.activity.team.adapter.MemberFeeEditListViewAdapter;
 import com.qqzq.widget.menu.TopBar;
 
-import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 

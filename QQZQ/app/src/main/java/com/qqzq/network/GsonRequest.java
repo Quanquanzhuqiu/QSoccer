@@ -83,7 +83,7 @@ public class GsonRequest<T> extends Request<T> {
 
 
             String json = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
-            Log.i(TAG, json);
+            Log.i(TAG, "收到回复：" + json);
 
             return Response.success(mGson.fromJson(json, mClazz),
                     HttpHeaderParser.parseCacheHeaders(networkResponse));
@@ -136,7 +136,7 @@ public class GsonRequest<T> extends Request<T> {
             if (mParameters != null) {
                 Object object = mParameters.get(Constants.GSON_REQUST_POST_PARAM_KEY);
                 String json = mGson.toJson(object);
-                Log.i(TAG, "Request json => " + json);
+                Log.i(TAG, "发送消息：" + json);
                 if (json != null) {
                     return json.getBytes(getParamsEncoding());
                 }

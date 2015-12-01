@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.activity;
+package com.qqzq.activity.team.activity;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -20,10 +20,8 @@ import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamMember;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
-import com.qqzq.subitem.game.AttendanceStatisticsFragment;
-import com.qqzq.subitem.game.GameAttendManageFragment;
-import com.qqzq.subitem.team.MemberBalanceFragment;
-import com.qqzq.subitem.team.MemberFeeDetailFragment;
+import com.qqzq.activity.team.MemberBalanceFragment;
+import com.qqzq.activity.team.MemberFeeDetailFragment;
 import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.tab.PagerSlidingTabStrip;
 

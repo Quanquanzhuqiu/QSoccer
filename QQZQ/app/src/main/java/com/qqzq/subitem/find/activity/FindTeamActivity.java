@@ -1,7 +1,6 @@
 package com.qqzq.subitem.find.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +17,9 @@ import com.android.volley.VolleyError;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.R;
 import com.qqzq.listener.BackButtonListener;
-import com.qqzq.subitem.team.activity.CreateTeamActivity;
-import com.qqzq.subitem.team.activity.TeamDetailActivity;
-import com.qqzq.subitem.team.adapter.TeamListViewAdapter;
+import com.qqzq.activity.team.activity.TeamDetailActivity;
+import com.qqzq.activity.team.adapter.TeamListViewAdapter;
 import com.qqzq.config.Constants;
-import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.entity.EntTeamListItem;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;

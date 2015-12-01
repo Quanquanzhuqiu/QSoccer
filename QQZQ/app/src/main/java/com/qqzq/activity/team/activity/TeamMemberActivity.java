@@ -1,26 +1,22 @@
-package com.qqzq.subitem.team.activity;
+package com.qqzq.activity.team.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamMember;
-import com.qqzq.listener.BackButtonListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
-import com.qqzq.subitem.team.adapter.TeamMemberListViewAdapter;
+import com.qqzq.activity.team.adapter.TeamMemberListViewAdapter;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

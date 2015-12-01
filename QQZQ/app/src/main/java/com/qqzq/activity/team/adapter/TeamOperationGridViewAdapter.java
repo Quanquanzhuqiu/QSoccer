@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.adapter;
+package com.qqzq.activity.team.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -17,12 +17,13 @@ import java.util.List;
 /**
  * Created by jie.xiao on 15/9/13.
  */
-public class TeamGalleryGridViewAdapter extends BaseAdapter {
+public class TeamOperationGridViewAdapter extends BaseAdapter {
 
+    private final static String TAG = "TeamOperatioAdapter";
     private final Context mContext;
     public List<EntTeamOperation> mList;
 
-    public TeamGalleryGridViewAdapter(Context context, List<EntTeamOperation> list) {
+    public TeamOperationGridViewAdapter(Context context, List<EntTeamOperation> list) {
         this.mContext = context;
         this.mList = list;
     }
@@ -47,17 +48,24 @@ public class TeamGalleryGridViewAdapter extends BaseAdapter {
 
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_gv_team_gallery, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_gv_team_operation, parent, false);
             holder = new ViewHolder();
             holder.iv_logo = (ImageView) convertView.findViewById(R.id.iv_logo);
+            holder.tv_operation = (TextView) convertView.findViewById(R.id.tv_operation);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        if (position < 0) {
+            return convertView;
+        }
+
         EntTeamOperation entTeamOperation = mList.get(position);
         if (entTeamOperation != null) {
             Drawable logo = entTeamOperation.getLogo();
+            String operation = entTeamOperation.getOperation();
+            holder.tv_operation.setText(operation);
             holder.iv_logo.setImageDrawable(logo);
         }
         return convertView;
@@ -66,5 +74,6 @@ public class TeamGalleryGridViewAdapter extends BaseAdapter {
 
     class ViewHolder {
         ImageView iv_logo;
+        TextView tv_operation;
     }
 }

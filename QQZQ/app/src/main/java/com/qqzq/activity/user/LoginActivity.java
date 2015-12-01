@@ -1,4 +1,4 @@
-package com.qqzq.activity;
+package com.qqzq.activity.user;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,16 +9,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.qqzq.R;
+import com.qqzq.activity.BaseActivity;
+import com.qqzq.activity.BaseApplication;
+import com.qqzq.activity.MainActivity;
 import com.qqzq.config.Constants;
+import com.qqzq.dto.EntLoginDTO;
 import com.qqzq.entity.EntClientResponse;
-import com.qqzq.entity.EntLoginDto;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 
@@ -93,7 +95,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         Map<String, Object> mParameters = prepareRequestJson();
         GsonRequest loginRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_LOGIN_URL,
-                EntClientResponse.class, null, mParameters, loginResponseListener);
+                EntClientResponse.class, null, mParameters, new ResponseListener<EntClientResponse>() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(EntClientResponse response) {
+
+                BaseApplication.QQZQ_USER = username;
+                BaseApplication.QQZQ_PASSWORD = password;
+                jumpPage();
+            }
+        });
         executeRequest(loginRequest);
     }
 
@@ -102,7 +117,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         username = edt_username.getText().toString();
         password = edt_password.getText().toString();
 
-        EntLoginDto entLoginDto = new EntLoginDto();
+        EntLoginDTO entLoginDto = new EntLoginDTO();
         entLoginDto.setUsername(username);
         entLoginDto.setPassword(password);
         entLoginDto.setRememberme(false);
@@ -146,21 +161,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 + scaledDensity + "  densityDpi = " + densityDpi);
     }
 
-
-    ResponseListener<EntClientResponse> loginResponseListener = new ResponseListener<EntClientResponse>() {
-        @Override
-        public void onErrorResponse(VolleyError volleyError) {
-            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onResponse(EntClientResponse response) {
-
-            BaseApplication.QQZQ_USER = username;
-            BaseApplication.QQZQ_PASSWORD = password;
-            jumpPage();
-        }
-    };
 
     private void initTestData() {
         //for test only

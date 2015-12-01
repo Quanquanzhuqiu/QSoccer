@@ -78,7 +78,7 @@ public class Constants {
     //用户登录
     public static final String API_USER_LOGIN_URL = API_SERVER_HOST + "/authc/login";
     // 修改密码
-    public static final String API_USER_EDIT_USER_URL = API_SERVER_HOST + "/authc/pwd";
+    public static final String API_USER_MODIFY_PASSWORD_URL = API_SERVER_HOST + "/authc/pwdmodification";
     //用户退出
     public static final String API_USER_LOGOUT_URL = API_SERVER_HOST + "/authc/logout";
 

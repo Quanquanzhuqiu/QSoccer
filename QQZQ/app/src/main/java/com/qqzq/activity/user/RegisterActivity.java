@@ -1,4 +1,4 @@
-package com.qqzq.activity;
+package com.qqzq.activity.user;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,17 +15,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.qqzq.R;
+import com.qqzq.activity.BaseActivity;
 import com.qqzq.config.Constants;
+import com.qqzq.dto.EntRegisterDTO;
 import com.qqzq.entity.EntClientResponse;
-import com.qqzq.entity.EntRegisterInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.find.activity.FindLocationActivity;
@@ -173,7 +172,19 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         Map<String, Object> mParameters = prepareRequestJson();
         GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, Constants.API_USER_REGISTER_URL,
-                EntClientResponse.class, null, mParameters, registerUserResponseListener);
+                EntClientResponse.class, null, mParameters, new ResponseListener<EntClientResponse>() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+                Log.e(TAG, volleyError.toString());
+            }
+
+            @Override
+            public void onResponse(EntClientResponse entClientResponse) {
+                System.out.println("注册成功");
+                jumpPage();
+            }
+        });
 
         executeRequest(gsonRequest);
     }
@@ -182,14 +193,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         Map<String, Object> mParameters = new HashMap<String, Object>();
 
-        EntRegisterInfo entRegisterInfo = new EntRegisterInfo();
-        entRegisterInfo.setProvince(selectedProvinceCode);
-        entRegisterInfo.setCity(selectedCityCode);
-        entRegisterInfo.setUsername(edt_phone_no.getText().toString());
-        entRegisterInfo.setPassword(edt_password.getText().toString());
-        entRegisterInfo.setVerifyCode(edt_verify_code.getText().toString());
+        EntRegisterDTO dto = new EntRegisterDTO();
+        dto.setProvince(selectedProvinceCode);
+        dto.setCity(selectedCityCode);
+        dto.setUsername(edt_phone_no.getText().toString());
+        dto.setPassword(edt_password.getText().toString());
+        dto.setVerifyCode(edt_verify_code.getText().toString());
 
-        mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entRegisterInfo);
+        mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, dto);
         return mParameters;
     }
 
@@ -250,17 +261,4 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         startActivity(intent);
     }
 
-    ResponseListener registerUserResponseListener = new ResponseListener<EntClientResponse>() {
-        @Override
-        public void onErrorResponse(VolleyError volleyError) {
-            Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
-            Log.e(TAG, volleyError.toString());
-        }
-
-        @Override
-        public void onResponse(EntClientResponse entClientResponse) {
-            System.out.println("注册成功");
-            jumpPage();
-        }
-    };
 }

@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team;
+package com.qqzq.activity.team;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,12 +14,11 @@ import android.widget.TextView;
 import com.qqzq.R;
 import com.qqzq.activity.BaseFragment;
 import com.qqzq.config.Constants;
-import com.qqzq.entity.EntTeamInfo;
+import com.qqzq.dto.EntTeamInfoDTO;
 import com.qqzq.subitem.find.activity.FindTeamActivity;
-import com.qqzq.subitem.game.activity.GameDetailActivity;
-import com.qqzq.subitem.team.activity.CreateTeamActivity;
-import com.qqzq.subitem.team.activity.TeamDetailActivity;
-import com.qqzq.subitem.team.adapter.TeamGridViewAdapter;
+import com.qqzq.activity.team.activity.CreateTeamActivity;
+import com.qqzq.activity.team.activity.TeamDetailActivity;
+import com.qqzq.activity.team.adapter.TeamGridViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,7 @@ public class TeamManageFragment extends BaseFragment {
     private Context context;
     private GridView gv_team;
     private TeamGridViewAdapter teamGridViewAdapter;
-    public static List<EntTeamInfo> list = new ArrayList<EntTeamInfo>();
+    public static List<EntTeamInfoDTO> list = new ArrayList<EntTeamInfoDTO>();
 
     private TextView tv_create_team;
     private TextView tv_find_team;
@@ -96,7 +95,7 @@ public class TeamManageFragment extends BaseFragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Log.i(TAG, "选中的球队位置 = " + position);
             if (!list.isEmpty()) {
-                EntTeamInfo entTeamInfo = list.get(position);
+                EntTeamInfoDTO entTeamInfo = list.get(position);
 
                 Intent intent = new Intent(context, TeamDetailActivity.class);
                 intent.putExtra(Constants.EXTRA_SELECTED_TEAM_ID, entTeamInfo.getId());

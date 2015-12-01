@@ -20,14 +20,13 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.config.Constants;
+import com.qqzq.dto.EntTeamInfoDTO;
 import com.qqzq.entity.EntGameInfo;
-import com.qqzq.entity.EntTeamInfo;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.subitem.game.GameManagementFragment;
-import com.qqzq.subitem.me.activity.MeActivity;
 import com.qqzq.subitem.me.activity.MeSettingActivity;
-import com.qqzq.subitem.team.TeamManageFragment;
+import com.qqzq.activity.team.TeamManageFragment;
 import com.qqzq.util.Utils;
 import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.tab.PagerSlidingTabStrip;
@@ -63,7 +62,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
      */
     private DisplayMetrics dm;
 
-    private List<EntTeamInfo> teamList = new ArrayList<EntTeamInfo>();
+    private List<EntTeamInfoDTO> teamList = new ArrayList<EntTeamInfoDTO>();
     private List<EntGameInfo> gameList = new ArrayList<EntGameInfo>();
 
     private String teamPageType = Constants.PAGE_TYPE_NO_TEAM;
@@ -202,19 +201,15 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         String queryUrl = MessageFormat.format(Constants.API_FIND_TEAM_MEMBER_BY_ID_URL, BaseApplication.QQZQ_USER);
         queryUrl = Utils.makeGetRequestUrl(queryUrl, null);
 
-//        Map<String, Object> mParameters = new HashMap<String, Object>();
-//        mParameters.put("offset", 0);
-//        mParameters.put("limit", 10);
-//        String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_TEAM_URL, mParameters);
-        GsonRequest gsonRequest = new GsonRequest<EntTeamInfo[]>(queryUrl, EntTeamInfo[].class,
-                new ResponseListener<EntTeamInfo[]>() {
+        GsonRequest gsonRequest = new GsonRequest<EntTeamInfoDTO[]>(queryUrl, EntTeamInfoDTO[].class,
+                new ResponseListener<EntTeamInfoDTO[]>() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override
-                    public void onResponse(EntTeamInfo[] entTeamInfos) {
+                    public void onResponse(EntTeamInfoDTO[] entTeamInfos) {
                         if (entTeamInfos.length > 0) {
                             teamList = Arrays.asList(entTeamInfos);
                             TeamManageFragment.list = teamList;

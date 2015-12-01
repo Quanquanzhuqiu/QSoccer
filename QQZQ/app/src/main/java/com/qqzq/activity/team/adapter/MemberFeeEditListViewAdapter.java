@@ -1,13 +1,15 @@
-package com.qqzq.subitem.team.adapter;
+package com.qqzq.activity.team.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,19 +18,21 @@ import com.qqzq.R;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamMember;
 import com.qqzq.network.RequestManager;
-import com.qqzq.util.Utils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Created by jie.xiao on 15/9/27.
+ * Created by jie.xiao on 11/4/2015.
  */
-public class TeamMemberListViewAdapter extends BaseAdapter {
+public class MemberFeeEditListViewAdapter extends BaseAdapter {
 
     private Context context;
     public List<EntTeamMember> mList;
+    Map<Integer, Float> balanceMap = new HashMap<Integer, Float>();
 
-    public TeamMemberListViewAdapter(Context context, List<EntTeamMember> mList) {
+    public MemberFeeEditListViewAdapter(Context context, List<EntTeamMember> mList) {
         this.context = context;
         this.mList = mList;
     }
@@ -61,21 +65,18 @@ public class TeamMemberListViewAdapter extends BaseAdapter {
      * 返回item的视图
      */
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
 
         // 初始化item view
         if (convertView == null) {
             // 通过LayoutInflater将xml中定义的视图实例化到一个View中
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_lv_team_member, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_lv_member_fee_edit, null);
             // 实例化一个封装类ListItemView，并实例化它的所有域
             viewHolder = new ViewHolder();
-            viewHolder.iv_memeber_logo = (ImageView) convertView.findViewById(R.id.iv_logo);
+            viewHolder.iv_member_logo = (ImageView) convertView.findViewById(R.id.iv_logo);
             viewHolder.tv_member_name = (TextView) convertView.findViewById(R.id.tv_member_name);
-            viewHolder.tv_member_attendance_count = (TextView) convertView.findViewById(R.id.tv_member_attendance_count);
-            viewHolder.tv_member_personal_score = (TextView) convertView.findViewById(R.id.tv_member_personal_score);
-            viewHolder.tv_member_join_date = (TextView) convertView.findViewById(R.id.tv_member_join_date);
-            viewHolder.cbox_memeber_selected = (CheckBox) convertView.findViewById(R.id.cbox_memeber_selected);
+            viewHolder.edt_member_fee = (EditText) convertView.findViewById(R.id.edt_member_fee);
             // 将ListItemView对象传递给convertView
             convertView.setTag(viewHolder);
         } else {
@@ -89,20 +90,37 @@ public class TeamMemberListViewAdapter extends BaseAdapter {
 //            String logoUrl = entTeamMember.getLogoUrl();
             Drawable logo = null;
             String logoUrl = null;
-            String name = entTeamMember.getUsernickname();
-            String attendanceCount = entTeamMember.getAttendancecount() + "";
-            String personalscore = entTeamMember.getPersonalscore() + "";
-            String joinDate = Utils.getFormatedSimpleDate(entTeamMember.getJointime());
+            final int memberId = entTeamMember.getUserid();
+            String name = entTeamMember.getUsername();
+            String balance = entTeamMember.getPersonalbalance() + "";
 
             if (logo != null) {
-                viewHolder.iv_memeber_logo.setImageDrawable(logo);
+                viewHolder.iv_member_logo.setImageDrawable(logo);
             } else if (!TextUtils.isEmpty(logoUrl)) {
-                displayUrlImg(viewHolder.iv_memeber_logo, logoUrl);
+                displayUrlImg(viewHolder.iv_member_logo, logoUrl);
             }
             viewHolder.tv_member_name.setText(name);
-            viewHolder.tv_member_attendance_count.setText(attendanceCount);
-            viewHolder.tv_member_personal_score.setText(personalscore);
-            viewHolder.tv_member_join_date.setText(joinDate);
+
+            //为editText设置TextChangedListener，每次改变的值设置到hashMap
+            //我们要拿到里面的值根据position拿值
+            viewHolder.edt_member_fee.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start,
+                                              int count, int after) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    //将editText中改变的值设置的HashMap中
+                    balanceMap.put(memberId, Float.valueOf(s.toString()));
+                }
+            });
         }
 
         return convertView;
@@ -117,12 +135,14 @@ public class TeamMemberListViewAdapter extends BaseAdapter {
         RequestManager.getImageLoader().get(logoUrl, listener);
     }
 
-    class ViewHolder {
-        ImageView iv_memeber_logo;
-        TextView tv_member_name;
-        TextView tv_member_attendance_count;
-        TextView tv_member_personal_score;
-        TextView tv_member_join_date;
-        CheckBox cbox_memeber_selected;
+    public Map<Integer, Float> getSelectedData() {
+        return balanceMap;
     }
+
+    class ViewHolder {
+        ImageView iv_member_logo;
+        TextView tv_member_name;
+        EditText edt_member_fee;
+    }
+
 }

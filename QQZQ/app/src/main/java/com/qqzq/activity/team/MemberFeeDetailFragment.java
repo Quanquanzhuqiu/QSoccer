@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team;
+package com.qqzq.activity.team;
 
 import com.qqzq.activity.BaseFragment;
 

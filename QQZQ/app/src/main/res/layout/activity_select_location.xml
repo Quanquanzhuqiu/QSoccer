@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:leftImage="@drawable/ic_btn_back"
-        app:pageTitle="活动出勤管理详情" />
+        app:pageTitle="选择地区" />
 
     <RelativeLayout
         android:layout_width="match_parent"

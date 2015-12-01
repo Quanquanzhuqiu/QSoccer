@@ -6,20 +6,18 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.qqzq.R;
 import com.qqzq.activity.BaseActivity;
-import com.qqzq.activity.RegisterActivity;
+import com.qqzq.activity.user.RegisterActivity;
 import com.qqzq.adapter.LocationListViewAdapter;
 import com.qqzq.config.Constants;
 import com.qqzq.db.LocationDao;
 import com.qqzq.entity.EntLocation;
-import com.qqzq.listener.BackButtonListener;
 import com.qqzq.subitem.me.activity.MeSettingActivity;
-import com.qqzq.subitem.team.activity.CreateTeamActivity;
+import com.qqzq.activity.team.activity.CreateTeamActivity;
 
 import java.util.List;
 

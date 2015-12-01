@@ -1,4 +1,4 @@
-package com.qqzq.subitem.team.adapter;
+package com.qqzq.activity.team.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -15,7 +15,6 @@ import com.qqzq.R;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntTeamListItem;
 import com.qqzq.network.RequestManager;
-import com.qqzq.util.Utils;
 
 import java.util.List;
 
