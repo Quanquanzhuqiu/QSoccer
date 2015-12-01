@@ -12,16 +12,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.qqzq.activity.BaseApplication;
+import com.qqzq.base.BaseApplication;
 import com.qqzq.config.Constants;
 import com.qqzq.util.json.DateDeserializer;
 import com.qqzq.util.json.DateSerializer;
 import com.qqzq.util.json.ObjectDeserializer;
 
-import java.util.BitSet;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**

@@ -1,6 +1,5 @@
 package com.qqzq.chat;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -11,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.qqzq.activity.BaseFragment;
+import com.qqzq.base.BaseFragment;
 
 /**
  * Created by jie.xiao on 15/9/12.

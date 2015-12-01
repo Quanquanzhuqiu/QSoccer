@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.qqzq.entity.EntLocation;
+import com.qqzq.common.dto.EntLocation;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

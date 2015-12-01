@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.qqzq.activity.team.activity.CreateTeamActivity;
+import com.qqzq.team.activity.CreateTeamActivity;
 import com.robotium.solo.Solo;
 
 /**

@@ -12,9 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.qqzq.R;
-import com.qqzq.subitem.find.activity.FindTeamActivity;
-import com.qqzq.subitem.game.activity.GamePublishActivity;
-import com.qqzq.activity.team.activity.CreateTeamActivity;
+import com.qqzq.common.activity.SelectTeamActivity;
+import com.qqzq.game.activity.GamePublishActivity;
+import com.qqzq.team.activity.CreateTeamActivity;
 
 /**
  * Created by jie.xiao on 15/9/20.
@@ -87,7 +87,7 @@ public class PopupMenuWindow extends PopupWindow {
                     context.startActivity(createTeamIntent);
                     break;
                 case R.id.ll_find_team:
-                    Intent findTeamIntent = new Intent(context, FindTeamActivity.class);
+                    Intent findTeamIntent = new Intent(context, SelectTeamActivity.class);
                     context.startActivity(findTeamIntent);
                     break;
                 case R.id.ll_game_publish:

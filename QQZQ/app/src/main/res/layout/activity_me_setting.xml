@@ -28,32 +28,39 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="90dp"
             android:layout_marginTop="5dp"
-            android:background="@color/rgb_255_255_255"
+            android:background="@drawable/shape_grey_divider_bottom"
             android:focusable="true"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:text="@string/me_logo"
                 android:textColor="@color/rgb_0_0_0" />
 
-
-            <ImageView
+            <com.qqzq.widget.RoundCornerImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/ic_default_team_log" />
 
 
-            <ImageView
-                android:id="@+id/iv_more_info"
-                android:layout_width="15dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_browse_img" />
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
 
+                <ImageView
+                    android:id="@+id/iv_more_info"
+                    android:layout_width="15dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_browse_img" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -62,13 +69,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/rgb_255_255_255"
+            android:background="@drawable/shape_grey_divider_bottom"
             android:focusable="true"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="@string/me_nickname"
                 android:textColor="@color/rgb_0_0_0" />
 
@@ -81,10 +89,16 @@
                 android:maxEms="10" />
 
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_browse_img" />
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <!--      <ImageView
+                          android:layout_width="15dp"
+                          android:layout_height="30dp"
+                          android:background="@drawable/ic_browse_img" />-->
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -93,13 +107,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/rgb_255_255_255"
+            android:background="@drawable/shape_grey_divider_bottom"
             android:focusable="true"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="@string/me_qqzq_id"
                 android:textColor="@color/rgb_0_0_0" />
 
@@ -112,25 +127,30 @@
                 android:maxEms="15" />
 
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_browse_img" />
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
 
-
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_browse_img" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/rgb_255_255_255"
+            android:background="@drawable/shape_grey_divider_bottom"
             android:focusable="true"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="@string/me_sex"
                 android:textColor="@color/rgb_0_0_0" />
 
@@ -141,12 +161,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_browse_img" />
-
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_browse_img" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -154,13 +178,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/rgb_255_255_255"
+            android:background="@drawable/shape_grey_divider_bottom"
             android:focusable="true"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="@string/me_location"
                 android:textColor="@color/rgb_0_0_0" />
 
@@ -174,11 +199,16 @@
                 android:focusable="false" />
 
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_browse_img" />
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
 
+                <!--      <ImageView
+                          android:layout_width="15dp"
+                          android:layout_height="30dp"
+                          android:background="@drawable/ic_browse_img" />-->
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -186,13 +216,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/rgb_255_255_255"
+            android:background="@drawable/shape_grey_divider_bottom"
             android:focusable="true"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="@string/me_best_position"
                 android:textColor="@color/rgb_0_0_0" />
 
@@ -205,10 +236,16 @@
                 android:maxEms="10" />
 
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_browse_img" />
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <!--      <ImageView
+                          android:layout_width="15dp"
+                          android:layout_height="30dp"
+                          android:background="@drawable/ic_browse_img" />-->
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -217,13 +254,15 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/rgb_255_255_255"
+            android:background="@drawable/shape_grey_divider_bottom"
             android:focusable="true"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
                 android:text="@string/me_signature"
                 android:textColor="@color/rgb_0_0_0" />
 
@@ -231,7 +270,11 @@
                 android:id="@+id/edt_signature"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:maxEms="60" />
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:maxEms="60"
+                android:maxLength="1000"
+                android:minLines="3" />
 
         </LinearLayout>
 

@@ -10,7 +10,7 @@
         android:targetSdkVersion="23" />
 
     <application
-        android:name=".activity.BaseApplication"
+        android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@drawable/app_logo"
@@ -19,7 +19,7 @@
         tools:replace="android:debuggable">
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".common.activity.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -28,74 +28,74 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.user.LoginActivity"
+            android:name=".user.activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.user.PasswordModifyActivity"
+            android:name=".user.activity.PasswordModifyActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".common.activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.user.RegisterActivity"
+            android:name=".user.activity.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.find.activity.FindLocationActivity"
+            android:name=".common.activity.SelectLocationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.team.activity.CreateTeamActivity"
+            android:name=".team.activity.CreateTeamActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.find.activity.FindTeamActivity"
+            android:name=".common.activity.SelectTeamActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.game.activity.GamePublishActivity"
+            android:name=".game.activity.GamePublishActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.team.activity.SelectTeamActivity"
+            android:name=".team.activity.FindTeamActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".activity.team.activity.TeamRuleActivity"
+            android:name=".team.activity.TeamRuleActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".activity.team.activity.TeamDetailActivity"
+            android:name=".team.activity.TeamDetailActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".activity.team.activity.TeamGalleryActivity"
+            android:name=".team.activity.TeamGalleryActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".activity.team.activity.TeamMemberActivity"
+            android:name=".team.activity.TeamMemberActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".subitem.game.activity.GameDetailActivity"
+            android:name=".game.activity.GameDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.game.activity.GameListActivity"
+            android:name=".game.activity.GameListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.game.activity.GameAttendanceActivity"
+            android:name=".game.activity.GameAttendanceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.game.activity.GameAttendanceDetailActivity"
+            android:name=".game.activity.GameAttendanceDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.team.activity.MemberFeeManageActivity"
+            android:name=".team.activity.MemberFeeManageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.team.activity.MemberFeeIncomeActivity"
+            android:name=".team.activity.MemberFeeIncomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.team.activity.MemberFeeEditListActivity"
+            android:name=".team.activity.MemberFeeEditListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.team.activity.MemberFeePayoutActivity"
+            android:name=".team.activity.MemberFeePayoutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".subitem.me.activity.MeActivity"
+            android:name=".me.activity.MeActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".subitem.me.activity.MeSettingActivity"
+            android:name=".me.activity.MeSettingActivity"
             android:screenOrientation="portrait" />
     </application>
 
