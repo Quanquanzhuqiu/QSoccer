@@ -105,6 +105,14 @@
         <activity
             android:name=".me.activity.MeCardActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".me.activity.MeWalletActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".me.activity.MeWalletDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />

@@ -117,6 +117,7 @@ public class GsonRequest<T> extends Request<T> {
         mHeaders.put("user-agent", "android");
         if (!TextUtils.isEmpty(BaseApplication.QQZQ_USER)) {
             mHeaders.put("X-Subject", BaseApplication.QQZQ_USER);
+            Log.i(TAG, "X-Subject：" + BaseApplication.QQZQ_USER);
         }
 
         return mHeaders;

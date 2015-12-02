@@ -41,12 +41,16 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
     private TopBar topBar;
 
     private EntUserInfoDTO entUserInfoDTO;
+    private TopBar mTopbarTopBar;
+    private LinearLayout mMyWalletLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_me);
+
+
         initData();
         initView();
         initListener();
@@ -58,6 +62,7 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
         mQqzqIdTextView = (TextView) findViewById(R.id.tv_qqzq_id);
         mMoreInfoImageView = (ImageView) findViewById(R.id.iv_more_info);
         mMyInfoLinearLayout = (LinearLayout) findViewById(R.id.ll_my_info);
+        mMyWalletLinearLayout = (LinearLayout) findViewById(R.id.ll_my_wallet);
         mMainLinearLayout = (LinearLayout) findViewById(R.id.ll_main);
 
         mTabs = new Button[4];
@@ -76,6 +81,7 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
 
     private void initListener() {
         mMyInfoLinearLayout.setOnClickListener(this);
+        mMyWalletLinearLayout.setOnClickListener(this);
         topBar.setListener(new TopBarListener() {
 
             @Override
@@ -134,6 +140,10 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
                 Intent intent = new Intent(context, MeCardActivity.class);
                 intent.putExtra(Constants.EXTRA_USER_INFO, entUserInfoDTO);
                 startActivity(intent);
+                break;
+            case R.id.ll_my_wallet:
+                Intent myWalletIntent = new Intent(context, MeWalletActivity.class);
+                startActivity(myWalletIntent);
                 break;
         }
     }
