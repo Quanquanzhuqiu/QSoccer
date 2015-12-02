@@ -17,9 +17,11 @@ import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.base.BaseActivity;
 import com.qqzq.config.Constants;
+import com.qqzq.listener.TopBarListener;
 import com.qqzq.me.dto.EntUserInfoDTO;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.widget.menu.TopBar;
 
 /**
  * Created by jie.xiao on 15/9/12.
@@ -36,6 +38,7 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
     private TextView mQqzqIdTextView;
     private ImageView mMoreInfoImageView;
     private LinearLayout mMyInfoLinearLayout;
+    private TopBar topBar;
 
     private EntUserInfoDTO entUserInfoDTO;
 
@@ -50,6 +53,7 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initView() {
+        topBar = (TopBar) findViewById(R.id.topbar);
         mUserNameTextView = (TextView) findViewById(R.id.tv_user_name);
         mQqzqIdTextView = (TextView) findViewById(R.id.tv_qqzq_id);
         mMoreInfoImageView = (ImageView) findViewById(R.id.iv_more_info);
@@ -72,6 +76,23 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
 
     private void initListener() {
         mMyInfoLinearLayout.setOnClickListener(this);
+        topBar.setListener(new TopBarListener() {
+
+            @Override
+            public void leftButtonClick() {
+            }
+
+            @Override
+            public void rightButtonClick() {
+                Intent intent = new Intent(context, MeSettingActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public int getButtonType() {
+                return TopBarListener.RIGHT;
+            }
+        });
     }
 
     private void initForm(EntUserInfoDTO entUserInfoDTO) {
