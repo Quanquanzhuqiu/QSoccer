@@ -25,6 +25,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_my_info"
             android:layout_width="fill_parent"
             android:layout_height="90dp"
             android:layout_marginTop="5dp"
@@ -60,7 +61,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_team_game_name"
+                        android:id="@+id/tv_user_name"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="蓝色的老吉他"
@@ -82,6 +83,7 @@
                         android:textColor="@color/rgb_0_0_0" />
 
                     <TextView
+                        android:id="@+id/tv_qqzq_id"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="yangzi"
@@ -341,4 +343,5 @@
         </LinearLayout>
 
     </LinearLayout>
+    <include layout="@layout/common_bottom_menu"/>
 </LinearLayout>

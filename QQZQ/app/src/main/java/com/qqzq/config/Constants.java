@@ -53,6 +53,7 @@ public class Constants {
     public static final String EXTRA_SELECTED_GAME_DATE = "EXTRA_SELECTED_GAME_DATE";
     public static final String EXTRA_SELECTED_GENDER = "EXTRA_SELECTED_GENDER";
     public static final String EXTRA_SELECTED_GENDER_ID = "EXTRA_SELECTED_GENDER_ID";
+    public static final String EXTRA_USER_INFO = "EXTRA_USER_INFO";
 
     public static final String HTTP_HEADER_TOKER = "Token";
 

@@ -1,9 +1,11 @@
 package com.qqzq.me.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by jie.xiao on 15/12/1.
  */
-public class EntUserInfoDTO {
+public class EntUserInfoDTO implements Serializable{
 
     /**
      * id : 0

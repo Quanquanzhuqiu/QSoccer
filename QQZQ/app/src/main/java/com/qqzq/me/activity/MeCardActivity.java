@@ -2,6 +2,7 @@ package com.qqzq.me.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Window;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ import com.qqzq.me.dto.EntUserInfoDTO;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.team.adapter.TeamListViewAdapter;
+import com.qqzq.team.dto.EntMemberBalanceInfoDTO;
 import com.qqzq.team.dto.EntTeamInfoDTO;
 import com.qqzq.util.Utils;
 
@@ -53,13 +55,15 @@ public class MeCardActivity extends BaseActivity {
     private List<EntTeamListItem> teamList = new ArrayList<EntTeamListItem>();
     private TeamListViewAdapter listViewAdapter;
 
+    private EntUserInfoDTO entUserInfoDTO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_me_card);
-        initData();
         initView();
+        initData();
 //        initListener();
     }
 
@@ -83,32 +87,27 @@ public class MeCardActivity extends BaseActivity {
     }
 
     private void initData() {
-        loadUserInfoFromBackend();
+
+        Bundle extras = this.getIntent().getExtras();
+        if (extras != null
+                && extras.containsKey(Constants.EXTRA_USER_INFO)) {
+            entUserInfoDTO = (EntUserInfoDTO) extras.getSerializable(Constants.EXTRA_USER_INFO);
+            if (entUserInfoDTO != null) {
+                initForm(entUserInfoDTO);
+            }
+        }
         loadTeamList();
     }
 
-    private void loadUserInfoFromBackend() {
-        String queryUrl = Constants.API_GET_ME_INFO_URL;
-        GsonRequest gsonRequest = new GsonRequest<EntUserInfoDTO>(queryUrl, EntUserInfoDTO.class,
-                new ResponseListener<EntUserInfoDTO>() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, error.toString());
-                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onResponse(EntUserInfoDTO entUserInfoDTO) {
-                        if (entUserInfoDTO != null) {
-                            initForm(entUserInfoDTO);
-                        }
-                    }
-                });
-        executeRequest(gsonRequest);
-    }
-
     private void initForm(EntUserInfoDTO entUserInfoDTO) {
-        mMyNameTextView.setText(entUserInfoDTO.getNickname());
+
+        String name = "";
+        if (TextUtils.isEmpty(entUserInfoDTO.getNickname())) {
+            name = entUserInfoDTO.getUsername();
+        } else {
+            name = entUserInfoDTO.getNickname();
+        }
+        mMyNameTextView.setText(name);
         mMyAgeTextView.setText(entUserInfoDTO.getAge() + "岁");
         mMyBestPositionTextView.setText(entUserInfoDTO.getArea());
         mQqzqIdTextView.setText(entUserInfoDTO.getQuanquanid());

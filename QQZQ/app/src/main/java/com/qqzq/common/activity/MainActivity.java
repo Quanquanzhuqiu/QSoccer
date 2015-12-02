@@ -88,12 +88,12 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        initDate();
+        initData();
         initView();
         initListener();
     }
 
-    private void initDate() {
+    private void initData() {
         loadTeamList();
     }
 
@@ -147,7 +147,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_me:
-                Intent intent = new Intent(context, MeCardActivity.class);
+                Intent intent = new Intent(context, MeActivity.class);
                 startActivity(intent);
                 break;
             default:

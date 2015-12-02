@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_main_bottom"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="horizontal"
+    android:weightSum="4">
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/btn_my_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_bottom_item_bg"
+            android:drawableTop="@drawable/bg_tab_myteam"
+            android:paddingBottom="2dp"
+            android:paddingTop="7dp"
+            android:scaleType="matrix"
+            android:text="@string/my_team"
+            android:textColor="@color/rgb_153_153_153"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/btn_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_bottom_item_bg"
+            android:drawableTop="@drawable/bg_tab_chat"
+            android:paddingBottom="2dp"
+            android:paddingTop="7dp"
+            android:scaleType="matrix"
+            android:text="@string/chat"
+            android:textColor="@color/rgb_153_153_153"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/btn_find"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_bottom_item_bg"
+            android:drawableTop="@drawable/bg_tab_find"
+            android:paddingBottom="2dp"
+            android:paddingTop="7dp"
+            android:scaleType="matrix"
+            android:text="@string/find"
+            android:textColor="@color/rgb_153_153_153"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/btn_me"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_bottom_item_bg"
+            android:drawableTop="@drawable/bg_tab_me"
+            android:paddingBottom="2dp"
+            android:paddingTop="7dp"
+            android:scaleType="matrix"
+            android:text="@string/me"
+            android:textColor="@color/rgb_153_153_153"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</LinearLayout>
