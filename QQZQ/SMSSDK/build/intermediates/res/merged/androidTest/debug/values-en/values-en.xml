@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/syouketu/Documents/repository/git/qqzq/QQZQ/SMSSDK/build/intermediates/bundles/debug/res/values-en/values-en.xml -->
+    <!-- From: file:/E:/workspace/qqzq/QQZQ/SMSSDK/build/intermediates/bundles/debug/res/values-en/values-en.xml -->
     <eat-comment/>
     <string-array name="smssdk_country_group_a">
 		<item>Afghanistan,93,46,41220|41230|41240|41250|41201</item>
@@ -272,7 +272,6 @@
 		<item>Zambia,260,92,64502|64501|64503</item>
 		<item>Zimbabwe,263,95,64801|64803|64804</item>
     </string-array>
-    <string name="no_contacts_permission">no permission to read contacts</string>
     <string name="smssdk_add_contact">Add</string>
     <string name="smssdk_back">Back </string>
     <string name="smssdk_cancel">Cancel</string>

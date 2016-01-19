@@ -61,7 +61,10 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+//    private static String getUserDbName() {
+//        return Constants.DB_PATH + "qqzq.db";
+//    }
     private static String getUserDbName() {
-        return Constants.DB_PATH + "qqzq.db";
+        return Constants.DB_NAME;
     }
 }

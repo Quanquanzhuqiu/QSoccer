@@ -74,6 +74,8 @@ public class Constants {
     public static final String IMAGE_PHOTO_TMP_PATH = Environment.getExternalStorageDirectory().getPath() + "/qqzq/tmp/";
     public static final String DB_PATH = Environment.getExternalStorageDirectory().getPath() + "/qqzq/db/";
 
+    public static final String DB_NAME = "qqzq";
+
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~ 注册认证部分 ~~~~~~~~~~~~~~~~~~~~~~~~~
     //用户注册

@@ -48,7 +48,7 @@ import java.util.Map;
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
 
     private Activity context = this;
-    private final static String TAG = "MainActivity";
+    private final static String TAG = "MyTeamFrag";
 
     //我的球队页面布局
     private View myTeamLayout;

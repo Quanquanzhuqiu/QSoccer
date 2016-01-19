@@ -18,6 +18,7 @@ import com.qqzq.R;
 import com.qqzq.base.BaseActivity;
 import com.qqzq.base.BaseApplication;
 import com.qqzq.common.activity.MainActivity;
+import com.qqzq.common.activity.MainActivity2;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.network.GsonRequest;
@@ -138,7 +139,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void jumpPage() {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, MainActivity2.class);
         startActivity(intent);
     }
 

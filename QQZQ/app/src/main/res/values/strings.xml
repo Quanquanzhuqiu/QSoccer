@@ -315,4 +315,7 @@
     <string name="plus_video_chat">视频聊天</string>
     <string name="plus_scan">扫一扫</string>
     <string name="plus_take_photo">拍照分享</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

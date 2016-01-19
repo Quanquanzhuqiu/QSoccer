@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_main"
+    style="@style/default_layout">
+
+    <!-- TOP BAR-->
+    <com.qqzq.widget.menu.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:leftImage="@drawable/ic_btn_back"
+        app:pageTitle="我的球队"
+        app:rightImage="@drawable/ic_btn_more" />
+
+    <com.qqzq.widget.tab.PagerSlidingTabStrip
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/top_bar"
+
+        />
+
+    <com.qqzq.widget.MyViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabs"
+        android:layout_weight="1" />
+
+</LinearLayout>

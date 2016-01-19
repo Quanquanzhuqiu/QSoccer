@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:checkedButton="@+id/rb_task"
+    android:orientation="horizontal">
+ <!--   <RadioGroup
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/rb_task"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">-->
+
+        <RadioButton
+            android:id="@+id/btn_my_team"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/sel_tab_myteam"
+            android:text="@string/my_team"
+            android:textSize="12sp"
+            android:textColor="@color/rgb_153_153_153"
+            android:gravity="center" />
+
+        <RadioButton
+            android:id="@+id/btn_chat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/sel_tab_chat"
+            android:text="@string/chat"
+            android:textSize="12sp"
+            android:textColor="@color/rgb_153_153_153"
+            android:gravity="center" />
+
+        <RadioButton
+            android:id="@+id/btn_find"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textSize="12sp"
+            android:drawableTop="@drawable/sel_tab_find"
+            android:text="@string/find"
+            android:textColor="@color/rgb_153_153_153"
+            android:gravity="center" />
+        <RadioButton
+            android:id="@+id/btn_me"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textSize="12sp"
+            android:text="@string/me"
+            android:textColor="@color/rgb_153_153_153"
+            android:drawableTop="@drawable/sel_tab_me"
+            android:gravity="center" />
+</RadioGroup>
