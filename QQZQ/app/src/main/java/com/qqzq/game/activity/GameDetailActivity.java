@@ -48,6 +48,10 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
     private TextView mDescTextView;
     private LinearLayout mCommentLinearLayout;
     private LinearLayout mContactGamePublisherLinearLayout;
+    private TextView mJoinedNoTextView;
+    private TextView mLeftNoTextView ;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,8 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
         mDescTextView = (TextView) findViewById(R.id.tv_game_desc);
         mCommentLinearLayout = (LinearLayout) findViewById(R.id.ll_game_comment);
         mContactGamePublisherLinearLayout = (LinearLayout) findViewById(R.id.ll_contact_game_publisher);
+        mJoinedNoTextView = (TextView) findViewById(R.id.tv_game_joinedNo);
+        mLeftNoTextView = (TextView) findViewById(R.id.tv_game_leftNo);
     }
 
 
@@ -116,6 +122,8 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
         mCostTextView.setText(gameCost + "");
         mPayTypeTextView.setText(payTypeName);
         mDescTextView.setText(gameDesc);
+
+//        mJoinedNoTextView.setText(entGameInfo.get);
 
     }
 
