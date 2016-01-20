@@ -27,6 +27,7 @@ public class Constants {
     public static final String SHARE_REFERENCE_NAME = "qqzq";
 
 
+
     //preference configuration
     public static final String PREF_APP = "PREF_QQZQ";
     // login user name

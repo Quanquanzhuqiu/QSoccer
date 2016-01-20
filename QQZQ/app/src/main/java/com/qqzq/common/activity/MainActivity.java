@@ -24,8 +24,6 @@ import com.qqzq.base.BaseFragmentActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.game.dto.EntGameInfoDTO;
 import com.qqzq.me.activity.MeActivity;
-import com.qqzq.me.activity.MeCardActivity;
-import com.qqzq.me.activity.MeSettingActivity;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.game.fragment.GameManagementFragment;
@@ -48,7 +46,7 @@ import java.util.Map;
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
 
     private Activity context = this;
-    private final static String TAG = "MyTeamFrag";
+    private final static String TAG = "MyTeamFragment";
 
     //我的球队页面布局
     private View myTeamLayout;

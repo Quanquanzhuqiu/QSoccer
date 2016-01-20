@@ -29,6 +29,7 @@ import com.qqzq.listener.TopBarListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.common.activity.SelectTeamActivity;
+import com.qqzq.util.ShareReferenceUtil;
 import com.qqzq.widget.menu.TopBar;
 import com.qqzq.widget.time.TimePickerWindow;
 
@@ -319,6 +320,7 @@ public class GamePublishActivity extends BaseActivity implements View.OnClickLis
         entGamePublishDTO.setSoccerpersonnum(selectedSoccerPerson);
         entGamePublishDTO.setIsdinner(eatAndPlay);
         entGamePublishDTO.setTeamid(teamId);
+        entGamePublishDTO.setPublisher(ShareReferenceUtil.getStringValue(this,ShareReferenceUtil.USERNAME));
 
         mParameters.put(Constants.GSON_REQUST_POST_PARAM_KEY, entGamePublishDTO);
         return mParameters;

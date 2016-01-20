@@ -189,6 +189,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_my_photos"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -228,6 +229,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_my_history"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -267,6 +269,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_my_messge"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -306,6 +309,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_my_set"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"

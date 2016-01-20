@@ -16,10 +16,11 @@ import com.qqzq.network.RequestManager;
 public class BaseActivity extends Activity {
 
     protected Activity activity;
-
+    protected String TAG = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TAG = this.getClass().getName();
         activity = this;
     }
 

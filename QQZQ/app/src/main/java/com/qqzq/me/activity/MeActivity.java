@@ -23,6 +23,9 @@ import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.widget.menu.TopBar;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by jie.xiao on 15/9/12.
  */
@@ -32,24 +35,33 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
 
     private Activity context = this;
 
-    private LinearLayout mMainLinearLayout;
+    @Bind(R.id.ll_main)
+    LinearLayout mMainLinearLayout;
     private Button[] mTabs;
-    private TextView mUserNameTextView;
-    private TextView mQqzqIdTextView;
-    private ImageView mMoreInfoImageView;
-    private LinearLayout mMyInfoLinearLayout;
-    private TopBar topBar;
+    @Bind(R.id.tv_user_name)
+     TextView mUserNameTextView;
+    @Bind(R.id.tv_qqzq_id)
+    TextView mQqzqIdTextView;
+    @Bind(R.id.iv_more_info)
+    ImageView mMoreInfoImageView;
+    @Bind(R.id.ll_my_info)
+    LinearLayout mMyInfoLinearLayout;
+    @Bind(R.id.topbar)
+    TopBar topBar;
 
     private EntUserInfoDTO entUserInfoDTO;
     private TopBar mTopbarTopBar;
-    private LinearLayout mMyWalletLinearLayout;
+    @Bind(R.id.ll_my_wallet)
+    LinearLayout mMyWalletLinearLayout;
+    @Bind(R.id.ll_my_set)
+    LinearLayout mMySetLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_me);
-
+        ButterKnife.bind(this);
 
         initData();
         initView();
@@ -57,13 +69,7 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initView() {
-        topBar = (TopBar) findViewById(R.id.topbar);
-        mUserNameTextView = (TextView) findViewById(R.id.tv_user_name);
-        mQqzqIdTextView = (TextView) findViewById(R.id.tv_qqzq_id);
-        mMoreInfoImageView = (ImageView) findViewById(R.id.iv_more_info);
-        mMyInfoLinearLayout = (LinearLayout) findViewById(R.id.ll_my_info);
-        mMyWalletLinearLayout = (LinearLayout) findViewById(R.id.ll_my_wallet);
-        mMainLinearLayout = (LinearLayout) findViewById(R.id.ll_main);
+
 
         mTabs = new Button[4];
         mTabs[0] = (Button) findViewById(R.id.btn_my_team);
@@ -82,6 +88,7 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
     private void initListener() {
         mMyInfoLinearLayout.setOnClickListener(this);
         mMyWalletLinearLayout.setOnClickListener(this);
+        mMySetLinearLayout.setOnClickListener(this);
         topBar.setListener(new TopBarListener() {
 
             @Override
@@ -90,7 +97,7 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void rightButtonClick() {
-                Intent intent = new Intent(context, MeSettingActivity.class);
+                Intent intent = new Intent(context, MePersonalSettingActivity.class);
                 startActivity(intent);
             }
 
@@ -144,6 +151,10 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
             case R.id.ll_my_wallet:
                 Intent myWalletIntent = new Intent(context, MeWalletActivity.class);
                 startActivity(myWalletIntent);
+                break;
+            case R.id.ll_my_set:
+                Intent setIntent = new Intent(context,MeCommonSettingActivity.class);
+                startActivity(setIntent);
                 break;
         }
     }

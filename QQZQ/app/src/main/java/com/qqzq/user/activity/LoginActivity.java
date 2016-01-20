@@ -24,6 +24,7 @@ import com.qqzq.entity.EntClientResponse;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.user.dto.EntLoginDTO;
+import com.qqzq.util.ShareReferenceUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +49,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        String usrName = ShareReferenceUtil.getStringValue(LoginActivity.this,ShareReferenceUtil.USERNAME);
+        String pwd = ShareReferenceUtil.getStringValue(LoginActivity.this,ShareReferenceUtil.PASSWORD);
+
+        //密码不为空 直接到详情页面
+        if(!TextUtils.isEmpty(pwd)){
+            BaseApplication.QQZQ_USER = usrName;
+            BaseApplication.QQZQ_PASSWORD = pwd;
+            jumpPage();
+            return;
+        }
+
         initView();
+
         initListener();
 
         initTestData();
@@ -61,6 +74,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         edt_password = (EditText) findViewById(R.id.edt_password);
         btn_register = (Button) findViewById(R.id.btn_register);
         btn_login = (Button) findViewById(R.id.btn_login);
+        edt_username.setText(ShareReferenceUtil.getStringValue(this,ShareReferenceUtil.USERNAME));
+        edt_password.setText(ShareReferenceUtil.getStringValue(this,ShareReferenceUtil.PASSWORD));
+
+
     }
 
     private void initListener() {
@@ -107,6 +124,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                 BaseApplication.QQZQ_USER = username;
                 BaseApplication.QQZQ_PASSWORD = password;
+
+                ShareReferenceUtil.putString(LoginActivity.this,ShareReferenceUtil.USERNAME,username);
+                ShareReferenceUtil.putString(LoginActivity.this,ShareReferenceUtil.PASSWORD,username);
+
                 jumpPage();
             }
         });
@@ -141,6 +162,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void jumpPage() {
         Intent intent = new Intent(context, MainActivity2.class);
         startActivity(intent);
+        this.finish();
     }
 
     private void checkMetrics() {

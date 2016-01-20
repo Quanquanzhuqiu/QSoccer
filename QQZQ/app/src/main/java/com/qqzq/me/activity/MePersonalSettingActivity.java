@@ -33,9 +33,9 @@ import java.util.Map;
 /**
  * Created by jie.xiao on 15/9/12.
  */
-public class MeSettingActivity extends BaseActivity implements View.OnClickListener {
+public class MePersonalSettingActivity extends BaseActivity implements View.OnClickListener {
 
-    private final static String TAG = "MeSettingActivity";
+    private final static String TAG = "MePersonalSettingActivity";
 
     private Activity context = this;
     private TopBar topBar;
@@ -148,12 +148,12 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.edt_location:
                 Intent intent = new Intent(context, SelectLocationActivity.class);
-                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "MeSettingActivity");
+                intent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "MePersonalSettingActivity");
                 startActivityForResult(intent, 10);
                 break;
             case R.id.edt_gender:
                 Intent selectedGenderIntent = new Intent(context, SelectGenderActivity.class);
-                selectedGenderIntent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "MeSettingActivity");
+                selectedGenderIntent.putExtra(Constants.EXTRA_PREV_PAGE_NAME, "MePersonalSettingActivity");
                 startActivityForResult(selectedGenderIntent, 20);
                 break;
         }

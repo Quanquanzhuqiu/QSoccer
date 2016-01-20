@@ -17,7 +17,8 @@ public class ShareReferenceUtil {
     private static final String USER_INFO_JSON = "user_info_json";
     private static final String APPLY_IDS = "student_apply_ids";
     private static final String PUSH_USER_INFO_KEY = "push_user_info";
-
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
 
     public static String getPushUserInfoJson(Context context) {
         SharedPreferences settings = context.getSharedPreferences(Constants.SHARE_REFERENCE_NAME, 0);
@@ -146,5 +147,16 @@ public class ShareReferenceUtil {
         Editor editor = settings.edit();
         editor.putString(LOCATION_ADDRESS, address);
         editor.commit();
+    }
+
+    public static void putString(Context context,String key,String value){
+        SharedPreferences settings = context.getSharedPreferences(Constants.SHARE_REFERENCE_NAME, 0);
+        Editor editor = settings.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+    public static String getStringValue(Context context,String key){
+        SharedPreferences settings = context.getSharedPreferences(Constants.SHARE_REFERENCE_NAME, 0);
+        return settings.getString(key, "");
     }
 }

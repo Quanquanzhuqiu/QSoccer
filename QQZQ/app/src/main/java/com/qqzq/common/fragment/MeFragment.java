@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,17 +17,20 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.qqzq.R;
-import com.qqzq.base.BaseActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.listener.TopBarListener;
 import com.qqzq.me.activity.MeCardActivity;
-import com.qqzq.me.activity.MeSettingActivity;
+import com.qqzq.me.activity.MeCommonSettingActivity;
+import com.qqzq.me.activity.MePersonalSettingActivity;
 import com.qqzq.me.activity.MeWalletActivity;
 import com.qqzq.me.dto.EntUserInfoDTO;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.RequestManager;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.widget.menu.TopBar;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by jie.xiao on 15/9/12.
@@ -38,17 +40,26 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private final static String TAG = "MeActivity";
 
     private Activity context = null;
-    private LinearLayout mMainLinearLayout;
+    @Bind(R.id.ll_main)
+    LinearLayout mMainLinearLayout;
     private Button[] mTabs;
-    private TextView mUserNameTextView;
-    private TextView mQqzqIdTextView;
-    private ImageView mMoreInfoImageView;
-    private LinearLayout mMyInfoLinearLayout;
-    private TopBar topBar;
+    @Bind(R.id.tv_user_name)
+    TextView mUserNameTextView;
+    @Bind(R.id.tv_qqzq_id)
+    TextView mQqzqIdTextView;
+    @Bind(R.id.iv_more_info)
+    ImageView mMoreInfoImageView;
+    @Bind(R.id.ll_my_info)
+    LinearLayout mMyInfoLinearLayout;
+    @Bind(R.id.topbar)
+    TopBar topBar;
 
     private EntUserInfoDTO entUserInfoDTO;
     private TopBar mTopbarTopBar;
-    private LinearLayout mMyWalletLinearLayout;
+    @Bind(R.id.ll_my_wallet)
+    LinearLayout mMyWalletLinearLayout;
+    @Bind(R.id.ll_my_set)
+    LinearLayout mMySetLinearLayout;
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -72,23 +83,23 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_me,container,false);
+        ButterKnife.bind(this,view);
         initData();
-        initView();
         initListener();
 
         return view;
     }
 
-    private void initView() {
-        topBar = (TopBar) view.findViewById(R.id.topbar);
-        mUserNameTextView = (TextView) view.findViewById(R.id.tv_user_name);
-        mQqzqIdTextView = (TextView) view.findViewById(R.id.tv_qqzq_id);
-        mMoreInfoImageView = (ImageView) view.findViewById(R.id.iv_more_info);
-        mMyInfoLinearLayout = (LinearLayout) view.findViewById(R.id.ll_my_info);
-        mMyWalletLinearLayout = (LinearLayout) view.findViewById(R.id.ll_my_wallet);
-        mMainLinearLayout = (LinearLayout) view.findViewById(R.id.ll_main);
-
-    }
+//    private void initView() {
+//        topBar = (TopBar) view.findViewById(R.id.topbar);
+//        mUserNameTextView = (TextView) view.findViewById(R.id.tv_user_name);
+//        mQqzqIdTextView = (TextView) view.findViewById(R.id.tv_qqzq_id);
+//        mMoreInfoImageView = (ImageView) view.findViewById(R.id.iv_more_info);
+//        mMyInfoLinearLayout = (LinearLayout) view.findViewById(R.id.ll_my_info);
+//        mMyWalletLinearLayout = (LinearLayout) view.findViewById(R.id.ll_my_wallet);
+//        mMainLinearLayout = (LinearLayout) view.findViewById(R.id.ll_main);
+//
+//    }
 
     private void initData() {
         loadUserInfoFromBackend();
@@ -97,6 +108,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private void initListener() {
         mMyInfoLinearLayout.setOnClickListener(this);
         mMyWalletLinearLayout.setOnClickListener(this);
+        mMySetLinearLayout.setOnClickListener(this);
+
         topBar.setListener(new TopBarListener() {
 
             @Override
@@ -105,7 +118,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void rightButtonClick() {
-                Intent intent = new Intent(context, MeSettingActivity.class);
+                Intent intent = new Intent(context, MePersonalSettingActivity.class);
                 startActivity(intent);
             }
 
@@ -159,6 +172,10 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             case R.id.ll_my_wallet:
                 Intent myWalletIntent = new Intent(context, MeWalletActivity.class);
                 startActivity(myWalletIntent);
+                break;
+            case R.id.ll_my_set:
+                Intent setIntent = new Intent(context,MeCommonSettingActivity.class);
+                startActivity(setIntent);
                 break;
         }
     }

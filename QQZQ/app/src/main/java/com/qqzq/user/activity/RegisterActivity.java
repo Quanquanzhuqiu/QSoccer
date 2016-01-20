@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -28,6 +29,7 @@ import com.qqzq.user.dto.EntRegisterDTO;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
+import com.qqzq.util.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -91,10 +93,22 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 startActivityForResult(intent, 1);
                 break;
             case R.id.btn_verify_code:
-                if (edt_phone_no != null && !TextUtils.isEmpty(edt_phone_no.getText())) {
-                    Toast.makeText(context, "验证码将通过短信发送到你的手机，请注意查收！", Toast.LENGTH_LONG).show();
-                    sendSMS(edt_phone_no.getText().toString());
+
+                if(edt_phone_no == null){
+                    return;
                 }
+
+                if(TextUtils.isEmpty(edt_phone_no.getText())){
+                    Toast.makeText(context,"请输入手机号！",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(edt_phone_no.getText().toString().length() != 11 || Utils.isMobile(edt_phone_no.getText().toString())){
+                    Toast.makeText(RegisterActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(context, "验证码将通过短信发送到你的手机，请注意查收！", Toast.LENGTH_LONG).show();
+                sendSMS(edt_phone_no.getText().toString());
+
                 break;
             case R.id.btn_register:
                 registerUser();
@@ -259,6 +273,26 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private void jumpPage() {
         Intent intent = new Intent(context, LoginActivity.class);
         startActivity(intent);
+    }
+    public class TimerCount extends CountDownTimer {
+
+        public TimerCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+            // TODO Auto-generated constructor stub
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            btn_verify_code.setEnabled(false);
+            btn_verify_code.setText(millisUntilFinished / 1000 + "s后重新发送");
+        }
+
+        @Override
+        public void onFinish() {
+
+            btn_verify_code.setEnabled(true);
+            btn_verify_code.setText(getResources().getString(R.string.txt_get_verify_code));
+        }
     }
 
 }

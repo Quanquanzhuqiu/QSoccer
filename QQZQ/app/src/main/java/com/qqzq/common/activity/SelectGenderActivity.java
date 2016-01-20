@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.qqzq.R;
 import com.qqzq.base.BaseActivity;
 import com.qqzq.config.Constants;
-import com.qqzq.me.activity.MeSettingActivity;
+import com.qqzq.me.activity.MePersonalSettingActivity;
 
 /**
  * Created by jie.xiao on 15/12/1.
@@ -49,8 +49,8 @@ public class SelectGenderActivity extends BaseActivity implements View.OnClickLi
         }
 
         Intent intent = null;
-        if ("MeSettingActivity".equals(prevPageName)) {
-            intent = new Intent(context, MeSettingActivity.class);
+        if ("MePersonalSettingActivity".equals(prevPageName)) {
+            intent = new Intent(context, MePersonalSettingActivity.class);
         }
 
         if (intent != null) {

@@ -13,7 +13,7 @@ import com.qqzq.R;
 import com.qqzq.base.BaseActivity;
 import com.qqzq.common.adapter.LocationListViewAdapter;
 import com.qqzq.common.dto.EntLocation;
-import com.qqzq.me.activity.MeSettingActivity;
+import com.qqzq.me.activity.MePersonalSettingActivity;
 import com.qqzq.user.activity.RegisterActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.db.LocationDao;
@@ -112,8 +112,8 @@ public class SelectLocationActivity extends BaseActivity implements AdapterView.
                     intent = new Intent(context, CreateTeamActivity.class);
                 } else if ("RegisterActivity".equals(prevPageName)) {
                     intent = new Intent(context, RegisterActivity.class);
-                } else if ("MeSettingActivity".equals(prevPageName)) {
-                    intent = new Intent(context, MeSettingActivity.class);
+                } else if ("MePersonalSettingActivity".equals(prevPageName)) {
+                    intent = new Intent(context, MePersonalSettingActivity.class);
                 }
 
                 if (intent != null) {
