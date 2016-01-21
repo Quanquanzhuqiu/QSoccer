@@ -161,61 +161,61 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter implements Radi
     private void setButtonState(int pos){
         switch (pos){
             case 0:
-                teamSelected.setBounds(0,0,teamSelected.getIntrinsicWidth(),teamSelected.getIntrinsicHeight());
+                teamSelected.setBounds(0,0,teamSelected.getIntrinsicWidth()- 30,teamSelected.getIntrinsicHeight() - 30);
                 teamBtn.setCompoundDrawables(null,teamSelected,null,null);
 
-                chatNormal.setBounds(0,0,chatNormal.getIntrinsicWidth(),chatNormal.getIntrinsicHeight());
+                chatNormal.setBounds(0,0,chatNormal.getIntrinsicWidth()- 30,chatNormal.getIntrinsicHeight()- 30);
                 chatBtn.setCompoundDrawables(null,chatNormal,null,null);
 
-                findNormal.setBounds(0, 0, findNormal.getIntrinsicWidth(),findNormal.getIntrinsicHeight());
+                findNormal.setBounds(0, 0, findNormal.getIntrinsicWidth()- 30,findNormal.getIntrinsicHeight()- 30);
                 findBtn.setCompoundDrawables(null, findNormal, null, null);
 
-                meNormal.setBounds(0, 0,meNormal.getIntrinsicWidth(),meNormal.getIntrinsicHeight());
+                meNormal.setBounds(0, 0,meNormal.getIntrinsicWidth()- 30,meNormal.getIntrinsicHeight()-30);
                 meBtn.setCompoundDrawables(null, meNormal, null, null);
 
                 break;
             case 1:
 
-                teamNormal.setBounds(0,0,teamNormal.getIntrinsicWidth(),teamNormal.getIntrinsicHeight());
+                teamNormal.setBounds(0,0,teamNormal.getIntrinsicWidth()- 30,teamNormal.getIntrinsicHeight()- 30);
                 teamBtn.setCompoundDrawables(null,teamNormal,null,null);
 
-                chatSelected.setBounds(0,0,chatSelected.getIntrinsicWidth(),chatSelected.getIntrinsicHeight());
+                chatSelected.setBounds(0,0,chatSelected.getIntrinsicWidth()- 30,chatSelected.getIntrinsicHeight()- 30);
                 chatBtn.setCompoundDrawables(null,chatSelected,null,null);
 
-                findNormal.setBounds(0,0,findNormal.getIntrinsicWidth(),findNormal.getIntrinsicHeight());
+                findNormal.setBounds(0,0,findNormal.getIntrinsicWidth()- 30,findNormal.getIntrinsicHeight()- 30);
                 findBtn.setCompoundDrawables(null, findNormal,null,null);
 
-                meNormal.setBounds(0,0,meNormal.getIntrinsicWidth(),meNormal.getIntrinsicHeight());
+                meNormal.setBounds(0,0,meNormal.getIntrinsicWidth()- 30,meNormal.getIntrinsicHeight()- 30);
                 meBtn.setCompoundDrawables(null, meNormal,null,null);
 
                 break;
             case 2:
 
-                teamNormal.setBounds(0,0,teamNormal.getIntrinsicWidth(),teamNormal.getIntrinsicHeight());
+                teamNormal.setBounds(0,0,teamNormal.getIntrinsicWidth()- 30,teamNormal.getIntrinsicHeight()- 30);
                 teamBtn.setCompoundDrawables(null,teamNormal,null,null);
 
-                chatNormal.setBounds(0,0,chatNormal.getIntrinsicWidth(),chatNormal.getIntrinsicHeight());
+                chatNormal.setBounds(0,0,chatNormal.getIntrinsicWidth()- 30,chatNormal.getIntrinsicHeight()- 30);
                 chatBtn.setCompoundDrawables(null,chatNormal,null,null);
 
-                findSelected.setBounds(0,0,findSelected.getIntrinsicWidth(),findSelected.getIntrinsicHeight());
+                findSelected.setBounds(0,0,findSelected.getIntrinsicWidth()- 30,findSelected.getIntrinsicHeight()- 30);
                 findBtn.setCompoundDrawables(null, findSelected,null,null);
 
-                meNormal.setBounds(0,0,meNormal.getIntrinsicWidth(),meNormal.getIntrinsicHeight());
+                meNormal.setBounds(0,0,meNormal.getIntrinsicWidth()- 30,meNormal.getIntrinsicHeight()- 30);
                 meBtn.setCompoundDrawables(null, meNormal,null,null);
 
                 break;
             case 3:
 
-                teamNormal.setBounds(0,0,teamNormal.getIntrinsicWidth(),teamNormal.getIntrinsicHeight());
+                teamNormal.setBounds(0,0,teamNormal.getIntrinsicWidth()- 30,teamNormal.getIntrinsicHeight()- 30);
                 teamBtn.setCompoundDrawables(null, teamNormal,null,null);
 
-                chatNormal.setBounds(0,0,chatNormal.getIntrinsicWidth(),chatNormal.getIntrinsicHeight());
+                chatNormal.setBounds(0,0,chatNormal.getIntrinsicWidth()- 30,chatNormal.getIntrinsicHeight()- 30);
                 chatBtn.setCompoundDrawables(null, chatNormal,null,null);
 
-                findNormal.setBounds(0,0,findNormal.getIntrinsicWidth(),findNormal.getIntrinsicHeight());
+                findNormal.setBounds(0,0,findNormal.getIntrinsicWidth()- 30,findNormal.getIntrinsicHeight()- 30);
                 findBtn.setCompoundDrawables(null, findNormal,null,null);
 
-                meSelected.setBounds(0,0,meSelected.getIntrinsicWidth(),meSelected.getIntrinsicHeight());
+                meSelected.setBounds(0,0,meSelected.getIntrinsicWidth()- 30,meSelected.getIntrinsicHeight()- 30);
                 meBtn.setCompoundDrawables(null, meSelected,null,null);
 
 

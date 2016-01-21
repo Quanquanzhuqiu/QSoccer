@@ -31,6 +31,7 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
     private TextView mCommitTextView;
     private LinearLayout mMoreLinearLayout;
     private PopupMenuWindow popupMenuWindow;
+    private int mGameId;
 
     private int leftImage;
     private int rightImage;
@@ -54,6 +55,10 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
 
     public void setListener(TopBarListener mListener) {
         this.mListener = mListener;
+    }
+
+    public void setData(int gameId){
+        this.mGameId = gameId;
     }
 
     private void initAttribute(AttributeSet attrs) {
@@ -98,7 +103,12 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
 
             if (rightImage == R.drawable.ic_btn_more) {
                 Log.i(TAG, "含有弹出菜单的页面！");
-                popupMenuWindow = new PopupMenuWindow(context, null);
+                popupMenuWindow = new PopupMenuWindow(context, null,0);
+                popupMenuWindow.dismiss();
+            }else if(rightImage == R.drawable.actionbar_more_icon){
+                Log.i(TAG, "含有弹出菜单的页面！");
+                popupMenuWindow = new PopupMenuWindow(context, null,1);
+                popupMenuWindow.setData(mGameId);
                 popupMenuWindow.dismiss();
             }
 

@@ -8,11 +8,12 @@
 
     <!-- TOP BAR-->
     <com.qqzq.widget.menu.TopBar
+        android:id="@+id/topbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:leftImage="@drawable/ic_btn_back"
         app:pageTitle="活动详情"
-        app:rightImage="@drawable/ic_btn_share" />
+        app:rightImage="@drawable/actionbar_more_icon" />
 
     <ScrollView
         android:layout_width="fill_parent"

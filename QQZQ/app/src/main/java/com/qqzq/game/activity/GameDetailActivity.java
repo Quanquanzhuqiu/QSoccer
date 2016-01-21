@@ -18,9 +18,11 @@ import com.qqzq.base.BaseActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.game.dto.EntGameInfoDTO;
+import com.qqzq.listener.TopBarListener;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.util.Utils;
+import com.qqzq.widget.menu.TopBar;
 
 import java.text.MessageFormat;
 import java.util.Date;
@@ -50,6 +52,7 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
     private LinearLayout mContactGamePublisherLinearLayout;
     private TextView mJoinedNoTextView;
     private TextView mLeftNoTextView ;
+    private TopBar mTopBar;
 
 
 
@@ -78,6 +81,8 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
         mContactGamePublisherLinearLayout = (LinearLayout) findViewById(R.id.ll_contact_game_publisher);
         mJoinedNoTextView = (TextView) findViewById(R.id.tv_game_joinedNo);
         mLeftNoTextView = (TextView) findViewById(R.id.tv_game_leftNo);
+        mTopBar = (TopBar) findViewById(R.id.topbar);
+
     }
 
 
@@ -87,6 +92,7 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
                 && extras.containsKey(Constants.EXTRA_SELECTED_GAME_ID)) {
 
             selectedGameId = extras.getInt(Constants.EXTRA_SELECTED_GAME_ID, 0);
+            mTopBar.setData(selectedGameId);
             if (selectedGameId > 0) {
                 loadGameDetailFromBackend(selectedGameId);
             }
@@ -95,6 +101,22 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
 
     private void initListener() {
         mJoinGameButton.setOnClickListener(this);
+        mTopBar.setListener(new TopBarListener() {
+            @Override
+            public void leftButtonClick() {
+                finish();
+            }
+
+            @Override
+            public void rightButtonClick() {
+
+            }
+
+            @Override
+            public int getButtonType() {
+                return 0;
+            }
+        });
     }
 
     private void initForm(EntGameInfoDTO entGameInfo) {
@@ -123,7 +145,10 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
         mPayTypeTextView.setText(payTypeName);
         mDescTextView.setText(gameDesc);
 
-//        mJoinedNoTextView.setText(entGameInfo.get);
+        mJoinedNoTextView.setText(entGameInfo.getSignupcount() + "");
+        int leftCount = entGameInfo.getPersonmaxlimit() - entGameInfo.getSignupcount() > 0 ?
+                entGameInfo.getPersonmaxlimit() - entGameInfo.getSignupcount():0;
+        mLeftNoTextView.setText(leftCount + "");
 
     }
 

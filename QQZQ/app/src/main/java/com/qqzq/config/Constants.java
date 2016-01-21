@@ -125,6 +125,8 @@ public class Constants {
     public static final String API_FIND_GAME_BY_ID_URL = API_SERVER_HOST + "/activity/activities/{0}";
     //用户参加活动报名
     public static final String API_GAME_JOIN_APPLICATION_URL = API_SERVER_HOST + "/activity/activities/{0}/application";
+    //用户取消活动
+    public static final String API_GAME_CANCEL_APPLICATION_URL = API_SERVER_HOST + "/activity/activities/{0}/manalcancel";
     //获取活动报名名单
     public static final String API_GAME_SIGNUP_LIST_URL = API_SERVER_HOST + "/activity/activities/{0}/signup_list";
     //记录出勤情况

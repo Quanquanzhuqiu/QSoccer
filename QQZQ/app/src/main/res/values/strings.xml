@@ -166,6 +166,10 @@
     <string name="game_registrator_lower_limit_hint">默认为报名人数下限+5</string>
     <string name="game_description">活动介绍</string>
     <string name="game_description_hint">请输入本次活动的简介</string>
+    <string name="game_share">活动分享</string>
+    <string name="game_modify">修改活动</string>
+    <string name="game_cancel">取消活动</string>
+
 
     <!-- 球队成员页面-->
     <string name="member_name">队员：</string>

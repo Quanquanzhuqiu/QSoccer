@@ -11,11 +11,23 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.common.activity.SelectTeamActivity;
+import com.qqzq.config.Constants;
+import com.qqzq.entity.EntClientResponse;
 import com.qqzq.game.activity.GamePublishActivity;
+import com.qqzq.network.GsonRequest;
+import com.qqzq.network.RequestManager;
+import com.qqzq.network.ResponseListener;
 import com.qqzq.team.activity.CreateTeamActivity;
 import com.qqzq.team.activity.FindTeamActivity;
+import com.qqzq.util.Utils;
+
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jie.xiao on 15/9/20.
@@ -28,8 +40,10 @@ public class PopupMenuWindow extends PopupWindow {
     private LinearLayout ll_game_publish;
     private LinearLayout ll_create_team;
     private LinearLayout ll_find_team;
+    private int mType;
+    private int mGameId;
 
-    public PopupMenuWindow(Activity context, View.OnClickListener myOnClick) {
+    public PopupMenuWindow(Activity context, View.OnClickListener myOnClick,int type) {
         super(context);
         this.context = context;
 
@@ -37,8 +51,13 @@ public class PopupMenuWindow extends PopupWindow {
             myOnClick = itemsOnClick;
         }
         this.myOnClick = myOnClick;
+        this.mType = type;
         initView();
         initListener();
+    }
+
+    public void setData(int gameId){
+     this.mGameId = gameId;
     }
 
     public void show() {
@@ -50,7 +69,11 @@ public class PopupMenuWindow extends PopupWindow {
     private void initView() {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        layoutView = inflater.inflate(R.layout.popup_menu_main, null);
+        if(mType == 0){
+            layoutView = inflater.inflate(R.layout.popup_menu_main, null);
+        }else if(mType == 1){
+            layoutView = inflater.inflate(R.layout.popup_menu_main_game_detail, null);
+        }
         ll_game_publish = (LinearLayout) layoutView.findViewById(R.id.ll_game_publish);
         ll_create_team = (LinearLayout) layoutView.findViewById(R.id.ll_create_team);
         ll_find_team = (LinearLayout) layoutView.findViewById(R.id.ll_find_team);
@@ -84,20 +107,65 @@ public class PopupMenuWindow extends PopupWindow {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.ll_create_team:
-                    Intent createTeamIntent = new Intent(context, CreateTeamActivity.class);
-                    context.startActivity(createTeamIntent);
+                    if(mType == 0){
+                        Intent createTeamIntent = new Intent(context, CreateTeamActivity.class);
+                        context.startActivity(createTeamIntent);
+                    }else if(mType == 1){
+                        //do share
+                    }
+                    dismiss();
                     break;
                 case R.id.ll_find_team:
-                    Intent findTeamIntent = new Intent(context, FindTeamActivity.class);
-                    context.startActivity(findTeamIntent);
+                    if(mType == 0){
+                        Intent findTeamIntent = new Intent(context, FindTeamActivity.class);
+                        context.startActivity(findTeamIntent);
+                    }else if(mType == 1){
+                        doCancelGameAction();
+                    }
+                    dismiss();
+
                     break;
                 case R.id.ll_game_publish:
-                    Intent publishGameIntent = new Intent(context, GamePublishActivity.class);
-                    context.startActivity(publishGameIntent);
+                    if(mType == 0){
+                        Intent publishGameIntent = new Intent(context, GamePublishActivity.class);
+                        context.startActivity(publishGameIntent);
+                    }else if(mType == 1){
+                        //do cancel game
+
+                    }
+                    dismiss();
                     break;
                 default:
                     break;
             }
         }
+
+        private void doModifyGameAction(){
+//            Map<String, Object> mParameters = new HashMap<String, Object>();
+//            String queryUrl = MessageFormat.format(Constants.API_GAME_CANCEL_APPLICATION_URL, 1);
+//            queryUrl = Utils.makeGetRequestUrl(queryUrl, mParameters);
+//
+//            GsonRequest gsonRequest = new GsonRequest(Request.Method.POST, queryUrl,
+//                    EntClientResponse.class, null, null, joinGameResponseListener);
+//            executeRequest(gsonRequest);
+        }
+        private void doCancelGameAction(){
+            String queryUrl = MessageFormat.format(Constants.API_GAME_CANCEL_APPLICATION_URL, mGameId);
+
+            GsonRequest gsonRequest = new GsonRequest(Request.Method.PUT, queryUrl,
+                    EntClientResponse.class, null, null, new ResponseListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+
+                @Override
+                public void onResponse(Object response) {
+
+                }
+            });
+            RequestManager.addRequest(gsonRequest,this);
+        }
+
     };
 }
