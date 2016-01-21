@@ -157,11 +157,17 @@ public class BaseApplication extends Application {
                     }
 
                     @Override
-                    public void onResponse(EntLocation[] entLocationInfos) {
+                    public void onResponse(final EntLocation[] entLocationInfos) {
                         Log.i(TAG, "找到地区->" + entLocationInfos.length);
-                        LocationDao locationDao = new LocationDao(applicationContext);
+                        final LocationDao locationDao = new LocationDao(applicationContext);
                         if (locationDao.findAll().size() != entLocationInfos.length) {
-                            locationDao.saveLocaitonList(entLocationInfos);
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    locationDao.saveLocaitonList(entLocationInfos);
+                                }
+                            }).start();
+
                         }
                     }
                 }, true);

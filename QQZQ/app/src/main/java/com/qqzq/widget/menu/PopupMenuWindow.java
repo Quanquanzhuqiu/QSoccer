@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -18,12 +20,15 @@ import com.qqzq.common.activity.SelectTeamActivity;
 import com.qqzq.config.Constants;
 import com.qqzq.entity.EntClientResponse;
 import com.qqzq.game.activity.GamePublishActivity;
+import com.qqzq.game.fragment.GameManagementFragment;
 import com.qqzq.network.GsonRequest;
 import com.qqzq.network.RequestManager;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.team.activity.CreateTeamActivity;
 import com.qqzq.team.activity.FindTeamActivity;
 import com.qqzq.util.Utils;
+
+import org.json.JSONObject;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -153,15 +158,18 @@ public class PopupMenuWindow extends PopupWindow {
             String queryUrl = MessageFormat.format(Constants.API_GAME_CANCEL_APPLICATION_URL, mGameId);
 
             GsonRequest gsonRequest = new GsonRequest(Request.Method.PUT, queryUrl,
-                    EntClientResponse.class, null, null, new ResponseListener() {
+                    EntClientResponse.class, null, null, new ResponseListener<EntClientResponse>() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
 
+                    Toast.makeText(context, Utils.parseErrorResponse(error).getCustomMessage(), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onResponse(Object response) {
-
+                public void onResponse(EntClientResponse response) {
+                    Toast.makeText(context, response.getCustomMessage(), Toast.LENGTH_SHORT).show();
+                    context.setResult(GameManagementFragment.GAMEDETAILRESULTCODE);
+                    context.finish();
                 }
             });
             RequestManager.addRequest(gsonRequest,this);

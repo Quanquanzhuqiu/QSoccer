@@ -108,7 +108,6 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
             }else if(rightImage == R.drawable.actionbar_more_icon){
                 Log.i(TAG, "含有弹出菜单的页面！");
                 popupMenuWindow = new PopupMenuWindow(context, null,1);
-                popupMenuWindow.setData(mGameId);
                 popupMenuWindow.dismiss();
             }
 
@@ -141,7 +140,7 @@ public class TopBar extends LinearLayout implements View.OnClickListener {
                         || mListener.getButtonType() == TopBarListener.BOTH)) {
                     mListener.rightButtonClick();
                 } else {
-                    Toast.makeText(context, "已点中弹出菜单", Toast.LENGTH_LONG).show();
+                    popupMenuWindow.setData(mGameId);
                     popupMenuWindow.showAsDropDown(mMoreLinearLayout);
                 }
                 break;

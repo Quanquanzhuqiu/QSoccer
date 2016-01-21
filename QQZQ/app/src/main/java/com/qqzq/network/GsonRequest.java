@@ -102,6 +102,11 @@ public class GsonRequest<T> extends Request<T> {
     }
 
     @Override
+    public void deliverError(VolleyError error) {
+        super.deliverError(error);
+    }
+
+    @Override
     protected void deliverResponse(T response) {
         mListener.onResponse(response);
     }

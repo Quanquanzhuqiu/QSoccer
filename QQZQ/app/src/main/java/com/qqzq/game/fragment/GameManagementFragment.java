@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.qqzq.R;
 import com.qqzq.base.BaseFragment;
 import com.qqzq.config.Constants;
@@ -18,9 +20,16 @@ import com.qqzq.game.adapter.GameListViewAdapter;
 import com.qqzq.game.dto.EntGameInfoDTO;
 import com.qqzq.game.activity.GameDetailActivity;
 import com.qqzq.game.activity.GamePublishActivity;
+import com.qqzq.network.GsonRequest;
+import com.qqzq.network.RequestManager;
+import com.qqzq.network.ResponseListener;
+import com.qqzq.util.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jie.xiao on 15/9/12.
@@ -35,6 +44,8 @@ public class GameManagementFragment extends BaseFragment {
     private ListView lv_games;
     private GameListViewAdapter adapter;
     public static List<EntGameInfoDTO> list = new ArrayList<EntGameInfoDTO>();
+    public static int GAMEDETAILREQUESTCODE = 100;
+    public static int GAMEDETAILRESULTCODE = 101;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,9 +100,49 @@ public class GameManagementFragment extends BaseFragment {
 
                 Intent intent = new Intent(context, GameDetailActivity.class);
                 intent.putExtra(Constants.EXTRA_SELECTED_GAME_ID, entGameInfo.getId());
-                startActivity(intent);
+                startActivityForResult(intent,GAMEDETAILREQUESTCODE);
             }
         }
     };
+    public void loadGameList() {
+        Map<String, Object> mParameters = new HashMap<String, Object>();
+        mParameters.put("offset", 0);
+        mParameters.put("limit", 10);
+        String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_GAME_URL, mParameters);
+        GsonRequest gsonRequest = new GsonRequest<EntGameInfoDTO[]>(queryUrl, EntGameInfoDTO[].class,
+                new ResponseListener<EntGameInfoDTO[]>() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(context, Utils.parseErrorResponse(volleyError).getCustomMessage(), Toast.LENGTH_LONG).show();
+                    }
 
+                    @Override
+                    public void onResponse(EntGameInfoDTO[] entGameInfos) {
+
+                        if (entGameInfos.length > 0) {
+                            list = Arrays.asList(entGameInfos);
+                            adapter.notifyDataSetChanged();
+//                            gamePageType = Constants.PAGE_TYPE_HAVE_GAME;
+                        } else {
+//                            gamePageType = Constants.PAGE_TYPE_NO_GAME;
+                        }
+
+//                        Log.i(TAG, "gamePageType = " + gamePageType);
+//                        mPagerViewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
+//                        mTabsPagerSlidingTabStrip.setViewPager(mPagerViewPager);
+//                        setTabsValue();
+                    }
+                });
+        RequestManager.addRequest(gsonRequest, this);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i(TAG,"requestCode:"+requestCode+",resultCode:"+resultCode);
+        if(requestCode == GAMEDETAILREQUESTCODE){
+            if(resultCode == GAMEDETAILRESULTCODE){
+                loadGameList();
+            }
+        }
+    }
 }

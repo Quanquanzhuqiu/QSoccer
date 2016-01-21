@@ -1,5 +1,11 @@
 package com.qqzq.util;
 
+import com.android.volley.VolleyError;
+import com.qqzq.entity.EntClientResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -66,5 +72,18 @@ public class Utils {
         m = p.matcher(str);
         b = m.matches();
         return b;
+    }
+    public static EntClientResponse parseErrorResponse(VolleyError error){
+        EntClientResponse entClientResponse = new EntClientResponse();
+        try {
+            JSONObject jsonObject = new JSONObject(error.getMessage());
+            entClientResponse.setCode(jsonObject.optString("code"));
+            entClientResponse.setInnerMessage(jsonObject.optString("innerMessage"));
+            entClientResponse.setCustomMessage(jsonObject.optString("customMessage"));
+            entClientResponse.setMoreInfo(jsonObject.optString("moreInfo"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return  entClientResponse;
     }
 }
