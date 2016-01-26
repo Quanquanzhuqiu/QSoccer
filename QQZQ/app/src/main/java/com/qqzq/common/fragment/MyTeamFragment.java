@@ -233,7 +233,7 @@ public class MyTeamFragment extends Fragment implements View.OnClickListener {
     public void loadGameList() {
         Map<String, Object> mParameters = new HashMap<String, Object>();
         mParameters.put("offset", 0);
-        mParameters.put("limit", 10);
+        mParameters.put("limit", 100);
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_GAME_URL, mParameters);
         GsonRequest gsonRequest = new GsonRequest<EntGameInfoDTO[]>(queryUrl, EntGameInfoDTO[].class,
                 new ResponseListener<EntGameInfoDTO[]>() {
@@ -246,7 +246,9 @@ public class MyTeamFragment extends Fragment implements View.OnClickListener {
                     public void onResponse(EntGameInfoDTO[] entGameInfos) {
 
                         if (entGameInfos.length > 0) {
-                            gameList = Arrays.asList(entGameInfos);
+                            for(EntGameInfoDTO entGameInfoDTO:entGameInfos){
+                                gameList.add(entGameInfoDTO);
+                            }
                             GameManagementFragment.list = gameList;
                             gamePageType = Constants.PAGE_TYPE_HAVE_GAME;
                         } else {

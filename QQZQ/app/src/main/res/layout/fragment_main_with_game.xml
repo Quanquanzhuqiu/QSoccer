@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:listViewAttr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_bg"
@@ -11,12 +12,15 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-
-        <ListView
+        <com.qqzq.widget.DropDownListView
             android:id="@+id/lv_games"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="#b8b8b8"></ListView>
+            android:drawSelectorOnTop="false"
+            android:divider="#b8b8b8"
+            listViewAttr:isDropDownStyle="false"
+            listViewAttr:isOnBottomStyle="false"
+            listViewAttr:isAutoLoadOnBottom="false" />
 
 
     </LinearLayout>

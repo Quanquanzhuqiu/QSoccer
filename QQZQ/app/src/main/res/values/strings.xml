@@ -59,6 +59,7 @@
     <string name="main_game_type">类型：</string>
     <string name="registering">报名中</string>
     <string name="registered">报名结束</string>
+    <string name="canceled">已取消</string>
 
     <!-- 登陆页面-->
     <string name="hint_username">请输入用户名/手机号</string>
@@ -326,4 +327,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="drop_down_list_header_default_text">Click to refresh&#8230;</string>
+    <string name="drop_down_list_header_pull_text">Drop Down to refresh&#8230;</string>
+    <string name="drop_down_list_header_release_text">Release to refresh&#8230;</string>
+    <string name="drop_down_list_header_loading_text">Loading&#8230;</string>
+    <string name="drop_down_list_footer_default_text">More</string>
+    <string name="drop_down_list_footer_loading_text">Loading&#8230;</string>
+    <string name="drop_down_list_footer_no_more_text">No More</string>
+
+    <string name="image_content">Image</string>
 </resources>

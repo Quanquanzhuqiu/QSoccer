@@ -1,13 +1,16 @@
 package com.qqzq.game.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -79,6 +82,7 @@ public class GameListViewAdapter extends BaseAdapter {
             viewHolder.tv_game_date = (TextView) convertView.findViewById(R.id.tv_game_date);
             viewHolder.tv_soccer_person = (TextView) convertView.findViewById(R.id.tv_soccer_person);
             viewHolder.tv_game_join = (TextView) convertView.findViewById(R.id.tv_game_join);
+            viewHolder.ll_game_state = (LinearLayout) convertView.findViewById(R.id.ll_game_state);
             // 将ListItemView对象传递给convertView
             convertView.setTag(viewHolder);
         } else {
@@ -101,6 +105,21 @@ public class GameListViewAdapter extends BaseAdapter {
             } else {
 //                displayUrlImg(viewHolder.iv_logo, logoUrl);
             }
+
+            if(TextUtils.isEmpty(entGameInfo.getStat())){
+                viewHolder.ll_game_state.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bg_game_join));
+                viewHolder.tv_game_join.setTextColor(context.getResources().getColor(R.color.rgb_255_79_87));
+                viewHolder.tv_game_join.setText(R.string.registering);
+            }else if("MANAL_CANCEL".equals(entGameInfo.getStat())){
+                viewHolder.ll_game_state.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bg_game_cancel));
+                viewHolder.tv_game_join.setTextColor(Color.GRAY);
+                viewHolder.tv_game_join.setText(R.string.canceled);
+            }else{
+                viewHolder.ll_game_state.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bg_game_cancel));
+                viewHolder.tv_game_join.setTextColor(Color.GRAY);
+                viewHolder.tv_game_join.setText(entGameInfo.getStat());
+            }
+
             viewHolder.tv_game_name.setText(gameName);
             viewHolder.tv_game_address.setText(gameAddress);
             viewHolder.tv_game_date.setText(gameDate);
@@ -126,5 +145,6 @@ public class GameListViewAdapter extends BaseAdapter {
         TextView tv_game_date;
         TextView tv_soccer_person;
         TextView tv_game_join;
+        LinearLayout ll_game_state;
     }
 }

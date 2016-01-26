@@ -38,4 +38,5 @@ dependencies {
     compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
     compile 'org.apache.httpcomponents:httpmime:4.3.5'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
 }

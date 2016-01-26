@@ -24,6 +24,7 @@ import com.qqzq.network.GsonRequest;
 import com.qqzq.network.RequestManager;
 import com.qqzq.network.ResponseListener;
 import com.qqzq.util.Utils;
+import com.qqzq.widget.DropDownListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +42,7 @@ public class GameManagementFragment extends BaseFragment {
     private Context context;
     private TextView tv_game_publish;
     private String pageType = "";
-    private ListView lv_games;
+    private DropDownListView lv_games;
     private GameListViewAdapter adapter;
     public static List<EntGameInfoDTO> list = new ArrayList<EntGameInfoDTO>();
     public static int GAMEDETAILREQUESTCODE = 100;
@@ -70,6 +71,9 @@ public class GameManagementFragment extends BaseFragment {
         return view;
     }
 
+    private int offset = 0;
+    private int limit = 100;
+
     private void initNoGamePage(View view) {
         tv_game_publish = (TextView) view.findViewById(R.id.tv_game_publish);
 
@@ -83,10 +87,27 @@ public class GameManagementFragment extends BaseFragment {
     }
 
     private void initHaveGamePage(View view) {
-        lv_games = (ListView) view.findViewById(R.id.lv_games);
+        lv_games = (DropDownListView) view.findViewById(R.id.lv_games);
         adapter = new GameListViewAdapter(context, list);
         lv_games.setAdapter(adapter);
         lv_games.setOnItemClickListener(mOnClickListener);
+
+//        lv_games.setOnDropDownListener(new DropDownListView.OnDropDownListener() {
+//            @Override
+//            public void onDropDown() {
+//                resetData();
+//                loadGameList();
+//            }
+//        });
+//
+//        lv_games.setOnBottomListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                offset = offset < 1 ? 1 : offset;
+//                loadGameList();
+//            }
+//        });
+
     }
 
     final private AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() {
@@ -106,8 +127,8 @@ public class GameManagementFragment extends BaseFragment {
     };
     public void loadGameList() {
         Map<String, Object> mParameters = new HashMap<String, Object>();
-        mParameters.put("offset", 0);
-        mParameters.put("limit", 10);
+        mParameters.put("offset", offset);
+        mParameters.put("limit", limit);
         String queryUrl = Utils.makeGetRequestUrl(Constants.API_FIND_GAME_URL, mParameters);
         GsonRequest gsonRequest = new GsonRequest<EntGameInfoDTO[]>(queryUrl, EntGameInfoDTO[].class,
                 new ResponseListener<EntGameInfoDTO[]>() {
@@ -119,8 +140,13 @@ public class GameManagementFragment extends BaseFragment {
                     @Override
                     public void onResponse(EntGameInfoDTO[] entGameInfos) {
 
+
                         if (entGameInfos.length > 0) {
-                            list = Arrays.asList(entGameInfos);
+                            List<EntGameInfoDTO> result = new ArrayList<>();
+                            for(EntGameInfoDTO entGameInfoDTO:entGameInfos){
+                                result.add(entGameInfoDTO);
+                            }
+                            list.addAll(result);
                             adapter.notifyDataSetChanged();
 //                            gamePageType = Constants.PAGE_TYPE_HAVE_GAME;
                         } else {
@@ -135,12 +161,17 @@ public class GameManagementFragment extends BaseFragment {
                 });
         RequestManager.addRequest(gsonRequest, this);
     }
+    private void resetData(){
+        offset = 0;
+        list.clear();
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.i(TAG,"requestCode:"+requestCode+",resultCode:"+resultCode);
         if(requestCode == GAMEDETAILREQUESTCODE){
             if(resultCode == GAMEDETAILRESULTCODE){
+                resetData();
                 loadGameList();
             }
         }
